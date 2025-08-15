@@ -89,7 +89,7 @@ set "PROJECT_DRIVE=%~d0"
 set PATH=%PROJECT_BASE%tools\windows;%PATH%
 set BUILD_TYPE=debug
 set REBUILD=build
-set MSVC_VERSION=12
+set MSVC_VERSION=17
 set ALLHEIGHTMAPS=false
 set SKIPHEIGHTMAPS=false
 set DEPENDENCIESONLY=false
@@ -189,22 +189,22 @@ rem ----------------------------------------------------------------------------
 rem --- Start of BUILD_ENVIRONMENT ---------------------------------------------
 :BUILD_ENVIRONMENT
 
-if not exist "%VS120COMNTOOLS%" (
-  set "VS120COMNTOOLS=%PROGRAMFILES(X86)%\Microsoft Visual Studio 12.0\Common7\Tools"
-  if not exist "!VS120COMNTOOLS!" (
-  	  set "VS120COMNTOOLS=%PROGRAMFILES%\Microsoft Visual Studio 12.0\Common7\Tools"
-  	  if not exist "!VS120COMNTOOLS!" (          
-  		    rem TODO: Allow user to enter a path to their base visual Studio directory.
-         
-    	    echo ***** Microsoft Visual Studio 12.0 required *****
-    	    exit /b 1
-  	  )
+if not exist "%VS170COMNTOOLS%" (
+  set "VS170COMNTOOLS=%PROGRAMFILES(X86)%\Microsoft Visual Studio\2022\Community\Common7\Tools"
+  if not exist "!VS170COMNTOOLS!" (
+          set "VS170COMNTOOLS=%PROGRAMFILES%\Microsoft Visual Studio\2022\Community\Common7\Tools"
+          if not exist "!VS170COMNTOOLS!" (
+                    rem TODO: Allow user to enter a path to their base visual Studio directory.
+
+            echo ***** Microsoft Visual Studio 17 2022 required *****
+            exit /b 1
+          )
   )
 )
 
-set "MSBUILD=%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe"
+set "MSBUILD=%VS170COMNTOOLS%\..\..\MSBuild\Current\Bin\MSBuild.exe"
 
-call "%VS120COMNTOOLS%\vsvars32.bat" >NUL
+call "%VS170COMNTOOLS%\VsDevCmd.bat" -arch=x86 >NUL
 
 set environment_built=yes
 
@@ -338,7 +338,7 @@ if not exist "%PROJECT_BASE%build" (
 )
 cd "%PROJECT_BASE%build"
 
-cmake -G "Visual Studio 12" -DCMAKE_INSTALL_PREFIX=%PROJECT_BASE% -DENABLE_TEST_REPORT=ON ..
+cmake -G "Visual Studio 17 2022" -A Win32 -DCMAKE_INSTALL_PREFIX=%PROJECT_BASE% -DENABLE_TEST_REPORT=ON ..
 
 if exist "*.cache" del /S /Q "*.cache" >NUL
 
