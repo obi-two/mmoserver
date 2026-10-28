@@ -346,7 +346,7 @@ void LoginManager::_authenticateClient(LoginClient* client, DatabaseResult* resu
         errType = "@cpt_login_fail";
         errMsg = "@msg_login_fail";
 
-        LOG(WARNING) << " Login failed for username: " <<  client->getUsername().getAnsi() << " password: ********" << client->getPassword().getAnsi();
+        LOG(WARNING) << " Login failed for username: " <<  client->getUsername().getAnsi();
 
         gMessageFactory->StartMessage();
         gMessageFactory->addUint32(opErrorMessage);
