@@ -53,7 +53,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            build-essential cmake ninja-build git curl zip unzip tar pkg-config
+            build-essential cmake ninja-build git curl zip unzip tar pkg-config libtirpc-dev
 
       # Use the vcpkg release matching the baseline in vcpkg-configuration.json.
       - name: Set up vcpkg
@@ -63,14 +63,24 @@ jobs:
           mkdir -p "$VCPKG_DEFAULT_BINARY_CACHE"
 
       - name: Restore vcpkg binary cache
-        uses: actions/cache@v4
+        id: vcpkg-cache
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-          key: vcpkg-ubuntu-24.04-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json', 'tools/vcpkg/ports/**') }}
+          key: vcpkg-ubuntu-24.04-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json', 'tools/vcpkg/ports/**') }}-${{ github.run_id }}
           restore-keys: vcpkg-ubuntu-24.04-
 
       - name: Build and test
         run: ./build_server.sh --vcpkg -t
+
+      # Saved even when the build fails, so the next run does not rebuild the
+      # packages that did succeed. vcpkg only uses entries whose ABI matches.
+      - name: Save vcpkg binary cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+          key: ${{ steps.vcpkg-cache.outputs.cache-primary-key }}
 
       - name: Upload vcpkg logs on failure
         if: failure()

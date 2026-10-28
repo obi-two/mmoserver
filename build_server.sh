@@ -11,8 +11,8 @@ basedir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 apt_build_tools=(build-essential cmake ninja-build)
 apt_libraries=(libboost-all-dev libtbb-dev libmysqlcppconn-dev liblua5.1-0-dev
     libtolua++5.1-dev libnoise-dev libglm-dev libgtest-dev libmysqlclient-dev zlib1g-dev)
-# Extra tools vcpkg needs to build the dependencies itself.
-apt_vcpkg_tools=(build-essential cmake ninja-build git curl zip unzip tar pkg-config)
+# Tools vcpkg needs to build the dependencies itself (libtirpc-dev is for libmysql).
+apt_vcpkg_tools=(build-essential cmake ninja-build git curl zip unzip tar pkg-config libtirpc-dev)
 
 usage() {
     cat <<EOF
