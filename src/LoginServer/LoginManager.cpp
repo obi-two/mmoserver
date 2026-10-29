@@ -232,6 +232,7 @@ void LoginManager::handleDatabaseJobComplete(void* ref, DatabaseResult* result)
         _sendDeleteCharacterReply(deleteFailed,client);
 
         // _sendDeleteCharacterReply(0,client);
+        break;
     }
     case LCSTATE_RetrieveAccountId:
     {

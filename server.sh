@@ -22,7 +22,8 @@ Options:
   -r                 Use the release build (build/linux-release)
   -h, --help         Show this help and exit
 
-Each server runs detached from the terminal and logs to bin/logs/<name>.out.
+Each server runs detached from the terminal and logs to bin/logs/<name>.out;
+the previous run's log is kept as <name>.out.1.
 Zones other than tutorial need their heightmap: ./build_server.sh --heightmaps <zone>
 EOF
 }
@@ -77,6 +78,11 @@ start_one() {
         return
     fi
 
+    # Keep the previous run's log: it may hold the reason that run ended.
+    if [[ -s $log_dir/$name.out ]]; then
+        mv "$log_dir/$name.out" "$log_dir/$name.out.1"
+    fi
+
     # setsid detaches from the terminal; with stdin from /dev/null the
     # server's console command check stays out of the way.
     (cd "$bin_dir" && exec setsid "./$exe" "${args[@]}" < /dev/null > "$log_dir/$name.out" 2>&1) &
@@ -111,6 +117,8 @@ stop() {
         if pid=$(pid_of "$name"); then
             kill "$pid" 2>/dev/null || true
             stopped+=("$name:$pid")
+        else
+            echo "$name: was not running; it may have crashed (see logs/$name.out)"
         fi
     done
 
