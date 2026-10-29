@@ -367,6 +367,16 @@ void WorldManager::destroyObject(Object* object)
 			// remove any timers we got running
 			removeCreatureHamToProcess(creature->getHam()->getTaskId());
 
+			// Take the creature out of the cell it stands in; cells keep ids of
+			// their contents, and stale ids end up in building content lists.
+			if(creature->getParentId())
+			{
+				if(CellObject* cell = dynamic_cast<CellObject*>(getObjectById(creature->getParentId())))
+				{
+					cell->removeObject(creature);
+				}
+			}
+
 			// if its a shuttle, remove it from the shuttle list
 			if(creature->getCreoGroup() == CreoGroup_Shuttle)
 			{
