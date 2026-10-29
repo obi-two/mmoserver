@@ -93,8 +93,8 @@ The archives come from the [v0.6.0 release][3] and are checked against
 
 ### 1. Set up the database ###
 
-The servers use MariaDB (MySQL 8 is not supported yet). Install it and create
-the databases:
+The servers use MariaDB (tested with 10.11 and 11.8; MySQL 8 is not supported
+yet). Install it and create the databases:
 
     sudo apt install mariadb-server
     sudo ./mmoserverdb/setup.sh install
@@ -106,8 +106,10 @@ settings go into `mmoserverdb/local.cfg` (not in git) and into
 automatically.
 
 If game clients connect from other machines, pass the address they should
-use: `--public-address 192.168.1.10`. To start over, add `--force`. That
-drops the databases, including all accounts and characters.
+use: `--public-address 192.168.1.10`. To change it later without
+reinstalling, run `sudo ./mmoserverdb/setup.sh set-address 192.168.1.10` and
+restart the servers. To start over, add `--force` to `install`. That drops
+the databases, including all accounts and characters.
 
 Create an account to log in with:
 

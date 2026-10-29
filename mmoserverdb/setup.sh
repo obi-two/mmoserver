@@ -29,6 +29,8 @@ Commands:
                           to mmoserverdb/local.cfg and every build's
                           bin/config/general.cfg
   add-account NAME        Create a game account; asks for the password
+  set-address ADDR        Change the address game clients use to reach this
+                          server (same as --public-address at install)
   apply-config DIR        Copy the settings in local.cfg into DIR/general.cfg
 
 Options for install:
@@ -67,8 +69,12 @@ sql() {
     [[ ${DB_ADMIN_USER:-} ]] && args+=(--user="$DB_ADMIN_USER")
     [[ ${DB_HOST:-} ]] && args+=(--host="$DB_HOST")
     [[ ${DB_PORT:-} ]] && args+=(--port="$DB_PORT")
+    [[ $session_init ]] && args+=(--init-command="$session_init")
     "$client" "${args[@]}" "$@"
 }
+
+# Session settings applied to every connection, set by check_connection.
+session_init=
 
 check_connection() {
     if ! sql -e 'SELECT 1' >/dev/null 2>&1; then
@@ -78,6 +84,14 @@ check_connection() {
         fi
         echo "Is MariaDB installed and running? (sudo apt install mariadb-server)" >&2
         exit 1
+    fi
+
+    # MariaDB 11.5+ defaults utf8 text to the uca1400 collations, while the
+    # schema's routines use utf8_general_ci; comparing the two fails with
+    # "Illegal mix of collations". Keep the collation the data was written
+    # for. Older servers (no character_set_collations) already default to it.
+    if sql -e 'SELECT @@character_set_collations' >/dev/null 2>&1; then
+        session_init="SET SESSION character_set_collations='utf8mb3=utf8mb3_general_ci,utf8mb4=utf8mb4_general_ci'"
     fi
 }
 
@@ -115,6 +129,27 @@ apply_config() {
     echo "Updated $dir/general.cfg"
 }
 
+check_address() {
+    [[ $1 =~ ^[A-Za-z0-9.:-]+$ ]] || die "invalid address '$1'"
+}
+
+# The LoginServer hands clients the galaxy's address. The servers already
+# listen on all interfaces; leave BindAddress at 127.0.0.1, because servers
+# register under it and the ConnectionServer looks them up by the address
+# their packets come from.
+set_address() {
+    sql -e "UPDATE swganh.galaxy SET address = '$1'"
+}
+
+apply_config_to_builds() {
+    local config_dir
+    for config_dir in "$project_dir"/build/*/bin/config; do
+        [[ -f $config_dir/general.cfg ]] || continue
+        apply_config "$config_dir"
+        give_to_invoking_user "$config_dir/general.cfg"
+    done
+}
+
 # --- install ------------------------------------------------------------------
 
 import_file() {
@@ -142,7 +177,7 @@ install() {
         esac
         shift
     done
-    [[ $public_address =~ ^[A-Za-z0-9.:-]+$ ]] || die "invalid --public-address '$public_address'"
+    check_address "$public_address"
 
     check_connection
 
@@ -180,8 +215,6 @@ install() {
         sql -e "DELETE FROM swganh.account WHERE account_username REGEXP '^swganh[0-9]\$'"
     fi
 
-    sql -e "UPDATE swganh.galaxy SET address = '$public_address'"
-
     # One database user for all servers, limited to the MMOServer databases.
     local password
     password=$(head -c 48 /dev/urandom | base64 | tr -d '/+=\n')
@@ -196,9 +229,6 @@ install() {
     done
     sql -e "$grants FLUSH PRIVILEGES;"
 
-    local bind_address=127.0.0.1
-    [[ $public_address != 127.0.0.1 && $public_address != localhost ]] && bind_address=0.0.0.0
-
     (
         umask 077
         cat > "$local_cfg" <<EOF
@@ -209,16 +239,16 @@ DBPort = ${DB_PORT:-3306}
 DBName = swganh
 DBUser = $db_user
 DBPass = $password
-BindAddress = $bind_address
 EOF
     )
     give_to_invoking_user "$local_cfg"
 
+    set_address "$public_address"
+    apply_config_to_builds
+
     local config_dir found=
     for config_dir in "$project_dir"/build/*/bin/config; do
         [[ -f $config_dir/general.cfg ]] || continue
-        apply_config "$config_dir"
-        give_to_invoking_user "$config_dir/general.cfg"
         found=1
     done
 
@@ -272,6 +302,13 @@ shift
 case "$command" in
     install) install "$@" ;;
     add-account) add_account "$@" ;;
+    set-address)
+        [[ $# -eq 1 ]] || die "usage: $(basename "$0") set-address ADDR"
+        check_address "$1"
+        check_connection
+        set_address "$1"
+        echo "Galaxy address set to $1. Restart the servers to apply it."
+        ;;
     apply-config)
         [[ $# -eq 1 ]] || die "usage: $(basename "$0") apply-config DIR"
         apply_config "$1"
