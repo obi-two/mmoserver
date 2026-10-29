@@ -148,6 +148,13 @@ status() {
     done
     [[ $found ]] || echo "No servers running."
 
+    # The rules themselves are only readable by root, so just remind.
+    if grep -qs '^ENABLED=yes' /etc/ufw/ufw.conf; then
+        echo
+        echo "Note: the ufw firewall is enabled. Game clients on other machines need"
+        echo "UDP 44990-44992 open: sudo ufw allow 44990:44992/udp (check: sudo ufw status)"
+    fi
+
     local others
     others=$(pgrep -a -f '/?(Connection|Login|Ping|Chat|Zone)Server( |$)' | grep -v -F -f <(cat "$run_dir"/*.pid 2>/dev/null) || true)
     if [[ $others ]]; then

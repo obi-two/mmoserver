@@ -129,7 +129,26 @@ heightmap (`./build_server.sh --heightmaps tatooine`) and take a minute or
 two to load. Add `-r` to run the release build.
 
 Game clients log in on UDP port 44990; the ConnectionServer uses 44991 and
-the PingServer 44992.
+the PingServer 44992. If the firewall is on (`sudo ufw status`), open them
+for clients on other machines:
+
+    sudo ufw allow 44990:44992/udp
+
+Keep the internal ports (5000 and the zones' 50xx) closed to the outside;
+the servers only use them among themselves.
+
+### 3. Connect a client ###
+
+Point the client's `login.cfg` at the server and log in with an account
+created by `setup.sh add-account`:
+
+    [ClientGame]
+    loginServerAddress0=192.168.1.10
+    loginServerPort0=44990
+
+If the client gets no response, run `sudo tcpdump -ni any udp port 44990`
+on the server while logging in. No packets means a network problem between
+the machines; packets arriving with no reply usually means the firewall.
 
 ## Windows ##
 
