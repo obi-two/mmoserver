@@ -77,10 +77,34 @@ if(unofficial-toluapp_FOUND)
 else()
     # Debian/Ubuntu name it libtolua++5.1.
     find_library(TOLUAPP_LIBRARY NAMES tolua++5.1 tolua++ toluapp)
-    if(NOT TOLUAPP_LIBRARY)
-        message(FATAL_ERROR "tolua++ library not found (Debian/Ubuntu: libtolua++5.1-dev)")
-    endif()
+endif()
+if(TOLUAPP_LIBRARY)
     target_link_libraries(mmo_tolua INTERFACE ${TOLUAPP_LIBRARY} mmo::lua)
+elseif(NOT unofficial-toluapp_FOUND)
+    # Ubuntu 26.04 and later no longer package tolua++, so build the runtime
+    # library from the same checksummed source as the vcpkg overlay port.
+    message(STATUS "tolua++ not found; building it from source")
+    enable_language(C)
+    include(FetchContent)
+    FetchContent_Declare(toluapp
+        URL "https://archive.ubuntu.com/ubuntu/pool/universe/t/tolua++/tolua++_1.0.93+repack.orig.tar.gz"
+            "https://deb.debian.org/debian/pool/main/t/tolua++/tolua++_1.0.93+repack.orig.tar.gz"
+        URL_HASH SHA256=084b6cda15203ebb085b923b3fa30cdb29a91eb506469b8f4477f6f6eff11f35
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+        # The tarball has no CMakeLists.txt: only fetch it, the library is
+        # defined below.
+        SOURCE_SUBDIR no-cmake-project)
+    FetchContent_MakeAvailable(toluapp)
+
+    add_library(mmo_toluapp_bundled STATIC
+        ${toluapp_SOURCE_DIR}/src/lib/tolua_event.c
+        ${toluapp_SOURCE_DIR}/src/lib/tolua_is.c
+        ${toluapp_SOURCE_DIR}/src/lib/tolua_map.c
+        ${toluapp_SOURCE_DIR}/src/lib/tolua_push.c
+        ${toluapp_SOURCE_DIR}/src/lib/tolua_to.c)
+    target_include_directories(mmo_toluapp_bundled PRIVATE ${toluapp_SOURCE_DIR}/include)
+    target_link_libraries(mmo_toluapp_bundled PUBLIC mmo::lua)
+    target_link_libraries(mmo_tolua INTERFACE mmo_toluapp_bundled)
 endif()
 
 # --- libnoise ------------------------------------------------------------------

@@ -80,6 +80,11 @@ if command -v dpkg-query >/dev/null; then
     [[ $heightmaps ]] && wanted+=(curl unzip)
     for package in "${wanted[@]}"; do
         if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed"; then
+            # Ubuntu 26.04+ dropped tolua++; CMake then builds it from source.
+            if [[ $package == libtolua++5.1-dev ]] &&
+                ! apt-cache policy "$package" 2>/dev/null | grep -q 'Candidate: [0-9]'; then
+                continue
+            fi
             missing_packages+=("$package")
         fi
     done

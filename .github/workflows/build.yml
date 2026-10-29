@@ -40,6 +40,30 @@ jobs:
       - name: Build and test
         run: ./build_server.sh -t ${{ matrix.config == 'release' && '-r' || '' }}
 
+  # Ubuntu 26.04 dropped libtolua++5.1-dev, so this also covers building
+  # tolua++ from source, and the newer GCC 15 / Boost 1.90 / GLM 1.0.
+  linux-2604:
+    name: Linux ${{ matrix.config }} (Ubuntu 26.04 packages)
+    runs-on: ubuntu-24.04
+    container: ubuntu:26.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [debug, release]
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential cmake ninja-build git ca-certificates \
+            libboost-all-dev libtbb-dev libmysqlcppconn-dev liblua5.1-0-dev \
+            libnoise-dev libglm-dev libgtest-dev libmysqlclient-dev zlib1g-dev
+
+      - uses: actions/checkout@v4
+
+      - name: Build and test
+        run: ./build_server.sh -t ${{ matrix.config == 'release' && '-r' || '' }}
+
   linux-vcpkg:
     name: Linux debug (vcpkg)
     runs-on: ubuntu-24.04
