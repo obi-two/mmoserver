@@ -91,10 +91,42 @@ The archives come from the [v0.6.0 release][3] and are checked against
 
 ## Running ##
 
-The servers need a MySQL database created from the scripts in `mmoserverdb/`.
+### 1. Set up the database ###
+
+The servers use MariaDB (MySQL 8 is not supported yet). Install it and create
+the databases:
+
+    sudo apt install mariadb-server
+    sudo ./mmoserverdb/setup.sh install
+
+This imports the schema and game data, removes the sample accounts, and
+creates a `swganh` database user with a random password. The connection
+settings go into `mmoserverdb/local.cfg` (not in git) and into
+`bin/config/general.cfg` of every build; later builds pick them up
+automatically.
+
+If game clients connect from other machines, pass the address they should
+use: `--public-address 192.168.1.10`. To start over, add `--force`. That
+drops the databases, including all accounts and characters.
+
+Create an account to log in with:
+
+    sudo ./mmoserverdb/setup.sh add-account <name>
+
+### 2. Start the servers ###
+
 Run each server from its `bin` directory, because configs, scripts and
-heightmaps are loaded relative to the working directory. A scripted database
-setup and one-command launch are planned next (see the roadmap).
+heightmaps are loaded relative to the working directory. Start them in this
+order:
+
+    cd build/linux-debug/bin
+    ./ConnectionServer &
+    ./LoginServer &
+    ./PingServer &
+    ./ZoneServer --ZoneName tutorial &
+    ./ZoneServer --ZoneName tatooine &     # needs the tatooine heightmap
+
+A one-command launcher is planned next (see the roadmap).
 
 ## Windows ##
 
