@@ -505,6 +505,16 @@ void WorldManager::destroyObject(Object* object)
 	}
 
 
+	// Make sure nothing in the spatial grid still points at the object once
+	// it is freed: not every caller removes creatures/objects from the world
+	// first, and a dangling grid entry crashes the next lookup (e.g. a player
+	// reconnecting nearby). Players were removed above; removal is a no-op
+	// for objects that are not in the grid.
+	if(object->getType() != ObjType_Player)
+	{
+		gSpatialIndexManager->getGrid()->RemoveObject(object);
+	}
+
 	// finally delete it
 	ObjectMap::iterator objMapIt = mObjectMap.find(object->getId());
 
@@ -514,8 +524,8 @@ void WorldManager::destroyObject(Object* object)
 	}
 	else
 	{
-		delete(object);
 		DLOG(WARNING) << "WorldManager::destroyObject: error removing from objectmap: " << object->getId();
+		delete(object);
 	}
 }
 
