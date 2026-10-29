@@ -122,7 +122,7 @@ Create an account to log in with:
     ./server.sh status
     ./server.sh stop
 
-`start` launches the ConnectionServer, LoginServer and PingServer, then the
+`start` launches the Connection, Chat, Login and Ping servers, then the
 zones, each detached from the terminal and logging to
 `build/linux-debug/bin/logs/<name>.out`. Zones other than tutorial need their
 heightmap (`./build_server.sh --heightmaps tatooine`) and take a minute or

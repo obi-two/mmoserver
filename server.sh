@@ -12,7 +12,7 @@ usage() {
 Usage: $(basename "$0") [-r] <command> [zone ...]
 
 Commands:
-  start [zone ...]   Start the ConnectionServer, LoginServer and PingServer,
+  start [zone ...]   Start the Connection, Chat, Login and Ping servers,
                      then the given zones (default: tutorial tatooine)
   stop               Stop every server started by this script
   status             Show which servers are running
@@ -38,7 +38,7 @@ run_dir="$bin_dir/run"
 log_dir="$bin_dir/logs"
 
 # Order matters: the other servers register with the ConnectionServer.
-core_servers=(connection login ping)
+core_servers=(connection chat login ping)
 
 executable() {
     case "$1" in
@@ -156,7 +156,7 @@ status() {
     fi
 
     local others
-    others=$(pgrep -a -f '/?(Connection|Login|Ping|Chat|Zone)Server( |$)' | grep -v -F -f <(cat "$run_dir"/*.pid 2>/dev/null) || true)
+    others=$(pgrep -a -f '^([^ ]*/)?(Connection|Login|Ping|Chat|Zone)Server( |$)' | grep -v -F -f <(cat "$run_dir"/*.pid 2>/dev/null) || true)
     if [[ $others ]]; then
         echo
         echo "Also running, not started by this script (stop them to avoid port clashes):"
