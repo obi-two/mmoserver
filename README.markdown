@@ -117,18 +117,19 @@ Create an account to log in with:
 
 ### 2. Start the servers ###
 
-Run each server from its `bin` directory, because configs, scripts and
-heightmaps are loaded relative to the working directory. Start them in this
-order:
+    ./server.sh start                    # tutorial and tatooine
+    ./server.sh start tutorial naboo     # or pick the zones
+    ./server.sh status
+    ./server.sh stop
 
-    cd build/linux-debug/bin
-    ./ConnectionServer &
-    ./LoginServer &
-    ./PingServer &
-    ./ZoneServer --ZoneName tutorial &
-    ./ZoneServer --ZoneName tatooine &     # needs the tatooine heightmap
+`start` launches the ConnectionServer, LoginServer and PingServer, then the
+zones, each detached from the terminal and logging to
+`build/linux-debug/bin/logs/<name>.out`. Zones other than tutorial need their
+heightmap (`./build_server.sh --heightmaps tatooine`) and take a minute or
+two to load. Add `-r` to run the release build.
 
-A one-command launcher is planned next (see the roadmap).
+Game clients log in on UDP port 44990; the ConnectionServer uses 44991 and
+the PingServer 44992.
 
 ## Windows ##
 
