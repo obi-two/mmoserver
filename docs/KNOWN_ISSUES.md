@@ -65,6 +65,22 @@ After an interrupted transfer, the character was left on the zone's
 later login for it was silently ignored until the zone restarted. Entries
 now expire after 30 seconds, with a warning logged when a login is retried.
 
+### 2c. Switching character while the previous one is link-dead hangs — fix needs testing
+
+Disconnect (without logging out), then enter a zone with a different
+character from the same account while the first is still link-dead there
+(up to `Zone_Player_Logout`, 300 seconds): the loading screen never ends.
+The zone saves and removes the old character, then is meant to load the new
+one, but the check for that step in
+`WorldManager::storeCharacterAttributes_` was inverted (`!clContainer`), so
+the new character was never requested. The callback also captured the
+container by reference to a parameter that no longer existed when it ran.
+#2b's entry for the new character was left behind as a side effect.
+
+Untested edge case: if the old character is still *connected* (not
+link-dead) when the account selects another, both share one client object,
+and removing the old character deletes it.
+
 ### 3. Servers listen on all interfaces — open (security)
 
 `Service.cpp` binds every UDP socket to `INADDR_ANY`, whatever
