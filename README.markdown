@@ -111,8 +111,14 @@ reinstalling, run `sudo ./mmoserverdb/setup.sh set-address 192.168.1.10` and
 restart the servers. To start over, add `--force` to `install`. That drops
 the databases, including all accounts and characters.
 
-Databases installed before resources were spawned by `install` have none;
-run `sudo ./mmoserverdb/setup.sh spawn-resources` and restart the zones.
+After pulling changes to the stored procedures, load them into an existing
+database with `sudo ./mmoserverdb/setup.sh update-procedures` (game data is
+not touched). Databases installed before resources were spawned by `install`
+have none; run `sudo ./mmoserverdb/setup.sh spawn-resources` and restart the
+zones.
+
+Resources expire after 1 to 22 days. The zones replace expired ones with new
+resources of the same type, at startup and every 10 minutes.
 
 Create an account to log in with:
 

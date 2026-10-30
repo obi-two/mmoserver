@@ -454,6 +454,7 @@ private:
     // timed subsystems
     bool	_handleServerTimeUpdate(uint64 callTime,void* ref);
     bool	_handleShuttleUpdate(uint64 callTime,void* ref);
+    bool	_handleResourceRotation(uint64 callTime,void* ref);
     bool	_handleDisconnectUpdate(uint64 callTime,void* ref);
     bool	_handleCraftToolTimers(uint64 callTime,void* ref);
     bool	_handleNpcConversionTimers(uint64 callTime,void* ref);

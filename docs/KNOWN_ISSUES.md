@@ -132,15 +132,22 @@ The spawn procedures also computed each resource's end date as
 about 60% of new resources' `spawn_end` in the past. Fixed in both
 procedures.
 
-### 5b. Resources never rotate — open
+### 5b. Resources never rotated — fix needs testing
 
-Zones load the active resources at startup and keep them until restart;
-nothing checks `spawn_end`, and nothing calls `sp_ResourceSpawn`, which
-retires the whole set and spawns a new one (`setup.sh spawn-resources
---replace` runs it by hand). Proper rotation needs expired resources
-replaced one by one (a scheduled database job or the server) and zones to
-pick up the changes while running. Templates with `time_min = 0` can also
-roll a resource that ends as soon as it spawns.
+Zones loaded the active resources at startup and kept them until restart;
+nothing checked `spawn_end`. Now `sp_ResourceRotate` retires each expired
+resource and spawns a replacement of the same type on the same planets. Each
+zone calls it at startup and every 10 minutes
+(`Zone_Resource_Rotation_Interval` in `config_server`, in seconds), then
+loads the new resources and retires the expired ones, which drop out of
+survey lists. Harvesters on an expired resource stop (`sf_HarvestResource`
+already did this), and a sample in progress ends. Tested on Naboo with
+expired resources; not yet tried with a client surveying or sampling.
+
+Existing databases need the new procedure: `setup.sh update-procedures`.
+
+Not implemented: depletion. Sampling lowers `unitsLeft`, but a resource is
+never retired when it runs out.
 
 ## Login
 
