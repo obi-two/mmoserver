@@ -1,9 +1,7 @@
 # These files should be ignored
 bin/
-deps/*
-!deps/build_deps.bat
-!deps/README.md
 build/
+vcpkg_installed/
 Debug/
 Release/
 data/heightmaps/
