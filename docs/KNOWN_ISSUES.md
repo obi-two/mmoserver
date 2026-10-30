@@ -119,6 +119,29 @@ loads without errors. To check: whether `npcSpawnPrivate` reaches the client,
 and whether the script advances past the first steps (it waits on client
 events in `Tutorial::tutorialResponse`).
 
+### 5a. No harvestable resources on a fresh install — fix needs testing
+
+The Windows installer spawns resources only with the optional
+`setup.bat /generateresources` flag, and `setup.sh` didn't do it at all, so
+the `resources` table was empty. `setup.sh install` now calls
+`sp_ResourceInitialSpawn`; existing databases can run
+`setup.sh spawn-resources` (then restart the zones).
+
+The spawn procedures also computed each resource's end date as
+`RAND() * (time_min - time_max) + time_min` (min and max swapped), which put
+about 60% of new resources' `spawn_end` in the past. Fixed in both
+procedures.
+
+### 5b. Resources never rotate — open
+
+Zones load the active resources at startup and keep them until restart;
+nothing checks `spawn_end`, and nothing calls `sp_ResourceSpawn`, which
+retires the whole set and spawns a new one (`setup.sh spawn-resources
+--replace` runs it by hand). Proper rotation needs expired resources
+replaced one by one (a scheduled database job or the server) and zones to
+pick up the changes while running. Templates with `time_min = 0` can also
+roll a resource that ends as soon as it spawns.
+
 ## Login
 
 ### 6. "Not allowed to create any more characters" after deleting one — open

@@ -99,8 +99,8 @@ yet). Install it and create the databases:
     sudo apt install mariadb-server
     sudo ./mmoserverdb/setup.sh install
 
-This imports the schema and game data, removes the sample accounts, and
-creates a `swganh` database user with a random password. The connection
+This imports the schema and game data, spawns the first set of harvestable
+resources, removes the sample accounts, and creates a `swganh` database user with a random password. The connection
 settings go into `mmoserverdb/local.cfg` (not in git) and into
 `bin/config/general.cfg` of every build; later builds pick them up
 automatically.
@@ -110,6 +110,9 @@ use: `--public-address 192.168.1.10`. To change it later without
 reinstalling, run `sudo ./mmoserverdb/setup.sh set-address 192.168.1.10` and
 restart the servers. To start over, add `--force` to `install`. That drops
 the databases, including all accounts and characters.
+
+Databases installed before resources were spawned by `install` have none;
+run `sudo ./mmoserverdb/setup.sh spawn-resources` and restart the zones.
 
 Create an account to log in with:
 

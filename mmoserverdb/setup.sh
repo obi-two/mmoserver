@@ -32,6 +32,11 @@ Commands:
   set-address ADDR        Change the address game clients use to reach this
                           server (same as --public-address at install)
   apply-config DIR        Copy the settings in local.cfg into DIR/general.cfg
+  spawn-resources [--replace]
+                          Spawn the harvestable resources (install does this).
+                          With --replace, retire the current set and spawn a
+                          new one; resources already harvested are kept.
+                          Restart the zones to load them
 
 Options for install:
   --force                 Drop and recreate existing MMOServer databases
@@ -210,6 +215,9 @@ install() {
         done
     done
 
+    echo "Spawning resources"
+    sql -e "CALL swganh.sp_ResourceInitialSpawn()" > /dev/null
+
     if [[ ! $keep_test_accounts ]]; then
         echo "Removing the sample accounts swganh0-9"
         sql -e "DELETE FROM swganh.account WHERE account_username REGEXP '^swganh[0-9]\$'"
@@ -294,6 +302,38 @@ add_account() {
     echo "Account '$name' created."
 }
 
+# --- spawn-resources ----------------------------------------------------------
+
+spawn_resources() {
+    local replace=
+    case "${1:-}" in
+        "") ;;
+        --replace) replace=1 ;;
+        *) die "usage: $(basename "$0") spawn-resources [--replace]" ;;
+    esac
+    check_connection
+
+    # Databases installed before these procedures were fixed have the old
+    # versions, so load them again first.
+    local procedure
+    for procedure in sp_ResourceInitialSpawn sp_ResourceSpawn; do
+        import_file swganh "$script_dir/swganh/procedures/$procedure.sql"
+    done
+
+    local active
+    active=$(sql -N -e "SELECT COUNT(*) FROM swganh.resources WHERE active = 1")
+    if [[ $replace ]]; then
+        sql -e "CALL swganh.sp_ResourceSpawn()" > /dev/null
+    elif [[ $active -gt 0 ]]; then
+        die "$active resources are already spawned. Use --replace to retire them and spawn a new set."
+    else
+        sql -e "CALL swganh.sp_ResourceInitialSpawn()" > /dev/null
+    fi
+
+    active=$(sql -N -e "SELECT COUNT(*) FROM swganh.resources WHERE active = 1")
+    echo "$active resources spawned. Restart the zones to load them."
+}
+
 # --- main ---------------------------------------------------------------------
 
 [[ $# -ge 1 ]] || { usage >&2; exit 2; }
@@ -313,6 +353,7 @@ case "$command" in
         [[ $# -eq 1 ]] || die "usage: $(basename "$0") apply-config DIR"
         apply_config "$1"
         ;;
+    spawn-resources) spawn_resources "$@" ;;
     -h|--help|help) usage ;;
     *) echo "error: unknown command '$command'" >&2; usage >&2; exit 2 ;;
 esac
