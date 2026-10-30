@@ -697,6 +697,7 @@ void CreatureObject::creatureLocomotionUpdate()
 //
 void CreatureObject::incap()
 {
+    LOG(INFO) << "TRACE incap " << getId() << " type " << getType() << " posture " << (int)states.getPosture();
     // sanity check
     if (isIncapacitated() || isDead())
     {
@@ -794,6 +795,7 @@ void CreatureObject::incap()
 
 void CreatureObject::die()
 {
+    LOG(INFO) << "TRACE die " << getId();
     mIncapCount			= 0;
     mCurrentIncapTime	= 0;
     mFirstIncapTime		= 0;
