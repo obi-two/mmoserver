@@ -83,6 +83,17 @@ Untested edge case: if the old character is still *connected* (not
 link-dead) when the account selects another, both share one client object,
 and removing the old character deletes it.
 
+### 2d. Servers crashed after a long idle period — fix needs testing
+
+Left running for a day with no players, the ConnectionServer died with
+`Lost connection to MySQL server during query` and a segfault. MariaDB
+closes connections idle longer than `wait_timeout` (8 hours by default),
+and the servers never checked theirs, so the next query failed. Any failed
+asynchronous query then crashed the server: `Database::destroyResult` read
+the null result. Connections idle for over 30 seconds are now checked
+before use and replaced if closed, and failed queries no longer crash.
+Reproduced and verified with `wait_timeout` set to 40 seconds.
+
 ### 3. Servers listen on all interfaces — open (security)
 
 `Service.cpp` binds every UDP socket to `INADDR_ANY`, whatever
