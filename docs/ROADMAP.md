@@ -28,6 +28,29 @@ databases, wiki pages, recordings. The leaked SOE server source is not used,
 for reference or otherwise: it was never licensed, and anything derived from
 it puts the project and every community hosting it at legal risk.
 
+## Prior work: swganh
+
+[anhstudios/swganh](https://github.com/anhstudios/swganh) (2011-2016) was
+the same team's ground-up rewrite: a C++11 core of services (login,
+connection, chat, simulation, combat, travel, terrain, ...) with Python 3
+scripting, MIT licensed. It never reached MMOServer's gameplay coverage, and
+MMOServer's `src/anh` already carries parts of it (brought in by the 2015
+"Backports" commit). Useful as a reference:
+
+- **What it scripted:** commands, radial menus, attributes, buffs, spawns,
+  weather and character creation are Python, the rest is C++ services. A
+  concrete list for the inventory in `docs/SCRIPTING.md`.
+- **Object templates generated from client data:** about 16,300 generated
+  template files, one per client object template; the content-from-client-
+  files approach above, done once already.
+- **Forum login plugins** (phpBB, SMF) for accounts, relevant to the
+  community tools below.
+
+Rules for using it: ideas and architecture are free to learn from. Code can
+be used under its MIT licence, keeping its copyright notice. Leave out any
+piece that encodes server-side knowledge which could not have come from the
+client or public material, as for the leaked source.
+
 ## Status
 
 Tested end to end on Ubuntu 26.04 with MariaDB 11.8 and a real client:

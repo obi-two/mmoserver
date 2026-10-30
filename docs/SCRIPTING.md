@@ -110,6 +110,9 @@ after each.
   step 26, the debris explosion, the "[]:" bark).
 - List every `isTutorial()` and `isInstance()` branch and every hard-coded
   content id in C++ (the tables above are the start).
+- Compare with what [swganh](https://github.com/anhstudios/swganh) put in
+  scripts (commands, radials, attributes, buffs, spawns, weather, character
+  creation); see "Prior work" in `docs/ROADMAP.md` for how to use it.
 - Decide what to do with the `TatooineNpcTest*` and `CorelliaInstanceTest`
   scripts (disable in `config_zone_scripts`, or keep as examples).
 
