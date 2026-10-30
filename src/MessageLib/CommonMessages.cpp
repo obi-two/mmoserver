@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 ---------------------------------------------------------------------------------------
 */
 
+#include "Utils/logger.h"
 #include "MessageLib.h"
 
 #include "ZoneServer/Bank.h"
@@ -149,6 +150,8 @@ bool MessageLib::sendDestroyObject(uint64 objectId, PlayerObject* const targetOb
     {
         return(false);
     }
+
+    LOG(INFO) << "TRACE destroy " << objectId << " for player " << targetObject->getId();
 
     mMessageFactory->StartMessage();
     mMessageFactory->addUint32(opSceneDestroyObject);

@@ -184,6 +184,10 @@ void SpatialIndexManager::UpdateObject(Object *updateObject)
 
     // now process the spatial index update
     if(newBucket != oldBucket)	{
+        if(updateObject->getType() == ObjType_Player) {
+            LOG(INFO) << "TRACE player " << updateObject->getId() << " moves from bucket " << oldBucket << " to " << newBucket
+                      << " (cell " << updateObject->getParentId() << " at " << updateObject->mPosition.x << "," << updateObject->mPosition.z << ")";
+        }
         DLOG(INFO) << "ContainerManager::UpdateObject :: " << updateObject->getId() <<"normal movement from bucket" << oldBucket << " to bucket" << newBucket;
         
         // test how much we moved if only one grid proceed normally
