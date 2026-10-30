@@ -248,6 +248,10 @@ For reference; details are in the commit messages on `phase2-db-installer`.
 - A malformed client command (`getattributesbatch`, emotes, mood) crashed
   the zone; commands now fail individually.
 - LoginServer crashed after a character was deleted (missing `break`).
+- Killed creatures never disappeared from clients: since the 2015
+  "Backports" commit, `WorldManager::destroyObject` no longer removed
+  creatures from the world, so no destroy was sent. The tutorial debris
+  died on the server but stayed on screen.
 - Targets brought to exactly 0 health were neither incapacitated nor
   killed (only going below 0 counted), so the tutorial debris stayed at 0
   and the script waited forever.

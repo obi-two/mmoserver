@@ -25,7 +25,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 ---------------------------------------------------------------------------------------
 */
 #include "Ham.h"
-#include "Utils/logger.h"
 #include "CreatureObject.h"
 #include "PlayerObject.h"
 #include "WorldConfig.h"
@@ -495,11 +494,7 @@ void Ham::updateSingleHam(int32 propertyDelta, bool damage)
         return;
     }
 
-    uint8 traceResult = mHamBars[HamBar_Health]->updateCurrentHitpoints(propertyDelta,damage);
-    LOG(INFO) << "TRACE singleHam " << (mParent ? mParent->getId() : 0) << " delta " << propertyDelta << " damage " << damage
-              << " result " << (int)traceResult << " now " << mHamBars[HamBar_Health]->getCurrentHitPoints()
-              << "/" << mHamBars[HamBar_Health]->getMaxHitPoints();
-    switch(traceResult)
+    switch(mHamBars[HamBar_Health]->updateCurrentHitpoints(propertyDelta,damage))
     {
         // update went through
     case 1:
