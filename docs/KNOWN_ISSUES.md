@@ -45,6 +45,19 @@ NPCs with `destroyObject`, which left them behind in two places:
   returned a null pointer for it (fixed: `destroyObject` removes creatures
   from their cell, and `getAllCellChilds` skips ids that no longer resolve).
 
+### 2a. Text sent by the client was garbled on Linux — fix needs testing
+
+`BString` stores the client's UTF-16 text as 16-bit units but converted and
+measured it with `wcstombs`/`wcslen`/`wcsncpy`, which use `wchar_t`: 16 bits
+on Windows, 32 bits on Linux. Every client string (names, chat, command
+arguments, the starting city) came out garbled on Linux. Effects seen:
+`getattributesbatch` "bad lexical cast", and skipping the tutorial sending the
+player to a garbage planet, which crashed the tutorial zone (waypoint foreign
+key error, then a null database result) and the ConnectionServer
+(out-of-bounds zone id). Fixed in `BString` (with unit tests that fail on the
+old code), plus guards in all three crash sites. May also explain other
+client input that "did nothing", such as the debris (#4).
+
 ### 3. Servers listen on all interfaces — open (security)
 
 `Service.cpp` binds every UDP socket to `INADDR_ANY`, whatever
