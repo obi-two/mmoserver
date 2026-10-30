@@ -72,7 +72,7 @@ and file).
 | NPC ids, spawn positions, debris, bandit | conversation outcomes per NPC id: the covard officer moves the script to step 17, quartermaster, mission room officer (`QuestGiver.cpp:103-370`) |
 | position triggers | starting cell (`Tutorial.cpp:100`), starting-location lookup and warp (`Tutorial.cpp:166`) |
 | | mission terminal id (`MissionTerminal.cpp:52`) |
-| | 37 `isTutorial()` branches in 19 files (combat, food, trainers, cloning and insurance terminals, spawning, fly text) |
+| | 38 `isTutorial()` checks in 19 files (combat, food, trainers, cloning and insurance terminals, spawning, fly text) |
 
 A change to the tutorial's flow can need edits in the script, in up to a
 dozen C++ files, and in the database.
