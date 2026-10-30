@@ -124,20 +124,20 @@ Confirmed with a client for the first rooms; see 5b-2.
 Talking to any NPC inside a building failed with "You are out of range":
 the check compared the NPC's building with the player's cell. Fixed.
 
-### 5b-2. NPCs in the tutorial's later rooms don't appear — open
+### 5b-2. Some NPCs inside buildings are invisible — fix needs testing
 
-With the grid fix the first rooms' NPCs show up, but not those in later
-rooms (droid, nervous guy, Covard officer), although all 61 NPCs of the
-building are in the grid. Candidates: the grid returns creatures before
-buildings (`zmap::GetCellContents` splices each list in at the front), so
-NPCs can be sent before the client knows their cell; and that function
-tests the type mask with `&&` instead of `&`, so it returns every type.
-Next: check whether they appear after reconnecting while standing in the
-later room.
+In the tutorial's item room the officer (47513079097) was invisible while
+the supply drums next to him showed, yet the client knew him (his barks
+appeared in chat). The grid returns creatures before buildings, so on login
+an NPC in a cell could be sent before the client had the building and that
+cell, leaving the NPC outside the building. Creates around a player now
+send buildings and other objects first.
 
-The building also holds 44 NPCs the tutorial script doesn't use (36
-stormtroopers named "Joe..." in the first hall, ids 47513079017-47513085649),
-added by the old project.
+Also seen: `zmap::GetCellContents` tests the type mask with `&&` instead of
+`&`, so it returns every type whatever is asked; one stormtrooper's bark is
+just "[]:". The first hall's 36 stormtroopers ("Joe...") are not in the
+original tutorial, but the script does use some NPCs from the same block
+(the item room and bank room officers).
 
 ### 5c. Object positions inside buildings are mirrored — open
 
