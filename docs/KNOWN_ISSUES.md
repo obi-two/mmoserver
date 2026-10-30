@@ -103,7 +103,7 @@ public. Until fixed, keep those internal ports closed in the firewall.
 
 ## Tutorial and gameplay
 
-### 4. Debris blocking the tutorial path has no Attack option — fix needs testing
+### 4. Debris blocking the tutorial path has no Attack option — fixed
 
 Not a bug of its own: the script makes the debris attackable only after you
 talk to the Covard officer (`makeCreatureAttackable` at sub-state 17), and
@@ -184,6 +184,13 @@ Existing databases need the new procedure: `setup.sh update-procedures`.
 Not implemented: depletion. Sampling lowers `unitsLeft`, but a resource is
 never retired when it runs out.
 
+### 5e. Tutorial prompts lag behind the player — open
+
+The script plays each voice-over and waits for it, and some prompts wait
+for the player to reach a spot, but the debris is made attackable at the
+start of its step (the later call in `TutorialPart_1_9.lua` is commented
+out). A quick player is ahead of the prompts. Pacing, not an engine delay.
+
 ## Login
 
 ### 6. "Not allowed to create any more characters" after deleting one — open
@@ -241,6 +248,9 @@ For reference; details are in the commit messages on `phase2-db-installer`.
 - A malformed client command (`getattributesbatch`, emotes, mood) crashed
   the zone; commands now fail individually.
 - LoginServer crashed after a character was deleted (missing `break`).
+- Targets brought to exactly 0 health were neither incapacitated nor
+  killed (only going below 0 counted), so the tutorial debris stayed at 0
+  and the script waited forever.
 - Tutorial zone crashed in the item room when the script showed "open me"
   over the drum: fly text cast its source to a creature (null for a
   container). Fly text in instances also only reached grouped players.
