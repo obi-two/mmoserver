@@ -241,4 +241,7 @@ For reference; details are in the commit messages on `phase2-db-installer`.
 - A malformed client command (`getattributesbatch`, emotes, mood) crashed
   the zone; commands now fail individually.
 - LoginServer crashed after a character was deleted (missing `break`).
+- Tutorial zone crashed in the item room when the script showed "open me"
+  over the drum: fly text cast its source to a creature (null for a
+  container). Fly text in instances also only reached grouped players.
 - Missing `sp_DeleteMail`; SQL procedures broken by earlier bulk edits.
