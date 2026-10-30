@@ -109,7 +109,7 @@ Not a bug of its own: the script makes the debris attackable only after you
 talk to the Covard officer (`makeCreatureAttackable` at sub-state 17), and
 the officer was invisible (#5).
 
-### 5. Tutorial NPCs did not appear — fix needs testing
+### 5. Tutorial NPCs did not appear — partly fixed
 
 The tutorial's 17 characters (officers, the nervous guy, the trainer's
 officer, ...) are persistent NPCs in the tutorial building. NPCs loaded with
@@ -119,6 +119,25 @@ tangible items. So no player ever saw an NPC inside a building that came
 from the database, on any planet. The debris and bandit were visible
 because the script spawns them later through the normal path. Fixed:
 once a building is in the world, its cells' creatures are added to the grid.
+Confirmed with a client for the first rooms; see 5b-2.
+
+Talking to any NPC inside a building failed with "You are out of range":
+the check compared the NPC's building with the player's cell. Fixed.
+
+### 5b-2. NPCs in the tutorial's later rooms don't appear — open
+
+With the grid fix the first rooms' NPCs show up, but not those in later
+rooms (droid, nervous guy, Covard officer), although all 61 NPCs of the
+building are in the grid. Candidates: the grid returns creatures before
+buildings (`zmap::GetCellContents` splices each list in at the front), so
+NPCs can be sent before the client knows their cell; and that function
+tests the type mask with `&&` instead of `&`, so it returns every type.
+Next: check whether they appear after reconnecting while standing in the
+later room.
+
+The building also holds 44 NPCs the tutorial script doesn't use (36
+stormtroopers named "Joe..." in the first hall, ids 47513079017-47513085649),
+added by the old project.
 
 ### 5c. Object positions inside buildings are mirrored — open
 
