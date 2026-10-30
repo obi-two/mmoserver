@@ -534,10 +534,6 @@ bool MessageLib::sendCreateCreature(CreatureObject* creature, PlayerObject* targ
         return false;
     }
 
-    LOG(INFO) << "TRACE create creature " << creature->getId() << " cell " << creature->getParentId()
-              << " at (" << creature->mPosition.x << "," << creature->mPosition.y << "," << creature->mPosition.z << ")"
-              << " for player " << target->getId();
-
     sendCreateObjectByCRC(creature, target, false);
 
     sendBaselinesCREO_3(creature, target);

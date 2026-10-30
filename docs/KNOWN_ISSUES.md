@@ -109,7 +109,7 @@ Not a bug of its own: the script makes the debris attackable only after you
 talk to the Covard officer (`makeCreatureAttackable` at sub-state 17), and
 the officer was invisible (#5).
 
-### 5. Tutorial NPCs did not appear — partly fixed
+### 5. Tutorial NPCs did not appear — fixed
 
 The tutorial's 17 characters (officers, the nervous guy, the trainer's
 officer, ...) are persistent NPCs in the tutorial building. NPCs loaded with
@@ -124,14 +124,16 @@ Confirmed with a client for the first rooms; see 5b-2.
 Talking to any NPC inside a building failed with "You are out of range":
 the check compared the NPC's building with the player's cell. Fixed.
 
-### 5b-2. Some NPCs inside buildings are invisible — fix needs testing
+### 5b-2. Some NPCs inside buildings were invisible — fixed
 
 In the tutorial's item room the officer (47513079097) was invisible while
 the supply drums next to him showed, yet the client knew him (his barks
 appeared in chat). The grid returns creatures before buildings, so on login
 an NPC in a cell could be sent before the client had the building and that
 cell, leaving the NPC outside the building. Creates around a player now
-send buildings and other objects first.
+send buildings and other objects first. Confirmed with a client: a new
+tutorial character sees the item room officer and the other NPCs; a trace
+showed all 63 NPCs of the building sent at login and nothing destroyed.
 
 Also seen: `zmap::GetCellContents` tests the type mask with `&&` instead of
 `&`, so it returns every type whatever is asked; one stormtrooper's bark is
