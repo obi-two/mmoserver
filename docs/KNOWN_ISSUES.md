@@ -28,7 +28,10 @@ disconnected. The zone keeps running with the player link-dead.
 Next step: capture `logs/connection.out` and `logs/tutorial.out` right after
 the disconnect, and compare with the client's own log if it has one.
 
-### 2. Zone crashes when a player reconnects — fix needs testing
+### 2. Zone crashes when a player reconnects — fixed
+
+Confirmed with a client: disconnecting and reconnecting no longer crashes the
+tutorial zone.
 
 Reconnecting while the character is still link-dead crashed the zone in
 `SpatialIndexManager::InitializeObject`
