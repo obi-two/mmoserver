@@ -191,6 +191,23 @@ for the player to reach a spot, but the debris is made attackable at the
 start of its step (the later call in `TutorialPart_1_9.lua` is commented
 out). A quick player is ahead of the prompts. Pacing, not an engine delay.
 
+### 5f. Combat creatures never appeared (tutorial bandit) — fix needs testing
+
+Combat creatures (`AttackableCreature`: the tutorial bandit, creatures from
+lairs) are created unspawned and queued as dormant; the AI manager calls
+their `handleEvents`, which was empty, and nothing else called `spawn()`.
+So none ever appeared. They now spawn on the first handling.
+
+The rest of their AI is mostly missing too: nothing moves them out of the
+idle state, so expect creatures that can be attacked and killed but barely
+react. Tatooine's 4 lairs will now put creatures in the world for the
+first time.
+
+### 5g. No explosion when the tutorial debris is destroyed — open
+
+Cosmetic. `AttackableStaticNpc::playDeathAnimation` exists; check what it
+sends.
+
 ## Login
 
 ### 6. "Not allowed to create any more characters" after deleting one — open
