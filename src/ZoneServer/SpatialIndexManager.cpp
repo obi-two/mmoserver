@@ -838,6 +838,30 @@ void SpatialIndexManager::createInWorld(CreatureObject* creature)
 }
 
 
+//======================================================================================================================
+//
+// Creatures loaded with a building (persistent NPCs in its cells) are added to
+// their cells by the cell factory, but not to the grid: their world position
+// depends on the building, which isn't in the world yet at that point. Call
+// this once it is, or players never get them.
+//
+
+void SpatialIndexManager::addCellCreaturesToGrid(BuildingObject* building)
+{
+    CellObjectList* cell_list = building->getCellList();
+
+    std::for_each(cell_list->begin(), cell_list->end(), [this] (CellObject* cell) {
+        ObjectIDList* content_list = cell->getObjects();
+
+        std::for_each(content_list->begin(), content_list->end(), [this] (uint64_t object_id) {
+            Object* object = gWorldManager->getObjectById(object_id);
+            if(object && (object->getType() == ObjType_NPC || object->getType() == ObjType_Creature)) {
+                _AddObject(object);
+            }
+        });
+    });
+}
+
 void SpatialIndexManager::createInWorld(PlayerObject* player)
 {
     //just create in the SI - it will keep track of nearby players

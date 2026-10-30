@@ -203,6 +203,10 @@ bool WorldManager::addObject(Object* object,bool manual)
 			
 			//create the building in the world
 			gSpatialIndexManager->createInWorld(object);
+
+			// and the NPCs that were loaded in its cells
+			if(building)
+				gSpatialIndexManager->addCellCreaturesToGrid(building);
 		}
 		break;
 

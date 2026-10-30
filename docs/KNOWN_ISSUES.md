@@ -103,21 +103,35 @@ public. Until fixed, keep those internal ports closed in the firewall.
 
 ## Tutorial and gameplay
 
-### 4. Debris blocking the tutorial path has no Attack option — open
+### 4. Debris blocking the tutorial path has no Attack option — fix needs testing
 
-The debris is spawned as an NPC by `data/script/TutorialPart_1_9.lua`
-(`createAndSpawnNpc(npcDebrisTypeId, ...)`). Its radial menu only offers
-Examine, so the tutorial cannot be completed. Likely the NPC is not sent with
-attackable PvP flags, or attack handling rejects it. Combat is the thinnest
-system in the code (see `docs/CODE_REVIEW_2026.md`).
+Not a bug of its own: the script makes the debris attackable only after you
+talk to the Covard officer (`makeCreatureAttackable` at sub-state 17), and
+the officer was invisible (#5).
 
-### 5. Tutorial NPCs other than the debris do not appear — open
+### 5. Tutorial NPCs did not appear — fix needs testing
 
-The tutorial script should spawn several private NPCs (officers, trainer,
-etc.) as the player progresses, but none are seen in the client. The script
-loads without errors. To check: whether `npcSpawnPrivate` reaches the client,
-and whether the script advances past the first steps (it waits on client
-events in `Tutorial::tutorialResponse`).
+The tutorial's 17 characters (officers, the nervous guy, the trainer's
+officer, ...) are persistent NPCs in the tutorial building. NPCs loaded with
+a building's cells were added to the cell but never to the spatial grid,
+and only the grid sends creatures to players; cell registration only sends
+tangible items. So no player ever saw an NPC inside a building that came
+from the database, on any planet. The debris and bandit were visible
+because the script spawns them later through the normal path. Fixed:
+once a building is in the world, its cells' creatures are added to the grid.
+
+### 5c. Object positions inside buildings are mirrored — open
+
+`Object::getWorldPosition` computes a building's contents at (-x, -z) of
+where they should be (for an unrotated building, world = (-x, y, -z)
+instead of (x, y, z)). Everything inside uses the same formula, so players
+and NPCs in a building see each other, but distances between indoor and
+outdoor objects are off by up to twice the indoor offset.
+
+### 5d. Sampling often yields nothing at low concentration — open
+
+Works, but needs a high concentration to return resources reliably; the
+formula in `ArtisanManager::sampleEvent` may need tuning.
 
 ### 5a. No harvestable resources on a fresh install — fix needs testing
 
