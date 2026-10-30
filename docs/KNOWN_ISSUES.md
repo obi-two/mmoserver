@@ -58,6 +58,13 @@ key error, then a null database result) and the ConnectionServer
 old code), plus guards in all three crash sites. May also explain other
 client input that "did nothing", such as the debris (#4).
 
+### 2b. A character that failed to load could never log in again — fixed
+
+After an interrupted transfer, the character was left on the zone's
+"login in progress" list (`CharacterLoginHandler::playerZoneList`), so every
+later login for it was silently ignored until the zone restarted. Entries
+now expire after 30 seconds, with a warning logged when a login is retried.
+
 ### 3. Servers listen on all interfaces — open (security)
 
 `Service.cpp` binds every UDP socket to `INADDR_ANY`, whatever
