@@ -203,6 +203,14 @@ idle state, so expect creatures that can be attacked and killed but barely
 react. Tatooine's 4 lairs will now put creatures in the world for the
 first time.
 
+Confirmed with a client: the tutorial bandit appears, fights, and the
+script continues after his grenade.
+
+### 5h. "Too many commands queued. A command was dropped." — open
+
+Seen repeatedly while fighting the tutorial bandit. The player's command
+queue overflows during auto-attack; check its limit and what fills it.
+
 ### 5g. No explosion when the tutorial debris is destroyed — open
 
 Cosmetic. `AttackableStaticNpc::playDeathAnimation` exists; check what it
@@ -265,6 +273,8 @@ For reference; details are in the commit messages on `phase2-db-installer`.
 - A malformed client command (`getattributesbatch`, emotes, mood) crashed
   the zone; commands now fail individually.
 - LoginServer crashed after a character was deleted (missing `break`).
+- NPC and creature posture changes never reached clients (only players'
+  did), so killed creatures stayed standing.
 - Killed creatures never disappeared from clients: since the 2015
   "Backports" commit, `WorldManager::destroyObject` no longer removed
   creatures from the world, so no destroy was sent. The tutorial debris
