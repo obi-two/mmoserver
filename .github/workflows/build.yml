@@ -64,6 +64,85 @@ jobs:
       - name: Build and test
         run: ./build_server.sh -t ${{ matrix.config == 'release' && '-r' || '' }}
 
+  database:
+    name: Database install (MariaDB ${{ matrix.mariadb }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        # The versions Ubuntu 24.04 and 26.04 ship. 11.5+ changed the default
+        # utf8 collation, which the installer has to override.
+        mariadb: ['10.11', '11.8']
+    services:
+      mariadb:
+        image: mariadb:${{ matrix.mariadb }}
+        env:
+          MARIADB_ROOT_PASSWORD: ci-root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "healthcheck.sh --connect --innodb_initialized"
+          --health-interval 5s --health-retries 20
+    env:
+      DB_HOST: 127.0.0.1
+      DB_ADMIN_USER: root
+      MYSQL_PWD: ci-root
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the MariaDB client
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends mariadb-client
+
+      - name: Install the databases
+        run: ./mmoserverdb/setup.sh install
+
+      - name: Refuse to overwrite without --force
+        run: |
+          if ./mmoserverdb/setup.sh install; then
+            echo "install should refuse to overwrite existing databases" >&2
+            exit 1
+          fi
+
+      - name: Create an account
+        run: |
+          printf 'ci-password-123\n' | ./mmoserverdb/setup.sh add-account ci_pilot
+          mariadb -h "$DB_HOST" -u root -N -e \
+            "SELECT COUNT(*) FROM swganh.account WHERE account_username='ci_pilot' AND account_password=SHA1('ci-password-123')" |
+            grep -qx 1
+
+      # Mixed collations make routines fail at runtime with
+      # "Illegal mix of collations".
+      - name: Check collations are consistent
+        run: |
+          mixed=$(mariadb -h "$DB_HOST" -u root -N -e "
+            SELECT CONCAT('table ', table_name, ': ', table_collation) FROM information_schema.tables
+             WHERE table_schema='swganh' AND table_collation NOT IN ('utf8mb3_general_ci', 'utf8mb3_bin')
+            UNION ALL
+            SELECT CONCAT('routine ', routine_name, ': ', database_collation) FROM information_schema.routines
+             WHERE routine_schema='swganh' AND database_collation <> 'utf8mb3_general_ci'")
+          if [ -n "$mixed" ]; then
+            echo "Objects with an unexpected collation:" >&2
+            echo "$mixed" >&2
+            exit 1
+          fi
+
+      # Every swganh.<table/routine> the servers query must exist.
+      - name: Check the schema covers the code
+        run: |
+          grep -rhoE '%s\.[A-Za-z_][A-Za-z_0-9]*' src --include=*.cpp --include=*.h |
+            sed 's/^%s\.//' | tr 'A-Z' 'a-z' | grep -vx join | sort -u > referenced.txt
+          mariadb -h "$DB_HOST" -u root -N -e "
+            SELECT LOWER(table_name) FROM information_schema.tables WHERE table_schema='swganh'
+            UNION SELECT LOWER(routine_name) FROM information_schema.routines WHERE routine_schema='swganh'" |
+            sort -u > available.txt
+          missing=$(comm -23 referenced.txt available.txt)
+          if [ -n "$missing" ]; then
+            echo "Referenced by the code but missing from the database:" >&2
+            echo "$missing" >&2
+            exit 1
+          fi
+          echo "All $(wc -l < referenced.txt) referenced tables and routines exist."
+
   linux-vcpkg:
     name: Linux debug (vcpkg)
     runs-on: ubuntu-24.04

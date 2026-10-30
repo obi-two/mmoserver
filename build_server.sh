@@ -169,6 +169,10 @@ mkdir -p "$bin_dir/config" "$bin_dir/logs"
 for cfg in "$basedir"/data/config/*.cfg; do
     [[ -e $bin_dir/config/$(basename "$cfg") ]] || cp "$cfg" "$bin_dir/config/"
 done
+# Database settings written by mmoserverdb/setup.sh install.
+if [[ -f $basedir/mmoserverdb/local.cfg ]]; then
+    "$basedir/mmoserverdb/setup.sh" apply-config "$bin_dir/config"
+fi
 # Scripts are code; always refresh them.
 rm -rf "$bin_dir/script"
 cp -r "$basedir/data/script" "$bin_dir/script"

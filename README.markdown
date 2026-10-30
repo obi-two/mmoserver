@@ -91,10 +91,77 @@ The archives come from the [v0.6.0 release][3] and are checked against
 
 ## Running ##
 
-The servers need a MySQL database created from the scripts in `mmoserverdb/`.
-Run each server from its `bin` directory, because configs, scripts and
-heightmaps are loaded relative to the working directory. A scripted database
-setup and one-command launch are planned next (see the roadmap).
+### 1. Set up the database ###
+
+The servers use MariaDB (tested with 10.11 and 11.8; MySQL 8 is not supported
+yet). Install it and create the databases:
+
+    sudo apt install mariadb-server
+    sudo ./mmoserverdb/setup.sh install
+
+This imports the schema and game data, removes the sample accounts, and
+creates a `swganh` database user with a random password. The connection
+settings go into `mmoserverdb/local.cfg` (not in git) and into
+`bin/config/general.cfg` of every build; later builds pick them up
+automatically.
+
+If game clients connect from other machines, pass the address they should
+use: `--public-address 192.168.1.10`. To change it later without
+reinstalling, run `sudo ./mmoserverdb/setup.sh set-address 192.168.1.10` and
+restart the servers. To start over, add `--force` to `install`. That drops
+the databases, including all accounts and characters.
+
+Create an account to log in with:
+
+    sudo ./mmoserverdb/setup.sh add-account <name>
+
+### 2. Start the servers ###
+
+    ./server.sh start                    # tutorial and tatooine
+    ./server.sh start tutorial naboo     # or pick the zones
+    ./server.sh status
+    ./server.sh stop
+
+`start` launches the Connection, Chat, Login and Ping servers, then the
+zones, each detached from the terminal and logging to
+`build/linux-debug/bin/logs/<name>.out`. Zones other than tutorial need their
+heightmap (`./build_server.sh --heightmaps tatooine`) and take a minute or
+two to load. Add `-r` to run the release build.
+
+For debugging, `debug` starts the same servers in a tmux session
+(`sudo apt install tmux gdb`), one window per server showing its output live:
+
+    ./server.sh debug                    # tutorial and tatooine
+    ./server.sh debug -g tutorial        # each server under gdb
+
+Switch windows with Ctrl-b n / Ctrl-b p (window 0 shows the status), detach
+with Ctrl-b d and come back with `tmux attach -t mmoserver`. A server that
+exits or crashes keeps its window open. With `-g`, a crash stops in gdb and
+prints the backtrace, which is also saved in the server's log. Type `q` and
+Enter in a server's window to quit it; `./server.sh stop` stops them all and
+closes the session.
+
+Game clients log in on UDP port 44990; the ConnectionServer uses 44991 and
+the PingServer 44992. If the firewall is on (`sudo ufw status`), open them
+for clients on other machines:
+
+    sudo ufw allow 44990:44992/udp
+
+Keep the internal ports (5000 and the zones' 50xx) closed to the outside;
+the servers only use them among themselves.
+
+### 3. Connect a client ###
+
+Point the client's `login.cfg` at the server and log in with an account
+created by `setup.sh add-account`:
+
+    [ClientGame]
+    loginServerAddress0=192.168.1.10
+    loginServerPort0=44990
+
+If the client gets no response, run `sudo tcpdump -ni any udp port 44990`
+on the server while logging in. No packets means a network problem between
+the machines; packets arriving with no reply usually means the firewall.
 
 ## Windows ##
 
