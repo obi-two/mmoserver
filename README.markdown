@@ -128,6 +128,19 @@ zones, each detached from the terminal and logging to
 heightmap (`./build_server.sh --heightmaps tatooine`) and take a minute or
 two to load. Add `-r` to run the release build.
 
+For debugging, `debug` starts the same servers in a tmux session
+(`sudo apt install tmux gdb`), one window per server showing its output live:
+
+    ./server.sh debug                    # tutorial and tatooine
+    ./server.sh debug -g tutorial        # each server under gdb
+
+Switch windows with Ctrl-b n / Ctrl-b p (window 0 shows the status), detach
+with Ctrl-b d and come back with `tmux attach -t mmoserver`. A server that
+exits or crashes keeps its window open. With `-g`, a crash stops in gdb and
+prints the backtrace, which is also saved in the server's log. Type `q` and
+Enter in a server's window to quit it; `./server.sh stop` stops them all and
+closes the session.
+
 Game clients log in on UDP port 44990; the ConnectionServer uses 44991 and
 the PingServer 44992. If the firewall is on (`sudo ufw status`), open them
 for clients on other machines:
