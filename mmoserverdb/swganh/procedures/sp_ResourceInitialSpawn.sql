@@ -531,7 +531,7 @@ REPEAT
 	SET final_sr = rand() * (generated_sr_max - generated_sr_min) + generated_sr_min;
 	SET final_ut = rand() * (generated_ut_max - generated_ut_min) + generated_ut_min;
 	SET final_pe = rand() * (generated_pe_max - generated_pe_min) + generated_pe_min;
-	SET generated_spawn_end = (RAND() * (generated_time_min - generated_time_max) + generated_time_min);
+	SET generated_spawn_end = (RAND() * (generated_time_max - generated_time_min) + generated_time_min);
 	SET final_spawn_end = DATE_ADD(NOW(), INTERVAL generated_spawn_end DAY);
 	
 	INSERT INTO swganh.resources VALUES (
@@ -647,7 +647,7 @@ REPEAT
 	SET final_sr = rand() * (generated_sr_max - generated_sr_min) + generated_sr_min;
 	SET final_ut = rand() * (generated_ut_max - generated_ut_min) + generated_ut_min;
 	SET final_pe = rand() * (generated_pe_max - generated_pe_min) + generated_pe_min;
-	SET generated_spawn_end = (RAND() * (generated_time_min - generated_time_max) + generated_time_min);
+	SET generated_spawn_end = (RAND() * (generated_time_max - generated_time_min) + generated_time_min);
 	SET final_spawn_end = DATE_ADD(NOW(), INTERVAL generated_spawn_end DAY);
 
 
@@ -794,7 +794,7 @@ REPEAT
 	SET final_sr = rand() * (generated_sr_max - generated_sr_min) + generated_sr_min;
 	SET final_ut = rand() * (generated_ut_max - generated_ut_min) + generated_ut_min;
 	SET final_pe = rand() * (generated_pe_max - generated_pe_min) + generated_pe_min;
-	SET generated_spawn_end = (RAND() * (generated_time_min - generated_time_max) + generated_time_min);
+	SET generated_spawn_end = (RAND() * (generated_time_max - generated_time_min) + generated_time_min);
 	SET final_spawn_end = DATE_ADD(NOW(), INTERVAL generated_spawn_end DAY);
 
 	INSERT INTO swganh.resources VALUES (
@@ -940,7 +940,7 @@ REPEAT
 	SET final_sr = rand() * (generated_sr_max - generated_sr_min) + generated_sr_min;
 	SET final_ut = rand() * (generated_ut_max - generated_ut_min) + generated_ut_min;
 	SET final_pe = rand() * (generated_pe_max - generated_pe_min) + generated_pe_min;
-	SET generated_spawn_end = (RAND() * (generated_time_min - generated_time_max) + generated_time_min);
+	SET generated_spawn_end = (RAND() * (generated_time_max - generated_time_min) + generated_time_min);
 	SET final_spawn_end = DATE_ADD(NOW(), INTERVAL generated_spawn_end DAY);
 
 	INSERT INTO swganh.resources VALUES (
