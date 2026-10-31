@@ -220,28 +220,26 @@ sends.
 
 ## Login
 
-### 6. "Not allowed to create any more characters" — partly fixed
+### 6. "Not allowed to create any more characters" — fix needs testing
 
 The client shows this when the ConnectionServer (which character creation
-connects to) refuses the account or reports no free slot. Causes found:
+connects to) refuses the account or reports no free slot. Causes found and
+fixed:
 
-- **Fixed:** the LoginServer cleared `account_authenticated` after every
-  character delete, so the account counted as logged out until the next
-  login.
-- **Open, likely the common case:** the ConnectionServer marks an account
-  logged in (`account_loggedin` = galaxy id) while connected and clears it
-  only when it notices the client is gone, which can take the 60 s session
-  timeout. A new connection from the same account before then is refused
-  silently. Seen on the VM: refused repeatedly after logging out and in and
-  after restarting the client, then fine a little later. Fix: a new
-  connection should replace the account's stale session instead of being
-  refused (and log why it refuses when it does).
-- **Open, possible:** the ConnectionServer counts every non-deleted
-  character, but the character list (`sp_ReturnAccountCharacters`) only
-  shows characters with a `character_appearance` row. Half-created
-  characters (from failed creations) are invisible but use a slot. The
-  count query also returns a NULL limit for an account with no characters.
-  Make the count match the list, and character creation all-or-nothing.
+- The LoginServer cleared `account_authenticated` after every character
+  delete, so the account counted as logged out until the next login.
+- The ConnectionServer refused any account still marked logged in
+  (`account_loggedin`), which it clears only when it notices the previous
+  client has gone (up to the 60 s session timeout). Seen on the VM:
+  refused after logging out and in and after restarting the client, fine
+  a little later. A reconnecting account now takes over its stale session,
+  and every refusal is logged with its reason in `connection.out`.
+- Characters were counted differently from the character list (which
+  needs a `character_appearance` row), so half-created characters could
+  use slots invisibly; an account with no characters got a NULL limit.
+  The count now matches the list.
+- The login check ran two async queries and handled them in arrival
+  order; they could be swapped. One query now.
 
 ## Protocol
 
