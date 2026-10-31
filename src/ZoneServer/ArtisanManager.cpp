@@ -724,11 +724,14 @@ bool	ArtisanManager::stopSampling(PlayerObject* player, CurrentResource* resourc
     {
         stop = true;
     }
-    // the resource expired while sampling
+    // the resource expired while sampling; stop now, before the combat
+    // check below, which would otherwise keep the sample going
     else if(!resource->getCurrent())
     {
         gMessageLib->SendSystemMessage(::common::OutOfBand("ui","survey_noresource"), player);
-        stop = true;
+        player->setSamplingState(false);
+        gStateManager.setCurrentPostureState(player, CreaturePosture_Upright);
+        return true;
     }
     // you can't take sample while under attack!
     if(player->states.checkState(CreatureState_Combat))

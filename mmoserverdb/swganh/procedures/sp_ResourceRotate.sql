@@ -54,7 +54,9 @@ BEGIN
   ##
   ## The zone servers call it on startup and every few minutes, then load
   ## the changes. A named lock keeps concurrent calls from doing the work
-  ## twice; a call that finds the lock taken returns 0.
+  ## twice: a call that finds the lock taken waits for that rotation to
+  ## finish (it then finds nothing left), so the caller never loads a
+  ## half-done rotation. It returns 0 if the wait times out.
 
   DECLARE expired_id BIGINT UNSIGNED;
   DECLARE expired_type INT UNSIGNED;
@@ -65,7 +67,7 @@ BEGIN
   DECLARE found INT DEFAULT 1;
   DECLARE CONTINUE HANDLER FOR NOT FOUND SET found = 0;
 
-  IF GET_LOCK('swganh.sp_ResourceRotate', 0) = 1 THEN
+  IF GET_LOCK('swganh.sp_ResourceRotate', 30) = 1 THEN
 
     rotate: LOOP
       SET found = 1;
