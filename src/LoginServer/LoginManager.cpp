@@ -113,8 +113,23 @@ void LoginManager::handleSessionDisconnect(NetworkClient* client)
 {
     LoginClient* loginClient = reinterpret_cast<LoginClient*>(client);
 
-    // Client has disconnected.  Update the db to show they are no longer authenticated.
-    mDatabase->executeProcedureAsync(0, 0, "UPDATE %s.account SET account_authenticated = 0 WHERE account_id=%u;",mDatabase->galaxy(), loginClient->getAccountId());
+    // Client has disconnected.  Update the db to show they are no longer
+    // authenticated, unless the account has logged in again meanwhile (a
+    // client that went away without logging out times out only later).
+    bool loggedInAgain = false;
+    for(LoginClientList::iterator it = mLoginClientList.begin(); it != mLoginClientList.end(); ++it)
+    {
+        if((*it) != loginClient && loginClient->getAccountId() && (*it)->getAccountId() == loginClient->getAccountId())
+        {
+            loggedInAgain = true;
+            break;
+        }
+    }
+
+    if(!loggedInAgain)
+    {
+        mDatabase->executeProcedureAsync(0, 0, "UPDATE %s.account SET account_authenticated = 0 WHERE account_id=%u;",mDatabase->galaxy(), loginClient->getAccountId());
+    }
 
     LoginClientList::iterator iter = mLoginClientList.begin();
 
@@ -279,8 +294,11 @@ void LoginManager::_handleLoginClientId(LoginClient* client, Message* message)
 
     if (strlen(username.getAnsi()) == 0) //SessionID Login With ANH Launcher
     {
+        // Not account_authenticated/account_loggedin: they stay set until the
+        // servers notice a client that went away without logging out, and the
+        // ConnectionServer replaces that stale session.
         sprintf(sql,"SELECT account_id, account_username, account_password, account_station_id, account_banned, account_active,account_characters_allowed,"
-                "account_session_key, account_csr FROM account WHERE account_banned=0 AND account_authenticated=0 AND account_loggedin=0 AND account_session_key='");
+                "account_session_key, account_csr FROM account WHERE account_banned=0 AND account_session_key='");
         // sprintf(sql,"SELECT account_id, account_username, account_password, account_station_id, account_banned, account_active,account_characters_allowed,"
         //"account_session_key, account_csr FROM account WHERE account_banned=0 AND account_authenticated=0 AND account_loggedin=0 AND account_session_key=' AND session_key='");
         sqlPointer = sql + strlen(sql);
@@ -290,8 +308,9 @@ void LoginManager::_handleLoginClientId(LoginClient* client, Message* message)
     }
     else //	regular login the client login screen
     {
-        //the problem with the marked authentication is, that if a connection drops without a sessiondisconnect packet
-        //the connection to the loginserver cannot be established anymore - need to have the sessiontimeout think of that
+        // sp_ReturnUserAccount no longer requires the account to be marked
+        // logged out, so a client that dropped without logging out can log in
+        // again at once; the ConnectionServer replaces the stale session.
 
         sprintf(sql,"CALL %s.sp_ReturnUserAccount('",mDatabase->galaxy());
 

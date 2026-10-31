@@ -94,6 +94,12 @@ the null result. Connections idle for over 30 seconds are now checked
 before use and replaced if closed, and failed queries no longer crash.
 Reproduced and verified with `wait_timeout` set to 40 seconds.
 
+### 3a. Unknown usernames create accounts — open (security)
+
+`sp_ReturnUserAccount` creates an account for any username it doesn't know,
+with the password typed. Convenient on a test server; a public server needs
+it off. Make it a setting (default off for public installs).
+
 ### 3. Servers listen on all interfaces — open (security)
 
 `Service.cpp` binds every UDP socket to `INADDR_ANY`, whatever
@@ -240,6 +246,14 @@ fixed:
   The count now matches the list.
 - The login check ran two async queries and handled them in arrival
   order; they could be swapped. One query now.
+- The LoginServer had the same stale-flag problem one step earlier: it only
+  accepted a login while the account was marked logged out
+  (`account_authenticated = 0` and `account_loggedin = 0`), so after killing
+  the client the client said "The Login Server is currently not available"
+  until the old session timed out (seen on the VM: three failed logins,
+  then success). A correct password now logs in; the ConnectionServer
+  replaces the stale session. An old LoginServer session timing out no
+  longer clears the authentication of a newer login of the same account.
 
 ## Protocol
 

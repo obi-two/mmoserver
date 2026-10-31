@@ -113,7 +113,12 @@ Remaining:
   bounds-checked `Message` reads; player text out of fixed SQL buffers and
   into prepared statements; hashed passwords (Argon2id or bcrypt) with
   re-hash on next login; servers binding only to `BindAddress` instead of
-  every interface (`KNOWN_ISSUES.md` #3).
+  every interface (`KNOWN_ISSUES.md` #3); unknown usernames no longer
+  creating accounts by default (#3a).
+- **Character limits**: the per-account limit is `account_characters_allowed`
+  (default 2), changed by hand in SQL today. `setup.sh` options for the
+  default limit of new accounts and for one account's limit, so test servers
+  can be generous; later the same in the management portal.
 - **Docker Compose** stack (MariaDB plus servers) as an alternative to the
   manual install.
 - **Operations**: database backup and restore commands in `setup.sh`, log
@@ -168,7 +173,7 @@ For admins, QA and community leaders; a web application, reachable only
 from trusted networks or behind a login, never open by default.
 
 - **Read and edit data** (works against the database directly): accounts
-  (create, ban, reset password, permissions), characters (find, inspect,
+  (create, ban, reset password, permissions, character limit), characters (find, inspect,
   move, restore), galaxy settings (address, lock to staff, settings now in
   `config_server` such as the resource rotation interval), resources
   (current spawn, force a rotation).

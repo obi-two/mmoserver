@@ -26,8 +26,7 @@ server crashes, gdb stops it and the backtrace is at the end of its log.
 
 | # | Area | What was wrong | How to test | Expect |
 |---|---|---|---|---|
-| T1 | Login | No character creation after a delete until logging in again [6] | Delete a character, then create one straight away without logging out | Creation screen opens |
-| T2 | Login | A quick reconnect was refused for up to a minute [6] | Log in, select the galaxy, then **close the client without logging out** (or kill it). Start it again at once and log in, then create or select a character | Works first time; `connection.out` shows `Account N connected again; replacing its previous connection` |
+| T2 | Login | A quick reconnect was refused for up to a minute [6]: first at login ("The Login Server is currently not available"), then at the galaxy ("not allowed to create any more characters") | Log in, go to character selection or creation, then **kill the client** without logging out. Start it again at once, log in, and create or select a character | Login works first time (`login.out`: no `Login failed`), and `connection.out` shows `Account N connected again; replacing its previous connection` |
 | T3 | Login | Refusals were silent [6] | If anything is refused at the galaxy screen | `connection.out` has a `Refusing account N: <reason>` line; send it to me |
 | T4 | Login | Characters with a surname couldn't be deleted | Delete a character with a surname by typing `delete First Last` | Deleted, no hidden space needed (the earlier test needed a trailing space; this checks the fixed build) |
 | T5 | Tutorial | Corpse looting | Kill the bandit, then radial menu on the corpse → Loot | A melon and blue milk |
@@ -48,6 +47,7 @@ server crashes, gdb stops it and the backtrace is at the end of its log.
 | Launcher | `server.sh debug -g` stopped at gdb's debuginfod prompt | Servers run under gdb in tmux |
 | Galaxy | Galaxy stuck on "Loading..." (ChatServer race) | Galaxy online |
 | Login | LoginServer crashed after a character was deleted | Deletes work |
+| Login | No character creation after a delete until logging in again [6] (T1) | Deleted and created twice without logging out; both loaded into Tatooine |
 | Login | Characters with a surname couldn't be deleted | Typing the hidden trailing space deleted one (diagnosis); see T4 for the fixed build |
 | Stability | Zone crash on reconnect [2] | Disconnect and reconnect, no crash |
 | Stability | Character switching after a disconnect hung [2c] | New character transferred to Tatooine |
