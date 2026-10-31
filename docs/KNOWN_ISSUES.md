@@ -220,13 +220,28 @@ sends.
 
 ## Login
 
-### 6. "Not allowed to create any more characters" after deleting one — fix needs testing
+### 6. "Not allowed to create any more characters" — partly fixed
 
-After deleting a character, creating one was refused until logging out and
-in again. The LoginServer set `account_authenticated = 0` after every
-delete, and the ConnectionServer (which character creation goes through)
-only accepts authenticated accounts, so the account counted as logged out.
-It now stays authenticated after a delete.
+The client shows this when the ConnectionServer (which character creation
+connects to) refuses the account or reports no free slot. Causes found:
+
+- **Fixed:** the LoginServer cleared `account_authenticated` after every
+  character delete, so the account counted as logged out until the next
+  login.
+- **Open, likely the common case:** the ConnectionServer marks an account
+  logged in (`account_loggedin` = galaxy id) while connected and clears it
+  only when it notices the client is gone, which can take the 60 s session
+  timeout. A new connection from the same account before then is refused
+  silently. Seen on the VM: refused repeatedly after logging out and in and
+  after restarting the client, then fine a little later. Fix: a new
+  connection should replace the account's stale session instead of being
+  refused (and log why it refuses when it does).
+- **Open, possible:** the ConnectionServer counts every non-deleted
+  character, but the character list (`sp_ReturnAccountCharacters`) only
+  shows characters with a `character_appearance` row. Half-created
+  characters (from failed creations) are invisible but use a slot. The
+  count query also returns a NULL limit for an account with no characters.
+  Make the count match the list, and character creation all-or-nothing.
 
 ## Protocol
 
