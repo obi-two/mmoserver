@@ -220,14 +220,13 @@ sends.
 
 ## Login
 
-### 6. "Not allowed to create any more characters" after deleting one — open
+### 6. "Not allowed to create any more characters" after deleting one — fix needs testing
 
-Create a character, delete it, then try to create another in the same
-session: the client refuses when the galaxy is selected. Logging out and in
-again works. The server reports the delete as successful and sends the limit
-(`account_characters_allowed`, default 2) only at login, so the client is
-probably deciding from data cached at login. Possible fix: resend the
-character list and cluster status after a delete. Low priority.
+After deleting a character, creating one was refused until logging out and
+in again. The LoginServer set `account_authenticated = 0` after every
+delete, and the ConnectionServer (which character creation goes through)
+only accepts authenticated accounts, so the account counted as logged out.
+It now stays authenticated after a delete.
 
 ## Protocol
 

@@ -519,11 +519,11 @@ void LoginManager::_sendDeleteCharacterReply(uint32 result,LoginClient* client)
 
     client->SendChannelA(newMessage, 2, false);
 
-    // Set the account authenticated to 0 (the server will attempt to relogin for any further processing).
     // Set the state to the end state to prevent character deletion infinite loop.
+    // The account stays authenticated: the client is still logged in, and the
+    // ConnectionServer refuses unauthenticated accounts, so clearing it here
+    // blocked creating a character after a delete until the next login.
     client->setState(LCSTATE_End);
-    mDatabase->executeProcedureAsync(0, 0, "UPDATE %s.account SET account_authenticated = 0 WHERE account_id = %u;",mDatabase->galaxy(), client->getAccountId());
- 
 }
 
 //======================================================================================================================
