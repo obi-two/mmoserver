@@ -167,7 +167,7 @@ The spawn procedures also computed each resource's end date as
 about 60% of new resources' `spawn_end` in the past. Fixed in both
 procedures.
 
-### 5b. Resources never rotated — fix needs testing
+### 5b. Resources never rotated — fixed
 
 Zones loaded the active resources at startup and kept them until restart;
 nothing checked `spawn_end`. Now `sp_ResourceRotate` retires each expired
@@ -177,7 +177,9 @@ zone calls it at startup and every 10 minutes
 loads the new resources and retires the expired ones, which drop out of
 survey lists. Harvesters on an expired resource stop (`sf_HarvestResource`
 already did this), and a sample in progress ends. Tested on Naboo with
-expired resources; not yet tried with a client surveying or sampling.
+expired resources. Confirmed on the VM: a resource expired by hand was
+replaced within one interval while the servers ran (`Replaced 1 expired
+resources`, and Tatooine loaded the new Lok resource).
 
 Existing databases need the new procedure: `setup.sh update-procedures`.
 
