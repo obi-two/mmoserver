@@ -275,6 +275,9 @@ For reference; details are in the commit messages on `phase2-db-installer`.
 - A malformed client command (`getattributesbatch`, emotes, mood) crashed
   the zone; commands now fail individually.
 - LoginServer crashed after a character was deleted (missing `break`).
+- Characters with a surname could not be deleted: the character list sent
+  "First " (the surname was commented out, the space was not), so the
+  client's "delete <name>" check could never match what was typed.
 - NPC and creature posture changes never reached clients (only players'
   did), so killed creatures stayed standing.
 - Killed creatures never disappeared from clients: since the 2015

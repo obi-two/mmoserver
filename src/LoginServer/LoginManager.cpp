@@ -472,10 +472,13 @@ void LoginManager::_sendCharacterList(LoginClient* client, DatabaseResult* resul
 
         fullName << data.mFirstName.getAnsi();
 
+        // The client asks for "delete <this name>" to delete a character, so
+        // the name must not carry anything the player can't see (it used to
+        // end in a space when the surname was left out).
         if(data.mLastName.getLength())
         {
             fullName << " ";
-        //    fullName << data.mLastName.getAnsi();
+            fullName << data.mLastName.getAnsi();
         }
 
         fullName.convert(BSTRType_Unicode16);
