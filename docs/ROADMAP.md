@@ -56,17 +56,29 @@ client or public material, as for the leaked source.
 Tested end to end on Ubuntu 26.04 with MariaDB 11.8 and a real client:
 galaxy online, account login, character creation, the full tutorial to
 Tatooine, tutorial skip, character switching after a disconnect, surveying
-and sampling. Long idle runs recover from database connection timeouts.
-Resource rotation is tested on the server only so far.
+and sampling, resource rotation while running. The servers run unattended
+overnight and recover from database connection timeouts. What is confirmed
+and what still needs a client test is in `docs/TEST_PLAN.md`.
 
 | Phase | State |
 |---|---|
-| 1. Reproducible build | Linux done (merged). Windows build still to do |
-| 2. Runnable server | Installer, launcher and many runtime fixes done (PR #2 on the fork); security and remote database access to do |
-| 3. Modernisation and robustness | Not started |
-| 4. Scripting and content | Planned (`docs/SCRIPTING.md`) |
+| 1. Reproducible build | Linux done (merged). Windows build next |
+| 2. Runnable server | Installer, launcher and runtime fixes done (PRs #2 and #3 on the fork); client tests in `docs/TEST_PLAN.md`; security and remote database access to do |
+| 3. Refactoring: scripts first, then modernisation | Planned (`docs/SCRIPTING.md`) |
+| 4. Content | Planned |
 | 5. Pre-CU gameplay | Not started |
 | Tools: portal, load testing | Planned (below) |
+
+## Next steps
+
+1. **Client tests** of the remaining fixes (`docs/TEST_PLAN.md`), fixing
+   whatever fails.
+2. **Windows build** (phase 1, remaining), with the remote database setup
+   from phase 2 so Windows development can use the Linux VM's database.
+3. **Refactoring, scripts first** (phase 3): move tutorial and other
+   content out of C++ into Lua behind a documented script API, with event
+   hooks instead of polling; then dependency upgrades and the rest of the
+   modernisation.
 
 ## Phase 1: reproducible build
 
@@ -108,9 +120,18 @@ Remaining:
   rotation, and running the servers as systemd services for unattended
   servers.
 
-## Phase 3: modernisation and robustness
+## Phase 3: refactoring, scripts first
 
-Once Linux and Windows both build:
+Once Linux and Windows both build. Two parts, in this order.
+
+**Scripts first** (`docs/SCRIPTING.md`): inventory of what is in Lua versus
+C++ (with swganh's split as a reference), event hooks instead of polling, a
+small documented script API, the tutorial moved onto it and its C++
+special cases (38 `isTutorial()` checks, hard-coded NPC and terminal ids)
+removed, then the same for other content; bindings that build on both
+platforms (tolua++ built as part of the build, or sol2), Lua staying 5.1.
+
+**Then modernisation and robustness:**
 - **Dependency upgrades**: current Boost, oneTBB, Connector/C++; replace
   `boost::thread`/`mutex`/`future` with `std::`. Lua stays 5.1.
 - **Warnings to zero** with `-Wall -Wextra` / `/W4`, and ASan/UBSan builds
@@ -125,13 +146,12 @@ Once Linux and Windows both build:
   layer (prepared statements throughout), and creature AI (largely
   missing).
 
-## Phase 4: scripting and content
+## Phase 4: content
 
-See `docs/SCRIPTING.md`: inventory of what is in Lua versus C++, event
-hooks instead of polling, a small documented script API, the tutorial moved
-onto it, and bindings that build on both platforms. Then content research
-for pre-CU creature spawns, lairs, NPCs and quests from the sources above,
-written as scripts and data.
+On the script API from phase 3: research pre-CU creature spawns, lairs,
+NPCs and quests from the sources above and write them as scripts and data;
+generating object data from the client's files (as swganh did for its
+templates).
 
 ## Phase 5: pre-CU gameplay
 

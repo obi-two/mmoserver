@@ -8,6 +8,7 @@ The project is being revived:
 
 - [docs/ROADMAP.md](docs/ROADMAP.md): where it stands and where it is going
 - [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md): open bugs and what has been fixed
+- [docs/TEST_PLAN.md](docs/TEST_PLAN.md): client tests, done and to do
 - [docs/SCRIPTING.md](docs/SCRIPTING.md): the plan for scripts and content
 - [docs/CODE_REVIEW_2026.md](docs/CODE_REVIEW_2026.md): the code review the
   revival started from
