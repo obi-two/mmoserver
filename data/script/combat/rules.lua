@@ -224,6 +224,15 @@ rules.DEFAULT_WOUND_CHANCE = { unarmed = 8 }
 -- hampers the healing of wounds (p. 86). The guide gives no rate: each hit
 -- taken adds this much, out of 1000. Reconstructed.
 rules.FATIGUE_PER_HIT = 1
+-- Every wound makes the wounded pool bleed ("All moves that cause Health,
+-- Action, or Mind wounds also cause bleeding to the affected stat", p. 75).
+-- Bleeding slowly drains the pool until it is cured or runs its course,
+-- and can incapacitate (p. 85). The guide gives no amounts: every
+-- BLEED_INTERVAL seconds for BLEED_DURATION seconds the pool loses
+-- BLEED_FRACTION of the wound, at least 1. Reconstructed.
+rules.BLEED_FRACTION = 0.5
+rules.BLEED_INTERVAL = 5
+rules.BLEED_DURATION = 30
 
 
 -- Three incaps within any 10 minutes kill (p. 85).
@@ -502,6 +511,7 @@ function rules.attack(a)
     result.pool = rules.pool(a, math.random())
     result.effects = rules.effects(a, math.random)
     result.wound = rules.wound(a, result.damage, math.random())
+    result.bleed, result.bleed_interval, result.bleed_duration = rules.bleed(a, result.pool, result.wound)
     result.fatigue = rules.FATIGUE_PER_HIT
   else
     result.damage = 0
@@ -546,6 +556,15 @@ function rules.move(name, a, roll)
   chance = math.max(rules.MIN_MOVE_CHANCE, math.min(rules.MAX_MOVE_CHANCE, chance))
   local duration = move.kind == "intimidate" and rules.INTIMIDATE_DURATION or 0
   return roll * 100 < chance, chance, duration
+end
+
+-- The bleeding a wound causes: what the pool loses per tick, the seconds
+-- between ticks and how long it lasts. No wound, no bleeding.
+function rules.bleed(a, pool, wound)
+  if not wound or wound <= 0 then
+    return 0, 0, 0
+  end
+  return math.max(1, math.floor(wound * rules.BLEED_FRACTION)), rules.BLEED_INTERVAL, rules.BLEED_DURATION
 end
 
 -- A self buff (Berserk, Center of Being) for a.attacker holding a.weapon:

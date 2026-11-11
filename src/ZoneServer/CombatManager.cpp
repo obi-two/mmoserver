@@ -836,6 +836,11 @@ void CombatManager::applyWounds(CreatureObject* defender, const CombatOutcome& o
         }
         defender->getHam()->updatePropertyValue(bar, HamProperty_Wounds, outcome.wound, false, true);
         LOG(INFO) << "Combat wound " << outcome.wound << " " << outcome.pool << " on " << defender->getId();
+
+        if (outcome.bleed > 0 && outcome.bleedInterval > 0 && outcome.bleedDuration > 0)
+        {
+            _startBleeding(defender, bar, outcome.bleed, outcome.bleedInterval, outcome.bleedDuration);
+        }
     }
 
     // Battle fatigue only matters to players (it hampers wound healing).
@@ -843,6 +848,126 @@ void CombatManager::applyWounds(CreatureObject* defender, const CombatOutcome& o
     {
         defender->getHam()->updateBattleFatigue(outcome.fatigue, true);
     }
+}
+
+bool CombatManager::isBleeding(CreatureObject* creature) const
+{
+    for (size_t i = 0; i < mBleeds.size(); ++i)
+    {
+        if (mBleeds[i].creatureId == creature->getId())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void CombatManager::_startBleeding(CreatureObject* creature, uint8 bar, int32 perTick, float interval, float duration)
+{
+    uint64 now = Anh_Utils::Clock::getSingleton()->getLocalTime();
+    uint64 expires = now + static_cast<uint64>(duration * 1000.0f);
+    bool wasBleeding = isBleeding(creature);
+
+    // A new wound to a pool that bleeds already: the stronger bleed, for the
+    // longer time.
+    for (size_t i = 0; i < mBleeds.size(); ++i)
+    {
+        if (mBleeds[i].creatureId == creature->getId() && mBleeds[i].bar == bar)
+        {
+            mBleeds[i].perTick = std::max(mBleeds[i].perTick, perTick);
+            mBleeds[i].expires = std::max(mBleeds[i].expires, expires);
+            return;
+        }
+    }
+    uint64 intervalMs = static_cast<uint64>(interval * 1000.0f);
+    Bleed bleed = { creature->getId(), bar, perTick, intervalMs, now + intervalMs, expires };
+    mBleeds.push_back(bleed);
+    LOG(INFO) << "Bleeding " << perTick << " every " << interval << " s for " << duration << " s, bar "
+              << static_cast<uint32>(bar) << " on " << creature->getId();
+
+    if (!wasBleeding)
+    {
+        gStateManager.setCurrentActionState(creature, CreatureState_Bleeding);
+        if (PlayerObject* player = dynamic_cast<PlayerObject*>(creature))
+        {
+            gMessageLib->SendSystemMessage(L"You are bleeding!", player);
+        }
+    }
+}
+
+void CombatManager::_tickBleeding(uint64 now)
+{
+    for (size_t i = 0; i < mBleeds.size(); )
+    {
+        Bleed& bleed = mBleeds[i];
+        CreatureObject* creature = dynamic_cast<CreatureObject*>(gWorldManager->getObjectById(bleed.creatureId));
+        // Incapacitation and death end it; so does its time running out.
+        bool over = !creature || creature->isIncapacitated() || creature->isDead() || bleed.expires <= now;
+        if (!over && bleed.nextTick <= now)
+        {
+            bleed.nextTick += bleed.interval;
+            creature->getHam()->updatePropertyValue(bleed.bar, HamProperty_CurrentHitpoints, -bleed.perTick, true);
+            // The drain may have incapacitated or killed it; look it up again.
+            creature = dynamic_cast<CreatureObject*>(gWorldManager->getObjectById(mBleeds[i].creatureId));
+            over = !creature || creature->isIncapacitated() || creature->isDead();
+        }
+        if (!over)
+        {
+            ++i;
+            continue;
+        }
+        uint64 creatureId = bleed.creatureId;
+        mBleeds[i] = mBleeds.back();
+        mBleeds.pop_back();
+        _bleedingEnded(creatureId);
+    }
+}
+
+void CombatManager::_bleedingEnded(uint64 creatureId)
+{
+    for (size_t i = 0; i < mBleeds.size(); ++i)
+    {
+        if (mBleeds[i].creatureId == creatureId)
+        {
+            return;
+        }
+    }
+    LOG(INFO) << "Bleeding on " << creatureId << " ended";
+    CreatureObject* creature = dynamic_cast<CreatureObject*>(gWorldManager->getObjectById(creatureId));
+    if (!creature)
+    {
+        return;
+    }
+    if (creature->states.checkState(CreatureState_Bleeding))
+    {
+        gStateManager.removeActionState(creature, CreatureState_Bleeding);
+    }
+    PlayerObject* player = dynamic_cast<PlayerObject*>(creature);
+    if (player && !player->isIncapacitated() && !player->isDead())
+    {
+        gMessageLib->SendSystemMessage(L"You have stopped bleeding.", player);
+    }
+}
+
+bool CombatManager::stopBleeding(CreatureObject* creature)
+{
+    bool found = false;
+    for (size_t i = 0; i < mBleeds.size(); )
+    {
+        if (mBleeds[i].creatureId == creature->getId())
+        {
+            mBleeds[i] = mBleeds.back();
+            mBleeds.pop_back();
+            found = true;
+            continue;
+        }
+        ++i;
+    }
+    if (found)
+    {
+        _bleedingEnded(creature->getId());
+    }
+    return found;
 }
 
 //======================================================================================================================
@@ -1261,6 +1386,8 @@ bool CombatManager::_expireStates(uint64 callTime, void* ref)
 		mTimedStates[i] = mTimedStates.back();
 		mTimedStates.pop_back();
 	}
+
+	_tickBleeding(now);
 
 	for (size_t i = 0; i < mBuffs.size(); )
 	{

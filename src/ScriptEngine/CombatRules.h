@@ -110,7 +110,8 @@ struct CombatAttack
 
 struct CombatOutcome
 {
-    CombatOutcome() : ok(false), hit(false), chance(0), damage(0), pool("health"), delay(2.0f), wound(0), fatigue(0) {}
+    CombatOutcome() : ok(false), hit(false), chance(0), damage(0), pool("health"), delay(2.0f), wound(0), fatigue(0)
+        , bleed(0), bleedInterval(0), bleedDuration(0) {}
 
     bool        ok;         // false if the script failed; the rest are defaults then
     bool        hit;
@@ -120,6 +121,9 @@ struct CombatOutcome
     float       delay;      // seconds to the next attack
     int         wound;      // wound to the pool hit
     int         fatigue;    // battle fatigue the defender gains
+    int         bleed;          // the wounded pool loses this per tick...
+    float       bleedInterval;  // ...every this many seconds...
+    float       bleedDuration;  // ...for this many seconds
     // The effects that landed: name ("knockdown", "stun"...), seconds.
     std::vector<std::pair<std::string, float> > effects;
 };
