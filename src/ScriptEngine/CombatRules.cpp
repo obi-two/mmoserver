@@ -276,7 +276,7 @@ CombatOutcome CombatRules::attack(const CombatAttack& attack)
     lua_pop(mState, 1);
 
     lua_getfield(mState, -1, "fatigue");
-    outcome.fatigue = static_cast<int>(lua_tonumber(mState, -1));
+    outcome.fatigue = static_cast<float>(lua_tonumber(mState, -1));
     lua_pop(mState, 1);
 
     lua_getfield(mState, -1, "bleed");

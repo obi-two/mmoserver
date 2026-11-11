@@ -864,9 +864,17 @@ void CombatManager::applyWounds(CreatureObject* defender, const CombatOutcome& o
     }
 
     // Battle fatigue only matters to players (it hampers wound healing).
+    // The rules give fractions (a quarter a hit); they add up until whole.
     if (outcome.fatigue > 0 && defender->getType() == ObjType_Player)
     {
-        defender->getHam()->updateBattleFatigue(outcome.fatigue, true);
+        float& carry = mFatigueCarry[defender->getId()];
+        carry += outcome.fatigue;
+        int32 whole = static_cast<int32>(carry);
+        carry -= static_cast<float>(whole);
+        if (whole > 0)
+        {
+            defender->getHam()->updateBattleFatigue(whole, true);
+        }
     }
 }
 

@@ -120,7 +120,7 @@ struct CombatOutcome
     std::string pool;       // "health", "action", "mind"
     float       delay;      // seconds to the next attack
     int         wound;      // wound to the pool hit
-    int         fatigue;    // battle fatigue the defender gains
+    float       fatigue;    // battle fatigue the defender gains (fractions add up)
     int         bleed;          // the wounded pool loses this per tick...
     float       bleedInterval;  // ...every this many seconds...
     float       bleedDuration;  // ...for this many seconds

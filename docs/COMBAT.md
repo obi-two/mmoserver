@@ -125,12 +125,15 @@ not used, so in that respect players attack faster than they should).
 - HAM pools, incapacitation, death, clone selection, regeneration with
   posture modifiers. Cloning revives the player with full health, action
   and mind, less wounds (KNOWN_ISSUES #24).
-- Wounds and battle fatigue (`rules.wound`, `rules.FATIGUE_PER_HIT`): a
+- Wounds and battle fatigue (`rules.wound`, `rules.FATIGUE_PER_HIT`,
+  `rules.FATIGUE_MODIFIER`): a
   hit wounds the pool it hit with the weapon's wound chance (p. 389;
   `cat_wpn_damage.wpn_wound_chance`, bare hands and creatures the
   vibroknuckler's 8%, p. 390); the wound is a tenth of the damage, at least
-  1, and lowers the pool's maximum. Each hit a player takes adds 1 battle
-  fatigue (of 1000). Both sizes are reconstructed: the guide gives none.
+  1, and lowers the pool's maximum. Each hit a player takes adds a quarter
+  of a battle fatigue point (four hits make 1, of 1000), times
+  `rules.FATIGUE_MODIFIER` for servers that want it faster or slower. Both
+  sizes are reconstructed: the guide gives none.
   Each wound is logged (`Combat wound ...`); the client shows it in the
   character sheet's Wounds column and as "wounded" combat spam.
 - Bleeding (`rules.bleed`; `CombatManager::_tickBleeding`): every wound

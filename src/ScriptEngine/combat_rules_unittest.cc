@@ -375,7 +375,7 @@ TEST_F(CombatRulesTest, WoundsAndFatigueReachCpp) {
     ASSERT_TRUE(outcome.hit);
     EXPECT_EQ(outcome.damage / 10, outcome.wound);
     EXPECT_GT(outcome.wound, 0);
-    EXPECT_EQ(1, outcome.fatigue);
+    EXPECT_FLOAT_EQ(0.25f, outcome.fatigue);
     // The wound makes the pool bleed: half the wound every 5 s for 30 s.
     EXPECT_EQ(outcome.wound / 2, outcome.bleed);
     EXPECT_FLOAT_EQ(5, outcome.bleedInterval);

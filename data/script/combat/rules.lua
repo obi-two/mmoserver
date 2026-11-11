@@ -222,8 +222,12 @@ rules.WOUND_FRACTION = 0.1
 rules.DEFAULT_WOUND_CHANCE = { unarmed = 8 }
 -- Battle fatigue is gained through combat; it does not affect combat but
 -- hampers the healing of wounds (p. 86). The guide gives no rate: each hit
--- taken adds this much, out of 1000. Reconstructed.
-rules.FATIGUE_PER_HIT = 1
+-- taken adds FATIGUE_PER_HIT (a quarter: four hits make 1, out of 1000)
+-- times FATIGUE_MODIFIER. The server keeps the fractions. Reconstructed;
+-- FATIGUE_MODIFIER is the knob for a server that wants it faster (2) or
+-- slower (0.5), 0 turns it off.
+rules.FATIGUE_PER_HIT = 0.25
+rules.FATIGUE_MODIFIER = 1
 -- Every wound makes the wounded pool bleed ("All moves that cause Health,
 -- Action, or Mind wounds also cause bleeding to the affected stat", p. 75).
 -- Bleeding slowly drains the pool until it is cured or runs its course,
@@ -512,7 +516,7 @@ function rules.attack(a)
     result.effects = rules.effects(a, math.random)
     result.wound = rules.wound(a, result.damage, math.random())
     result.bleed, result.bleed_interval, result.bleed_duration = rules.bleed(a, result.pool, result.wound)
-    result.fatigue = rules.FATIGUE_PER_HIT
+    result.fatigue = rules.FATIGUE_PER_HIT * rules.FATIGUE_MODIFIER
   else
     result.damage = 0
   end

@@ -146,6 +146,8 @@ private:
         uint64		expires;	// ms, Clock local time
     };
     std::vector<Bleed>		mBleeds;
+    // Each player's battle fatigue not yet whole (the rules give fractions).
+    std::map<uint64, float>	mFatigueCarry;
     void					_startBleeding(CreatureObject* creature, uint8 bar, int32 perTick, float interval, float duration);
     void					_tickBleeding(uint64 now);
     // Removes the Bleeding state and tells a player, once no pool bleeds.
