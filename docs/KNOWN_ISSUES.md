@@ -168,6 +168,19 @@ string.
 
 ## Tutorial and gameplay
 
+### 3d. Two SQL statements had the wrong arguments — fix needs testing
+
+Found by the compiler's format checks:
+
+- Storing clone data at a cloning terminal passed the `Database` object
+  where the schema name belongs, so the `CALL` was invalid SQL, and an SQL
+  error stops the server. It now names the schema.
+- Retrieving a bazaar item passed the galaxy name twice, so the auction id
+  was never used. Fixed; but that handler (and the bazaar's cancel and
+  item-info handlers) return when the player *is* found, so they never
+  reach the query for a logged-in player. Left as it is until the bazaar
+  is looked at as a whole.
+
 ### 4. Debris blocking the tutorial path has no Attack option — fixed
 
 Not a bug of its own: the script makes the debris attackable only after you
