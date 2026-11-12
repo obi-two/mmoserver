@@ -413,6 +413,11 @@ bool ObjectController::_processCommandQueue()
                     }
                 }
                 break;
+                // Area attacks (command group 2: Point Blank Area, the spin
+                // attacks, the cones...) are attacks too; their area or cone
+                // comes from command_table.area_shape (CombatManager). They
+                // fell to the default case and were dropped without a word.
+                case ObjControllerCmdGroup_Area_Attack:
                 case ObjControllerCmdGroup_Attack:
                 {
                     // If player activated combat or me returning fire, the peace is ended, and auto-attack allowed.
@@ -464,7 +469,8 @@ bool ObjectController::_processCommandQueue()
 
                 default:
                 {
-					DLOG(WARNING) << "ObjectController::processCommandQueue: ObjControllerCmdGroup_Common Unhandled Cmd 0"<<cmdProperties->mCmdGroup <<" for "<<mObject->getId();
+					LOG(WARNING) << "ObjectController::processCommandQueue: command group " << static_cast<uint32>(cmdProperties->mCmdGroup)
+					             << " not handled, command 0x" << std::hex << command << std::dec << " from " << mObject->getId();
                 }
                 break;
                 }

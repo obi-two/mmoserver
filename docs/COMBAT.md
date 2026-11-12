@@ -216,6 +216,13 @@ not used, so in that respect players attack faster than they should).
   Shot 2 and Point Blank Area 2 are areas, and Charge Shot 2 (with a
   knockdown), Wild Shot 2 and the two Multi-Target Shots are cones (the
   table: single targets).
+- Area attacks reach the combat code at all: the command table puts them
+  in command group 2 (area attack), which the command queue dropped
+  without a word, so no area or cone special ever ran. Group 2 now runs as
+  an attack. Its commands without an area or cone in our data (Fan Shot,
+  the flamethrower and acid/lightning cones, the saber spins and Dervish,
+  Two-Hand Sweep 1, One-Hand Blind Hit 1) hit their one target until their
+  shapes are added.
 - The attacker's end posture (migration 012): Dive Shot leaves the attacker
   prone, Kip Up Shot standing, Roll Shot kneeling (pp. 80-81).
 - Specials' HAM costs: their cost modifiers x the weapon's attack costs
