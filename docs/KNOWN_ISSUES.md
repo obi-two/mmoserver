@@ -297,7 +297,7 @@ unknown travel point) now log the reason and tell the player instead of
 doing nothing. The tutorial's travel uses a different, synchronous path and
 was not affected.
 
-### 5h. "Too many commands queued. A command was dropped." — open
+### 5h. "Too many commands queued. A command was dropped." — expected
 
 Seen repeatedly while fighting the tutorial bandit and a rill on Tatooine.
 The command queue (30 entries) was strictly first in, first out: a combat
@@ -314,6 +314,11 @@ when queued, so it is the attacks themselves. The zone now logs what fills
 the queue when it overflows (`Command queue full for ...`: how many are
 combat commands, the front one, the time to the next combat command, and
 whether the queue is scheduled). `docs/COMBAT.md` has the combat review.
+
+Not seen since the combat rework (Nov 2026). When it was seen, the attack
+queue was being spammed on purpose: past 30 queued commands the client is
+told one was dropped, which is the queue's limit working, not a bug. The
+log line stays for diagnosis.
 
 ### 5g. No explosion when the tutorial debris is destroyed — fix needs testing
 
@@ -708,7 +713,7 @@ states is refused by the same lock (`ActionState::CanTransition` checks
 wound was lost: a wound can't exceed the pool's current points and death
 leaves health at 0, so the pools are now filled before the clone's wounds.
 
-### 25. Entertainers never heal; medics' healing skill does nothing — fix needs testing
+### 25. Entertainers never heal; medics' healing skill does nothing — fixed
 
 Found while adding bleeding:
 
@@ -725,9 +730,13 @@ Found while adding bleeding:
   skill mod under +100 did nothing: the entertainers' wound and shock
   healing mods and the medics' `healing_wound_treatment` (Tend Wound and
   Heal Wound). The stimpack heals (`HealDamage`, `HealDamageRanged`) have
-  the same bug; not fixed yet.
+  the same bug; left for the review of the medic professions.
 - `MedicManager::CalculateBF` tested battle fatigue over 500 before over
   750, so the "high" message never showed.
+
+Tested on the VM (Nov 2026): an entertainer dancing in a Bestine cantina
+healed a watching brawler's mind wounds and battle fatigue, and a medic's
+`/tendwound health` and `/tendwound action` healed wounds.
 
 Still open: the entertainer group-buff code (`EntertainerManager.cpp`, the
 two `loc != ... || loc != ...` checks next to `dance_watch_stop_self` and

@@ -29,6 +29,13 @@ server crashes, gdb stops it and the backtrace is at the end of its log.
 | T3 | Login | Refusals were silent [6] | If anything is refused at the galaxy screen | `connection.out` has a `Refusing account N: <reason>` line; send it to me |
 | T4 | Script events | New | `sudo ./mmoserverdb/setup.sh update`, then on Tatooine: log in, walk into Mos Eisley, talk to an NPC and pick an option, use a radial menu item, kill a creature, log out. Watch `tail -f tatooine.out \| grep 'event:'` | one `event:` line per action, with the player's id as `source` |
 | T5 | Scripts | `print` output was lost [15] | Start Tatooine | `tatooine.out` has `[script] WeatherController v.0.2` and `[script] event_logger: listening to 9 events` |
+| T12 | Combat | Incaps all lasted 30 s | Get incapacitated twice within 10 minutes | The first incap lasts 30 s, the second 60 s, the third kills; `tatooine.out`: `incapacitated (N in the window) for S s` |
+| T13 | Combat | Taunt never switched a creature's target | With a second player fighting a creature, Taunt it | The creature turns on the taunter; `tatooine.out`: `Creature ... taunted by ...` |
+| T14 | Creatures | Lairs never spawned [5j] | Wait 3-6 minutes after Tatooine starts, then visit a lair region (about -2200,-4700 to -1500,-3950) | Lairs with creatures; `tatooine.out`: `Lair ... spawned` |
+| T15 | Combat | Still in combat after the opponent dies [5i] | Kill a creature that was your only opponent | Combat music and state end without `/peace` |
+| T16 | Creatures | Stats from the creature tables (migration 011) | `sudo ./mmoserverdb/setup.sh update`, then near Bestine walk up to womp rats and rills | They no longer attack on sight; attacked, they fight back; womp rats hit less often than before (28%) |
+| T17 | Creatures | No pack assist | Attack one womp rat with others nearby | The other womp rats join; `tatooine.out`: `assists its pack against` |
+| T18 | Creatures | No killers | Get incapacitated by a killer (none spawn on Tatooine yet; for now check that a womp rat leaves you incapacitated) | A womp rat does not deathblow; `deathblows` appears only for creatures marked Killer |
 
 ## Confirmed
 
@@ -75,21 +82,28 @@ server crashes, gdb stops it and the backtrace is at the end of its log.
 | Windows | Servers on Windows | All servers started with `server.ps1` against the database on the Linux VM; logged in and played in Bestine on Tatooine (after fixing the grid crash, KNOWN_ISSUES #11) |
 | Linux | No regression from the Windows changes | `windows-dev-env` built and played on the Ubuntu VM |
 | Stability | Idle memory | 22 hours with no client: every server at its fresh size (tutorial 116 MB, Tatooine 274 MB, ConnectionServer 137 MB), heaptrack peaks only startup allocations |
+| Creatures | Creatures never fought back, roamed or aggroed [5f] | Womp rats near Bestine attack on sight, fight back and change stance under Unarmed Lunge (Nov 2026) |
+| Death | A cloned player stayed a corpse [24] | Killed and cloned in Bestine: standing, full HAM (Nov 2026) |
+| Combat | No wounds or battle fatigue | The character sheet shows wounds and battle fatigue after fights (Nov 2026) |
+| Combat | Brawler moves did nothing | Intimidate, Warcry and Taunt roll and report; Berserk and Center of Being start and wear off (`Brawler move`, `Self buff` in the log, Nov 2026) |
+| Combat | No bleeding | Wounds bleed on players and creatures, on health, action and mind, and stop after 30 s; First Aid stops a bleed (`Bleeding ...` in the log, Nov 2026) |
+| Healing | Entertainers never healed; medic skill mods ignored [25] | A dancer in a Bestine cantina healed a watcher's mind wounds and battle fatigue; `/tendwound` healed health and action wounds (Nov 2026) |
 
 ## Not implemented yet
 
 | Test | Why |
 |---|---|
-| T7, lair creatures on Tatooine | No lair ever spawns: their state machine is stripped (KNOWN_ISSUES 5j). Deferred to the combat and creature AI review |
+| Scout harvesting of corpses | Not implemented [23]; waits on the creature tables |
 
 ## Known open issues (not tested)
 
 Tracked in `docs/KNOWN_ISSUES.md`; not expected to pass yet:
 servers listening on all interfaces [3], positions inside buildings
 mirrored [5c], low sampling yield at low concentration [5d], tutorial
-prompts lagging behind [5e], no debris explosion [5g], "Too many commands
-queued" [5h], unhandled opcodes [7], startup data warnings [8], garbage
-"MessageFactory Heap" log lines [9], creature AI largely missing.
+prompts lagging behind [5e], no debris explosion [5g], unhandled opcodes
+[7], startup data warnings [8], garbage "MessageFactory Heap" log lines
+[9]. Killer creatures, pack assist and creature stats wait on the creature
+tables (`docs/COMBAT.md`).
 
 ## Recording results
 
