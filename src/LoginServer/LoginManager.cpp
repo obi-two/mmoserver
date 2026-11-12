@@ -320,8 +320,9 @@ void LoginManager::_handleLoginClientId(LoginClient* client, Message* message)
         sqlPointer = sql + strlen(sql);
         sqlPointer += mDatabase->escapeString(sqlPointer,password.getAnsi(),password.getLength());
         *sqlPointer++ = '\'';
-        *sqlPointer++ = ')';
-        *sqlPointer++ = '\0';
+        *sqlPointer = '\0';
+        // Whether an unknown username creates an account (AutoCreateAccounts).
+        strcat(sql, mAutoCreateAccounts ? ", 1)" : ", 0)");
     }
 
 // Setup an async query for checking authentication.

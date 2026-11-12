@@ -95,11 +95,17 @@ the null result. Connections idle for over 30 seconds are now checked
 before use and replaced if closed, and failed queries no longer crash.
 Reproduced and verified with `wait_timeout` set to 40 seconds.
 
-### 3a. Unknown usernames create accounts — open (security)
+### 3a. Unknown usernames create accounts — fixed
 
-`sp_ReturnUserAccount` creates an account for any username it doesn't know,
-with the password typed. Convenient on a test server; a public server needs
-it off. Make it a setting (default off for public installs).
+`sp_ReturnUserAccount` created an account for any username it didn't know,
+with the password typed. Convenient on a test server; on a public server
+anyone could take any name. Now it only does so when the LoginServer's
+`AutoCreateAccounts` setting is on (`config/loginserver.cfg`, off by
+default); otherwise an unknown username is refused like a wrong password,
+and accounts are made with `sudo ./mmoserverdb/setup.sh add-account NAME`.
+The LoginServer logs which at startup. Existing accounts are unaffected.
+After pulling, `sudo ./mmoserverdb/setup.sh update` reloads the procedure
+(its new third argument): without it, every login fails.
 
 ### 3. Servers listen on all interfaces — open (security)
 

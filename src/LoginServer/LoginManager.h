@@ -78,6 +78,9 @@ public:
     ~LoginManager(void);
 
     void                    Process(void);
+    // Whether an unknown username creates an account at login (the
+    // AutoCreateAccounts setting; off by default).
+    void                    setAutoCreateAccounts(bool create) { mAutoCreateAccounts = create; }
 
     // From NetworkCallback inheritance
     virtual NetworkClient*	handleSessionConnect(Session* session, Service* service);
@@ -88,6 +91,8 @@ public:
     virtual void            handleDatabaseJobComplete(void* ref, DatabaseResult* result);
 
 private:
+
+    bool                    mAutoCreateAccounts = false;
 
     void                    _processDeleteCharacter(Message* message,LoginClient* client);
     void                    _sendDeleteCharacterReply(uint32 result,LoginClient* client);

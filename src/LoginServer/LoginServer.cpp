@@ -67,6 +67,9 @@ LoginServer::LoginServer(int argc, char* argv[])
 	std::list<std::string> config_files;
 	config_files.push_back("config/general.cfg");
 	config_files.push_back("config/loginserver.cfg");
+	configuration_options_description_.add_options()
+		("AutoCreateAccounts", boost::program_options::value<bool>()->default_value(false),
+		 "Create an account for an unknown username at login, with the password typed (test servers only).");
 	LoadOptions_(argc, argv, config_files);
 
     // Initialize our modules.
@@ -108,6 +111,9 @@ LoginServer::LoginServer(int argc, char* argv[])
     // The code itself here is not needed, since it will instance itself at first use.
 
     mLoginManager = new LoginManager(mDatabase);
+    mLoginManager->setAutoCreateAccounts(configuration_variables_map_["AutoCreateAccounts"].as<bool>());
+    LOG(WARNING) << "Unknown usernames " << (configuration_variables_map_["AutoCreateAccounts"].as<bool>()
+        ? "create accounts (AutoCreateAccounts)" : "are refused; create accounts with setup.sh add-account");
 
     // Let our network Service know about our callbacks
     mService->AddNetworkCallback(mLoginManager);
