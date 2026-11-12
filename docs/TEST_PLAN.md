@@ -33,6 +33,9 @@ server crashes, gdb stops it and the backtrace is at the end of its log.
 | T13 | Combat | Taunt never switched a creature's target | With a second player fighting a creature, Taunt it | The creature turns on the taunter; `tatooine.out`: `Creature ... taunted by ...` |
 | T14 | Creatures | Lairs never spawned [5j] | Wait 3-6 minutes after Tatooine starts, then visit a lair region (about -2200,-4700 to -1500,-3950) | Lairs with creatures; `tatooine.out`: `Lair ... spawned` |
 | T15 | Combat | Still in combat after the opponent dies [5i] | Kill a creature that was your only opponent | Combat music and state end without `/peace` |
+| T16 | Creatures | Stats from the creature tables (migration 011) | `sudo ./mmoserverdb/setup.sh update`, then near Bestine walk up to womp rats and rills | They no longer attack on sight; attacked, they fight back; womp rats hit less often than before (28%) |
+| T17 | Creatures | No pack assist | Attack one womp rat with others nearby | The other womp rats join; `tatooine.out`: `assists its pack against` |
+| T18 | Creatures | No killers | Get incapacitated by a killer (none spawn on Tatooine yet; for now check that a womp rat leaves you incapacitated) | A womp rat does not deathblow; `deathblows` appears only for creatures marked Killer |
 
 ## Confirmed
 

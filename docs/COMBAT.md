@@ -72,7 +72,7 @@ where it does not:
 | Accuracy modifier | the weapon's range curve (point blank at 0 m, ideal at its ideal range, max at its max range, straight lines between) + the weapon group's accuracy skill mods + postures - the defender's ranged or melee defence | p. 66, p. 73, p. 145 |
 | Postures | attacker kneeling +10, prone +20; a kneeling/prone target -10/-20 against ranged attacks, +10/+20 against melee | p. 73; sizes reconstructed |
 | Chance to hit | 50% + 1% per point of accuracy modifier, 5-95% | reconstructed |
-| Creatures | their own to-hit replaces the 50% when known | creature tables |
+| Creatures | their own to-hit (`creature_tohit`, migration 011) replaces the 50% | 2004 guide pp. 172-207; An Empire Divided pp. 396-483 |
 | Damage | uniform in the weapon's range x the special's multiplier x armour rating (+25% per level the weapon is above the armour, -50% per level below) x (1 - armour effectiveness for the damage type) | p. 388, pp. 394-395 |
 | Pool | the special's, else health 50%, action 30%, mind 20% | reconstructed |
 | Attack time | the weapon's attack speed x (1 - 1% per point of speed mod) x the special's delay multiplier, at least 1 s | p. 389, p. 145; the 1% reconstructed |
@@ -176,6 +176,16 @@ not used, so in that respect players attack faster than they should).
   `center_of_being_duration_<group>` x 3 s (Novice Brawler unarmed: 10 for
   15 s). It is not in the guide. All the numbers are reconstructed. Each
   use is logged (`Self buff ...`).
+- Creatures from the guides' creature tables (migration 011,
+  `mmoserverdb/reference/prima_2004/` and `prima_ed/`): level, to-hit,
+  damage, XP, the behaviour flags, social group, and meat, hide and bone
+  with their quantities. Each spawn rolls its health, action and mind in
+  the guide's HAM range. **Killers** (p. 73) deathblow the player they
+  incapacitated; other creatures leave them incapacitated. **Pack**
+  creatures (p. 73) bring the idle members of their social group within
+  45 m into a fight. Neither guide marks the womp rats or the rill
+  aggressive, so they no longer attack on sight. Logged as `Creature ...
+  deathblows ...` and `... assists its pack against ...`.
 - Incapacitation from the combat rules (`rules.incap`, `rules.incapWindow`):
   three incaps within 10 minutes kill (p. 85); the first lasts 30 s, the
   second 60 s (`rules.INCAP_TIMES`, reconstructed: the guide's timer
@@ -338,11 +348,12 @@ against melee) is not known.
   hits its one target).
 - **States:** knockdown/dizzy interplay (a dizzy creature falling when it
   changes posture), knockdowns and posture changes have no duration.
-- **Creatures:** no special moves, no fleeing, no healing; no killers
-  (creatures that deathblow an incapacitated player, p. 73: every creature
-  only incapacitates) and no pack assist (p. 73), which wait for the
-  creature table; creature
-  regeneration is a made-up rule; aggression ignores the player's level.
+- **Creatures:** no special moves (the tables name them: stun, blind,
+  dizzy, intimidation, posture down, poison, disease, ranged spit), no
+  stalking (stalkers should follow and attack later, p. 73), no herding,
+  no fleeing, no healing; creature regeneration is a made-up rule;
+  aggression ignores the player's level. Only the spawned Tatooine
+  creatures have their table values so far.
 - **Combat XP** rates and weapon XP split are placeholders ("a complete
   made up rule" in the code).
 
@@ -513,8 +524,9 @@ and the point blank modifier of most pistols (0 for -5 to -20).
 3. To-hit and damage from those rules: done, in `combat/rules.lua`; the
    weapons' ranges and the noob CDEF: migration 007. Next: tune the
    reconstructed numbers in play.
-4. Creature regeneration and to-hit from the creature tables: next
-   (`docs/ROADMAP.md`, next steps).
+4. Creature to-hit, HAM, killers and pack assist from the creature
+   tables: done for the spawned creatures (migration 011). Next: their
+   special attacks and stalking, then regeneration.
 5. Specials as data: done for the 134 moves of the special moves table
    (migration 010), with costs, to-hit, posture changes and timed effects
    in the rules. Next: attacker postures, areas and cones.

@@ -522,6 +522,13 @@ CombatSide CombatManager::buildSide(CreatureObject* creature)
         side.skillMods[gSkillManager->getSkillModById(it->first).getAnsi()] = it->second;
     }
 
+    // A creature's base chance to hit, from the guides' creature tables
+    // (migration 011); it replaces the rules' base to-hit.
+    if (side.kind == "creature" && creature->hasAttribute("creature_tohit"))
+    {
+        side.toHit = static_cast<float>(atof(creature->getAttribute<std::string>("creature_tohit").c_str()));
+    }
+
     // Creatures carry their armour as attributes; worn armour is not read yet.
     if (creature->hasAttribute("armor_rating"))
     {

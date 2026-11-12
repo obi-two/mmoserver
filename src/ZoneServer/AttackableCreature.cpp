@@ -644,6 +644,9 @@ const float kDefaultLeash = 64.0f;
 // Running after a target and walking home, in metres a second.
 const float kChaseSpeed = 6.0f;
 const float kHomeSpeed = 4.0f;
+// Pack creatures within this many metres join a fight (the lair code's
+// assistance range).
+const float kPackRange = 45.0f;
 }
 
 void AttackableCreature::_think(void)
@@ -679,6 +682,16 @@ void AttackableCreature::_think(void)
                 && checkDefenderList(target->getId()) && _withinLeash(target))
         {
             return;
+        }
+        // A killer deathblows the player it incapacitated; others leave
+        // them be (p. 73).
+        if (mIsKiller && target && target->isIncapacitated() && !target->isDead()
+                && dynamic_cast<PlayerObject*>(target) && _withinLeash(target))
+        {
+            LOG(INFO) << "Creature " << getId() << " deathblows " << target->getId();
+            // Incapacitation locks the posture; death has to replace it.
+            target->states.unblock();
+            target->die(getId());
         }
         if (target)
         {
@@ -777,7 +790,7 @@ bool AttackableCreature::_withinLeash(CreatureObject* target) const
     return glm::distance(getHomePosition(), target->mPosition) <= _leash() + getWeaponMaxRange();
 }
 
-void AttackableCreature::_startFight(uint64 targetId)
+void AttackableCreature::_startFight(uint64 targetId, bool callPack)
 {
     setTarget(targetId);
     disableHoming();
@@ -786,6 +799,45 @@ void AttackableCreature::_startFight(uint64 targetId)
     mCombatState = State_Combat;
     setAiState(NpcIsActive);
     LOG(INFO) << "Creature " << getId() << " fights " << targetId;
+    if (callPack && mIsGroupAssist)
+    {
+        _callPack(targetId);
+    }
+}
+
+void AttackableCreature::_callPack(uint64 targetId)
+{
+    if (mSocialGroup.empty())
+    {
+        return;
+    }
+    ObjectSet around;
+    gSpatialIndexManager->getObjectsInRange(this, &around, ObjType_Creature | ObjType_NPC, kPackRange, true);
+    for (ObjectSet::iterator it = around.begin(); it != around.end(); ++it)
+    {
+        AttackableCreature* other = dynamic_cast<AttackableCreature*>(*it);
+        if (other && other != this && other->isGroupAssist() && other->getSocialGroup() == mSocialGroup)
+        {
+            other->assistPack(targetId);
+        }
+    }
+}
+
+void AttackableCreature::assistPack(uint64 targetId)
+{
+    if (isDead() || isIncapacitated() || !isSpawned() || mCombatState == State_Combat
+            || mCombatState == State_Unspawned || mCombatState == State_Halted || mCombatState == State_Dead)
+    {
+        return;
+    }
+    CreatureObject* target = dynamic_cast<CreatureObject*>(gWorldManager->getObjectById(targetId));
+    if (!target || target->isDead() || target->isIncapacitated() || !_withinLeash(target))
+    {
+        return;
+    }
+    LOG(INFO) << "Creature " << getId() << " (" << mSocialGroup << ") assists its pack against " << targetId;
+    // The pack's members answer the call; they don't call again.
+    _startFight(targetId, false);
 }
 
 void AttackableCreature::taunt(uint64 taunterId)
@@ -1811,6 +1863,10 @@ void AttackableCreature::respawn(void)
         bool groupAssist = this->getInternalAttribute<bool>("creature_group_assist");
         mIsGroupAssist = groupAssist;
     }
+    if (this->hasInternalAttribute("creature_social_group"))
+    {
+        mSocialGroup = this->getInternalAttribute<std::string>("creature_social_group");
+    }
     else
     {
         //assert(false && "Missing creature group assist attribute");
@@ -1954,6 +2010,7 @@ void AttackableCreature::respawn(void)
         this->mHam.mWillpower.setMaxHitPoints(500);
         this->mHam.mWillpower.setBaseHitPoints(500);
     }
+    _rollHam();
     this->mHam.calcAllModifiedHitPoints();
 
 
@@ -1965,6 +2022,30 @@ void AttackableCreature::respawn(void)
     this->clearSpawned();
 
     gWorldManager->addDormantNpc(this->getId(), mTimeToFirstSpawn);
+}
+
+// Each spawn rolls its health, action and mind within the guide's HAM range
+// (creature_ham_min/max); without one they keep the fixed values.
+void AttackableCreature::_rollHam(void)
+{
+    if (!hasInternalAttribute("creature_ham_min") || !hasInternalAttribute("creature_ham_max"))
+    {
+        return;
+    }
+    int32 lo = getInternalAttribute<int32>("creature_ham_min");
+    int32 hi = getInternalAttribute<int32>("creature_ham_max");
+    if (lo <= 0 || hi < lo)
+    {
+        return;
+    }
+    HamProperty* pools[] = { &mHam.mHealth, &mHam.mAction, &mHam.mMind };
+    for (HamProperty* pool : pools)
+    {
+        int32 value = lo + static_cast<int32>(gRandom->getRand() % static_cast<uint32>(hi - lo + 1));
+        pool->setCurrentHitPoints(value);
+        pool->setMaxHitPoints(value);
+        pool->setBaseHitPoints(value);
+    }
 }
 
 //=============================================================================

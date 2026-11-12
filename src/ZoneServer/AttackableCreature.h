@@ -212,6 +212,10 @@ public:
     }
     // A brawler's Taunt landed: fight the taunter.
     void	taunt(uint64 taunterId);
+    // A pack member of the same social group called for help: join its
+    // fight unless already fighting.
+    void	assistPack(uint64 targetId);
+    const std::string&	getSocialGroup(void) const { return mSocialGroup; }
 
 
 private:
@@ -226,7 +230,11 @@ private:
     uint64	_liveDefender(void);
     bool	_withinLeash(CreatureObject* target) const;
     float	_leash(void) const;
-    void	_startFight(uint64 targetId);
+    void	_startFight(uint64 targetId, bool callPack = true);
+    // Pack creatures bring their social group into the fight (p. 73).
+    void	_callPack(uint64 targetId);
+    // Roll health, action and mind within the guide's HAM range.
+    void	_rollHam(void);
     void	_endFight(void);
     void	_chase(void);
     void	_walkTo(const glm::vec3& destination, float speed, uint64 periodMs);
@@ -432,6 +440,7 @@ public:
     float mStalkerDistanceMax;
 
     bool mIsGroupAssist;
+    std::string mSocialGroup;
 
 
 private:
