@@ -209,6 +209,11 @@ not used, so in that respect players attack faster than they should).
   64 m along the line to the target, widening to 15 m at its end (the
   table's size for all ten cones). The extra targets cost and delay
   nothing more; each rolls its own hit. Logged as `Special ... also hit N`.
+- Corrections from the client (migration 013,
+  `tools/reference/specials_vs_client.py`): where the client's own command
+  descriptions (Publish 14, `string/en/cmd_d.stf`) contradict the guide's
+  table, the client wins: Two-Hand Area 3 blinds (the table: dizzy), Burst
+  Shot 2 and Point Blank Area 2 are areas (the table: single target).
 - The attacker's end posture (migration 012): Dive Shot leaves the attacker
   prone, Kip Up Shot standing, Roll Shot kneeling (pp. 80-81).
 - Specials' HAM costs: their cost modifiers x the weapon's attack costs
