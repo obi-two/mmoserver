@@ -157,6 +157,9 @@ public:
     // if it cannot be used; reason says why ("melee", "skill", "unknown").
     bool            selfBuff(const std::string& name, const CombatAttack& attack, std::string& buff,
                              float& strength, float& duration, std::string& reason);
+    // A scout's harvest of a creature table quantity with the given
+    // creature_harvesting skill mod: units and scout XP.
+    bool            harvest(int quantity, int skill, int& amount, int& xp);
     // The fields of the WeaponRanges message: layout ("i" int32, "f" float
     // per field) and values. False if no rules, the script returns nothing
     // (send nothing then) or the layout is not valid.

@@ -571,6 +571,26 @@ function rules.bleed(a, pool, wound)
   return math.max(1, math.floor(wound * rules.BLEED_FRACTION)), rules.BLEED_INTERVAL, rules.BLEED_DURATION
 end
 
+-- Scout harvesting ------------------------------------------------------------
+
+-- A corpse yields the creature table's quantity of the meat, hide or bone
+-- picked (both guides' tables; mmoserverdb/reference/). Each point of the
+-- scout's creature_harvesting skill mod adds HARVEST_PER_POINT of it (Novice
+-- Scout has 15); a harvest earns HARVEST_XP_PER_UNIT scout XP per unit.
+-- Neither is in the guides at hand: reconstructed.
+rules.HARVEST_PER_POINT = 0.01
+rules.HARVEST_XP_PER_UNIT = 1
+
+-- How many units a harvest of a table quantity gives, and the scout XP.
+function rules.harvest(quantity, skill)
+  if not quantity or quantity <= 0 then
+    return 0, 0
+  end
+  local amount = math.floor(quantity * (1 + (skill or 0) * rules.HARVEST_PER_POINT))
+  amount = math.max(1, amount)
+  return amount, amount * rules.HARVEST_XP_PER_UNIT
+end
+
 -- A self buff (Berserk, Center of Being) for a.attacker holding a.weapon:
 -- the buff ("berserk", "center_of_being"), its strength and its duration in
 -- seconds; or nil and why not ("melee": Center of Being needs bare hands or

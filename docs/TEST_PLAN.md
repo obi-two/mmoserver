@@ -35,6 +35,7 @@ server crashes, gdb stops it and the backtrace is at the end of its log.
 | T15 | Combat | Still in combat after the opponent dies [5i] | Kill a creature that was your only opponent | Combat music and state end without `/peace` |
 | T16 | Creatures | Stats from the creature tables (migration 011) | `sudo ./mmoserverdb/setup.sh update`, then near Bestine walk up to womp rats and rills | They no longer attack on sight; attacked, they fight back; womp rats hit less often than before (28%) |
 | T17 | Creatures | No pack assist | Attack one womp rat with others nearby | The other womp rats join; `tatooine.out`: `assists its pack against` |
+| T19 | Scout | Harvesting a corpse did nothing [23] | As a Novice Scout, kill a womp rat and use the corpse's radial: Harvest corpse, then on another corpse Harvest meat, hide and bone | "You harvest N units of <resource>." (about 4 meat, 3 hide, 2 bone for a womp rat); the resource in the inventory; scout XP; a second harvest of the same corpse is refused; `tatooine.out`: `Harvest by ...` |
 | T18 | Creatures | No killers | Get incapacitated by a killer (none spawn on Tatooine yet; for now check that a womp rat leaves you incapacitated) | A womp rat does not deathblow; `deathblows` appears only for creatures marked Killer |
 
 ## Confirmed
