@@ -345,9 +345,6 @@ against melee) is not known.
   regeneration is a made-up rule; aggression ignores the player's level.
 - **Combat XP** rates and weapon XP split are placeholders ("a complete
   made up rule" in the code).
-- **"Too many commands queued"** (KNOWN_ISSUES #5h): still seen with
-  attacks queued. The server now logs what fills the queue when it
-  overflows (`Command queue full for ...` in the zone log).
 
 ## Where each part should live
 
@@ -507,14 +504,17 @@ and the point blank modifier of most pistols (0 for -5 to -20).
 
 ## Order of work
 
-1. Find what overflows the command queue (the new log line, next fight).
+1. Find what overflows the command queue: done. It only overflowed with
+   the attack queue spammed on purpose, the queue limit working
+   (`KNOWN_ISSUES.md` 5h); not seen since the combat rework.
 2. Read the original rules: done (both guides' combat chapters, the
    Marksman and Brawler chapters). The numbers behind accuracy are in
    neither guide: measure the client's accuracy display instead.
 3. To-hit and damage from those rules: done, in `combat/rules.lua`; the
    weapons' ranges and the noob CDEF: migration 007. Next: tune the
    reconstructed numbers in play.
-4. Creature regeneration and to-hit from the creature tables.
+4. Creature regeneration and to-hit from the creature tables: next
+   (`docs/ROADMAP.md`, next steps).
 5. Specials as data: done for the 134 moves of the special moves table
    (migration 010), with costs, to-hit, posture changes and timed effects
    in the rules. Next: attacker postures, areas and cones.

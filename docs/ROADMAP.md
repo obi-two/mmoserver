@@ -66,19 +66,29 @@ and what still needs a client test is in `docs/TEST_PLAN.md`.
 | 2. Runnable server | Installer, launcher and runtime fixes done (PRs #2 and #3 on the fork); client tests in `docs/TEST_PLAN.md`; security and remote database access to do |
 | 3. Refactoring: scripts first, then modernisation | Planned (`docs/SCRIPTING.md`) |
 | 4. Content | Planned |
-| 5. Pre-CU gameplay | Not started |
+| 5. Pre-CU gameplay | Combat in progress: data-driven rules (`data/script/combat/rules.lua`), specials, brawler moves, incapacitation and cloning, wounds, bleeding and battle fatigue, medic and entertainer healing; creature AI (roam, aggro, fight back, leash); lairs spawn (`docs/COMBAT.md`) |
 | Tools: portal, load testing | Planned (below) |
 
 ## Next steps
 
-1. **Client tests** of the remaining fixes (`docs/TEST_PLAN.md`), fixing
-   whatever fails.
-2. **Windows build** (phase 1, remaining), with the remote database setup
-   from phase 2 so Windows development can use the Linux VM's database.
-3. **Refactoring, scripts first** (phase 3): move tutorial and other
-   content out of C++ into Lua behind a documented script API, with event
-   hooks instead of polling; then dependency upgrades and the rest of the
-   modernisation.
+In this order (Nov 2026):
+
+1. **Creature tables** from the creature chapters of both Prima guides:
+   each creature's level, HAM, to-hit, damage, armour, aggression, killer
+   and pack flags, and its meat, hide and bone, in our own form with page
+   citations. They unlock killers' deathblows and pack assist (p. 73) and
+   creatures' own to-hit, damage and armour in combat.
+2. **Scout harvesting** of creature corpses (`KNOWN_ISSUES.md` #23), from
+   the tables' resource quantities.
+3. **The rest of the specials**: the attacker's end posture, area and cone
+   attacks, players' worn armour in combat.
+4. **Security** before a public server (phase 2): accounts created for
+   unknown usernames, servers listening on all interfaces.
+
+Alongside: client tests of what is left in `docs/TEST_PLAN.md`; the medic
+professions reviewed as a whole (stimpacks share a skill mod bug fixed for
+wound healing, `KNOWN_ISSUES.md` #25); then refactoring, scripts first
+(phase 3).
 
 ## Database
 
@@ -158,10 +168,10 @@ platforms (tolua++ built as part of the build, or sol2), Lua staying 5.1.
   `ZoneServer.cpp`, which the test layout expects in `main.cpp`), tests for
   the mechanics fixed during testing (health and death, posture, spawning,
   visibility), and a fuzz harness for `Message` parsing.
-- **Combat and creature AI review**: the creature state machines are
-  largely stripped (`AttackableCreature`, `LairObject`): lairs never spawn,
-  creatures barely react, and players stay in combat after their opponent
-  dies (`KNOWN_ISSUES.md` 5f, 5i, 5j).
+- **Combat and creature AI review**: started under phase 5 (lairs spawn,
+  creatures roam, aggro, fight back and leash; `KNOWN_ISSUES.md` 5f, 5j).
+  Left: creature behaviour as `ai/` scripts, and a player staying in combat
+  after the opponent dies (5i, to retest).
 - **Memory**: a loop in Loot all ran a zone out of memory (#10). Keep memory
   monitoring as standard: LeakSanitizer in CI, the memory log during client
   tests, and memory per zone in the server metrics.
@@ -191,8 +201,8 @@ so it is a per-server choice, not a default.
 
 ## Phase 5: pre-CU gameplay
 
-From the code review: combat first (the heart of pre-CU and thin today),
-then factions and the GCW, loot, guilds, vendors and the bazaar, vehicles
+From the code review: combat first (the heart of pre-CU; under way, see
+the status above and `docs/COMBAT.md`), then factions and the GCW, loot, guilds, vendors and the bazaar, vehicles
 and pets, then Jedi. Crafting and the entertainer systems show what a
 complete system looks like in this codebase.
 
