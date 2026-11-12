@@ -213,7 +213,9 @@ not used, so in that respect players attack faster than they should).
   `tools/reference/specials_vs_client.py`): where the client's own command
   descriptions (Publish 14, `string/en/cmd_d.stf`) contradict the guide's
   table, the client wins: Two-Hand Area 3 blinds (the table: dizzy), Burst
-  Shot 2 and Point Blank Area 2 are areas (the table: single target).
+  Shot 2 and Point Blank Area 2 are areas, and Charge Shot 2 (with a
+  knockdown), Wild Shot 2 and the two Multi-Target Shots are cones (the
+  table: single targets).
 - The attacker's end posture (migration 012): Dive Shot leaves the attacker
   prone, Kip Up Shot standing, Roll Shot kneeling (pp. 80-81).
 - Specials' HAM costs: their cost modifiers x the weapon's attack costs
