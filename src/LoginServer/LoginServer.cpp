@@ -85,7 +85,7 @@ LoginServer::LoginServer(int argc, char* argv[])
 		configuration_variables_map_["UdpBufferSize"].as<uint32_t>()));
 
     LOG(WARNING) << "Config port set to " << configuration_variables_map_["BindPort"].as<uint16>();
-    mService = mNetworkManager->GenerateService((char*)configuration_variables_map_["BindAddress"].as<std::string>().c_str(), configuration_variables_map_["BindPort"].as<uint16_t>(),configuration_variables_map_["ServiceMessageHeap"].as<uint32_t>()*1024,false);
+    mService = mNetworkManager->GenerateService((char*)configuration_variables_map_["PublicBindAddress"].as<std::string>().c_str(), configuration_variables_map_["BindPort"].as<uint16_t>(),configuration_variables_map_["ServiceMessageHeap"].as<uint32_t>()*1024,false);
 
 	mDatabaseManager = new DatabaseManager(DatabaseConfig(configuration_variables_map_["DBMinThreads"].as<uint32_t>(), configuration_variables_map_["DBMaxThreads"].as<uint32_t>(), configuration_variables_map_["DBGlobalSchema"].as<std::string>(), configuration_variables_map_["DBGalaxySchema"].as<std::string>(), configuration_variables_map_["DBConfigSchema"].as<std::string>()));
 

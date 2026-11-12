@@ -107,12 +107,24 @@ The LoginServer logs which at startup. Existing accounts are unaffected.
 After pulling, `sudo ./mmoserverdb/setup.sh update` reloads the procedure
 (its new third argument): without it, every login fails.
 
-### 3. Servers listen on all interfaces — open (security)
+### 3. Servers listen on all interfaces — fixed
 
-`Service.cpp` binds every UDP socket to `INADDR_ANY`, whatever
-`BindAddress` says, so the internal cluster ports (ConnectionServer 5000,
-zones 50xx) are reachable from the network. Only 44990-44992 should be
-public. Until fixed, keep those internal ports closed in the firewall.
+`Service.cpp` bound every UDP socket to `INADDR_ANY`, whatever
+`BindAddress` said, so the internal cluster ports (ConnectionServer 5000,
+zones 50xx, chat 5200) were reachable from the network. Each socket now
+binds to its configured address:
+
+- the services game clients use (LoginServer 44990, ConnectionServer
+  44991, PingServer 44992) to `PublicBindAddress`, `0.0.0.0` (every
+  interface) by default, as before;
+- the ConnectionServer's cluster port to `ClusterBindAddress`
+  (`127.0.0.1`), zones and chat to `BindAddress` (`127.0.0.1`).
+
+Each service logs `Service listening on <address>:<port>`. Checked locally
+with `ss -ulnp`: 44990-44992 on 0.0.0.0, 5000 on 127.0.0.1. Servers split
+across machines set `BindAddress`/`ClusterBindAddress` to a LAN address
+(and the `config_process_list` addresses to match). A firewall on the
+internal ports is still good practice.
 
 ## Tutorial and gameplay
 
