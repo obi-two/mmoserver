@@ -100,7 +100,7 @@ server crashes, gdb stops it and the backtrace is at the end of its log.
 ## Known open issues (not tested)
 
 Tracked in `docs/KNOWN_ISSUES.md`; not expected to pass yet:
-servers listening on all interfaces [3], positions inside buildings
+positions inside buildings
 mirrored [5c], low sampling yield at low concentration [5d], tutorial
 prompts lagging behind [5e], no debris explosion [5g], unhandled opcodes
 [7], startup data warnings [8], garbage "MessageFactory Heap" log lines
