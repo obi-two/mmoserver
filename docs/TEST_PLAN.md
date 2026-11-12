@@ -36,14 +36,16 @@ server crashes, gdb stops it and the backtrace is at the end of its log.
 | T16 | Creatures | Stats from the creature tables (migration 011) | `sudo ./mmoserverdb/setup.sh update`, then near Bestine walk up to womp rats and rills | They no longer attack on sight; attacked, they fight back; womp rats hit less often than before (28%) |
 | T17 | Creatures | No pack assist | Attack one womp rat with others nearby | The other womp rats join; `tatooine.out`: `assists its pack against` |
 | T19 | Scout | Harvesting a corpse did nothing [23] | As a Novice Scout, kill a womp rat and use the corpse's radial: Harvest corpse, then on another corpse Harvest meat, hide and bone | "You harvest N units of <resource>." (about 4 meat, 3 hide, 2 bone for a womp rat); the resource in the inventory; scout XP; a second harvest of the same corpse is refused; `tatooine.out`: `Harvest by ...` |
-| T21 | Security | Internal ports open to the network [3] | Restart all servers, then `sudo ss -ulnp \| grep -E "Server\|44990\|5000"` | 44990-44992 on 0.0.0.0, 5000, the zones' and chat's ports on 127.0.0.1; the Windows client still logs in and plays |
-| T22 | Security | Unknown usernames created accounts [3a] | `sudo ./mmoserverdb/setup.sh update`, restart, then log in with a name that has no account | Refused like a wrong password; `login.out`: `Unknown usernames are refused`; existing accounts log in |
+| T23 | Security | Malformed packets could read past a message's end [3b] | Play normally for a while: log in, chat, mail, trade, craft | Nothing new; no `Message read past its end` in any log |
+| T24 | Security | Player text built into SQL [3c] | Log in (client and launcher); create a character with a biography; send a mail with an attachment (a waypoint) to yourself; add and remove a friend; rename a waypoint; make and join a chat channel; list an item on the bazaar with a description containing `'` and `%`; tip someone at the bank; set your biography | Everything works as before; the bazaar description shows exactly as typed; no `Prepared statement failed` in the logs (if there is one, send it to me) |
 | T18 | Creatures | No killers | Get incapacitated by a killer (none spawn on Tatooine yet; for now check that a womp rat leaves you incapacitated) | A womp rat does not deathblow; `deathblows` appears only for creatures marked Killer |
 
 ## Confirmed
 
 | Area | What was wrong | Confirmed by |
 |---|---|---|
+| Security | Internal ports open to the network [3] | `ss -ulnp` on the VM: 44990-44992 on 0.0.0.0, internal ports on 127.0.0.1 (Nov 2026) |
+| Security | Unknown usernames created accounts [3a] | On the VM: refused by default, created with `AutoCreateAccounts=1` (Nov 2026) |
 | Mail | No welcome mail; empty bodies; lost attachments [22] | New character on the VM: the welcome and profession mails arrive with their full text; a mail with a waypoint attached arrives with it (Nov 2026) |
 | Tutorial | Parts 3-9: refusals, the oath, the grenade [19, 21] | Raced through on the VM: weapon, documents and Quartermaster first time, the oath, the bandit killed by his own grenade (Nov 2026). Still in combat after his death [5i] |
 | Tutorial | Racing ahead got parts 1-2 stuck [21] | New character raced through rooms 1-2 (chat, zoom, drum, food before the prompts) and on to the end of the tutorial, Nov 2026 |

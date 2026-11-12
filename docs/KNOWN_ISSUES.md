@@ -141,6 +141,31 @@ checked against the packet buffer the same way. Unit tests in
 `src/NetworkManager/message_unittest.cc`. Watch the logs for that warning
 in normal play: a well-formed client should never cause it.
 
+### 3c. Player text was built into SQL — fixed, needs testing
+
+Names, mail, biographies, chat channels, bazaar listings and the like
+were escaped into fixed-size stack buffers (a long enough name or mail
+overflowed them), and some were not escaped at all: the launcher login
+put the username and password into the SQL as sent (any account could
+be logged into), and the planet map, channel path, character-creation
+models, permission lists and image-design hair were unescaped. Player
+text is now bound as values of prepared statements
+(`Database::executePreparedAsync`/`executePrepared`): it cannot change a
+statement and has no length limit in the server. A database refusal (a
+name too long for its column, say) fails that one request and logs
+`Prepared statement failed`, instead of stopping the server.
+Transactions bind their queries too (a `%` in a bazaar description was
+read as a format directive). Checked against MariaDB: injection text in
+either login gets no account, a 70,000-character username is refused
+cleanly, binary mail attachments and transaction text round-trip
+exactly. Text the server itself holds (zone names, resource names,
+serial numbers) still goes into SQL as before.
+
+Along the way: player mail stored the sender's name twice, the bazaar's
+Offers window was a syntax error for every name, a debug line logged the
+launcher password, and every finished database job leaked its query
+string.
+
 ## Tutorial and gameplay
 
 ### 4. Debris blocking the tutorial path has no Attack option — fixed
