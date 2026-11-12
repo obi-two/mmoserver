@@ -175,6 +175,12 @@ public:
     void executePreparedAsync(DatabaseCallback* callback, void* ref, const std::string& sql,
                               std::vector<std::string> params, bool procedure = false);
 
+    /*! As above, with the result passed to callback (nullptr if the
+    * statement failed).
+    */
+    void executePreparedAsync(const std::string& sql, std::vector<std::string> params,
+                              AsyncDatabaseCallback callback, bool procedure = false);
+
     /*! Executes a prepared statement and waits for the result (nullptr if it
     * failed); see executePreparedAsync.
     */

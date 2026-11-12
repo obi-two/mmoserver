@@ -224,6 +224,19 @@ void Database::executePreparedAsync(DatabaseCallback* callback, void* ref, const
 }
 
 
+void Database::executePreparedAsync(const std::string& sql, std::vector<std::string> params,
+                                    AsyncDatabaseCallback callback, bool procedure) {
+    DatabaseJob* job = new(job_pool_.ordered_malloc()) DatabaseJob();
+    job->callback = callback;
+    job->query = sql;
+    job->params = std::move(params);
+    job->prepared = true;
+    job->multi_job = procedure;
+
+    job_pending_queue_.push(job);
+}
+
+
 DatabaseResult* Database::executePrepared(const std::string& sql, const std::vector<std::string>& params,
                                           bool procedure) {
     return database_impl_->executePrepared(sql, params, procedure);
