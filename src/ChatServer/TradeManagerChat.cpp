@@ -1212,7 +1212,7 @@ void TradeManagerChatHandler::processAuctionBid(TradeManagerAsyncContainer* asyn
 //auction ...
     // The bidder's name is a bound value in each statement below.
     std::string sql;
-    const std::string PlayerName = player->getName().getAnsi();
+    const std::string PlayerName = DatabaseParam(player->getName().getAnsi()).value;
 
     //Check the current add depending on the price
 
@@ -1608,7 +1608,7 @@ void TradeManagerChatHandler::processHandleopAuctionQueryHeadersMessage(Message*
     {
         // The name was neither quoted nor escaped: a syntax error for every
         // name. Names are at most 32 characters, so escaped they fit.
-        sprintf(query.WindowQuery," (c.type = %" PRIu32") AND (c.bidder_name = '%s') AND (c.bazaar_id = %" PRIu64 ")",TRMVendor_Offer,mDatabase->escapeString(std::string(player->getName().getAnsi())).c_str(),query.vendorID);
+        sprintf(query.WindowQuery," (c.type = %" PRIu32") AND (c.bidder_name = '%s') AND (c.bazaar_id = %" PRIu64 ")",TRMVendor_Offer,mDatabase->escapeString(player->getName().getAnsi()).c_str(),query.vendorID);
 
 
     }

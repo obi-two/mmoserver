@@ -362,7 +362,7 @@ void CSRManager::_processSearchKnowledgeBaseMessage(Message *message, DispatchCl
     std::string pattern = "%";
     while (iter != splitstring.end())
     {
-        pattern += (*iter).getAnsi();
+        pattern += DatabaseParam((*iter).getAnsi()).value;
         pattern += "%";
         ++iter;
     }

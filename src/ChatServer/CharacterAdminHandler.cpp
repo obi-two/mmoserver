@@ -227,7 +227,7 @@ void CharacterAdminHandler::_processCreateCharacter(Message* message, DispatchCl
     // Everything the client chose (names, profession, biography, hair and
     // body models) is a bound value; the numbers go in the statement. An
     // empty last name, biography or hair model is stored as NULL, as before.
-    std::vector<std::string> params = {
+    DatabaseParams params = {
         characterInfo.mFirstName.getAnsi(),
         hasLastName ? characterInfo.mLastName.getAnsi() : "",
         characterInfo.mProfession.getAnsi(),
@@ -260,7 +260,7 @@ void CharacterAdminHandler::_processCreateCharacter(Message* message, DispatchCl
     sql += ", ?)";
     params.push_back(characterInfo.mBaseModel.getAnsi());
 
-    database_->executePreparedAsync(sql, std::move(params), [this, client] (DatabaseResult* result) {       
+    database_->executePreparedAsync(sql, params, [this, client] (DatabaseResult* result) {       
         // Vaalidate the input.
         if (! client || ! result) {
             return;

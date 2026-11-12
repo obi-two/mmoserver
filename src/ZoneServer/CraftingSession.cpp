@@ -947,7 +947,7 @@ void CraftingSession::createPrototype(uint32 noPractice,uint32 counter)
         // (a transaction runs its queries as text, so it cannot bind values).
         std::string sql = std::string("UPDATE ") + mDatabase->galaxy() + ".items SET parent_id="
             + std::to_string(mOwner->getEquipManager()->getEquippedObject(CreatureEquipSlot_Inventory)->getId())
-            + ", customName='" + mDatabase->escapeString(std::string(mItem->getCustomName().getAnsi()))
+            + ", customName='" + mDatabase->escapeString(mItem->getCustomName().getAnsi())
             + "' WHERE id=" + std::to_string(mItem->getId());
 
         t->addQuery("%s", sql.c_str());
