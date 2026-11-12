@@ -792,6 +792,10 @@ bool AttackableCreature::_withinLeash(CreatureObject* target) const
 
 void AttackableCreature::_startFight(uint64 targetId, bool callPack)
 {
+    // On each other's defender lists from the start: the fight is only kept
+    // while the target is on the list, and a creature that joins one (pack
+    // assist) or picks one (aggression) has not hit anyone yet.
+    NpcManager::Instance()->engage(this, targetId);
     setTarget(targetId);
     disableHoming();
     setRoamingSteps(0);
