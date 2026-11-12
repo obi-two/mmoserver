@@ -171,7 +171,7 @@ def right_rows(words):
 
 def main():
     last_section = ["Creatures"]
-    writer = csv.writer(sys.stdout)
+    writer = csv.writer(sys.stdout, lineterminator="\n")
     writer.writerow(["page", "facing", "section", "name", "level", "location", "social_group",
                      "ham_min", "ham_max", "to_hit", "damage_min", "damage_max", "xp",
                      "meat", "meat_qty", "hide", "hide_qty", "bone", "bone_qty", "milk",
