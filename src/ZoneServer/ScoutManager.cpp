@@ -464,6 +464,23 @@ Resource* currentResource(const std::string& typeKey)
     return NULL;
 }
 
+// Whether the amount fits in containers of this resource already in the
+// inventory; if not, a new container needs a free inventory slot.
+bool fitsInExistingContainers(PlayerObject* player, Resource* resource, uint32 amount)
+{
+    ObjectIDList* objects = player->getInventory()->getObjects();
+    uint32 room = 0;
+    for (ObjectIDList::iterator it = objects->begin(); it != objects->end(); ++it)
+    {
+        ResourceContainer* container = dynamic_cast<ResourceContainer*>(gWorldManager->getObjectById(*it));
+        if (container && container->getResourceId() == resource->getId() && container->getAmount() < container->getMaxAmount())
+        {
+            room += container->getMaxAmount() - container->getAmount();
+        }
+    }
+    return room >= amount;
+}
+
 // Puts an amount of a resource in the player's inventory: tops up a
 // container of the same resource, then starts new ones.
 void addToInventory(PlayerObject* player, Resource* resource, uint32 amount)
@@ -561,6 +578,14 @@ void ScoutManager::handleHarvestCorpse(PlayerObject* player, CreatureObject* tar
     if (amount <= 0)
     {
         gMessageLib->SendSystemMessage(L"There is nothing of that kind to harvest from this corpse.", player);
+        return;
+    }
+
+    // No room for a new container: nothing is harvested (checkCapacity tells
+    // the player the inventory is full).
+    if (!fitsInExistingContainers(player, resource, static_cast<uint32>(amount))
+            && !player->getInventory()->checkCapacity(1, player))
+    {
         return;
     }
 
