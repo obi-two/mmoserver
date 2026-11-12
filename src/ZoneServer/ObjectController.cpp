@@ -943,7 +943,8 @@ bool ObjectController::_validateProcessCommand(uint32 &reply1,uint32 &reply2,uin
             }
             // we still failed the check but we're not sending anything back
             // send this generic message
-            if(! (reply1 && reply2) )
+            // (the HAM check tells the player itself)
+            if(! (reply1 && reply2) && !dynamic_cast<PVHam*>(*it))
                 gMessageLib->SendSystemMessage(::common::OutOfBand("error_message", "wrong_state"), player);
             return(false);
         }
