@@ -489,6 +489,21 @@ TEST_F(CombatRulesTest, CenterOfBeingNeedsMeleeAndRaisesDefence) {
     EXPECT_FLOAT_EQ(plain.chance - 10, withBuff.chance);
 }
 
+TEST_F(CombatRulesTest, HarvestGivesTheTableQuantityPlusSkill) {
+    int amount = 0, xp = 0;
+    // Womp rat meat (4) by a Novice Scout (creature_harvesting 15).
+    ASSERT_TRUE(rules_.harvest(4, 15, amount, xp));
+    EXPECT_EQ(4, amount);
+    EXPECT_EQ(4, xp);
+    // Bantha meat (450) by a master (+80 or so).
+    ASSERT_TRUE(rules_.harvest(450, 80, amount, xp));
+    EXPECT_EQ(810, amount);
+    // Nothing in the table, nothing harvested.
+    ASSERT_TRUE(rules_.harvest(0, 15, amount, xp));
+    EXPECT_EQ(0, amount);
+    EXPECT_EQ(0, xp);
+}
+
 TEST_F(CombatRulesTest, IncapsGrowLongerAndTheThirdKills) {
     bool dies = true;
     int seconds = 0;

@@ -413,6 +413,20 @@ bool CombatRules::selfBuff(const std::string& name, const CombatAttack& attack, 
     return ok;
 }
 
+bool CombatRules::harvest(int quantity, int skill, int& amount, int& xp)
+{
+    lua_pushnumber(mState, quantity);
+    lua_pushnumber(mState, skill);
+    if (!_call("harvest", 2, 2))
+    {
+        return false;
+    }
+    amount = static_cast<int>(lua_tonumber(mState, -2));
+    xp = static_cast<int>(lua_tonumber(mState, -1));
+    lua_pop(mState, 2);
+    return true;
+}
+
 bool CombatRules::incapWindow(int& seconds)
 {
     if (!_call("incapWindow", 0, 1))

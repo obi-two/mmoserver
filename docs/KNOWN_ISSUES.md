@@ -684,7 +684,7 @@ For reference; details are in the commit messages on `phase2-db-installer`.
   container). Fly text in instances also only reached grouped players.
 - Missing `sp_DeleteMail`; SQL procedures broken by earlier bulk edits.
 
-### 23. Harvesting a creature corpse does nothing — open
+### 23. Harvesting a creature corpse does nothing — fix needs testing
 
 A Novice Scout (skill 31, `outdoors_scout_novice`) with loot rights gets
 "harvest corpse" and harvest meat, hide or bone on a creature's corpse
@@ -694,6 +694,28 @@ womp rat: `res_meat` Carnivore Meat, `res_hide` Bristley Hide) with
 `harvest_qty` 0. The 2004 guide's creature tables give each creature's
 meat, hide, bone and milk type and quantity; harvesting belongs with the
 scout's review, and the quantities with the creature transcription.
+
+Now (`ScoutManager::handleHarvestCorpse`): a Novice Scout with loot rights,
+within 10 m, harvests the corpse once. Harvest meat, hide or bone takes
+that part; Harvest corpse takes one the creature has, at random. The
+amount is the creature table's quantity (migration 011:
+`creature_meat_qty`, `creature_hide_qty`, `creature_bone_qty`) plus 1% per
+point of the `creature_harvesting` skill mod, and earns as much scout XP
+(`rules.harvest`, reconstructed). It goes into the inventory as the
+planet's current spawn of that type (wild meat on Tatooine:
+`meat_wild_tatooine`), topping up a container of the same resource first.
+The radial's harvest meat/hide/bone entries now hang under Harvest corpse
+(their parent index pointed at a missing entry). The greater desert and
+variegated womp rats have no quantities yet (the 2003 table lists no
+resources), so they yield nothing. Milking is not done.
+
+### 26. Sampling into a full resource container records the wrong amount — open
+
+`ArtisanManager` (sampling): when a sample overflows a container of the
+same resource, the container is filled to its maximum and the rest goes in
+a new one, but the database update writes the overflowing total, not the
+maximum, so the container holds more than it can after a reload. Found
+while writing the scout harvest, which does not share the bug.
 
 ### 24. A cloned player stays a corpse — fixed
 
