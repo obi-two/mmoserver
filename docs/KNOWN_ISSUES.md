@@ -104,6 +104,7 @@ anyone could take any name. Now it only does so when the LoginServer's
 default); otherwise an unknown username is refused like a wrong password,
 and accounts are made with `sudo ./mmoserverdb/setup.sh add-account NAME`.
 The LoginServer logs which at startup. Existing accounts are unaffected.
+Confirmed on the test VM: refused when off, created with `AutoCreateAccounts=1`.
 After pulling, `sudo ./mmoserverdb/setup.sh update` reloads the procedure
 (its new third argument): without it, every login fails.
 
@@ -124,7 +125,21 @@ Each service logs `Service listening on <address>:<port>`. Checked locally
 with `ss -ulnp`: 44990-44992 on 0.0.0.0, 5000 on 127.0.0.1. Servers split
 across machines set `BindAddress`/`ClusterBindAddress` to a LAN address
 (and the `config_process_list` addresses to match). A firewall on the
-internal ports is still good practice.
+internal ports is still good practice. Confirmed on the test VM.
+
+### 3b. Malformed packets could read past the end of a message — fixed
+
+`Message` reads (`getUint32`, `getStringAnsi`, ...) trusted the packet:
+a number read near the end, or a string whose length said more than the
+message carried, read whatever memory followed. A Unicode string length
+near 65535 also overflowed `BString`'s 16-bit allocation size, writing
+past the end of a heap buffer. Every read is now checked against the
+message size: a read past the end returns 0 or an empty string, the
+message is marked (`isOverrun()`), and the server logs
+`Message read past its end: ...` once per message. `Packet` reads are
+checked against the packet buffer the same way. Unit tests in
+`src/NetworkManager/message_unittest.cc`. Watch the logs for that warning
+in normal play: a well-formed client should never cause it.
 
 ## Tutorial and gameplay
 
