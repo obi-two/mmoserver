@@ -216,6 +216,9 @@ public:
     // fight unless already fighting.
     void	assistPack(uint64 targetId);
     const std::string&	getSocialGroup(void) const { return mSocialGroup; }
+    // A corpse is harvested once (Scout, ScoutManager::handleHarvestCorpse).
+    bool	isHarvested(void) const { return mHarvested; }
+    void	setHarvested(void) { mHarvested = true; }
 
 
 private:
@@ -441,6 +444,7 @@ public:
 
     bool mIsGroupAssist;
     std::string mSocialGroup;
+    bool mHarvested = false;
 
 
 private:

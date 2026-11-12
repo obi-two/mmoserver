@@ -113,13 +113,13 @@ void AttackableCreature::prepareCustomRadialMenu(CreatureObject* creatureObject,
                 mRadialMenu->addItem(4,0,radId_serverHarvestCorpse, radAction_ObjCallback, "@sui:harvest_corpse");
 
                 if(this->hasAttribute("res_meat"))
-                    mRadialMenu->addItem(5,3,radId_diceRoll, radAction_ObjCallback, "@sui:harvest_meat");
+                    mRadialMenu->addItem(5,4,radId_diceRoll, radAction_ObjCallback, "@sui:harvest_meat");
 
                 if(this->hasAttribute("res_hide"))
-                    mRadialMenu->addItem(6,3,radId_diceTwoFace, radAction_ObjCallback, "@sui:harvest_hide");
+                    mRadialMenu->addItem(6,4,radId_diceTwoFace, radAction_ObjCallback, "@sui:harvest_hide");
 
                 if(this->hasAttribute("res_bone"))
-                    mRadialMenu->addItem(7,3,radId_diceThreeFace, radAction_ObjCallback, "@sui:harvest_bone");
+                    mRadialMenu->addItem(7,4,radId_diceThreeFace, radAction_ObjCallback, "@sui:harvest_bone");
             }
         }
     }
@@ -1539,6 +1539,8 @@ void AttackableCreature::killEvent(void)
 
 void AttackableCreature::respawn(void)
 {
+    // A new body: nothing harvested from it yet.
+    mHarvested = false;
     // gCreatureCounter++;
 
     // The data used below ARE taken from DB, not hard coded as the script version above.
