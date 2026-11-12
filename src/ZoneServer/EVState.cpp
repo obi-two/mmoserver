@@ -59,7 +59,9 @@ bool EVState::validate(uint32 &reply1, uint32 &reply2, uint64 targetId, uint32 o
 		if (cmdProperties->mLocomotionMask !=0 && ((cmdProperties->mLocomotionMask & creature->states.getLocomotion()) != 0))
 		{
 			reply1 = kCannotDoWhileLocomotion;
-			reply2 = mController->getPostureValidator(creature->states.getLocomotion());
+			// The locomotion's name for the refusal ("You cannot ... while
+			// Prone"): a locomotion flag, not a posture number.
+			reply2 = mController->getLocoValidator(creature->states.getLocomotion());
 			return false;
 		}
 	}
