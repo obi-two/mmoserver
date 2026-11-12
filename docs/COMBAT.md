@@ -201,6 +201,16 @@ not used, so in that respect players attack faster than they should).
   attacking). Assisting other creatures or the lair is not wired yet.
 - XP by most damage, per weapon type, group split; loot rights.
 - Combat spam, fly text (miss, block, dodge, counter), animations.
+- Area and cone specials (migration 012, `tools/reference/special_areas_sql.py`):
+  "Area affects all targets within the melee weapon's range. Cone affects
+  all targets with the ranged weapon's cone of fire" (p. 75). An area also
+  hits every creature the attacker may fight within the weapon's max range
+  around the attacker (PointBlankArea1: 12 m); a cone, every one within
+  64 m along the line to the target, widening to 15 m at its end (the
+  table's size for all ten cones). The extra targets cost and delay
+  nothing more; each rolls its own hit. Logged as `Special ... also hit N`.
+- The attacker's end posture (migration 012): Dive Shot leaves the attacker
+  prone, Kip Up Shot standing, Roll Shot kneeling (pp. 80-81).
 - Specials' HAM costs: their cost modifiers x the weapon's attack costs
   (`rules.costs`), charged when the special is used; a special the
   attacker cannot pay for is refused. (The flat `healthcost` etc. columns
@@ -343,9 +353,6 @@ against melee) is not known.
 - **Damage modifiers:** no skill or stat bonuses, players' worn armour,
   vulnerabilities. Bleeding only from wounds, not from
   weapons that bleed on any hit (p. 85); no bleed resistance.
-- **Special attacks:** the attacker's end posture (Dive Shot prone, Kip Up
-  Shot standing, Roll Shot kneeling), area and cone attacks (every special
-  hits its one target).
 - **States:** knockdown/dizzy interplay (a dizzy creature falling when it
   changes posture), knockdowns and posture changes have no duration.
 - **Creatures:** no special moves (the tables name them: stun, blind,

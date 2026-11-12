@@ -438,6 +438,18 @@ bool CombatRules::incapWindow(int& seconds)
     return true;
 }
 
+bool CombatRules::maxRange(const CombatWeapon& weapon, float& range)
+{
+    pushWeapon(mState, weapon);
+    if (!_call("ranges", 1, 2))
+    {
+        return false;
+    }
+    range = static_cast<float>(lua_tonumber(mState, -1));
+    lua_pop(mState, 2);
+    return true;
+}
+
 bool CombatRules::inRange(const CombatWeapon& weapon, float distance)
 {
     pushWeapon(mState, weapon);

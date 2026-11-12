@@ -108,7 +108,18 @@ private:
     // bool					_verifyCombatState(CreatureObject* attacker,CreatureObject* defender);
     bool					_verifyCombatState(CreatureObject* attacker, uint64 defenderId);
 
-    uint8					_executeAttack(CreatureObject* attacker,CreatureObject* defender,ObjectControllerCmdProperties *cmdProperties,Weapon* weapon, uint64* delayMs);
+    // secondary: another target of an area or cone special, which costs and
+    // delays nothing more. Returns 0 hit, 1 miss, kNotPaid if the attacker
+    // could not pay for the special.
+    static const uint8		kNotPaid = 2;
+    uint8					_executeAttack(CreatureObject* attacker,CreatureObject* defender,ObjectControllerCmdProperties *cmdProperties,Weapon* weapon, uint64* delayMs, bool secondary = false);
+    // An area or cone special also hits every other target it reaches.
+    void					_attackArea(CreatureObject* attacker, CreatureObject* defender, ObjectControllerCmdProperties* cmdProperties, Weapon* weapon);
+    // The posture a special leaves the attacker in (Dive Shot: prone...).
+    void					_setAttackerEndPosture(CreatureObject* attacker, ObjectControllerCmdProperties* cmdProperties);
+    // Whether the attacker may fight this creature: alive, and an attackable
+    // creature or a player duelling the attacker.
+    bool					_canFight(CreatureObject* attacker, CreatureObject* target);
     // The attack as the rules see it: the sides, the weapon and the command.
     CombatAttack			_buildAttack(CreatureObject* attacker, CreatureObject* defender, ObjectControllerCmdProperties* cmdProperties, Weapon* weapon);
     // Charges a special's HAM costs; false (nothing charged) if the attacker
