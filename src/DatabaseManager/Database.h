@@ -34,6 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include <memory>
 #include <queue>
 #include <string>
+#include <vector>
 
 #include <boost/noncopyable.hpp>
 #include <boost/pool/pool.hpp>
@@ -163,6 +164,22 @@ public:
     * \depricated This method is being phased out for a more type-safe solution.
     */
     void executeProcedureAsync(DatabaseCallback* callback, void* ref, const char* sql, ...);
+
+    /*! Executes a prepared statement asynchronously. Each ? in sql is bound,
+    * in order, to one of params. Text from players goes in params, never in
+    * sql: it cannot change the statement, and has no length limit here.
+    *
+    * \param callback Receives the result (nullptr if the statement failed).
+    * \param procedure Whether the statement is a CALL (multi-result).
+    */
+    void executePreparedAsync(DatabaseCallback* callback, void* ref, const std::string& sql,
+                              std::vector<std::string> params, bool procedure = false);
+
+    /*! Executes a prepared statement and waits for the result (nullptr if it
+    * failed); see executePreparedAsync.
+    */
+    DatabaseResult* executePrepared(const std::string& sql, const std::vector<std::string>& params,
+                                    bool procedure = false);
 
     /*! Escapes a string to prepare for storage in a database.
     *

@@ -290,44 +290,31 @@ void LoginManager::_handleLoginClientId(LoginClient* client, Message* message)
     client->setUsername(username);
     client->setPassword(password);
 
-    int8 sql[512],*sqlPointer;
+    // Username and password are bound as values of a prepared statement:
+    // whatever the client sends, they cannot change the query.
+    client->setState(LCSTATE_QueryAuth);
 
     if (strlen(username.getAnsi()) == 0) //SessionID Login With ANH Launcher
     {
         // Not account_authenticated/account_loggedin: they stay set until the
         // servers notice a client that went away without logging out, and the
         // ConnectionServer replaces that stale session.
-        sprintf(sql,"SELECT account_id, account_username, account_password, account_station_id, account_banned, account_active,account_characters_allowed,"
-                "account_session_key, account_csr FROM account WHERE account_banned=0 AND account_session_key='");
-        // sprintf(sql,"SELECT account_id, account_username, account_password, account_station_id, account_banned, account_active,account_characters_allowed,"
-        //"account_session_key, account_csr FROM account WHERE account_banned=0 AND account_authenticated=0 AND account_loggedin=0 AND account_session_key=' AND session_key='");
-        sqlPointer = sql + strlen(sql);
-        sqlPointer += mDatabase->escapeString(sqlPointer,password.getAnsi(),password.getLength());
-        *sqlPointer++ = '\'';
-        *sqlPointer++ = '\0';
+        mDatabase->executePreparedAsync(this, client,
+            "SELECT account_id, account_username, account_password, account_station_id, account_banned, account_active,account_characters_allowed,"
+            "account_session_key, account_csr FROM account WHERE account_banned=0 AND account_session_key=?",
+            {password.getAnsi()}, false);
     }
     else //	regular login the client login screen
     {
         // sp_ReturnUserAccount no longer requires the account to be marked
         // logged out, so a client that dropped without logging out can log in
         // again at once; the ConnectionServer replaces the stale session.
-
-        sprintf(sql,"CALL %s.sp_ReturnUserAccount('",mDatabase->galaxy());
-
-        sqlPointer = sql + strlen(sql);
-        sqlPointer += mDatabase->escapeString(sqlPointer,username.getAnsi(),username.getLength());
-        strcat(sql,"' , '");
-        sqlPointer = sql + strlen(sql);
-        sqlPointer += mDatabase->escapeString(sqlPointer,password.getAnsi(),password.getLength());
-        *sqlPointer++ = '\'';
-        *sqlPointer = '\0';
-        // Whether an unknown username creates an account (AutoCreateAccounts).
-        strcat(sql, mAutoCreateAccounts ? ", 1)" : ", 0)");
+        // The third argument: whether an unknown username creates an account
+        // (AutoCreateAccounts).
+        mDatabase->executePreparedAsync(this, client,
+            std::string("CALL ") + mDatabase->galaxy() + ".sp_ReturnUserAccount(?, ?, " + (mAutoCreateAccounts ? "1" : "0") + ")",
+            {username.getAnsi(), password.getAnsi()}, true);
     }
-
-// Setup an async query for checking authentication.
-    client->setState(LCSTATE_QueryAuth);
-    mDatabase->executeProcedureAsync(this,client,sql);
     
 }
 
@@ -348,7 +335,8 @@ void LoginManager::_authenticateClient(LoginClient* client, DatabaseResult* resu
     binding->addField(DFT_uint32,offsetof(AccountData, mCharsAllowed), 4);
     binding->addField(DFT_uint8, offsetof(AccountData, mCsr), 1);
         
-    if (result->getRowCount())
+    // No result: the query failed (logged); refuse the login.
+    if (result && result->getRowCount())
     {
         result->getNextRow(binding, (void*)&data);
         client->setAccountId(data.mId);
@@ -670,16 +658,14 @@ void LoginManager::_handleLauncherSession(LoginClient* client, Message* message)
     client->setUsername(username);
     client->setPassword(password);
 
-    int8 sql[512];
-
-    //call the session_key creation sproc
-    sprintf(sql,"SELECT account_id FROM %s.account WHERE account_username='%s' AND account_password = SHA1('%s');",mDatabase->galaxy(), client->getUsername().getAnsi(), client->getPassword().getAnsi());
-
     //set the state
     client->setState(LCSTATE_RetrieveAccountId);
 
-    //and execute
-    mDatabase->executeProcedureAsync(this, client, sql);
+    // Bound values, never part of the query: this used to put the username
+    // and password into the SQL as sent.
+    mDatabase->executePreparedAsync(this, client,
+        std::string("SELECT account_id FROM ") + mDatabase->galaxy() + ".account WHERE account_username=? AND account_password = SHA1(?)",
+        {client->getUsername().getAnsi(), client->getPassword().getAnsi()}, false);
     
 }
 
@@ -690,7 +676,8 @@ void LoginManager::_getLauncherSessionKey(LoginClient* client, DatabaseResult* r
     DataBinding* binding = mDatabase->createDataBinding(1);
     binding->addField(DFT_int64, offsetof(AccountData, mId), 8);
 
-    if (result->getRowCount())
+    // No result: the query failed (logged); refuse the login.
+    if (result && result->getRowCount())
     {
         //we have the account id
         result->getNextRow(binding, (void*)&data);
@@ -715,7 +702,7 @@ void LoginManager::_getLauncherSessionKey(LoginClient* client, DatabaseResult* r
         errType = "@cpt_login_fail";
         errMsg = "@msg_login_fail";
 
-        DLOG(INFO) << " Login failed for username: "  << client->getUsername().getAnsi() <<", password: ********" << client->getPassword().getAnsi();
+        DLOG(INFO) << " Login failed for username: "  << client->getUsername().getAnsi();
 
         gMessageFactory->StartMessage();
         gMessageFactory->addUint32(opErrorMessage);
