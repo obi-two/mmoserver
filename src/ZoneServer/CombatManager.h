@@ -94,6 +94,10 @@ public:
     void					applyDamage(CreatureObject* defender, const std::string& pool, int32 damage);
     // The wound and battle fatigue a hit leaves (rules.wound, FATIGUE_PER_HIT).
     void					applyWounds(CreatureObject* defender, const CombatOutcome& outcome);
+    // Whether the creature is bleeding; stopBleeding cures it (First Aid)
+    // and returns false if it was not bleeding.
+    bool					isBleeding(CreatureObject* creature) const;
+    bool					stopBleeding(CreatureObject* creature);
 
     ~CombatManager();
 
@@ -131,6 +135,23 @@ private:
         uint64		expires;	// ms, Clock local time
     };
     std::vector<TimedBuff>	mBuffs;
+    // Bleeding: one per creature and pool.
+    struct Bleed
+    {
+        uint64		creatureId;
+        uint8		bar;		// HamBar_Health, _Action, _Mind
+        int32		perTick;
+        uint64		interval;	// ms
+        uint64		nextTick;	// ms, Clock local time
+        uint64		expires;	// ms, Clock local time
+    };
+    std::vector<Bleed>		mBleeds;
+    // Each player's battle fatigue not yet whole (the rules give fractions).
+    std::map<uint64, float>	mFatigueCarry;
+    void					_startBleeding(CreatureObject* creature, uint8 bar, int32 perTick, float interval, float duration);
+    void					_tickBleeding(uint64 now);
+    // Removes the Bleeding state and tells a player, once no pool bleeds.
+    void					_bleedingEnded(uint64 creatureId);
     // Charges a command's flat HAM costs; false (nothing charged) if the
     // creature cannot pay them.
     bool					_payFlatCosts(CreatureObject* creature, ObjectControllerCmdProperties* cmdProperties);

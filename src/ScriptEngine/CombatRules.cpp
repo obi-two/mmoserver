@@ -276,7 +276,17 @@ CombatOutcome CombatRules::attack(const CombatAttack& attack)
     lua_pop(mState, 1);
 
     lua_getfield(mState, -1, "fatigue");
-    outcome.fatigue = static_cast<int>(lua_tonumber(mState, -1));
+    outcome.fatigue = static_cast<float>(lua_tonumber(mState, -1));
+    lua_pop(mState, 1);
+
+    lua_getfield(mState, -1, "bleed");
+    outcome.bleed = static_cast<int>(lua_tonumber(mState, -1));
+    lua_pop(mState, 1);
+    lua_getfield(mState, -1, "bleed_interval");
+    outcome.bleedInterval = static_cast<float>(lua_tonumber(mState, -1));
+    lua_pop(mState, 1);
+    lua_getfield(mState, -1, "bleed_duration");
+    outcome.bleedDuration = static_cast<float>(lua_tonumber(mState, -1));
     lua_pop(mState, 1);
 
     lua_getfield(mState, -1, "effects");

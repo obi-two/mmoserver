@@ -375,7 +375,21 @@ TEST_F(CombatRulesTest, WoundsAndFatigueReachCpp) {
     ASSERT_TRUE(outcome.hit);
     EXPECT_EQ(outcome.damage / 10, outcome.wound);
     EXPECT_GT(outcome.wound, 0);
-    EXPECT_EQ(1, outcome.fatigue);
+    EXPECT_FLOAT_EQ(0.25f, outcome.fatigue);
+    // The wound makes the pool bleed: half the wound every 5 s for 30 s.
+    EXPECT_EQ(outcome.wound / 2, outcome.bleed);
+    EXPECT_FLOAT_EQ(5, outcome.bleedInterval);
+    EXPECT_FLOAT_EQ(30, outcome.bleedDuration);
+}
+
+TEST_F(CombatRulesTest, OnlyWoundsBleed) {
+    run("a = {}");
+    run("bleed, interval, duration = rules.bleed(a, 'health', 0)");
+    EXPECT_DOUBLE_EQ(0, eval("bleed"));
+    run("bleed, interval, duration = rules.bleed(a, 'mind', 1)");
+    EXPECT_DOUBLE_EQ(1, eval("bleed"));
+    EXPECT_DOUBLE_EQ(5, eval("interval"));
+    EXPECT_DOUBLE_EQ(30, eval("duration"));
 }
 
 TEST_F(CombatRulesTest, IntimidatedDefendersAreEasierToHit) {

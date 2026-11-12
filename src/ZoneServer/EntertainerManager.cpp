@@ -1324,7 +1324,7 @@ void EntertainerManager::heal(PlayerObject* entertainer)
 
     //healing only in proper places
     EMLocationType loc = entertainer->getPlayerLocation();
-    if(loc != EMLocation_Cantina || loc != EMLocation_Camp || loc != EMLocation_PlayerStructure)
+    if(loc != EMLocation_Cantina && loc != EMLocation_Camp && loc != EMLocation_PlayerStructure)
     {
         return;
     }
@@ -1341,19 +1341,19 @@ void EntertainerManager::heal(PlayerObject* entertainer)
         //total healed per tick = base healing amount x ( (100 + healingmodifier) / 100 )
 
         //Mindwound		//willpower		//focus
-        pTotalMindHeal = static_cast<float>(pBaseHealingMind * ((100+ modStruct.pHealingDanceWoundMod)/100));
+        pTotalMindHeal = pBaseHealingMind * (100.0f + modStruct.pHealingDanceWoundMod) / 100.0f;
 
         //bf
-        pTotalShockHeal = static_cast<float>(pBaseHealingShock * ((100+ modStruct.pHealingDanceShockMod)/100));
+        pTotalShockHeal = pBaseHealingShock * (100.0f + modStruct.pHealingDanceShockMod) / 100.0f;
 
     }
     else
     {
         //Mindwound		//willpower		//focus
-        pTotalMindHeal = static_cast<float>(pBaseHealingMind * ((100+ modStruct.pHealingMusicWoundMod)/100));
+        pTotalMindHeal = pBaseHealingMind * (100.0f + modStruct.pHealingMusicWoundMod) / 100.0f;
 
         //bf
-        pTotalShockHeal = static_cast<float>(pBaseHealingShock * ((100+ modStruct.pHealingMusicShockMod)/100));
+        pTotalShockHeal = pBaseHealingShock * (100.0f + modStruct.pHealingMusicShockMod) / 100.0f;
     }
 
     //half the heal without flourishes
@@ -1435,8 +1435,8 @@ void EntertainerManager::heal(PlayerObject* entertainer)
                 (*it)->getHam()->updateBattleFatigue(static_cast<int32>(-pTotalShockHeal));
             }
 
-            ++it;
         }
+        ++it;
     }
 
     float pHealingXP;

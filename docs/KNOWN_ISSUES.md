@@ -707,3 +707,29 @@ states is refused by the same lock (`ActionState::CanTransition` checks
 `blockAction`), so the clone now clears them too (needs testing). The clone's 100 health
 wound was lost: a wound can't exceed the pool's current points and death
 leaves health at 0, so the pools are now filled before the clone's wounds.
+
+### 25. Entertainers never heal; medics' healing skill does nothing — fix needs testing
+
+Found while adding bleeding:
+
+- `EntertainerManager::heal` returned when the entertainer was not in a
+  cantina, *or* not in a camp, *or* not in a player structure: always.
+  Nobody watching a dance or listening to music had a mind wound or battle
+  fatigue healed, nor did the entertainer. It now heals in a cantina, camp
+  or player structure; battle fatigue still only in a cantina.
+- `PlayerObject::getPlayerLocation` called a player outside a building a
+  camp when they were *not* in a camp region; now when they are.
+- The heal's audience loop only advanced past players: a non-player in the
+  list would have looped forever.
+- Heal amounts used integer division, `base * ((100 + mod) / 100)`, so any
+  skill mod under +100 did nothing: the entertainers' wound and shock
+  healing mods and the medics' `healing_wound_treatment` (Tend Wound and
+  Heal Wound). The stimpack heals (`HealDamage`, `HealDamageRanged`) have
+  the same bug; not fixed yet.
+- `MedicManager::CalculateBF` tested battle fatigue over 500 before over
+  750, so the "high" message never showed.
+
+Still open: the entertainer group-buff code (`EntertainerManager.cpp`, the
+two `loc != ... || loc != ...` checks next to `dance_watch_stop_self` and
+the music equivalent) has the same always-true location test and drops
+buffs; buffs are their own pass.

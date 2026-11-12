@@ -125,14 +125,31 @@ not used, so in that respect players attack faster than they should).
 - HAM pools, incapacitation, death, clone selection, regeneration with
   posture modifiers. Cloning revives the player with full health, action
   and mind, less wounds (KNOWN_ISSUES #24).
-- Wounds and battle fatigue (`rules.wound`, `rules.FATIGUE_PER_HIT`): a
+- Wounds and battle fatigue (`rules.wound`, `rules.FATIGUE_PER_HIT`,
+  `rules.FATIGUE_MODIFIER`): a
   hit wounds the pool it hit with the weapon's wound chance (p. 389;
   `cat_wpn_damage.wpn_wound_chance`, bare hands and creatures the
   vibroknuckler's 8%, p. 390); the wound is a tenth of the damage, at least
-  1, and lowers the pool's maximum. Each hit a player takes adds 1 battle
-  fatigue (of 1000). Both sizes are reconstructed: the guide gives none.
+  1, and lowers the pool's maximum. Each hit a player takes adds a quarter
+  of a battle fatigue point (four hits make 1, of 1000), times
+  `rules.FATIGUE_MODIFIER` for servers that want it faster or slower. Both
+  sizes are reconstructed: the guide gives none.
   Each wound is logged (`Combat wound ...`); the client shows it in the
   character sheet's Wounds column and as "wounded" combat spam.
+- Bleeding (`rules.bleed`; `CombatManager::_tickBleeding`): every wound
+  makes the wounded pool bleed (p. 75), players and creatures alike.
+  Bleeding drains half the wound, at least 1, every 5 s for 30 s, and can
+  incapacitate (p. 85); the amounts are reconstructed. A new wound to a pool
+  that is already bleeding keeps the stronger bleed and the longer time.
+  It sets the Bleeding state and ends at incapacitation or death. The
+  Medic's First Aid (Injury Treatment II, the command table's 140 mind)
+  stops it on the medic or their target within 6 m. Logged as
+  `Bleeding ...`.
+- Wound healing: a medic's Tend Wound and Heal Wound (`MedicManager`)
+  heal wounds; entertainers heal mind wounds, and in a cantina battle
+  fatigue, for their audience and themselves (`EntertainerManager::heal`).
+  Battle fatigue over 250 shrinks a medic's wound heal (p. 86: it hampers
+  the curing of wounds). Wounds never regenerate on their own (p. 86).
 - Intimidate, Warcry and Taunt (`rules.MOVES`, `rules.move`;
   `CombatManager::handleBrawlerMove`): each costs its flat HAM from the
   command table and starts the fight as an attack would. Intimidate (15 m,
@@ -314,8 +331,8 @@ against melee) is not known.
   the "no point blank attacks while prone" rule; creature to-hits are not
   in the database yet.
 - **Damage modifiers:** no skill or stat bonuses, players' worn armour,
-  vulnerabilities. Wounds cause no bleeding yet (p. 389), and battle
-  fatigue does not yet hamper healing (p. 86): nothing heals wounds yet.
+  vulnerabilities. Bleeding only from wounds, not from
+  weapons that bleed on any hit (p. 85); no bleed resistance.
 - **Special attacks:** the attacker's end posture (Dive Shot prone, Kip Up
   Shot standing, Roll Shot kneeling), area and cone attacks (every special
   hits its one target).
@@ -483,7 +500,7 @@ and the point blank modifier of most pistols (0 for -5 to -20).
 | Armour rating and effectiveness | creatures' (rules.lua); not players' worn armour |
 | Specials: time, damage, cost and to-hit from the weapon | 4 combat specials in `command_table`; costs fixed, not from the weapon |
 | Effects rolled per effect, with durations | always applied, no duration |
-| Bleeding, wounds, battle fatigue | not in combat |
+| Bleeding, wounds, battle fatigue | wounds and bleeding from the combat rules; medics and entertainers heal them |
 | Three incaps in 10 minutes means death | `IncapResetTime` is configurable; to check against the 10 minutes |
 | Prone: no attacking at point blank | no |
 | Con colour by weapon skill | client side; the server sends levels |
