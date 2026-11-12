@@ -258,6 +258,18 @@ TEST_F(CombatRulesTest, AttackFromCpp) {
     }
 }
 
+TEST_F(CombatRulesTest, MaxRangeFromCpp) {
+    // Area specials reach the weapon's max range: the CDEF's 64 m, bare
+    // hands the group default.
+    float range = 0;
+    ASSERT_TRUE(rules_.maxRange(noobCdef(), range));
+    EXPECT_FLOAT_EQ(64, range);
+    CombatWeapon hands;
+    hands.group = "unarmed";
+    ASSERT_TRUE(rules_.maxRange(hands, range));
+    EXPECT_GT(range, 0);
+}
+
 TEST_F(CombatRulesTest, InRangeFromCpp) {
     CombatWeapon cdef = noobCdef();
     EXPECT_TRUE(rules_.inRange(cdef, 64));

@@ -376,7 +376,12 @@ bool CombatManager::handleAttack(CreatureObject *attacker, uint64 targetId, Obje
     {
 
         // Execute the attack
-        /*uint8 attackResult = */_executeAttack(attacker,defender,cmdProperties,weapon,delayMs);
+        // An unpaid special does nothing: no other targets, no posture.
+        if (_executeAttack(attacker,defender,cmdProperties,weapon,delayMs) != kNotPaid)
+        {
+            _attackArea(attacker, defender, cmdProperties, weapon);
+            _setAttackerEndPosture(attacker, cmdProperties);
+        }
 
         return(true);
     }
@@ -1079,7 +1084,102 @@ bool CombatManager::_payCosts(CreatureObject* attacker, const CombatAttack& atta
 	return true;
 }
 
-uint8 CombatManager::_executeAttack(CreatureObject* attacker,CreatureObject* defender,ObjectControllerCmdProperties *cmdProperties,Weapon* weapon, uint64* delayMs)
+bool CombatManager::_canFight(CreatureObject* attacker, CreatureObject* target)
+{
+    if (!target || target == attacker || target->isDead() || target->isIncapacitated())
+    {
+        return false;
+    }
+    if (PlayerObject* targetPlayer = dynamic_cast<PlayerObject*>(target))
+    {
+        PlayerObject* playerAttacker = dynamic_cast<PlayerObject*>(attacker);
+        return playerAttacker && playerAttacker->checkDuelList(targetPlayer) && targetPlayer->checkDuelList(playerAttacker);
+    }
+    return (target->getPvPStatus() & CreaturePvPStatus_Attackable) != 0;
+}
+
+void CombatManager::_attackArea(CreatureObject* attacker, CreatureObject* defender, ObjectControllerCmdProperties* cmdProperties, Weapon* weapon)
+{
+    std::string shape = lowerCase(cmdProperties->mAreaShape.getAnsi());
+    if (shape != "area" && shape != "cone")
+    {
+        return;
+    }
+    float reach = cmdProperties->mAreaLength;
+    if (reach <= 0 && !mRules.maxRange(buildWeapon(weapon), reach))
+    {
+        return;
+    }
+
+    // A cone points from the attacker at the main target and widens to its
+    // width at its far end.
+    glm::vec3 forward = defender->mPosition - attacker->mPosition;
+    forward.y = 0;
+    if (glm::length(forward) > 0.001f)
+    {
+        forward = glm::normalize(forward);
+    }
+
+    ObjectSet around;
+    gSpatialIndexManager->getObjectsInRange(attacker, &around, ObjType_Creature | ObjType_NPC | ObjType_Player, reach, true);
+    int hits = 0;
+    for (ObjectSet::iterator it = around.begin(); it != around.end(); ++it)
+    {
+        CreatureObject* other = dynamic_cast<CreatureObject*>(*it);
+        if (!other || other == defender || !_canFight(attacker, other))
+        {
+            continue;
+        }
+        glm::vec3 offset = other->mPosition - attacker->mPosition;
+        offset.y = 0;
+        if (glm::length(offset) > reach)
+        {
+            continue;
+        }
+        if (shape == "cone")
+        {
+            float along = glm::dot(offset, forward);
+            float halfWidth = cmdProperties->mAreaWidth * 0.5f * along / reach;
+            if (along <= 0 || glm::length(offset - forward * along) > halfWidth)
+            {
+                continue;
+            }
+        }
+        if (_verifyCombatState(attacker, other->getId()))
+        {
+            _executeAttack(attacker, other, cmdProperties, weapon, NULL, true);
+            ++hits;
+        }
+    }
+    LOG(INFO) << "Special " << cmdProperties->mCommandStr.getAnsi() << " (" << shape << ", " << reach
+              << " m) by " << attacker->getId() << " also hit " << hits;
+}
+
+void CombatManager::_setAttackerEndPosture(CreatureObject* attacker, ObjectControllerCmdProperties* cmdProperties)
+{
+    std::string posture = lowerCase(cmdProperties->mAttackerEndPosture.getAnsi());
+    if (posture.empty() || attacker->isDead() || attacker->isIncapacitated())
+    {
+        return;
+    }
+    if (posture == "prone")
+    {
+        gStateManager.setCurrentPostureState(attacker, CreaturePosture_Prone);
+        gStateManager.setCurrentLocomotionState(attacker, CreatureLocomotion_Prone);
+    }
+    else if (posture == "kneeling")
+    {
+        gStateManager.setCurrentPostureState(attacker, CreaturePosture_Crouched);
+        gStateManager.setCurrentLocomotionState(attacker, CreatureLocomotion_Kneeling);
+    }
+    else if (posture == "standing")
+    {
+        gStateManager.setCurrentPostureState(attacker, CreaturePosture_Upright);
+        gStateManager.setCurrentLocomotionState(attacker, CreatureLocomotion_Standing);
+    }
+}
+
+uint8 CombatManager::_executeAttack(CreatureObject* attacker,CreatureObject* defender,ObjectControllerCmdProperties *cmdProperties,Weapon* weapon, uint64* delayMs, bool secondary)
 {
 	int32	multipliedDamage		= 0;
 	BString	combatSpam				= "melee";
@@ -1087,8 +1187,9 @@ uint8 CombatManager::_executeAttack(CreatureObject* attacker,CreatureObject* def
 	// The combat rules (data/script/combat/rules.lua) decide the outcome.
 	CombatAttack attack = _buildAttack(attacker, defender, cmdProperties, weapon);
 
-	// A special the attacker cannot pay for does not happen.
-	if (!_payCosts(attacker, attack))
+	// A special the attacker cannot pay for does not happen. Its other
+	// targets (an area or cone) were paid for with the first.
+	if (!secondary && !_payCosts(attacker, attack))
 	{
 		if (PlayerObject* player = dynamic_cast<PlayerObject*>(attacker))
 		{
@@ -1098,7 +1199,7 @@ uint8 CombatManager::_executeAttack(CreatureObject* attacker,CreatureObject* def
 		{
 			*delayMs = 1000;
 		}
-		return 1;
+		return kNotPaid;
 	}
 
 	CombatOutcome outcome = mRules.attack(attack);
