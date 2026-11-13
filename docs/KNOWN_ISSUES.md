@@ -181,7 +181,7 @@ Found by the compiler's format checks:
   reach the query for a logged-in player. Left as it is until the bazaar
   is looked at as a whole.
 
-### 3e. Passwords were stored as unsalted SHA-1 — fixed, needs testing
+### 3e. Passwords were stored as unsalted SHA-1 — fixed
 
 `account_password` held `SHA1(password)`, compared in the database: no
 salt, and fast to guess, so a leaked account table gave away most
@@ -194,7 +194,8 @@ says `password now stored as an Argon2id hash`). A login to an unknown
 username spends the same time, so the reply time does not tell which
 usernames exist. `setup.sh add-account` stores Argon2id (from
 `LoginServer --hash-password`), or SHA-1 if no LoginServer is built yet.
-Migration 014 widens the column. Needs `libsodium-dev`.
+Migration 014 widens the column. Needs `libsodium-dev`. Confirmed on the
+test VM.
 
 Not done: login attempts are not rate-limited, and the check runs on the
 LoginServer's main thread. `sp_ReturnUserAccount` is no longer used (an
