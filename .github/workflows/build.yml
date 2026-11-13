@@ -197,7 +197,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            build-essential cmake ninja-build git curl zip unzip tar pkg-config libtirpc-dev
+            build-essential cmake ninja-build git curl zip unzip tar pkg-config libtirpc-dev \
+            autoconf autoconf-archive automake libtool
 
       # Use the vcpkg release matching the baseline in vcpkg-configuration.json.
       - name: Set up vcpkg

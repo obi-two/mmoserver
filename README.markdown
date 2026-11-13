@@ -79,7 +79,8 @@ without the packages above and will be the route for Windows builds. Lua 5.1
 and tolua++ are not in the vcpkg registry; they come from the overlay ports in
 `tools/vcpkg/ports`.
 
-    sudo apt install build-essential cmake ninja-build git curl zip unzip tar pkg-config libtirpc-dev
+    sudo apt install build-essential cmake ninja-build git curl zip unzip tar pkg-config libtirpc-dev \
+        autoconf autoconf-archive automake libtool
     ./build_server.sh --vcpkg -t
 
 This uses `$VCPKG_ROOT` if it is set, and otherwise clones vcpkg into
