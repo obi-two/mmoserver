@@ -305,13 +305,31 @@ add_account() {
     fi
     [[ ${#password} -ge 8 ]] || die "use a password of at least 8 characters"
 
-    # The login procedure compares SHA1(password); hex-encode the password so
-    # no character in it can break out of the SQL string.
-    local hex
-    hex=$(printf '%s' "$password" | od -An -v -tx1 | tr -d ' \n')
+    # An Argon2id hash from the LoginServer (LoginServer --hash-password). It
+    # is made of letters, digits and $,=+/ only, so it is safe in the SQL.
+    local login_server stored=""
+    login_server=$(ls -t "$project_dir"/build/*/bin/LoginServer 2>/dev/null | head -n 1)
+    if [[ -n $login_server ]]; then
+        stored=$(printf '%s\n' "$password" | "$login_server" --hash-password 2>/dev/null) || stored=""
+        [[ $stored =~ ^\$argon2id\$[A-Za-z0-9\$,=+/]+$ ]] || stored=""
+    fi
+
+    local value
+    if [[ -n $stored ]]; then
+        value="'$stored'"
+    else
+        # No LoginServer built: the old SHA-1 form, which the LoginServer
+        # replaces with an Argon2id hash at the account's first login. The
+        # password is hex-encoded so no character in it can break the SQL.
+        echo "note: no LoginServer build found; the password is stored as SHA-1 until the first login" >&2
+        local hex
+        hex=$(printf '%s' "$password" | od -An -v -tx1 | tr -d ' \n')
+        value="SHA1(UNHEX('$hex'))"
+    fi
+
     sql -e "INSERT INTO swganh.account
                 (account_username, account_password, account_email, account_active)
-            VALUES ('$name', SHA1(UNHEX('$hex')), '', 1);
+            VALUES ('$name', $value, '', 1);
             UPDATE swganh.account SET account_station_id = 100000000 + account_id
             WHERE account_username = '$name';"
     echo "Account '$name' created."

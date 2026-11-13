@@ -44,6 +44,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class Database;
 class LoginClient;
+struct AccountData;
 class ServerData;
 class Message;
 
@@ -100,6 +101,10 @@ private:
 
     void                    _handleLoginClientId(LoginClient* client, Message* message);
     void                    _authenticateClient(LoginClient* client, DatabaseResult* result);
+    // Whether the client's password is the account's; stores an old one as
+    // an Argon2id hash.
+    bool                    _checkPassword(LoginClient* client, const AccountData& data);
+    void                    _sendLoginFailed(LoginClient* client);
     void                    _sendAuthSucceeded(LoginClient* client);
     void                    _sendCharacterList(LoginClient* client, DatabaseResult* result);
     void                    _sendServerList(LoginClient* client, DatabaseResult* result);

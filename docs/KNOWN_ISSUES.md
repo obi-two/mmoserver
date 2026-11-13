@@ -181,6 +181,30 @@ Found by the compiler's format checks:
   reach the query for a logged-in player. Left as it is until the bazaar
   is looked at as a whole.
 
+### 3e. Passwords were stored as unsalted SHA-1 — fixed, needs testing
+
+`account_password` held `SHA1(password)`, compared in the database: no
+salt, and fast to guess, so a leaked account table gave away most
+passwords. Passwords are now Argon2id hashes (libsodium, its interactive
+limits: about 64 MB and a few tens of milliseconds per check), checked
+by the LoginServer. The new `sp_AccountForLogin` returns the account
+whatever the password, with whether it matches an old SHA-1 one; that is
+accepted once and replaced by an Argon2id hash at that login (the log
+says `password now stored as an Argon2id hash`). A login to an unknown
+username spends the same time, so the reply time does not tell which
+usernames exist. `setup.sh add-account` stores Argon2id (from
+`LoginServer --hash-password`), or SHA-1 if no LoginServer is built yet.
+Migration 014 widens the column. Needs `libsodium-dev`.
+
+Not done: login attempts are not rate-limited, and the check runs on the
+LoginServer's main thread. `sp_ReturnUserAccount` is no longer used (an
+older LoginServer still works with it until its account is re-hashed).
+
+While there: the launcher's session-key login read the session key as the
+account's CSR flag, and a `DFT_string` data binding copies the whole
+column whatever the field's size (the password field was sized for the
+hash; the other bindings are unchanged).
+
 ### 4. Debris blocking the tutorial path has no Attack option — fixed
 
 Not a bug of its own: the script makes the debris attackable only after you

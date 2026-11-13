@@ -26,7 +26,7 @@ Linux is the primary platform. These steps are tested on Ubuntu 24.04 LTS and
 Ubuntu 24.04:
 
     sudo apt install build-essential cmake ninja-build \
-        libboost-all-dev libtbb-dev libmysqlcppconn-dev liblua5.1-0-dev \
+        libboost-all-dev libtbb-dev libmysqlcppconn-dev libsodium-dev liblua5.1-0-dev \
         libtolua++5.1-dev libnoise-dev libglm-dev libgtest-dev \
         libmysqlclient-dev zlib1g-dev
 
@@ -34,7 +34,7 @@ Ubuntu 26.04 no longer has `libtolua++5.1-dev`. Leave it out; the build
 downloads tolua++ (checksum-verified) and compiles it itself:
 
     sudo apt install build-essential cmake ninja-build \
-        libboost-all-dev libtbb-dev libmysqlcppconn-dev liblua5.1-0-dev \
+        libboost-all-dev libtbb-dev libmysqlcppconn-dev libsodium-dev liblua5.1-0-dev \
         libnoise-dev libglm-dev libgtest-dev \
         libmysqlclient-dev zlib1g-dev
 
