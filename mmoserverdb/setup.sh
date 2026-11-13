@@ -307,10 +307,17 @@ add_account() {
 
     # An Argon2id hash from the LoginServer (LoginServer --hash-password). It
     # is made of letters, digits and $,=+/ only, so it is safe in the SQL.
-    local login_server stored=""
-    login_server=$(ls -t "$project_dir"/build/*/bin/LoginServer 2>/dev/null | head -n 1)
+    # The newest build's; none at all is fine (an unmatched glob stays as is).
+    local login_server="" candidate stored=""
+    for candidate in "$project_dir"/build/*/bin/LoginServer; do
+        if [[ -x $candidate && ( -z $login_server || $candidate -nt $login_server ) ]]; then
+            login_server=$candidate
+        fi
+    done
     if [[ -n $login_server ]]; then
-        stored=$(printf '%s\n' "$password" | "$login_server" --hash-password 2>/dev/null) || stored=""
+        # A LoginServer older than --hash-password would start up instead:
+        # the timeout stops it, and its output is not a hash.
+        stored=$(printf '%s\n' "$password" | timeout 30 "$login_server" --hash-password 2>/dev/null) || stored=""
         [[ $stored =~ ^\$argon2id\$[A-Za-z0-9\$,=+/]+$ ]] || stored=""
     fi
 
@@ -321,7 +328,7 @@ add_account() {
         # No LoginServer built: the old SHA-1 form, which the LoginServer
         # replaces with an Argon2id hash at the account's first login. The
         # password is hex-encoded so no character in it can break the SQL.
-        echo "note: no LoginServer build found; the password is stored as SHA-1 until the first login" >&2
+        echo "note: no LoginServer build that hashes passwords; the password is stored as SHA-1 until the first login" >&2
         local hex
         hex=$(printf '%s' "$password" | od -An -v -tx1 | tr -d ' \n')
         value="SHA1(UNHEX('$hex'))"
