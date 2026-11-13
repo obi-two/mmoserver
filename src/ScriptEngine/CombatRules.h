@@ -140,6 +140,8 @@ public:
 
     CombatOutcome   attack(const CombatAttack& attack);
     bool            inRange(const CombatWeapon& weapon, float distance);
+    // The weapon's max range in metres (rules.ranges), for area specials.
+    bool            maxRange(const CombatWeapon& weapon, float& range);
     // What a special costs (rules.costs); false (and 0s) if no rules.
     bool            costs(const CombatAttack& attack, int& health, int& action, int& mind);
     // The count-th incap within the window (1 for the first): whether it
