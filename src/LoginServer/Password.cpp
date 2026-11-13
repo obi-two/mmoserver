@@ -36,6 +36,8 @@ namespace password {
 static const unsigned long long kOps = crypto_pwhash_OPSLIMIT_INTERACTIVE;
 static const size_t kMemory = crypto_pwhash_MEMLIMIT_INTERACTIVE;
 
+void checkNothing(const std::string& text);
+
 bool init()
 {
     return sodium_init() >= 0;
@@ -66,8 +68,14 @@ Check check(const std::string& stored, const std::string& text, bool legacyMatch
         return crypto_pwhash_str_needs_rehash(stored.c_str(), kOps, kMemory) == 0 ? Check::Right : Check::RightRehash;
     }
 
-    // An old unsalted SHA-1 password: compared by the database.
-    return legacyMatch ? Check::RightRehash : Check::Wrong;
+    // An old unsalted SHA-1 password: compared by the database. A wrong one
+    // spends a check's time too, or the quick refusal would tell which
+    // usernames exist while accounts still hold SHA-1.
+    if (!legacyMatch) {
+        checkNothing(text);
+        return Check::Wrong;
+    }
+    return Check::RightRehash;
 }
 
 void checkNothing(const std::string& text)
