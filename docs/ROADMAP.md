@@ -81,16 +81,12 @@ Done (Nov 2026): creature tables from both Prima guides (#17 on the fork),
 scout harvesting (#18), specials (#19), security (#20), player search, chat
 and friends (#21).
 
-1. **Bazaar pass** (in progress, `bazaar` branch): listing and buying
-   confirmed; next, a listing's details, retrieving and cancelling, then
-   bidding. Then the pull request.
-2. **Test pass of what is built but never played** (the audit's "Code"
-   rows; tests T27-T40 in `docs/TEST_PLAN.md`): crafting and
-   experimentation, harvesters and factories, housing and permissions,
-   mission terminals, groups, vehicles, image design. Each confirmed or
-   turned into issues; it may find working systems before any
-   new work starts.
-3. **Fill the world**: creature spawns and lairs on every planet (today:
+1. ~~Bazaar pass~~: done (#23 on the fork).
+2. ~~Test pass of what is built but never played~~: done (#25 on the fork:
+   missions, factories, crafting, banks, camps, house signs; results in
+   `docs/KNOWN_ISSUES.md`).
+3. **Fill the world** (in progress, `fill-the-world` branch; plan in
+   `docs/SPAWNS.md`): creature spawns and lairs on every planet (today:
    around Bestine only). Exercises the AI and combat already built. The
    client has no spawn or lair tables (those were the server's), so the
    sources are: the 2004 guide's creature tables, already transcribed (683
