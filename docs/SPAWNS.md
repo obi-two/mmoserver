@@ -27,10 +27,11 @@ What exists: 29 creature templates (womp rats, rill, dune lizards), four
 `lairs` rows near Bestine (two fixed, two of 25 random lairs).
 
 Gaps:
-- A random lair's position ignores cities: it can land inside one. The
-  cities are already in `planet_regions` (migration 003, from the client's
-  `clientregion` tables); placement should test them (as structure
-  placement does, `StructureManager::checkNoBuildRegion`) and try again.
+- A random lair's position ignored cities: it could land inside one.
+  Fixed: placement tests the no-build areas (the cities among them,
+  migration 003), as structure placement does
+  (`StructureManager::checkNoBuildRegion`), and tries again, up to 20
+  times.
 - Only six of the 2004 guide's Tatooine creatures have a template.
 
 ## What each creature needs

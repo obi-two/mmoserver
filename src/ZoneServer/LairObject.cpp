@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "LairObject.h"
+#include "StructureManager.h"
 #include "MissionManager.h"
 #include "AttackableCreature.h"
 #include "CellObject.h"
@@ -500,8 +501,21 @@ void LairObject::respawn(void)
 
             // Ge a random position withing given region.
             // Note that creature can spawn outside the region, since thay have a radius from the lair where thet are allowed to spawn.
-            this->mPosition.x = position.x + (gRandom->getRand() % (int32)(xWidth+1));
-            this->mPosition.z = position.z + (gRandom->getRand() % (int32)(zHeight+1));
+            // Not in a city or other no-build area (docs/SPAWNS.md): try
+            // again, a few times, before settling for the last spot.
+            for (int attempt = 0; attempt < 20; ++attempt)
+            {
+                this->mPosition.x = position.x + (gRandom->getRand() % (int32)(xWidth+1));
+                this->mPosition.z = position.z + (gRandom->getRand() % (int32)(zHeight+1));
+                if (!gStructureManager || !gStructureManager->checkNoBuildRegion(this->mPosition))
+                {
+                    break;
+                }
+                if (attempt == 19)
+                {
+                    LOG(WARNING) << "Lair " << this->getId() << ": no spot outside the no-build areas in its spawn area";
+                }
+            }
             if (this->getParentId() == 0)
             {
                 // Heightmap only works outside.
