@@ -32,7 +32,10 @@ Gaps:
   migration 003), as structure placement does
   (`StructureManager::checkNoBuildRegion`), and tries again, up to 20
   times.
-- Only six of the 2004 guide's Tatooine creatures have a template.
+- Only six of the 2004 guide's Tatooine creatures had a template.
+- `creature_groups.creature_id` has a foreign key to a `creatures` table
+  that does not exist; the generated migrations add their rows with the
+  key checks off, as the base data does.
 
 ## What each creature needs
 
@@ -44,6 +47,42 @@ Gaps:
 | Lair model | The client's `object/tangible/lair/<creature>/shared_lair_<creature>*.iff` (674 lair templates), or a generic one from `object/tangible/lair/base/` |
 | Where it lives | The guides' planet chapters (2004 guide, pp. 118-159), cited by page |
 | How many, how often | Not in any source: the client has no spawn tables (they were server data). Reconstructed, labelled, and kept in data so a community can tune it |
+
+## Distance bands
+
+Neither guide says where on a planet a creature lives, and the client has
+no spawn tables, so placement is our own design (decided Nov 2026): lairs
+are placed at random on the planet, but only within a band of distance
+from the nearest city's edge that depends on the creature's level, so no
+strong creature lives by a town.
+
+- The cities are the planet's `cities` rows and their areas in
+  `planet_regions` (for Tatooine, the client's city circles, migration
+  003). `NpcManager` reads them before the lairs.
+- A lair's band is two lair attributes, `lair_min_city_distance` and
+  `lair_max_city_distance` (metres from the nearest city's edge); a random
+  lair retries its spot until it is inside its band and outside every
+  no-build area (up to 100 times, then logs and keeps the last).
+- `tools/reference/planet_lairs_sql.py <planet>` writes a planet's
+  migration: one creature template per wild creature in the 2004 guide's
+  table (stats as `creatures_sql.py` writes them, the client's model and
+  name), a lair template with the client's lair model, and a lairs row
+  placing a number of them at random over the whole map within the
+  creature's band. The bands (levels 1-5 at 50-600 m, 6-8 at 600-1,500 m,
+  9-11 beyond), the counts (6 lairs per creature) and the lairs' settings
+  are constants at the top of the script, and data in the database once
+  applied.
+
+Tatooine: migration 027, 30 creatures, 180 lairs. The old test lairs near
+Bestine (25 level-10 womp rat lairs and 25 rill lairs by the city) are
+switched off.
+
+Not yet: creatures above level 11 (krayt dragons, Tusken camps, ...): An
+Empire Divided's tables have them but no planet, so they need matching by
+name; and the lairs' names (`lair_n` keys are guessed from the creature).
+
+Parked (ROADMAP): levels that change with how much an area is hunted; spawn
+areas set up by a community from the portal.
 
 ## Plan
 

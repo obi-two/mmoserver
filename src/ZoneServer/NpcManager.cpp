@@ -46,6 +46,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "Utils/rand.h"
 
 #include <cassert>
+#include <cmath>
+#include <sstream>
+
+#include <cppconn/resultset.h>
 
 //=============================================================================
 
@@ -200,6 +204,48 @@ void NpcManager::handleObjectReady(Object* object)
 //
 //=============================================================================================================================
 void NpcManager::loadLairs(void)
+{
+    // The planet's cities first: random lairs keep to a distance from them
+    // (docs/SPAWNS.md). A city's area is a circle (width 0, height its
+    // diameter) or a rectangle; the larger side gives its radius.
+    std::stringstream sql;
+    sql << "SELECT r.x, r.z, GREATEST(r.width, r.height) / 2 FROM " << mDatabase->galaxy() << ".cities c INNER JOIN "
+        << mDatabase->galaxy() << ".planet_regions r ON (r.region_id = c.city_region) WHERE c.planet_id = " << gWorldManager->getZoneId();
+    mDatabase->executeAsyncSql(sql, [this] (DatabaseResult* result) {
+        if(result && result->getResultSet())
+        {
+            std::unique_ptr<sql::ResultSet>& rows = result->getResultSet();
+            while(rows->next())
+            {
+                CityCircle city;
+                city.x = static_cast<float>(rows->getDouble(1));
+                city.z = static_cast<float>(rows->getDouble(2));
+                city.radius = static_cast<float>(rows->getDouble(3));
+                mCities.push_back(city);
+            }
+        }
+        LOG(INFO) << "Lairs: " << mCities.size() << " cities to keep their distance from";
+        _loadLairRows();
+    });
+}
+
+float NpcManager::distanceToNearestCity(const glm::vec3& position) const
+{
+    float nearest = 1.0e9f;
+    for(const CityCircle& city : mCities)
+    {
+        float dx = position.x - city.x;
+        float dz = position.z - city.z;
+        float distance = std::sqrt(dx * dx + dz * dz) - city.radius;
+        if(distance < nearest)
+        {
+            nearest = distance;
+        }
+    }
+    return nearest;
+}
+
+void NpcManager::_loadLairRows(void)
 {
     //load lair and creature spawn, and optionally heightmaps cache.
     // NpcFamily_NaturalLairs

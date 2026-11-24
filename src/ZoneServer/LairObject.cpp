@@ -501,19 +501,30 @@ void LairObject::respawn(void)
 
             // Ge a random position withing given region.
             // Note that creature can spawn outside the region, since thay have a radius from the lair where thet are allowed to spawn.
-            // Not in a city or other no-build area (docs/SPAWNS.md): try
-            // again, a few times, before settling for the last spot.
-            for (int attempt = 0; attempt < 20; ++attempt)
+            // Not in a city or other no-build area, and within the lair's
+            // distance band from the nearest city if it has one
+            // (lair_min_city_distance, lair_max_city_distance; docs/SPAWNS.md):
+            // try again, a number of times, before settling for the last spot.
+            float minCityDistance = this->hasInternalAttribute("lair_min_city_distance") ? this->getInternalAttribute<float>("lair_min_city_distance") : 0.0f;
+            float maxCityDistance = this->hasInternalAttribute("lair_max_city_distance") ? this->getInternalAttribute<float>("lair_max_city_distance") : 1.0e9f;
+            const int attempts = 100;
+            for (int attempt = 0; attempt < attempts; ++attempt)
             {
                 this->mPosition.x = position.x + (gRandom->getRand() % (int32)(xWidth+1));
                 this->mPosition.z = position.z + (gRandom->getRand() % (int32)(zHeight+1));
-                if (!gStructureManager || !gStructureManager->checkNoBuildRegion(this->mPosition))
+                bool allowed = !gStructureManager || !gStructureManager->checkNoBuildRegion(this->mPosition);
+                if (allowed && (minCityDistance > 0.0f || maxCityDistance < 1.0e9f))
+                {
+                    float cityDistance = NpcManager::Instance()->distanceToNearestCity(this->mPosition);
+                    allowed = cityDistance >= minCityDistance && cityDistance <= maxCityDistance;
+                }
+                if (allowed)
                 {
                     break;
                 }
-                if (attempt == 19)
+                if (attempt == attempts - 1)
                 {
-                    LOG(WARNING) << "Lair " << this->getId() << ": no spot outside the no-build areas in its spawn area";
+                    LOG(WARNING) << "Lair " << this->getId() << ": no spot in its distance band or outside the no-build areas";
                 }
             }
             if (this->getParentId() == 0)

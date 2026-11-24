@@ -128,6 +128,8 @@ when it unblocks the current step.
 | Management portal (beyond accounts), load testing (Tools, below) | After the gameplay steps | `portal/`: accounts, resets, roles and permissions, audit log, Linux installer |
 | A long run on a rented cloud VM (Azure, AWS or similar) | The test VM froze once overnight with memory, swap and CPU flat, put down to the host PC (KNOWN_ISSUES #40); a cloud VM would rule the host out, and is a step towards a public server | |
 | Housing set-up and test steps | Record how to place, sign, name and test each house type once Tatooine is populated; signs are tuned so far for the Tatooine large and small houses and the guild halls (KNOWN_ISSUES #30) | |
+| Creature levels that change with hunting | Raised Nov 2026: much-hunted areas stay low level, untouched creatures grow stronger. Not pre-CU (creatures had the guide's fixed level) and changes balance (XP, loot, missions); an optional server rule once there is a population to watch | Distance bands by level (`docs/SPAWNS.md`) |
+| Spawn areas set by a community from the portal | No source gives spawn locations, so communities may want to place their own | Bands and lairs are data (`docs/SPAWNS.md`) |
 | Deleting test characters in bulk | The test server has about 40 test characters; the character select screen's Delete removes them properly, one at a time. A `tools/` script through the same deletion procedure would do a list | |
 
 ## Database

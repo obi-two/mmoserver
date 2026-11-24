@@ -33,6 +33,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "Utils/typedefs.h"
 #include "ObjectFactoryCallback.h"
 
+#include <vector>
+#include <glm/glm.hpp>
+
 //=============================================================================
 
 class AttackableCreature;
@@ -97,6 +100,11 @@ public:
 
     void	loadLairs(void);
 
+    // Distance from a point to the nearest city's edge on this planet (the
+    // cities' circles), or a very large number if the planet has none.
+    // Random lairs use it to keep to their distance band (docs/SPAWNS.md).
+    float	distanceToNearestCity(const glm::vec3& position) const;
+
 
 protected:
     NpcManager(Database* database);
@@ -113,6 +121,15 @@ private:
     void	setTargetDirection(AttackableCreature* npc);
     // void			_setupDatabindings();
     // void			_destroyDatabindings();
+
+    struct CityCircle
+    {
+        float x;
+        float z;
+        float radius;
+    };
+    std::vector<CityCircle>	mCities;
+    void	_loadLairRows(void);
 
     static NpcManager* mInstance;
     Database* mDatabase;
