@@ -102,6 +102,9 @@ Lair names: 027-037 named each lair after its creature, and the client's
 `lair_n:[corellian_butterfly_drone]`). Its keys follow the lair model's
 file name, so each lair now takes its model's (migration 038; the generic
 lairs "an insect hill", "a nest", "a warren", "a rocky shelter"...).
+Confirmed on Corellia (Nov 2026): "a Corellian butterfly lair" with its
+drones outside Coronet; the lair's examine shows its hit points (2,500
+health, strength and constitution; KNOWN_ISSUES #49).
 
 Not yet: creatures above level 11 (krayt dragons, Tusken camps, ...): An
 Empire Divided's tables have them but no planet, so they need matching by
