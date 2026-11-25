@@ -128,6 +128,14 @@ Tatooine 27, Corellia 26, Dantooine 23; 1,258 lairs in all. Their ids start
 apart from the lower levels' (templates 5001+, lairs 2101+, lair
 attributes 20001+, 100 or 1,000 per planet).
 
+Movement: the creatures stood still. A creature only wanders when its
+template has `creature_is_roaming` set, and only the six old womp rat and
+rill templates had it. Migration 049 gives every creature template without
+its own settings: wander when a player is within 64 m, to a random spot
+within 15 m every 30-45 s, at 1 m/s, within 30 m of where it spawned
+(reconstructed; the attributes `creature_roaming_delay`,
+`creature_roaming_speed`, `creature_roaming_max_distance`).
+
 Parked (ROADMAP): levels that change with how much an area is hunted; spawn
 areas set up by a community from the portal.
 
