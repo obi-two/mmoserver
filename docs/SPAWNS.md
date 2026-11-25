@@ -73,7 +73,11 @@ strong creature lives by a town.
   are constants at the top of the script, and data in the database once
   applied.
 
-Tatooine: migration 027, 30 creatures, 180 lairs. The old test lairs near
+Tatooine: migration 027, 30 creatures, 180 lairs. Its area first reached
+past the map's edge (the map covers -7680 to 7680 m) and the first test
+crashed the zone: a lair placed past the edge read the height cache out of
+bounds. Migration 028 keeps the area inside the map, and the height lookup
+takes the edge's height for a point past it. The old test lairs near
 Bestine (25 level-10 womp rat lairs and 25 rill lairs by the city) are
 switched off.
 

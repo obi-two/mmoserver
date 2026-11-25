@@ -39,7 +39,9 @@ BANDS = [
 PLANETS = {
     "tatooine": {
         "planet_id": 8,
-        "area": (-7900, -7900, 15800, 15800),
+        # The whole map, inside its -7680 to 7680 edge (migration 027 was
+        # written with -7900 to 7900; 028 corrects it).
+        "area": (-7600, -7600, 15200, 15200),
         "ids": {"npc": 3001, "lair_template": 101, "creature_group": 101, "lair": 101, "spawn": 801, "lair_attribute": 1001},
         "creatures": [
             ("Tatooine mynock", "tatooine_mynock", "mynock", "mynock/shared_lair_mynock.iff"),
