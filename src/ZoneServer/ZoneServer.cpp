@@ -432,7 +432,10 @@ int main(int argc, char* argv[])
         gZoneServer->Process();
         gMessageFactory->Process(); //Garbage Collection
 
-        boost::this_thread::sleep(boost::posix_time::milliseconds(1));
+        // 5 ms between passes: the schedulers keep their own time, and
+        // waiting for packets adds at most this. 1 ms woke an idle zone a
+        // thousand times a second (KNOWN_ISSUES #40).
+        boost::this_thread::sleep(boost::posix_time::milliseconds(5));
 
     }
 

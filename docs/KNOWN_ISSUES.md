@@ -1328,6 +1328,12 @@ system time down from 12% to 3.5%. What is left is each server's 1 ms loops
 (the main loop and the socket write threads, about 5,000 futex wake-ups a
 second): the write threads could wait for work instead; to do if the
 retest still shows the zones crowding the VM.
+The retest did (four zones at about 14% of a core each, 10% of it system
+time). A zone's main loop and each socket write thread now wait 5 ms
+between passes instead of 1 ms (the schedulers keep their own time;
+packets wait at most that much longer). Measured on an idle tutorial zone:
+11% of a core before, 3.5% after; the ConnectionServer 8.5% to 5% (its
+own main loop still runs every 1 ms, as does the chat server's).
 
 ### 41. Crafted values didn't become the item's stats — fixed for weapons
 
