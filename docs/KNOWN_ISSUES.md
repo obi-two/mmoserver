@@ -1305,7 +1305,7 @@ hour.
 To check against the guides: whether the bank paid for maintenance
 pre-CU, and how fast an unpaid structure decayed.
 
-### 40. Idle servers use a lot of CPU — open
+### 40. Idle servers use a lot of CPU — partly fixed, to retest
 
 Found on the VM (Nov 2026, `sar` over a night with no players): about 25%
 of four cores went to kernel time and 9-10% to user time, flat, with the
@@ -1316,6 +1316,18 @@ fix after the step 2 pass. Not the cause of the VM freeze on 18 November:
 memory, swap and CPU were flat up to the last sample at 04:00, so it is
 put down to the host PC (the VM runs in VirtualBox on it). A long run on a
 rented cloud VM would rule the host out (ROADMAP, Parked).
+
+Running all eleven zones at once (Nov 2026, testing lairs on every planet)
+froze the 4-core VM: each zone spent half its time waiting for a CPU, with
+about 13% system time against 4% user. The socket read thread's `select`
+waited 250 microseconds, under a comment saying 250 ms, then slept 10
+microseconds: about 4,000 wake-ups a second per socket with nothing to read.
+It waits up to 10 ms now (select returns as soon as a packet arrives).
+Measured on an idle ConnectionServer: 24% of a core before, 8.5% after,
+system time down from 12% to 3.5%. What is left is each server's 1 ms loops
+(the main loop and the socket write threads, about 5,000 futex wake-ups a
+second): the write threads could wait for work instead; to do if the
+retest still shows the zones crowding the VM.
 
 ### 41. Crafted values didn't become the item's stats — fixed for weapons
 
