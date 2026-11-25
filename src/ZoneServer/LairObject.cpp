@@ -34,6 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "NpcManager.h"
 #include "PlayerObject.h"
 #include "SpatialIndexManager.h"
+#include "WorldConfig.h"
 #include "WorldManager.h"
 
 #include "MessageLib/MessageLib.h"
@@ -671,10 +672,12 @@ void LairObject::respawn(void)
         // Put the lair in the Dormant queue.
         // I do not want all lair running at same respawn period to do their initial spawn at the same time.
         // The first spawn after the zone starts waits one to two times the
-        // respawn delay, at most 5 minutes as the base: a rare lair with a
-        // long respawn delay (the krayts', 30 minutes) still appears within
-        // 10 minutes of a start (docs/SPAWNS.md).
-        uint64 initialBase = std::min<uint64>(this->getRespawnDelay(), 5 * 60 * 1000);
+        // respawn delay, with the base at most Lair_First_Spawn_Max_Minutes
+        // (default 5): a rare lair with a long respawn delay (the krayts',
+        // 30 minutes) still appears soon after a start. 0 spawns every lair
+        // straight away, for testing (docs/SPAWNS.md).
+        uint64 firstSpawnMaxMs = (uint64)gWorldConfig->getConfiguration<uint32>("Lair_First_Spawn_Max_Minutes", (uint32)5) * 60 * 1000;
+        uint64 initialBase = std::min<uint64>(this->getRespawnDelay(), firstSpawnMaxMs);
         this->mInitialSpawnDelay = (int64)initialBase + (int64)(((uint64)gRandom->getRand() * 1000) % (initialBase + 1));
         if (this->isMissionLair())
         {

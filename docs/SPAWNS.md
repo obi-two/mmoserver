@@ -145,7 +145,10 @@ killed krayt back after 10 minutes, a destroyed lair after 30). 039's random
 krayt lairs are switched off (count 0). The first test found none: a
 lair's first spawn after a zone start waited one to two times its respawn
 delay, so 30-60 minutes for these; the wait's base is now at most 5
-minutes, so every lair appears within 10 minutes of a start.
+minutes, so every lair appears within 10 minutes of a start. That cap is
+the server setting `Lair_First_Spawn_Max_Minutes` (`config_server`,
+migration 051; default 5): set it to 0 on a test server and every lair
+spawns at once, then restart the zones.
 
 The base data's `persistent_npcs` had 15 wild animals placed by hand
 (Tatooine's desert razorbacks and giant sand beetles, Lok's fanned rawls,
