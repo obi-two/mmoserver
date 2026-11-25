@@ -97,6 +97,12 @@ Naboo 234, Tatooine 180, Rori 138, Talus 108, Lok 72, Yavin 4 72, Dathomir
 60, Dantooine 24, Endor 24. The secondary planets have few creatures at
 these levels: the 2004 guide's tables stop at level 11.
 
+Lair names: 027-037 named each lair after its creature, and the client's
+`lair_n` string file mostly lacks those keys (a lair showed
+`lair_n:[corellian_butterfly_drone]`). Its keys follow the lair model's
+file name, so each lair now takes its model's (migration 038; the generic
+lairs "an insect hill", "a nest", "a warren", "a rocky shelter"...).
+
 Not yet: creatures above level 11 (krayt dragons, Tusken camps, ...): An
 Empire Divided's tables have them but no planet, so they need matching by
 name; and the lairs' names (`lair_n` keys are guessed from the creature).

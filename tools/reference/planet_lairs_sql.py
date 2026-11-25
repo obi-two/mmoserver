@@ -90,6 +90,27 @@ LAIR_ATTRIBUTES = [
 ]
 
 
+# The lair's name: a key in the client's lair_n string file, which follows
+# the lair model's file name (lair/bantha/shared_lair_bantha_desert.iff ->
+# bantha_desert, "a desert bantha lair"). The generic lairs and the bark
+# mite's have names under other keys.
+LAIR_NAME_KEYS = {
+    "bark_mite/shared_lair_bark_mite.iff": "barkmite",
+    "garbage": "lair_garbage",
+}
+
+
+def lair_name_key(lair):
+    if lair in LAIR_NAME_KEYS:
+        return LAIR_NAME_KEYS[lair]
+    stem = lair.split("/")[-1][len("shared_"):-len(".iff")]
+    if stem.startswith("poi_all_lair_"):
+        # base/shared_poi_all_lair_<kind>_<small|large>.iff
+        kind = stem[len("poi_all_lair_"):].rsplit("_", 1)[0]
+        return LAIR_NAME_KEYS.get(kind, kind)
+    return stem[len("lair_"):] if stem.startswith("lair_") else stem
+
+
 def band_for(level):
     for lo, hi, dmin, dmax, count in BANDS:
         if lo <= level <= hi:
@@ -97,14 +118,40 @@ def band_for(level):
     raise SystemExit("no band for level %d" % level)
 
 
+def lair_names():
+    """Migration 038: the lairs' names for the planets' lairs already loaded
+    (027-037 gave each lair its creature's key, which lair_n mostly lacks)."""
+    out = sys.stdout
+    out.write("""\
+-- The lairs' names (docs/SPAWNS.md). Migrations 027-037 named each lair
+-- after its creature (lair_n:<creature key>), and the client's lair_n string
+-- file has most of those keys under the lair model's name instead: a lair
+-- showed "lair_n:[corellian_butterfly_drone]". Each lair now takes the key
+-- for its model (lair/bantha/shared_lair_bantha_desert.iff -> bantha_desert,
+-- "a desert bantha lair"; the generic ones "an insect hill", "a nest", "a
+-- warren", ...). Written by tools/reference/planet_lairs_sql.py --lair-names.
+
+""")
+    for planet in PLANETS:
+        p = planet_info(planet)
+        template_id = p["ids"]["lair_template"]
+        for _, _, _, lair_model in p["creatures"]:
+            out.write("UPDATE swganh.lair_templates SET stf_name = %s WHERE id = %d;\n" % (
+                sql_str(lair_name_key(lair_model)), template_id))
+            template_id += 1
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "--lair-names":
+        lair_names()
+        return
     planet = sys.argv[1] if len(sys.argv) > 1 else "tatooine"
     p = planet_info(planet)
     with open(os.path.join(REF, "prima_2004", "creatures.csv"), newline="") as f:
         table = {r["name"]: r for r in csv.DictReader(f) if r["section"] == "Creatures"}
 
     ids = dict(p["ids"])
-    npcs, stats, templates, groups, lairs, lair_attrs, summary = [], [], [], [], [], [], []
+    npcs, stats, templates, groups, lairs, lair_attrs, summary, names = [], [], [], [], [], [], [], []
     for name, key, model, lair_model in p["creatures"]:
         r = table[name]
         level = int(r["level"])
@@ -123,7 +170,8 @@ def main():
             npc_id, sql_str("object/mobile/shared_%s.iff" % model), sql_str(key), level))
         stats.extend(stat_rows(npc_id, ham, values))
         templates.append("  (%d, %s, %s, 'lair_n', '', '')" % (
-            template_id, sql_str("object/tangible/lair/" + lair_model), sql_str(key)))
+            template_id, sql_str("object/tangible/lair/" + lair_model), sql_str(lair_name_key(lair_model))))
+        names.append((template_id, lair_name_key(lair_model)))
         groups.append("  (%d, %d, %d)" % (group_id, group_id, npc_id))
         lairs.append("  (%d, %d, 9, 1, %d, %d, %d, 0, 0, 0, 1, 0)" % (
             lair_id, p["ids"]["spawn"], template_id, group_id, count))
