@@ -87,6 +87,16 @@ edge, with their lair. Each in its band, with its client model, its name
 Bestine (25 level-10 womp rat lairs and 25 rill lairs by the city) are
 switched off.
 
+The other planets (Nov 2026): migrations 029-037, from the same generator.
+The creatures' client names, models and lair models are in
+`tools/reference/planet_lairs.csv` (names only), matched to the client's
+lists and checked by hand where a creature has no model or lair of its own
+(it takes its species' model, or a generic lair: insect hill, nest, warren
+or rock shelter by kind). Lairs (6 per creature) by planet: Corellia 252,
+Naboo 234, Tatooine 180, Rori 138, Talus 108, Lok 72, Yavin 4 72, Dathomir
+60, Dantooine 24, Endor 24. The secondary planets have few creatures at
+these levels: the 2004 guide's tables stop at level 11.
+
 Not yet: creatures above level 11 (krayt dragons, Tusken camps, ...): An
 Empire Divided's tables have them but no planet, so they need matching by
 name; and the lairs' names (`lair_n` keys are guessed from the creature).

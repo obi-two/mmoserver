@@ -2,6 +2,7 @@
 """Writes a planet's creature lairs migration (docs/SPAWNS.md).
 
     python3 tools/reference/planet_lairs_sql.py tatooine > mmoserverdb/migrations/027_tatooine_lairs.sql
+    python3 tools/reference/planet_lairs_sql.py corellia > mmoserverdb/migrations/029_corellia_lairs.sql
 
 For each of the planet's wild creatures in the 2004 guide's table
 (mmoserverdb/reference/prima_2004/creatures.csv): a creature template
@@ -31,52 +32,46 @@ BANDS = [
     (9, 11, 1500, 1.0e9, 6),
 ]
 
-# Per planet: the planet's id, its spawn area (the whole map), and its
-# creatures: (name in the 2004 table, string key in the client's
-# mob/creature_names, client model under object/mobile/, client lair model
-# under object/tangible/lair/). Names only, from the Publish 14 client. A
-# creature with no model of its own takes its species' (noted).
+# The planets: the name in the guide's location column, the planet's id in
+# the database, and the order the ids below are given out in (Tatooine,
+# the first done, is 0). Each planet's spawn area is the whole map, inside
+# its -7680 to 7680 edge (migration 027 was written with -7900 to 7900;
+# 028 corrects it).
 PLANETS = {
-    "tatooine": {
-        "planet_id": 8,
-        # The whole map, inside its -7680 to 7680 edge (migration 027 was
-        # written with -7900 to 7900; 028 corrects it).
-        "area": (-7600, -7600, 15200, 15200),
-        "ids": {"npc": 3001, "lair_template": 101, "creature_group": 101, "lair": 101, "spawn": 801, "lair_attribute": 1001},
-        "creatures": [
-            ("Tatooine mynock", "tatooine_mynock", "mynock", "mynock/shared_lair_mynock.iff"),
-            ("dwarf eopie", "dwarf_eopie", "dwarf_eopie", "eopie/shared_lair_eopie_desert.iff"),
-            ("kreetle", "kreetle", "kreetle", "base/shared_poi_all_lair_insecthill_small.iff"),
-            ("domestic eopie", "domestic_eopie", "eopie", "eopie/shared_lair_eopie.iff"),
-            ("dwarf nuna", "dwarf_nuna", "dwarf_nuna", "dwarf_nuna/shared_lair_dwarf_nuna.iff"),
-            ("lesser desert womp rat", "lesser_desert_womprat", "lesser_desert_womp_rat", "womp_rat/shared_lair_womp_rat_desert.iff"),
-            ("minor worrt", "minor_worrt", "minor_worrt", "worrt/shared_lair_worrt_desert.iff"),
-            ("drooling nuna", "dwarf_nuna_drooling", "dwarf_nuna", "dwarf_nuna/shared_lair_dwarf_nuna.iff"),
-            ("gorg", "gorg", "gorg", "base/shared_poi_all_lair_mound_small.iff"),
-            ("kreetle swarmling", "kreetle_swarming", "kreetle", "base/shared_poi_all_lair_insecthill_large.iff"),
-            ("rill", "rill", "rill", "base/shared_poi_all_lair_nest_small.iff"),
-            ("slum rat", "womprat_city", "womp_rat", "base/shared_poi_all_lair_garbage_small.iff"),
-            ("worrt", "worrt", "worrt", "worrt/shared_lair_worrt.iff"),
-            ("eopie", "eopie", "eopie", "eopie/shared_lair_eopie_dune.iff"),
-            ("gorg glutton", "gorg_glutton", "gorg", "base/shared_poi_all_lair_mound_large.iff"),
-            ("sevorrt", "sevorrt", "sevorrt", "base/shared_poi_all_lair_nest_large.iff"),
-            ("diseased bocatt", "bocatt_diseased", "bocatt", "bocatt/shared_lair_bocatt.iff"),
-            ("rockmite", "rockmite", "mound_mite", "base/shared_poi_all_lair_insecthill_small.iff"),
-            ("death kreetle", "kreetle_death", "kreetle", "base/shared_poi_all_lair_insecthill_large.iff"),
-            ("eopie herdmaster", "eopie_herdmaster", "eopie", "eopie/shared_lair_eopie_wasteland.iff"),
-            ("lesser dewback", "lesser_dewback", "dewback", "dewback/shared_lair_dewback_desert.iff"),
-            ("mound mite", "mound_mite", "mound_mite", "base/shared_poi_all_lair_insecthill_large.iff"),
-            ("tempest rill", "rill_tempest", "rill", "base/shared_poi_all_lair_nest_large.iff"),
-            ("bantha E3", "bantha", "bantha", "bantha/shared_lair_bantha_desert.iff"),
-            ("jundland eopie", "jundland_eopie", "eopie", "eopie/shared_lair_eopie_mountain.iff"),
-            ("womp rat", "womprat", "womp_rat", "womp_rat/shared_lair_womp_rat.iff"),
-            ("young mountain squill", "young_mountain_squill", "mountain_squill", "squill/shared_lair_squill_desert.iff"),
-            ("zucca boar", "zucca_boar", "zucca_boar", "zucca_boar/shared_lair_zucca_boar_desert.iff"),
-            ("cu pa", "cu_pa", "cu_pa", "cu_pa/shared_lair_cu_pa_dune.iff"),
-            ("dwarf bantha", "dwarf_bantha", "dwarf_bantha", "bantha/shared_lair_bantha_dune.iff"),
-        ],
-    },
+    "tatooine": ("Tatooine", 8, 0),
+    "corellia": ("Corellia", 0, 1),
+    "dantooine": ("Dantooine", 1, 2),
+    "dathomir": ("Dathomir", 2, 3),
+    "endor": ("Endor", 3, 4),
+    "lok": ("Lok", 4, 5),
+    "naboo": ("Naboo", 5, 6),
+    "rori": ("Rori", 6, 7),
+    "talus": ("Talus", 7, 8),
+    "yavin4": ("Yavin 4", 9, 9),
 }
+AREA = (-7600, -7600, 15200, 15200)
+
+# Each planet's creatures, in tools/reference/planet_lairs.csv: the name in
+# the 2004 table, the string key in the client's mob/creature_names, the
+# client model under object/mobile/, and the client lair model under
+# object/tangible/lair/. Names only, from the Publish 14 client. A creature
+# with no model of its own takes its species'; one with no lair model of
+# its own a generic one (base/: insect hill, nest, warren or rock shelter).
+
+
+def planet_info(planet):
+    location, planet_id, index = PLANETS[planet]
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "planet_lairs.csv"), newline="") as f:
+        creatures = [(r["name"], r["key"], r["model"], r["lair"]) for r in csv.DictReader(f) if r["planet"] == location]
+    return {
+        "planet_id": planet_id,
+        "area": AREA,
+        "ids": {"npc": 3001 + 100 * index, "lair_template": 101 + 100 * index,
+                "creature_group": 101 + 100 * index, "lair": 101 + 100 * index,
+                "spawn": 801 + index, "lair_attribute": 1001 + 1000 * index},
+        "creatures": creatures,
+    }
+
 
 # Lair settings (reconstructed): its own hit points per creature level, the
 # creatures it calls at a time (more for pack and herd animals), how many
@@ -104,7 +99,7 @@ def band_for(level):
 
 def main():
     planet = sys.argv[1] if len(sys.argv) > 1 else "tatooine"
-    p = PLANETS[planet]
+    p = planet_info(planet)
     with open(os.path.join(REF, "prima_2004", "creatures.csv"), newline="") as f:
         table = {r["name"]: r for r in csv.DictReader(f) if r["section"] == "Creatures"}
 
@@ -176,8 +171,10 @@ def main():
 --
 """ % (planet.capitalize(), LAIR_HP_PER_LEVEL))
     out.write("\n".join(summary) + "\n--\n")
-    out.write("-- The old test lairs near Bestine (25 womp rat and 25 rill lairs at random,\n"
-              "-- level 10 by the city) are switched off: count 0.\n\n")
+    if planet == "tatooine":
+        out.write("-- The old test lairs near Bestine (25 womp rat and 25 rill lairs at random,\n"
+                  "-- level 10 by the city) are switched off: count 0.\n")
+    out.write("\n")
 
     out.write("-- creature_groups.creature_id has a foreign key to a `creatures` table that\n"
               "-- does not exist (it is a non_persistent_npcs id), so no row could be\n"
