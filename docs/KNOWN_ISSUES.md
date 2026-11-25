@@ -1585,6 +1585,15 @@ Still open:
   they need is missing (return 3), and the chat server ignores the return
   code.
 
+### 49. Examining a creature lists its internal stats — open
+
+Seen while testing Tatooine's lairs (Nov 2026): examining an eopie lists
+each HAM attribute (Health, Constitution, Action, ... 455), To Hit, Stalker
+0, Deathblows 0, and its meat, hide and bone types. These are the server's
+creature attributes, most of them not marked internal. As far as we
+remember, pre-CU examine showed far less for a creature; to check against
+the guides' screenshots, then mark the server-only ones internal.
+
 ### 24. A cloned player stays a corpse — fixed
 
 Killed by womp rats near Bestine (three incaps inside the reset time, the

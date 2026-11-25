@@ -77,7 +77,13 @@ Tatooine: migration 027, 30 creatures, 180 lairs. Its area first reached
 past the map's edge (the map covers -7680 to 7680 m) and the first test
 crashed the zone: a lair placed past the edge read the height cache out of
 bounds. Migration 028 keeps the area inside the map, and the height lookup
-takes the edge's height for a point past it. The old test lairs near
+takes the edge's height for a point past it.
+
+Confirmed on the VM (Nov 2026, T44): walking out of Bestine, lesser desert
+womp rats (level 5) 312 m and domestic eopies (4) 537 m from Bestine's
+edge; gorgs (6) 1,222 m from Bestine; eopies (7) 798 m from Anchorhead's
+edge, with their lair. Each in its band, with its client model, its name
+("an eopie", "an eopie lair") and the guide's stats. The old test lairs near
 Bestine (25 level-10 womp rat lairs and 25 rill lairs by the city) are
 switched off.
 
