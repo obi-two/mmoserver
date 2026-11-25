@@ -282,7 +282,7 @@ Talus,dung mite,13,decay mite,,900,1500,900,1500,900,1500,65,70,no,30,965,no,no,
 Talus,famished sludge panther,19,sludge panther,,1275,2125,1275,2125,1275,2125,90,95,no,40,1824,no,no,yes,no,yes,yes,no,StunAttack,,464,465
 Talus,festering dung queen,17,decay mite,,1050,1750,1050,1750,1050,1750,75,80,no,35,1502,yes,no,yes,yes,yes,yes,no,DizzyAttack,,464,465
 Talus,foaming vynock,14,foaming vynock,,900,1500,900,1500,900,1500,65,70,no,30,1085,yes,no,no,no,yes,no,no,IntimidationAttack,,464,465
-Talus,frenzied fynock guardian,12,flit,,750,1250,750,1250,750,1250,55,60,no,30,747,no,no,yes,yes,yes,yes,no,,PostureDownAttack,464,465
+Talus,frenzied fynock guardian,12,fynock,,750,1250,750,1250,750,1250,55,60,no,30,747,no,no,yes,yes,yes,yes,no,,PostureDownAttack,464,465
 Talus,fynock,12,fynock,,825,1375,825,1375,825,1375,60,65,no,30,747,no,no,yes,no,no,yes,no,StunAttack,,466,467
 Talus,glutted fynock queen,14,fynock,,825,1375,825,1375,825,1375,60,65,no,30,1085,yes,no,yes,yes,yes,yes,no,IntimidationAttack,,466,467
 Talus,greater sludge panther,23,sludge panther,,1950,3250,1950,3250,1950,3250,105,110,no,50,2570,yes,no,yes,no,no,yes,no,PostureDownAttack,,466,467

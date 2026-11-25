@@ -1,195 +1,557 @@
-planet,name,key,model,lair
-Tatooine,Tatooine mynock,tatooine_mynock,mynock,mynock/shared_lair_mynock.iff
-Tatooine,dwarf eopie,dwarf_eopie,dwarf_eopie,eopie/shared_lair_eopie_desert.iff
-Tatooine,kreetle,kreetle,kreetle,base/shared_poi_all_lair_insecthill_small.iff
-Tatooine,domestic eopie,domestic_eopie,eopie,eopie/shared_lair_eopie.iff
-Tatooine,dwarf nuna,dwarf_nuna,dwarf_nuna,dwarf_nuna/shared_lair_dwarf_nuna.iff
-Tatooine,lesser desert womp rat,lesser_desert_womprat,lesser_desert_womp_rat,womp_rat/shared_lair_womp_rat_desert.iff
-Tatooine,minor worrt,minor_worrt,minor_worrt,worrt/shared_lair_worrt_desert.iff
-Tatooine,drooling nuna,dwarf_nuna_drooling,dwarf_nuna,dwarf_nuna/shared_lair_dwarf_nuna.iff
-Tatooine,gorg,gorg,gorg,base/shared_poi_all_lair_mound_small.iff
-Tatooine,kreetle swarmling,kreetle_swarming,kreetle,base/shared_poi_all_lair_insecthill_large.iff
-Tatooine,rill,rill,rill,base/shared_poi_all_lair_nest_small.iff
-Tatooine,slum rat,womprat_city,womp_rat,base/shared_poi_all_lair_garbage_small.iff
-Tatooine,worrt,worrt,worrt,worrt/shared_lair_worrt.iff
-Tatooine,eopie,eopie,eopie,eopie/shared_lair_eopie_dune.iff
-Tatooine,gorg glutton,gorg_glutton,gorg,base/shared_poi_all_lair_mound_large.iff
-Tatooine,sevorrt,sevorrt,sevorrt,base/shared_poi_all_lair_nest_large.iff
-Tatooine,diseased bocatt,bocatt_diseased,bocatt,bocatt/shared_lair_bocatt.iff
-Tatooine,rockmite,rockmite,mound_mite,base/shared_poi_all_lair_insecthill_small.iff
-Tatooine,death kreetle,kreetle_death,kreetle,base/shared_poi_all_lair_insecthill_large.iff
-Tatooine,eopie herdmaster,eopie_herdmaster,eopie,eopie/shared_lair_eopie_wasteland.iff
-Tatooine,lesser dewback,lesser_dewback,dewback,dewback/shared_lair_dewback_desert.iff
-Tatooine,mound mite,mound_mite,mound_mite,base/shared_poi_all_lair_insecthill_large.iff
-Tatooine,tempest rill,rill_tempest,rill,base/shared_poi_all_lair_nest_large.iff
-Tatooine,bantha E3,bantha,bantha,bantha/shared_lair_bantha_desert.iff
-Tatooine,jundland eopie,jundland_eopie,eopie,eopie/shared_lair_eopie_mountain.iff
-Tatooine,womp rat,womprat,womp_rat,womp_rat/shared_lair_womp_rat.iff
-Tatooine,young mountain squill,young_mountain_squill,mountain_squill,squill/shared_lair_squill_desert.iff
-Tatooine,zucca boar,zucca_boar,zucca_boar,zucca_boar/shared_lair_zucca_boar_desert.iff
-Tatooine,cu pa,cu_pa,cu_pa,cu_pa/shared_lair_cu_pa_dune.iff
-Tatooine,dwarf bantha,dwarf_bantha,dwarf_bantha,bantha/shared_lair_bantha_dune.iff
-Corellia,acicular defender,paralope_acicular_defender,paralope,base/shared_poi_all_lair_rock_shelter_large.iff
-Corellia,agrilat rasp,agrilat_plumed_rasp,plumed_rasp,base/shared_poi_all_lair_nest_large.iff
-Corellia,bageraset,bageraset,bageraset,bageraset/shared_lair_bageraset.iff
-Corellia,bloated gubber,gubbur_bloated,gubbur,gubbur/shared_lair_gubbur.iff
-Corellia,canoid,canoid,canoid,base/shared_poi_all_lair_rock_shelter_large.iff
-Corellia,carrion spat,carrion_spat,carrion_spat,carrion_spat/shared_lair_carrion_spat.iff
-Corellia,corellian butterfly,corellian_butterfly,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff
-Corellia,corellian butterfly drone,corellian_butterfly_drone,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff
-Corellia,corellian butterfly drone (large),corellian_butterfly_drone_large,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff
-Corellia,corellian butterfly worker,corellian_butterfly_worker,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff
-Corellia,crazed durni,crazed_durni,crazed_durni,durni/shared_lair_durni.iff
-Corellia,dalyrake,dalyrake,dalyrake,dalyrake/shared_lair_dalyrake.iff
-Corellia,diseased vrelt,diseased_vrelt,vrelt,base/shared_poi_all_lair_rock_shelter_large.iff
-Corellia,diseased vrelt matriarch,diseased_vrelt_matriarch,vrelt,base/shared_poi_all_lair_rock_shelter_large.iff
-Corellia,domestic bageraset,domestic_bageraset,bageraset,bageraset/shared_lair_bageraset.iff
-Corellia,domestic humbaba,domestic_humbaba,savage_humbaba,base/shared_poi_all_lair_rock_shelter_small.iff
-Corellia,domestic krahbu,domestic_krahbu,krahbu,krahbu/shared_lair_krahbu.iff
-Corellia,durni,durni,durni,durni/shared_lair_durni.iff
-Corellia,female dire cat,female_dire_cat,female_dire_cat,base/shared_poi_all_lair_warren_large.iff
-Corellia,female forest slice hound,female_forest_slice_hound,forest_slice_hound,base/shared_poi_all_lair_warren_large.iff
-Corellia,female slice hound,female_slice_hound,corellian_slice_hound,base/shared_poi_all_lair_warren_large.iff
-Corellia,giant gubbur,giant_gubbur,giant_gubbur,gubbur/shared_lair_gubbur.iff
-Corellia,giant horned krevol,giant_horned_krevol,giant_horned_krevol,horned_krevol/shared_lair_horned_krevol.iff
-Corellia,gubbur,gubbur,gubbur,gubbur/shared_lair_gubbur.iff
-Corellia,gurrcat,gurrcat,gurrcat,base/shared_poi_all_lair_warren_large.iff
-Corellia,howling plumed rasp,howling_plumed_rasp,plumed_rasp,plumed_rasp/shared_lair_plumed_rasp.iff
-Corellia,howling plumed rasp (large),howling_plumed_rasp_large,plumed_rasp,base/shared_poi_all_lair_nest_small.iff
-Corellia,krahbu,krahbu,krahbu,krahbu/shared_lair_krahbu.iff
-Corellia,minor gubbur,minor_gubbur,minor_gubbur,gubbur/shared_lair_gubbur.iff
-Corellia,murra,menagerie_murra,murra,murra/shared_lair_murra.iff
-Corellia,mutated krevol clicker,mutated_krevol_clicker,mutated_krevol_clicker,horned_krevol/shared_lair_horned_krevol.iff
-Corellia,noxious vrelt scavenger,noxious_vrelt_scavenger,noxious_vrelt_scavenger,base/shared_poi_all_lair_rock_shelter_large.iff
-Corellia,paralope,paralope,paralope,base/shared_poi_all_lair_rock_shelter_small.iff
-Corellia,plumed rasp,plumed_rasp,plumed_rasp,plumed_rasp/shared_lair_plumed_rasp.iff
-Corellia,razor cat cub,sand_panther_cub,corellian_sand_panther_cub,base/shared_poi_all_lair_warren_large.iff
-Corellia,scavenger rat,scavenger_rat,womp_rat,base/shared_poi_all_lair_warren_large.iff
-Corellia,slice hound,slice_hound,corellian_slice_hound,base/shared_poi_all_lair_warren_large.iff
-Corellia,tabage,tabage,tabage,base/shared_poi_all_lair_rock_shelter_large.iff
-Corellia,vehement warrior,durni_vehement_warrior,durni,durni/shared_lair_durni.iff
-Corellia,vrelt,vrelt,vrelt,base/shared_poi_all_lair_rock_shelter_small.iff
-Corellia,vynock,vynock,vynock,vynock/shared_lair_vynock.iff
-Corellia,wooded paralope,wooded_paralope,paralope,base/shared_poi_all_lair_rock_shelter_small.iff
-Dantooine,baby bol,baby_bol,baby_bol,bol/shared_lair_bol.iff
-Dantooine,huurton pup,huurton_pup,huurton_pup,huurton/shared_lair_huurton.iff
-Dantooine,lesser plains bol,bol_lesser_plains,bol,bol/shared_lair_bol.iff
-Dantooine,slice hound (warren),warren_slicehound,corellian_slice_hound,base/shared_poi_all_lair_warren_large.iff
-Dathomir,cavern spider broodling,cave_gaping_spider_broodling,gaping_spider_broodling,base/shared_poi_all_lair_insecthill_large.iff
-Dathomir,female Kwi,female_kwi,kwi,kwi/shared_lair_kwi.iff
-Dathomir,gaping spider broodling,gaping_spider_broodling,gaping_spider_broodling,base/shared_poi_all_lair_insecthill_large.iff
-Dathomir,infant brackaset,infant_brackaset,infant_brackaset,brackaset/shared_lair_brackaset.iff
-Dathomir,injured Kwi,injured_kwi,kwi,kwi/shared_lair_kwi.iff
-Dathomir,injured verne,injured_verne,verne,verne/shared_lair_verne.iff
-Dathomir,kwi,kwi,kwi,kwi/shared_lair_kwi.iff
-Dathomir,lowland brackaset,brackaset_lowlands,brackaset,brackaset/shared_lair_brackaset.iff
-Dathomir,shear mite broodling,shear_mite_broodling,shear_mite_broodling,base/shared_poi_all_lair_insecthill_large.iff
-Dathomir,young reptilian flier,young_reptilian_flier,young_reptilian_flier,base/shared_poi_all_lair_nest_large.iff
-Endor,diminutive bounding jax,jax_bounding_dwarf,bearded_jax,base/shared_poi_all_lair_warren_small.iff
-Endor,elder squall,elder_squall,squall,squall/shared_lair_squall.iff
-Endor,rabid squall,rabid_squall,squall,squall/shared_lair_squall.iff
-Endor,squall,squall,squall,squall/shared_lair_squall.iff
-Lok,flit,flit,flit,flit/shared_lair_flit.iff
-Lok,flit bloodsucker,flit_bloodsucker,flit,flit/shared_lair_flit.iff
-Lok,flit harasser,flit_harasser,flit,flit/shared_lair_flit.iff
-Lok,flit youth,flit_youth,flit_youth,flit/shared_lair_flit.iff
-Lok,giant pharple,giant_pharple,giant_pharple,pharple/shared_lair_pharple.iff
-Lok,gurnaset hatchling,gurnaset_hatchling,gurnaset_hatchling,gurnaset/shared_lair_gurnaset.iff
-Lok,juvenile langlatch,langlatch_juvenile,langlatch_juvenile,langlatch/shared_lair_langlatch.iff
-Lok,kusak pup,kusak_pup,kusak_pup,kusak/shared_lair_kusak.iff
-Lok,langlatch hatchling,langlatch_hatchling,langlatch_hatchling,langlatch/shared_lair_langlatch.iff
-Lok,pharple,pharple,pharple,pharple/shared_lair_pharple.iff
-Lok,runty pharple,runty_pharple,runty_pharple,pharple/shared_lair_pharple.iff
-Lok,young spined snake,young_spined_snake,young_spined_snake,spined_snake/shared_lair_spined_snake.iff
-Naboo,capper spineflap,capper_spineflap,capper_spineflap,capper_spineflap/shared_lair_capper_spineflap.iff
-Naboo,capper spineflap drone,capper_spineflap_drone,capper_spineflap,capper_spineflap/shared_lair_capper_spineflap.iff
-Naboo,chuba,chuba,chuba,chuba/shared_lair_chuba.iff
-Naboo,diseased nuna,diseased_nuna,nuna,nuna/shared_lair_nuna.iff
-Naboo,domesticated mott,domesticated_mott,mott,mott/shared_lair_mott.iff
-Naboo,fanned rawl,fanned_rawl,fanned_rawl,fanned_rawl/shared_lair_fanned_rawl.iff
-Naboo,flesh eating chuba,flesh_eating_chuba,chuba,chuba/shared_lair_chuba.iff
-Naboo,flewt,flewt,flewt,flewt/shared_lair_flewt.iff
-Naboo,flewt leviathan,flewt_leviathan,flewt,flewt/shared_lair_flewt.iff
-Naboo,frightened young flewt,frightened_young_flewt,frightened_young_flewt,flewt/shared_lair_flewt.iff
-Naboo,gnort,gnort,gnort,gnort/shared_lair_gnort.iff
-Naboo,hermit spider,hermit_spider,hermit_spider,hermit_spider/shared_lair_hermit_spider.iff
-Naboo,hermit spider guard,hermit_spider_guard,hermit_spider,hermit_spider/shared_lair_hermit_spider.iff
-Naboo,hermit spider queen,hermit_spider_queen,hermit_spider_queen,hermit_spider/shared_lair_hermit_spider.iff
-Naboo,horned krevol,horned_krevol,horned_krevol,horned_krevol/shared_lair_horned_krevol.iff
-Naboo,ikopi,ikopi,ikopi,ikopi/shared_lair_ikopi.iff
-Naboo,irate flewt matriarch,irate_flewt_matriarch,flewt,flewt/shared_lair_flewt.iff
-Naboo,kaadu,kaadu,kaadu,kaadu/shared_lair_kaadu.iff
-Naboo,large chuba,chuba_large,chuba,chuba/shared_lair_chuba.iff
-Naboo,massive gnort,gnort_massive,gnort,gnort/shared_lair_gnort.iff
-Naboo,motley kaadu,kaadu_motley,kaadu,kaadu/shared_lair_kaadu.iff
-Naboo,mott,menagerie_mott,mott,mott/shared_lair_mott.iff
-Naboo,mott bull,mott_bull,mott_bull,mott/shared_lair_mott.iff
-Naboo,mott calf,mott_calf,mott_calf,mott/shared_lair_mott.iff
-Naboo,narglatch cub,narglatch_cub,narglatch_cub,narglatch/shared_lair_narglatch.iff
-Naboo,nightspider,nightspider,nightspider,base/shared_poi_all_lair_insecthill_small.iff
-Naboo,nightspider aggressor,nightspider_aggressor,nightspider_aggressor,base/shared_poi_all_lair_insecthill_large.iff
-Naboo,nightspider poison spitter,nightspider_poison_spitter,nightspider_poison_spitter,base/shared_poi_all_lair_insecthill_large.iff
-Naboo,nuna,menagerie_nuna,nuna,nuna/shared_lair_nuna.iff
-Naboo,plodding falumpaset,domestic_falumpaset,falumpaset,falumpaset/shared_lair_falumpaset.iff
-Naboo,rabid shaupaut,rabid_shaupaut,shaupaut,shaupaut/shared_lair_shaupaut.iff
-Naboo,savage flewt queen,savage_flewt_queen,savage_flewt_queen,flewt/shared_lair_flewt.iff
-Naboo,sentry hermit spider,sentry_hermit_spider,hermit_spider,hermit_spider/shared_lair_hermit_spider.iff
-Naboo,shaupaut,shaupaut,shaupaut,shaupaut/shared_lair_shaupaut.iff
-Naboo,spiked krevol,spiked_krevol,horned_krevol,horned_krevol/shared_lair_horned_krevol.iff
-Naboo,spineflap gatherer,spineflap_gatherer,capper_spineflap,capper_spineflap/shared_lair_capper_spineflap.iff
-Naboo,stout ikopi buck,ikopi_stout_stallion,ikopi,ikopi/shared_lair_ikopi.iff
-Naboo,veermok sentry,naboo_veermok_sentry,veermok,veermok/shared_lair_veermok.iff
-Naboo,veermok sentry (cave),veermok_sentry_cave,veermok,veermok/shared_lair_veermok.iff
-Rori,bark mite,bark_mite,bark_mite,bark_mite/shared_lair_bark_mite.iff
-Rori,bark mite hatchling,bark_mite_hatchling,bark_mite_hatchling,bark_mite/shared_lair_bark_mite.iff
-Rori,bearded jax,bearded_jax,bearded_jax,bearded_jax/shared_lair_bearded_jax.iff
-Rori,confused wood mite hatchling,confused_wood_mite_hatchling,confused_wood_mite_hatchling,bark_mite/shared_lair_bark_mite.iff
-Rori,crescent rasp,crescent_rasp,horned_rasp,base/shared_poi_all_lair_nest_small.iff
-Rori,domestic bearded jax,domestic_bearded_jax,bearded_jax,bearded_jax/shared_lair_bearded_jax.iff
-Rori,female squall,squall_female,squall,squall/shared_lair_squall.iff
-Rori,frail squall,frail_squall,squall,squall/shared_lair_squall.iff
-Rori,frightened borgle,frightened_borgle,borgle,borgle/shared_lair_borgle.iff
-Rori,horned rasp,horned_rasp,horned_rasp,horned_rasp/shared_lair_horned_rasp.iff
-Rori,male squall,squall_male,squall,squall/shared_lair_squall.iff
-Rori,meek avenging squall,frail_squall_meek_avenger,squall,squall/shared_lair_squall.iff
-Rori,mutant bark mite hatchling,mutant_bark_mite_hatchling,bark_mite_hatchling,bark_mite/shared_lair_bark_mite.iff
-Rori,pigmy pugoriss,pigmy_pugoriss,pigmy_pugoriss,pugoriss/shared_lair_pugoriss.iff
-Rori,pudgy nudfuh,pudgy_nudfuh,nudfuh,base/shared_poi_all_lair_warren_large.iff
-Rori,scorched krevol,scorched_krevol,horned_krevol,base/shared_poi_all_lair_insecthill_large.iff
-Rori,sickle rasp,sickle_rasp,crowned_rasp,base/shared_poi_all_lair_nest_large.iff
-Rori,timid vir vur,timid_vir_vur,vir_vur,base/shared_poi_all_lair_warren_large.iff
-Rori,vir vur,vir_vur,vir_vur,base/shared_poi_all_lair_warren_large.iff
-Rori,vrobalet,vrobalet,vrobalet,base/shared_poi_all_lair_rock_shelter_large.iff
-Rori,wormed vrobal,wormed_vrobal,vrobal,base/shared_poi_all_lair_rock_shelter_large.iff
-Rori,young borgle,young_borgle,borgle,borgle/shared_lair_borgle.iff
-Rori,young borgle gruntling,young_borgle_gruntling,borgle,borgle/shared_lair_borgle.iff
-Talus,clipped fynock,clipped_fynock,clipped_fynock,fynock/shared_lair_fynock.iff
-Talus,decay mite,decay_mite,decay_mite,base/shared_poi_all_lair_insecthill_large.iff
-Talus,docile kahmurra,docile_kahmurra,kahmurra,base/shared_poi_all_lair_warren_large.iff
-Talus,feared fynock youth,feared_fynock_youth,fynock,fynock/shared_lair_fynock.iff
-Talus,fearful fynock youth,fearful_fynock_youth,fearful_fynock_youth,fynock/shared_lair_fynock.iff
-Talus,feeble kima,feeble_kima,kima,kima/shared_lair_kima.iff
-Talus,flite rasp,flite_rasp,flite_rasp,flite_rasp/shared_lair_flite_rasp.iff
-Talus,flite rasp (large),flite_rasp_large,flite_rasp,base/shared_poi_all_lair_nest_large.iff
-Talus,giant decay mite hatchling,giant_decay_mite_hatchling,decay_mite,base/shared_poi_all_lair_insecthill_small.iff
-Talus,giga flite rasp,giga_flite_rasp,flite_rasp,flite_rasp/shared_lair_flite_rasp.iff
-Talus,minor guf drolg,minor_guf_drolg,minor_guf_drolg,guf_drolg/shared_lair_guf_drolg.iff
-Talus,minor sludge panther,minor_sludge_panther,minor_sludge_panther,base/shared_poi_all_lair_warren_large.iff
-Talus,putrid decay mite hatchling,putrid_decay_mite_hatchling,putrid_decay_mite_hatchling,base/shared_poi_all_lair_insecthill_small.iff
-Talus,putrid decay mite hatchling (large),putrid_decay_mite_hatchling_large,putrid_decay_mite_hatchling,base/shared_poi_all_lair_insecthill_small.iff
-Talus,repugnant dung mite crawler,dung_mite_repugnant_crawler,dung_mite,base/shared_poi_all_lair_insecthill_small.iff
-Talus,rot mite,rot_mite,rot_mite,base/shared_poi_all_lair_insecthill_large.iff
-Talus,song rasp,song_rasp,plumed_rasp,base/shared_poi_all_lair_nest_large.iff
-Talus,stunted huf dun,stunted_huf_dun,stunted_huf_dun,huf_dun/shared_lair_huf_dun.iff
-Yavin 4,angler hatchling,angler_hatchling,angler_hatchling,angler/shared_lair_angler.iff
-Yavin 4,choku pup,choku_pup,choku_pup,choku/shared_lair_choku.iff
-Yavin 4,gackle bat,gackle_bat,gackle_bat,gackle_bat/shared_lair_gackle_bat.iff
-Yavin 4,mamien youth,mamien_youth,mamien,base/shared_poi_all_lair_warren_large.iff
-Yavin 4,puny gackle bat,puny_gackle_bat,puny_gackle_bat,gackle_bat/shared_lair_gackle_bat.iff
-Yavin 4,puny stintaril,puny_stintaril,puny_stintaril,stintaril/shared_lair_stintaril.iff
-Yavin 4,puny tanc mite,puny_tanc_mite,puny_tanc_mite,tanc_mite/shared_lair_tanc_mite.iff
-Yavin 4,skreeg infant,skreeg_infant,skreeg_infant,skreeg/shared_lair_skreeg.iff
-Yavin 4,stintaril scavenger,stintaril_scavenger,stintaril,base/shared_poi_all_lair_warren_large.iff
-Yavin 4,swarming kliknik,kliknik_swarming,kliknik,kliknik/shared_lair_kliknik.iff
-Yavin 4,tanc mite,tanc_mite,tanc_mite,tanc_mite/shared_lair_tanc_mite.iff
-Yavin 4,whisper bird hatchling,whisper_bird_hatchling,whisper_bird_hatchling,base/shared_poi_all_lair_nest_small.iff
+planet,name,key,model,lair,guide
+Tatooine,Tatooine mynock,tatooine_mynock,mynock,mynock/shared_lair_mynock.iff,2004
+Tatooine,dwarf eopie,dwarf_eopie,dwarf_eopie,eopie/shared_lair_eopie_desert.iff,2004
+Tatooine,kreetle,kreetle,kreetle,base/shared_poi_all_lair_insecthill_small.iff,2004
+Tatooine,domestic eopie,domestic_eopie,eopie,eopie/shared_lair_eopie.iff,2004
+Tatooine,dwarf nuna,dwarf_nuna,dwarf_nuna,dwarf_nuna/shared_lair_dwarf_nuna.iff,2004
+Tatooine,lesser desert womp rat,lesser_desert_womprat,lesser_desert_womp_rat,womp_rat/shared_lair_womp_rat_desert.iff,2004
+Tatooine,minor worrt,minor_worrt,minor_worrt,worrt/shared_lair_worrt_desert.iff,2004
+Tatooine,drooling nuna,dwarf_nuna_drooling,dwarf_nuna,dwarf_nuna/shared_lair_dwarf_nuna.iff,2004
+Tatooine,gorg,gorg,gorg,base/shared_poi_all_lair_mound_small.iff,2004
+Tatooine,kreetle swarmling,kreetle_swarming,kreetle,base/shared_poi_all_lair_insecthill_large.iff,2004
+Tatooine,rill,rill,rill,base/shared_poi_all_lair_nest_small.iff,2004
+Tatooine,slum rat,womprat_city,womp_rat,base/shared_poi_all_lair_garbage_small.iff,2004
+Tatooine,worrt,worrt,worrt,worrt/shared_lair_worrt.iff,2004
+Tatooine,eopie,eopie,eopie,eopie/shared_lair_eopie_dune.iff,2004
+Tatooine,gorg glutton,gorg_glutton,gorg,base/shared_poi_all_lair_mound_large.iff,2004
+Tatooine,sevorrt,sevorrt,sevorrt,base/shared_poi_all_lair_nest_large.iff,2004
+Tatooine,diseased bocatt,bocatt_diseased,bocatt,bocatt/shared_lair_bocatt.iff,2004
+Tatooine,rockmite,rockmite,mound_mite,base/shared_poi_all_lair_insecthill_small.iff,2004
+Tatooine,death kreetle,kreetle_death,kreetle,base/shared_poi_all_lair_insecthill_large.iff,2004
+Tatooine,eopie herdmaster,eopie_herdmaster,eopie,eopie/shared_lair_eopie_wasteland.iff,2004
+Tatooine,lesser dewback,lesser_dewback,dewback,dewback/shared_lair_dewback_desert.iff,2004
+Tatooine,mound mite,mound_mite,mound_mite,base/shared_poi_all_lair_insecthill_large.iff,2004
+Tatooine,tempest rill,rill_tempest,rill,base/shared_poi_all_lair_nest_large.iff,2004
+Tatooine,bantha E3,bantha,bantha,bantha/shared_lair_bantha_desert.iff,2004
+Tatooine,jundland eopie,jundland_eopie,eopie,eopie/shared_lair_eopie_mountain.iff,2004
+Tatooine,womp rat,womprat,womp_rat,womp_rat/shared_lair_womp_rat.iff,2004
+Tatooine,young mountain squill,young_mountain_squill,mountain_squill,squill/shared_lair_squill_desert.iff,2004
+Tatooine,zucca boar,zucca_boar,zucca_boar,zucca_boar/shared_lair_zucca_boar_desert.iff,2004
+Tatooine,cu pa,cu_pa,cu_pa,cu_pa/shared_lair_cu_pa_dune.iff,2004
+Tatooine,dwarf bantha,dwarf_bantha,dwarf_bantha,bantha/shared_lair_bantha_dune.iff,2004
+Corellia,acicular defender,paralope_acicular_defender,paralope,base/shared_poi_all_lair_rock_shelter_large.iff,2004
+Corellia,agrilat rasp,agrilat_plumed_rasp,plumed_rasp,base/shared_poi_all_lair_nest_large.iff,2004
+Corellia,bageraset,bageraset,bageraset,bageraset/shared_lair_bageraset.iff,2004
+Corellia,bloated gubber,gubbur_bloated,gubbur,gubbur/shared_lair_gubbur.iff,2004
+Corellia,canoid,canoid,canoid,base/shared_poi_all_lair_rock_shelter_large.iff,2004
+Corellia,carrion spat,carrion_spat,carrion_spat,carrion_spat/shared_lair_carrion_spat.iff,2004
+Corellia,corellian butterfly,corellian_butterfly,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff,2004
+Corellia,corellian butterfly drone,corellian_butterfly_drone,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff,2004
+Corellia,corellian butterfly drone (large),corellian_butterfly_drone_large,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff,2004
+Corellia,corellian butterfly worker,corellian_butterfly_worker,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff,2004
+Corellia,crazed durni,crazed_durni,crazed_durni,durni/shared_lair_durni.iff,2004
+Corellia,dalyrake,dalyrake,dalyrake,dalyrake/shared_lair_dalyrake.iff,2004
+Corellia,diseased vrelt,diseased_vrelt,vrelt,base/shared_poi_all_lair_rock_shelter_large.iff,2004
+Corellia,diseased vrelt matriarch,diseased_vrelt_matriarch,vrelt,base/shared_poi_all_lair_rock_shelter_large.iff,2004
+Corellia,domestic bageraset,domestic_bageraset,bageraset,bageraset/shared_lair_bageraset.iff,2004
+Corellia,domestic humbaba,domestic_humbaba,savage_humbaba,base/shared_poi_all_lair_rock_shelter_small.iff,2004
+Corellia,domestic krahbu,domestic_krahbu,krahbu,krahbu/shared_lair_krahbu.iff,2004
+Corellia,durni,durni,durni,durni/shared_lair_durni.iff,2004
+Corellia,female dire cat,female_dire_cat,female_dire_cat,base/shared_poi_all_lair_warren_large.iff,2004
+Corellia,female forest slice hound,female_forest_slice_hound,forest_slice_hound,base/shared_poi_all_lair_warren_large.iff,2004
+Corellia,female slice hound,female_slice_hound,corellian_slice_hound,base/shared_poi_all_lair_warren_large.iff,2004
+Corellia,giant gubbur,giant_gubbur,giant_gubbur,gubbur/shared_lair_gubbur.iff,2004
+Corellia,giant horned krevol,giant_horned_krevol,giant_horned_krevol,horned_krevol/shared_lair_horned_krevol.iff,2004
+Corellia,gubbur,gubbur,gubbur,gubbur/shared_lair_gubbur.iff,2004
+Corellia,gurrcat,gurrcat,gurrcat,base/shared_poi_all_lair_warren_large.iff,2004
+Corellia,howling plumed rasp,howling_plumed_rasp,plumed_rasp,plumed_rasp/shared_lair_plumed_rasp.iff,2004
+Corellia,howling plumed rasp (large),howling_plumed_rasp_large,plumed_rasp,base/shared_poi_all_lair_nest_small.iff,2004
+Corellia,krahbu,krahbu,krahbu,krahbu/shared_lair_krahbu.iff,2004
+Corellia,minor gubbur,minor_gubbur,minor_gubbur,gubbur/shared_lair_gubbur.iff,2004
+Corellia,murra,menagerie_murra,murra,murra/shared_lair_murra.iff,2004
+Corellia,mutated krevol clicker,mutated_krevol_clicker,mutated_krevol_clicker,horned_krevol/shared_lair_horned_krevol.iff,2004
+Corellia,noxious vrelt scavenger,noxious_vrelt_scavenger,noxious_vrelt_scavenger,base/shared_poi_all_lair_rock_shelter_large.iff,2004
+Corellia,paralope,paralope,paralope,base/shared_poi_all_lair_rock_shelter_small.iff,2004
+Corellia,plumed rasp,plumed_rasp,plumed_rasp,plumed_rasp/shared_lair_plumed_rasp.iff,2004
+Corellia,razor cat cub,sand_panther_cub,corellian_sand_panther_cub,base/shared_poi_all_lair_warren_large.iff,2004
+Corellia,scavenger rat,scavenger_rat,womp_rat,base/shared_poi_all_lair_warren_large.iff,2004
+Corellia,slice hound,slice_hound,corellian_slice_hound,base/shared_poi_all_lair_warren_large.iff,2004
+Corellia,tabage,tabage,tabage,base/shared_poi_all_lair_rock_shelter_large.iff,2004
+Corellia,vehement warrior,durni_vehement_warrior,durni,durni/shared_lair_durni.iff,2004
+Corellia,vrelt,vrelt,vrelt,base/shared_poi_all_lair_rock_shelter_small.iff,2004
+Corellia,vynock,vynock,vynock,vynock/shared_lair_vynock.iff,2004
+Corellia,wooded paralope,wooded_paralope,paralope,base/shared_poi_all_lair_rock_shelter_small.iff,2004
+Dantooine,baby bol,baby_bol,baby_bol,bol/shared_lair_bol.iff,2004
+Dantooine,huurton pup,huurton_pup,huurton_pup,huurton/shared_lair_huurton.iff,2004
+Dantooine,lesser plains bol,bol_lesser_plains,bol,bol/shared_lair_bol.iff,2004
+Dantooine,slice hound (warren),warren_slicehound,corellian_slice_hound,base/shared_poi_all_lair_warren_large.iff,2004
+Dathomir,cavern spider broodling,cave_gaping_spider_broodling,gaping_spider_broodling,base/shared_poi_all_lair_insecthill_large.iff,2004
+Dathomir,female Kwi,female_kwi,kwi,kwi/shared_lair_kwi.iff,2004
+Dathomir,gaping spider broodling,gaping_spider_broodling,gaping_spider_broodling,base/shared_poi_all_lair_insecthill_large.iff,2004
+Dathomir,infant brackaset,infant_brackaset,infant_brackaset,brackaset/shared_lair_brackaset.iff,2004
+Dathomir,injured Kwi,injured_kwi,kwi,kwi/shared_lair_kwi.iff,2004
+Dathomir,injured verne,injured_verne,verne,verne/shared_lair_verne.iff,2004
+Dathomir,kwi,kwi,kwi,kwi/shared_lair_kwi.iff,2004
+Dathomir,lowland brackaset,brackaset_lowlands,brackaset,brackaset/shared_lair_brackaset.iff,2004
+Dathomir,shear mite broodling,shear_mite_broodling,shear_mite_broodling,base/shared_poi_all_lair_insecthill_large.iff,2004
+Dathomir,young reptilian flier,young_reptilian_flier,young_reptilian_flier,base/shared_poi_all_lair_nest_large.iff,2004
+Endor,diminutive bounding jax,jax_bounding_dwarf,bearded_jax,base/shared_poi_all_lair_warren_small.iff,2004
+Endor,elder squall,elder_squall,squall,squall/shared_lair_squall.iff,2004
+Endor,rabid squall,rabid_squall,squall,squall/shared_lair_squall.iff,2004
+Endor,squall,squall,squall,squall/shared_lair_squall.iff,2004
+Lok,flit,flit,flit,flit/shared_lair_flit.iff,2004
+Lok,flit bloodsucker,flit_bloodsucker,flit,flit/shared_lair_flit.iff,2004
+Lok,flit harasser,flit_harasser,flit,flit/shared_lair_flit.iff,2004
+Lok,flit youth,flit_youth,flit_youth,flit/shared_lair_flit.iff,2004
+Lok,giant pharple,giant_pharple,giant_pharple,pharple/shared_lair_pharple.iff,2004
+Lok,gurnaset hatchling,gurnaset_hatchling,gurnaset_hatchling,gurnaset/shared_lair_gurnaset.iff,2004
+Lok,juvenile langlatch,langlatch_juvenile,langlatch_juvenile,langlatch/shared_lair_langlatch.iff,2004
+Lok,kusak pup,kusak_pup,kusak_pup,kusak/shared_lair_kusak.iff,2004
+Lok,langlatch hatchling,langlatch_hatchling,langlatch_hatchling,langlatch/shared_lair_langlatch.iff,2004
+Lok,pharple,pharple,pharple,pharple/shared_lair_pharple.iff,2004
+Lok,runty pharple,runty_pharple,runty_pharple,pharple/shared_lair_pharple.iff,2004
+Lok,young spined snake,young_spined_snake,young_spined_snake,spined_snake/shared_lair_spined_snake.iff,2004
+Naboo,capper spineflap,capper_spineflap,capper_spineflap,capper_spineflap/shared_lair_capper_spineflap.iff,2004
+Naboo,capper spineflap drone,capper_spineflap_drone,capper_spineflap,capper_spineflap/shared_lair_capper_spineflap.iff,2004
+Naboo,chuba,chuba,chuba,chuba/shared_lair_chuba.iff,2004
+Naboo,diseased nuna,diseased_nuna,nuna,nuna/shared_lair_nuna.iff,2004
+Naboo,domesticated mott,domesticated_mott,mott,mott/shared_lair_mott.iff,2004
+Naboo,fanned rawl,fanned_rawl,fanned_rawl,fanned_rawl/shared_lair_fanned_rawl.iff,2004
+Naboo,flesh eating chuba,flesh_eating_chuba,chuba,chuba/shared_lair_chuba.iff,2004
+Naboo,flewt,flewt,flewt,flewt/shared_lair_flewt.iff,2004
+Naboo,flewt leviathan,flewt_leviathan,flewt,flewt/shared_lair_flewt.iff,2004
+Naboo,frightened young flewt,frightened_young_flewt,frightened_young_flewt,flewt/shared_lair_flewt.iff,2004
+Naboo,gnort,gnort,gnort,gnort/shared_lair_gnort.iff,2004
+Naboo,hermit spider,hermit_spider,hermit_spider,hermit_spider/shared_lair_hermit_spider.iff,2004
+Naboo,hermit spider guard,hermit_spider_guard,hermit_spider,hermit_spider/shared_lair_hermit_spider.iff,2004
+Naboo,hermit spider queen,hermit_spider_queen,hermit_spider_queen,hermit_spider/shared_lair_hermit_spider.iff,2004
+Naboo,horned krevol,horned_krevol,horned_krevol,horned_krevol/shared_lair_horned_krevol.iff,2004
+Naboo,ikopi,ikopi,ikopi,ikopi/shared_lair_ikopi.iff,2004
+Naboo,irate flewt matriarch,irate_flewt_matriarch,flewt,flewt/shared_lair_flewt.iff,2004
+Naboo,kaadu,kaadu,kaadu,kaadu/shared_lair_kaadu.iff,2004
+Naboo,large chuba,chuba_large,chuba,chuba/shared_lair_chuba.iff,2004
+Naboo,massive gnort,gnort_massive,gnort,gnort/shared_lair_gnort.iff,2004
+Naboo,motley kaadu,kaadu_motley,kaadu,kaadu/shared_lair_kaadu.iff,2004
+Naboo,mott,menagerie_mott,mott,mott/shared_lair_mott.iff,2004
+Naboo,mott bull,mott_bull,mott_bull,mott/shared_lair_mott.iff,2004
+Naboo,mott calf,mott_calf,mott_calf,mott/shared_lair_mott.iff,2004
+Naboo,narglatch cub,narglatch_cub,narglatch_cub,narglatch/shared_lair_narglatch.iff,2004
+Naboo,nightspider,nightspider,nightspider,base/shared_poi_all_lair_insecthill_small.iff,2004
+Naboo,nightspider aggressor,nightspider_aggressor,nightspider_aggressor,base/shared_poi_all_lair_insecthill_large.iff,2004
+Naboo,nightspider poison spitter,nightspider_poison_spitter,nightspider_poison_spitter,base/shared_poi_all_lair_insecthill_large.iff,2004
+Naboo,nuna,menagerie_nuna,nuna,nuna/shared_lair_nuna.iff,2004
+Naboo,plodding falumpaset,domestic_falumpaset,falumpaset,falumpaset/shared_lair_falumpaset.iff,2004
+Naboo,rabid shaupaut,rabid_shaupaut,shaupaut,shaupaut/shared_lair_shaupaut.iff,2004
+Naboo,savage flewt queen,savage_flewt_queen,savage_flewt_queen,flewt/shared_lair_flewt.iff,2004
+Naboo,sentry hermit spider,sentry_hermit_spider,hermit_spider,hermit_spider/shared_lair_hermit_spider.iff,2004
+Naboo,shaupaut,shaupaut,shaupaut,shaupaut/shared_lair_shaupaut.iff,2004
+Naboo,spiked krevol,spiked_krevol,horned_krevol,horned_krevol/shared_lair_horned_krevol.iff,2004
+Naboo,spineflap gatherer,spineflap_gatherer,capper_spineflap,capper_spineflap/shared_lair_capper_spineflap.iff,2004
+Naboo,stout ikopi buck,ikopi_stout_stallion,ikopi,ikopi/shared_lair_ikopi.iff,2004
+Naboo,veermok sentry,naboo_veermok_sentry,veermok,veermok/shared_lair_veermok.iff,2004
+Naboo,veermok sentry (cave),veermok_sentry_cave,veermok,veermok/shared_lair_veermok.iff,2004
+Rori,bark mite,bark_mite,bark_mite,bark_mite/shared_lair_bark_mite.iff,2004
+Rori,bark mite hatchling,bark_mite_hatchling,bark_mite_hatchling,bark_mite/shared_lair_bark_mite.iff,2004
+Rori,bearded jax,bearded_jax,bearded_jax,bearded_jax/shared_lair_bearded_jax.iff,2004
+Rori,confused wood mite hatchling,confused_wood_mite_hatchling,confused_wood_mite_hatchling,bark_mite/shared_lair_bark_mite.iff,2004
+Rori,crescent rasp,crescent_rasp,horned_rasp,base/shared_poi_all_lair_nest_small.iff,2004
+Rori,domestic bearded jax,domestic_bearded_jax,bearded_jax,bearded_jax/shared_lair_bearded_jax.iff,2004
+Rori,female squall,squall_female,squall,squall/shared_lair_squall.iff,2004
+Rori,frail squall,frail_squall,squall,squall/shared_lair_squall.iff,2004
+Rori,frightened borgle,frightened_borgle,borgle,borgle/shared_lair_borgle.iff,2004
+Rori,horned rasp,horned_rasp,horned_rasp,horned_rasp/shared_lair_horned_rasp.iff,2004
+Rori,male squall,squall_male,squall,squall/shared_lair_squall.iff,2004
+Rori,meek avenging squall,frail_squall_meek_avenger,squall,squall/shared_lair_squall.iff,2004
+Rori,mutant bark mite hatchling,mutant_bark_mite_hatchling,bark_mite_hatchling,bark_mite/shared_lair_bark_mite.iff,2004
+Rori,pigmy pugoriss,pigmy_pugoriss,pigmy_pugoriss,pugoriss/shared_lair_pugoriss.iff,2004
+Rori,pudgy nudfuh,pudgy_nudfuh,nudfuh,base/shared_poi_all_lair_warren_large.iff,2004
+Rori,scorched krevol,scorched_krevol,horned_krevol,base/shared_poi_all_lair_insecthill_large.iff,2004
+Rori,sickle rasp,sickle_rasp,crowned_rasp,base/shared_poi_all_lair_nest_large.iff,2004
+Rori,timid vir vur,timid_vir_vur,vir_vur,base/shared_poi_all_lair_warren_large.iff,2004
+Rori,vir vur,vir_vur,vir_vur,base/shared_poi_all_lair_warren_large.iff,2004
+Rori,vrobalet,vrobalet,vrobalet,base/shared_poi_all_lair_rock_shelter_large.iff,2004
+Rori,wormed vrobal,wormed_vrobal,vrobal,base/shared_poi_all_lair_rock_shelter_large.iff,2004
+Rori,young borgle,young_borgle,borgle,borgle/shared_lair_borgle.iff,2004
+Rori,young borgle gruntling,young_borgle_gruntling,borgle,borgle/shared_lair_borgle.iff,2004
+Talus,clipped fynock,clipped_fynock,clipped_fynock,fynock/shared_lair_fynock.iff,2004
+Talus,decay mite,decay_mite,decay_mite,base/shared_poi_all_lair_insecthill_large.iff,2004
+Talus,docile kahmurra,docile_kahmurra,kahmurra,base/shared_poi_all_lair_warren_large.iff,2004
+Talus,feared fynock youth,feared_fynock_youth,fynock,fynock/shared_lair_fynock.iff,2004
+Talus,fearful fynock youth,fearful_fynock_youth,fearful_fynock_youth,fynock/shared_lair_fynock.iff,2004
+Talus,feeble kima,feeble_kima,kima,kima/shared_lair_kima.iff,2004
+Talus,flite rasp,flite_rasp,flite_rasp,flite_rasp/shared_lair_flite_rasp.iff,2004
+Talus,flite rasp (large),flite_rasp_large,flite_rasp,base/shared_poi_all_lair_nest_large.iff,2004
+Talus,giant decay mite hatchling,giant_decay_mite_hatchling,decay_mite,base/shared_poi_all_lair_insecthill_small.iff,2004
+Talus,giga flite rasp,giga_flite_rasp,flite_rasp,flite_rasp/shared_lair_flite_rasp.iff,2004
+Talus,minor guf drolg,minor_guf_drolg,minor_guf_drolg,guf_drolg/shared_lair_guf_drolg.iff,2004
+Talus,minor sludge panther,minor_sludge_panther,minor_sludge_panther,base/shared_poi_all_lair_warren_large.iff,2004
+Talus,putrid decay mite hatchling,putrid_decay_mite_hatchling,putrid_decay_mite_hatchling,base/shared_poi_all_lair_insecthill_small.iff,2004
+Talus,putrid decay mite hatchling (large),putrid_decay_mite_hatchling_large,putrid_decay_mite_hatchling,base/shared_poi_all_lair_insecthill_small.iff,2004
+Talus,repugnant dung mite crawler,dung_mite_repugnant_crawler,dung_mite,base/shared_poi_all_lair_insecthill_small.iff,2004
+Talus,rot mite,rot_mite,rot_mite,base/shared_poi_all_lair_insecthill_large.iff,2004
+Talus,song rasp,song_rasp,plumed_rasp,base/shared_poi_all_lair_nest_large.iff,2004
+Talus,stunted huf dun,stunted_huf_dun,stunted_huf_dun,huf_dun/shared_lair_huf_dun.iff,2004
+Yavin 4,angler hatchling,angler_hatchling,angler_hatchling,angler/shared_lair_angler.iff,2004
+Yavin 4,choku pup,choku_pup,choku_pup,choku/shared_lair_choku.iff,2004
+Yavin 4,gackle bat,gackle_bat,gackle_bat,gackle_bat/shared_lair_gackle_bat.iff,2004
+Yavin 4,mamien youth,mamien_youth,mamien,base/shared_poi_all_lair_warren_large.iff,2004
+Yavin 4,puny gackle bat,puny_gackle_bat,puny_gackle_bat,gackle_bat/shared_lair_gackle_bat.iff,2004
+Yavin 4,puny stintaril,puny_stintaril,puny_stintaril,stintaril/shared_lair_stintaril.iff,2004
+Yavin 4,puny tanc mite,puny_tanc_mite,puny_tanc_mite,tanc_mite/shared_lair_tanc_mite.iff,2004
+Yavin 4,skreeg infant,skreeg_infant,skreeg_infant,skreeg/shared_lair_skreeg.iff,2004
+Yavin 4,stintaril scavenger,stintaril_scavenger,stintaril,base/shared_poi_all_lair_warren_large.iff,2004
+Yavin 4,swarming kliknik,kliknik_swarming,kliknik,kliknik/shared_lair_kliknik.iff,2004
+Yavin 4,tanc mite,tanc_mite,tanc_mite,tanc_mite/shared_lair_tanc_mite.iff,2004
+Yavin 4,whisper bird hatchling,whisper_bird_hatchling,whisper_bird_hatchling,base/shared_poi_all_lair_nest_small.iff,2004
+Corellia,Corellian butterfly defender,corellian_butterfly_defender,corellian_butterfly_defender,corellian_butterfly/shared_lair_corellian_butterfly.iff,ed
+Corellia,Corellian butterfly monarch,corellian_butterfly_monarch,corellian_butterfly_monarch,corellian_butterfly/shared_lair_corellian_butterfly.iff,ed
+Corellia,Corellian butterfly warrior,corellian_butterfly_warrior,corellian_butterfly,corellian_butterfly/shared_lair_corellian_butterfly.iff,ed
+Corellia,crimson sand panther,crimson_sand_panther,crimson_sand_panther,base/shared_poi_all_lair_warren_large.iff,ed
+Corellia,deranged wrix,deranged_wrix,deranged_wrix,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Corellia,devil gulginaw,devil_gulginaw,devil_gulginaw,gulginaw/shared_lair_gulginaw.iff,ed
+Corellia,dwarf gronda,dwarf_gronda,dwarf_gronda,gronda/shared_lair_gronda.iff,ed
+Corellia,enraged tabage mother,enraged_tabage_mother,tabage,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Corellia,female grassland slice hound,female_grassland_slice_hound,female_grassland_slice_hound,base/shared_poi_all_lair_warren_large.iff,ed
+Corellia,female sand panther,female_sand_panther,corellian_sand_panther,base/shared_poi_all_lair_warren_large.iff,ed
+Corellia,giant carrion spat,giant_carrion_spat,giant_carrion_spat,carrion_spat/shared_lair_carrion_spat.iff,ed
+Corellia,giant dalyrake,giant_dalyrake,giant_dalyrake,dalyrake/shared_lair_dalyrake.iff,ed
+Corellia,grassland slice hound,grassland_slice_hound,female_grassland_slice_hound,base/shared_poi_all_lair_warren_large.iff,ed
+Corellia,greater gulginaw,greater_gulginaw,greater_gulginaw,gulginaw/shared_lair_gulginaw.iff,ed
+Corellia,gronda,gronda,gronda,gronda/shared_lair_gronda.iff,ed
+Corellia,gulginaw,gulginaw,gulginaw,gulginaw/shared_lair_gulginaw.iff,ed
+Corellia,mottled wrix,mottled_wrix,mottled_wrix,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Corellia,mountain murra,mountain_murra,mountain_murra,murra/shared_lair_murra.iff,ed
+Corellia,rogue bageraset,rogue_bageraset,bageraset,bageraset/shared_lair_bageraset.iff,ed
+Corellia,sand panther,menagerie_sand_panther,corellian_sand_panther,base/shared_poi_all_lair_warren_large.iff,ed
+Corellia,sickening dung mite worker,sickening_dung_mite_worker,sickening_dung_mite_worker,base/shared_poi_all_lair_insecthill_large.iff,ed
+Corellia,startled vrelt mother,startled_vrelt_mother,startled_vrelt_mother,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Corellia,swamp gurrcat,swamp_gurrcat,gurrcat,base/shared_poi_all_lair_warren_large.iff,ed
+Corellia,tabage protector,tabage_protector,tabage,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Corellia,tabage scavenger,tabage_scavenger,tabage,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Corellia,war gronda,war_gronda,war_gronda,gronda/shared_lair_gronda.iff,ed
+Dantooine,bile drenched quenker,bile_drenched_quenker,bile_drenched_quenker,quenker/shared_lair_quenker.iff,ed
+Dantooine,bol,bol,bol,bol/shared_lair_bol.iff,ed
+Dantooine,bol pack runner,bol_pack_runner,bol_pack_runner,bol/shared_lair_bol.iff,ed
+Dantooine,domestic bol mount,domestic_bol_mount,bol,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Dantooine,fierce piket protector,fierce_piket_protector,piket,piket/shared_lair_piket.iff,ed
+Dantooine,grassland voritor tracker,grassland_voritor_tracker,grassland_voritor_tracker,voritor_lizard/shared_lair_voritor_lizard.iff,ed
+Dantooine,hostile thune mother,hostile_thune_mother,thune,thune/shared_lair_thune.iff,ed
+Dantooine,huurton howler,huurton_howler,huurton,huurton/shared_lair_huurton.iff,ed
+Dantooine,huurton huntress,huurton_huntress,huurton,huurton/shared_lair_huurton.iff,ed
+Dantooine,huurton matron,huurton_matron,huurton,huurton/shared_lair_huurton.iff,ed
+Dantooine,huurton stalker,huurton_stalker,huurton,huurton/shared_lair_huurton.iff,ed
+Dantooine,piket longhorn,piket_longhorn,piket_longhorn,piket/shared_lair_piket.iff,ed
+Dantooine,piket longhorn female,piket_longhorn_female,piket,piket/shared_lair_piket.iff,ed
+Dantooine,piket plains walker,piket_plains_walker,piket_plains_walker,piket/shared_lair_piket.iff,ed
+Dantooine,quenker,menagerie_quenker,quenker,quenker/shared_lair_quenker.iff,ed
+Dantooine,quenker ravager,quenker_ravager,quenker,quenker/shared_lair_quenker.iff,ed
+Dantooine,quenker relic reaper,quenker_relic_reaper,quenker_relic_reaper,quenker/shared_lair_quenker.iff,ed
+Dantooine,savage quenker,savage_quenker,quenker,quenker/shared_lair_quenker.iff,ed
+Dantooine,seething bol crusher,seething_bol_crusher,seething_bol_crusher,bol/shared_lair_bol.iff,ed
+Dantooine,slinking voritor hunter,slinking_voritor_hunter,slinking_voritor_hunter,voritor_lizard/shared_lair_voritor_lizard.iff,ed
+Dantooine,thune herd leader,thune_herd_leader,thune_herd_leader,thune/shared_lair_thune.iff,ed
+Dantooine,vexed voritor lizard,vexed_voritor_lizard,vexed_voritor_lizard,voritor_lizard/shared_lair_voritor_lizard.iff,ed
+Dantooine,voritor dasher,voritor_dasher,voritor_dasher,voritor_lizard/shared_lair_voritor_lizard.iff,ed
+Dathomir,ancient bull rancor,ancient_bull_rancor,bull_rancor,rancor/shared_lair_rancor.iff,ed
+Dathomir,ancient graul,ancient_graul,graul,graul/shared_lair_graul.iff,ed
+Dathomir,ancient reptilian flier,ancient_reptilian_flier,reptilian_flier,base/shared_poi_all_lair_nest_large.iff,ed
+Dathomir,bull rancor,bull_rancor,bull_rancor,rancor/shared_lair_rancor.iff,ed
+Dathomir,enraged bull rancor,enraged_bull_rancor,bull_rancor,rancor/shared_lair_rancor.iff,ed
+Dathomir,enraged rancor,enraged_rancor,rancor,rancor/shared_lair_rancor.iff,ed
+Dathomir,enraged reptilian flier,enraged_reptilian_flier,reptilian_flier,base/shared_poi_all_lair_nest_large.iff,ed
+Dathomir,frenzied graul,frenzied_graul,frenzied_graul,graul/shared_lair_graul.iff,ed
+Dathomir,gaping spider hunter,gaping_spider_hunter,gaping_spider,base/shared_poi_all_lair_insecthill_large.iff,ed
+Dathomir,gaping spider queen,gaping_spider_queen,gaping_spider_queen,base/shared_poi_all_lair_insecthill_large.iff,ed
+Dathomir,gaping spider recluse,gaping_spider_recluse,gaping_spider_recluse,base/shared_poi_all_lair_insecthill_large.iff,ed
+Dathomir,gnarled rancor,gnarled_rancor,rancor,rancor/shared_lair_rancor.iff,ed
+Dathomir,graul,graul,graul,graul/shared_lair_graul.iff,ed
+Dathomir,graul mauler,graul_mauler,graul,graul/shared_lair_graul.iff,ed
+Dathomir,infant graul,infant_graul,infant_graul,graul/shared_lair_graul.iff,ed
+Dathomir,injured purbole,injured_purbole,purbole,purbole/shared_lair_purbole.iff,ed
+Dathomir,lurking shear mite,lurking_shear_mite,shear_mite,shear_mite/shared_lair_shear_mite.iff,ed
+Dathomir,malkloc bull,malkloc_bull,malkloc_bull,malkloc/shared_lair_malkloc.iff,ed
+Dathomir,mature reptilian flier,mature_reptilian_flier,reptilian_flier,base/shared_poi_all_lair_nest_large.iff,ed
+Dathomir,mutant rancor,mutant_rancor,mutant_rancor,rancor/shared_lair_rancor.iff,ed
+Dathomir,purbole,purbole,purbole,purbole/shared_lair_purbole.iff,ed
+Dathomir,purbole elder,purbole_elder,purbole_elder,purbole/shared_lair_purbole.iff,ed
+Dathomir,purbole hunter,purbole_hunter,purbole,purbole/shared_lair_purbole.iff,ed
+Dathomir,purbole scout,purbole_scout,purbole,purbole/shared_lair_purbole.iff,ed
+Dathomir,purbole stalker,purbole_stalker,purbole,purbole/shared_lair_purbole.iff,ed
+Dathomir,purbole youth,purbole_youth,purbole_youth,purbole/shared_lair_purbole.iff,ed
+Dathomir,rancor,jabbas_palace_rancor,rancor,rancor/shared_lair_rancor.iff,ed
+Dathomir,rancor youth,rancor_youth,rancor_youth,rancor/shared_lair_rancor.iff,ed
+Dathomir,reclusive shear mite,reclusive_shear_mite,shear_mite,shear_mite/shared_lair_shear_mite.iff,ed
+Dathomir,reptilian flier,reptilian_flier,reptilian_flier,base/shared_poi_all_lair_nest_large.iff,ed
+Dathomir,shear mite hunter,shear_mite_hunter,shear_mite_hunter,shear_mite/shared_lair_shear_mite.iff,ed
+Dathomir,shear mite queen,shear_mite_queen,shear_mite_queen,shear_mite/shared_lair_shear_mite.iff,ed
+Endor,Borgle life sapper,borgle_life_sapper,borgle,borgle/shared_lair_borgle.iff,ed
+Endor,Hanadak ancient,hanadak_ancient,hanadak,hanadak/shared_lair_hanadak.iff,ed
+Endor,Hanadak drifter,hanadak_drifter,hanadak,hanadak/shared_lair_hanadak.iff,ed
+Endor,Roba,roba,roba,roba/shared_lair_roba.iff,ed
+Endor,Roba pack leader,roba_pack_leader,roba,roba/shared_lair_roba.iff,ed
+Endor,aggravated bordok mare,aggrivated_bordok_mare,bordok,bordok/shared_lair_bordok.iff,ed
+Endor,arachne drone,arachne_drone,queen_arachne,base/shared_poi_all_lair_insecthill_large.iff,ed
+Endor,arachne warrior,arachne_warrior,queen_arachne,base/shared_poi_all_lair_insecthill_large.iff,ed
+Endor,arachne webmaster,arachne_webmaster,queen_arachne,base/shared_poi_all_lair_insecthill_large.iff,ed
+Endor,bark mite burrower,bark_mite_burrower,bark_mite,bark_mite/shared_lair_bark_mite.iff,ed
+Endor,bark mite burrower queen,bark_mite_burrower_queen,bark_mite_burrower_queen,bark_mite/shared_lair_bark_mite.iff,ed
+Endor,blood drenched merek king,blood_drenched_merek_king,blood_drenched_merek_king,merek/shared_lair_merek.iff,ed
+Endor,blood frenzied boar wolf,blood_frenzied_boar_wolf,boar_wolf,boar_wolf/shared_lair_boar_wolf.iff,ed
+Endor,blood stained merek,blood_stained_merek,merek,merek/shared_lair_merek.iff,ed
+Endor,bloodseeker mite,bloodseeker_mite,bloodseeker_mite,base/shared_poi_all_lair_insecthill_large.iff,ed
+Endor,bloodseeker mite queen,bloodseeker_mite_queen,bloodseeker_mite_queen,base/shared_poi_all_lair_insecthill_large.iff,ed
+Endor,blooming jax,blooming_jax,blooming_jax,base/shared_poi_all_lair_warren_large.iff,ed
+Endor,blurrg,blurrg,blurrg,blurrg/shared_lair_blurrg.iff,ed
+Endor,blushing jax,blushing_jax,blushing_jax,base/shared_poi_all_lair_warren_large.iff,ed
+Endor,boar wolf,boar_wolf,boar_wolf,boar_wolf/shared_lair_boar_wolf.iff,ed
+Endor,boar wolf ravager,boar_wolf_ravager,boar_wolf,boar_wolf/shared_lair_boar_wolf.iff,ed
+Endor,bolle bol bark biter,bolle_bol_bark_biter,bolle_bol,bolle_bol/shared_lair_bolle_bol.iff,ed
+Endor,bolle bol female,bolle_bol_female,bolle_bol,bolle_bol/shared_lair_bolle_bol.iff,ed
+Endor,bolle bol herd leader,bolle_bol_herd_leader,bolle_bol,bolle_bol/shared_lair_bolle_bol.iff,ed
+Endor,bolle bol male,bolle_bol_male,bolle_bol,bolle_bol/shared_lair_bolle_bol.iff,ed
+Endor,bolma pack master,bolma_pack_master,bolma,bolma/shared_lair_bolma.iff,ed
+Endor,bordok ancient,bordok_ancient,bordok,bordok/shared_lair_bordok.iff,ed
+Endor,bordok foal,bordok_foal,bordok_foal,bordok/shared_lair_bordok.iff,ed
+Endor,bordok herd master,bordok_herd_master,bordok,bordok/shared_lair_bordok.iff,ed
+Endor,cowardly gurreck,cowardly_gurreck,gurreck,gurreck/shared_lair_gurreck.iff,ed
+Endor,crazed gurreck,crazed_gurreck,gurreck,gurreck/shared_lair_gurreck.iff,ed
+Endor,crimson blurrg,crimson_blurrg,blurrg,blurrg/shared_lair_blurrg.iff,ed
+Endor,delirious merek avenger,delirious_merek_avenger,merek,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Endor,deranged mantigrue,deranged_mantigrue,mantigrue_night_stalker,base/shared_poi_all_lair_nest_large.iff,ed
+Endor,desert gurreck charger,desert_gurreck_charger,gurreck,gurreck/shared_lair_gurreck.iff,ed
+Endor,diseased blurrg,diseased_blurrg,blurrg,blurrg/shared_lair_blurrg.iff,ed
+Endor,disturbed bolma,disturbed_bolma,bolma,bolma/shared_lair_bolma.iff,ed
+Endor,domesticated merek,domesticated_merek,merek,merek/shared_lair_merek.iff,ed
+Endor,elder Hanadak matriarch,elder_hanadak_matriarch,elder_hanadak_matriarch,hanadak/shared_lair_hanadak.iff,ed
+Endor,erratic swirl prong,erratic_swirl_prong,swirl_prong,swirl_prong/shared_lair_swirl_prong.iff,ed
+Endor,festering squill,festering_squill,squill,squill/shared_lair_squill.iff,ed
+Endor,fierce Borgle,fierce_borgle,borgle,borgle/shared_lair_borgle.iff,ed
+Endor,gorax,gorax,gorax,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Endor,gurreck,gurreck,gurreck,gurreck/shared_lair_gurreck.iff,ed
+Endor,kai tok prowler,kai_tok_prowler,kai_tok,base/shared_poi_all_lair_warren_large.iff,ed
+Endor,kai tok scavenger,kai_tok_scavenger,kai_tok,base/shared_poi_all_lair_warren_large.iff,ed
+Endor,kai tok slayer,kai_tok_slayer,kai_tok,base/shared_poi_all_lair_warren_large.iff,ed
+Endor,king merek harvester,king_merek_harvester,king_merek_harvester,merek/shared_lair_merek.iff,ed
+Endor,lice ridden remmer queen,lice_ridden_remmer_queen,lice_ridden_remmer_queen,remmer/shared_lair_remmer.iff,ed
+Endor,lumbering bolma,lumbering_bolma,bolma,bolma/shared_lair_bolma.iff,ed
+Endor,mantigrue night stalker,mantigrue_night_stalker,mantigrue_night_stalker,base/shared_poi_all_lair_nest_large.iff,ed
+Endor,mantigrue screecher,mantigrue_screecher,mantigrue_night_stalker,base/shared_poi_all_lair_nest_large.iff,ed
+Endor,mature Hanadak,mature_hanadak,hanadak,hanadak/shared_lair_hanadak.iff,ed
+Endor,mature Hanadak rock smasher,mature_hanadak_rock_smasher,hanadak,hanadak/shared_lair_hanadak.iff,ed
+Endor,merek assassin,merek_assassin,merek,merek/shared_lair_merek.iff,ed
+Endor,merek cavern creeper,merek_cavern_creeper,merek,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Endor,merek deaths head,merek_deaths_head,merek,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Endor,merek harvester,merek_harvester,merek,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Endor,minor gorax,minor_gorax,gorax,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Endor,noxious squill,noxious_squill,squill,squill/shared_lair_squill.iff,ed
+Endor,putrid Borgle,putrid_borgle,borgle,borgle/shared_lair_borgle.iff,ed
+Endor,queen arachne,queen_arachne,queen_arachne,base/shared_poi_all_lair_insecthill_large.iff,ed
+Endor,queen merek harvester,queen_merek_harvester,queen_merek_harvester,merek/shared_lair_merek.iff,ed
+Endor,rancid remmer warrior,rancid_remmer_warrior,remmer,remmer/shared_lair_remmer.iff,ed
+Endor,ravenous Roba stalker,ravenous_roba_stalker,roba,roba/shared_lair_roba.iff,ed
+Endor,reclusive Roba,reclusive_roba,roba,roba/shared_lair_roba.iff,ed
+Endor,remmer carrion keeper,remmer_carrion_keeper,remmer,remmer/shared_lair_remmer.iff,ed
+Endor,roaming bordok stud,roaming_bordok_stud,bordok,bordok/shared_lair_bordok.iff,ed
+Endor,rotten gut remmer king,rotten_gut_remmer_king,rotten_gut_remmer_king,remmer/shared_lair_remmer.iff,ed
+Endor,swirl prong,swirl_prong,swirl_prong,swirl_prong/shared_lair_swirl_prong.iff,ed
+Endor,swirl prong impaler,swirl_prong_impaler,swirl_prong,swirl_prong/shared_lair_swirl_prong.iff,ed
+Endor,swirl prong pack leader,swirl_prong_pack_leader,swirl_prong,swirl_prong/shared_lair_swirl_prong.iff,ed
+Endor,toxic merek battlelord,toxic_merek_battlelord,merek,merek/shared_lair_merek.iff,ed
+Endor,young Hanadak rock crusher,young_hanadak_rock_crusher,young_hanadak_rock_crusher,hanadak/shared_lair_hanadak.iff,ed
+Endor,young Roba,young_roba,young_roba,roba/shared_lair_roba.iff,ed
+Lok,crazed gurk destroyer,crazed_gurk_destroyer,gurk,gurk/shared_lair_gurk.iff,ed
+Lok,desert vesp,desert_vesp,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,domesticated gurnaset,domesticated_gurnaset,gurnaset,gurnaset/shared_lair_gurnaset.iff,ed
+Lok,domesticated snorbal,domesticated_snorbal,snorbal,snorbal/shared_lair_snorbal.iff,ed
+Lok,dune kimogila,dune_kimogila,kimogila,kimogila/shared_lair_kimogila.iff,ed
+Lok,elder snorbal female,elder_snorbal_female,elder_snorbal_female,snorbal/shared_lair_snorbal.iff,ed
+Lok,elder snorbal male,elder_snorbal_male,elder_snorbal_male,snorbal/shared_lair_snorbal.iff,ed
+Lok,enraged dune kimogila,enraged_dune_kimogila,kimogila,kimogila/shared_lair_kimogila.iff,ed
+Lok,enraged kimogila,enraged_kimogila,kimogila,kimogila/shared_lair_kimogila.iff,ed
+Lok,female snorbal calf,female_snorbal_calf,female_snorbal_calf,snorbal/shared_lair_snorbal.iff,ed
+Lok,feral gurk,feral_gurk,gurk,gurk/shared_lair_gurk.iff,ed
+Lok,ferocious kusak,ferocious_kusak,kusak,kusak/shared_lair_kusak.iff,ed
+Lok,giant dune kimogila,giant_dune_kimogila,giant_dune_kimogila,kimogila/shared_lair_kimogila.iff,ed
+Lok,giant flit,giant_flit,giant_flit,flit/shared_lair_flit.iff,ed
+Lok,giant kimogila,giant_kimogila,giant_kimogila,kimogila/shared_lair_kimogila.iff,ed
+Lok,giant spined snake,giant_spined_snake,giant_spined_snake,spined_snake/shared_lair_spined_snake.iff,ed
+Lok,gorge vesp,gorge_vesp,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,gurk,gurk,gurk,gurk/shared_lair_gurk.iff,ed
+Lok,gurk gatherer,gurk_gatherer,gurk,gurk/shared_lair_gurk.iff,ed
+Lok,gurk tracker,gurk_tracker,gurk,gurk/shared_lair_gurk.iff,ed
+Lok,gurk whelp,gurk_whelp,gurk_whelp,gurk/shared_lair_gurk.iff,ed
+Lok,gurnaset,gurnaset,gurnaset,gurnaset/shared_lair_gurnaset.iff,ed
+Lok,kimogila,kimogila,kimogila,kimogila/shared_lair_kimogila.iff,ed
+Lok,kimogila hatchling,kimogila_hatchling,kimogila_hatchling,kimogila/shared_lair_kimogila.iff,ed
+Lok,kusak,kusak,kusak,kusak/shared_lair_kusak.iff,ed
+Lok,kusak mauler,kusak_mauler,kusak,kusak/shared_lair_kusak.iff,ed
+Lok,kusak stalker,kusak_stalker,kusak,kusak/shared_lair_kusak.iff,ed
+Lok,langlatch destroyer,langlatch_destroyer,langlatch,langlatch/shared_lair_langlatch.iff,ed
+Lok,langlatch female,eow_langlatch_female,langlatch,langlatch/shared_lair_langlatch.iff,ed
+Lok,langlatch hunter,langlatch_hunter,langlatch,langlatch/shared_lair_langlatch.iff,ed
+Lok,langlatch male,eow_langlatch_male,langlatch,langlatch/shared_lair_langlatch.iff,ed
+Lok,lowland salt mynock,lowland_salt_mynock,salt_mynock,mynock/shared_lair_mynock.iff,ed
+Lok,male snorbal calf,male_snorbal_calf,male_snorbal_calf,snorbal/shared_lair_snorbal.iff,ed
+Lok,mature snorbal female,mature_snorbal_female,snorbal,snorbal/shared_lair_snorbal.iff,ed
+Lok,mature snorbal male,mature_snorbal_male,snorbal,snorbal/shared_lair_snorbal.iff,ed
+Lok,mountain vesp,mission_mountain_villager,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,perlek,perlek,perlek,perlek/shared_lair_perlek.iff,ed
+Lok,perlek ravager,perlek_ravager,perlek,base/shared_poi_all_lair_warren_large.iff,ed
+Lok,perlek scavenger,perlek_scavanger,perlek,base/shared_poi_all_lair_warren_large.iff,ed
+Lok,recluse gurk king,recluse_gurk_king,recluse_gurk_king,gurk/shared_lair_gurk.iff,ed
+Lok,riverside sulfur mynock,riverside_sulfur_mynock,riverside_sulfur_mynock,mynock/shared_lair_mynock.iff,ed
+Lok,salt mynock,salt_mynock,salt_mynock,fynock/shared_lair_fynock.iff,ed
+Lok,shaggy gurk youth,shaggy_gurk_youth,shaggy_gurk_youth,gurk/shared_lair_gurk.iff,ed
+Lok,sharptooth langlatch,sharptooth_langlatch,langlatch,langlatch/shared_lair_langlatch.iff,ed
+Lok,snorbal matriarch,snorbal_matriarch,snorbal_matriarch,snorbal/shared_lair_snorbal.iff,ed
+Lok,spined snake,spined_snake,spined_snake,spined_snake/shared_lair_spined_snake.iff,ed
+Lok,spined snake recluse,spined_snake_recluse,spined_snake,base/shared_poi_all_lair_insecthill_large.iff,ed
+Lok,sulfur pool mynock,sulfur_pool_mynock,mynock,fynock/shared_lair_fynock.iff,ed
+Lok,vesp,vesp,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,vesp hunter,vesp_hunter,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,vesp scavanger,vesp_scavanger,vesp,vesp/shared_lair_vesp.iff,ed
+Naboo,alpha veermok,alpha_veermok,alpha_veermok,veermok/shared_lair_veermok.iff,ed
+Naboo,bachelor gualama,bachelor_gualama,gualama,gualama/shared_lair_gualama.iff,ed
+Naboo,bolle bol,bolle_bol,bolle_bol,bolle_bol/shared_lair_bolle_bol.iff,ed
+Naboo,carnivorous nuna,carnivorous_nuna,nuna,nuna/shared_lair_nuna.iff,ed
+Naboo,dappled gualama,dappled_gualama,dappled_gualama,gualama/shared_lair_gualama.iff,ed
+Naboo,domestic tusk cat,domestic_tusk_cat,tusk_cat,tusk_cat/shared_lair_tusk_cat.iff,ed
+Naboo,falumpaset,falumpaset,falumpaset,falumpaset/shared_lair_falumpaset.iff,ed
+Naboo,fambaa,fambaa,fambaa,fambaa/shared_lair_fambaa.iff,ed
+Naboo,female great grass plains tusk cat,female_great_grass_plains_tusk_cat,tusk_cat,tusk_cat/shared_lair_tusk_cat.iff,ed
+Naboo,female swamp tusk cat,female_swamp_tusk_cat,female_swamp_tusk_cat,tusk_cat/shared_lair_tusk_cat.iff,ed
+Naboo,giant peko peko,giant_peko_peko,giant_peko_peko,peko_peko/shared_lair_peko_peko.iff,ed
+Naboo,giant veermok,giant_veermok,giant_veermok,veermok/shared_lair_veermok.iff,ed
+Naboo,greater shaupaut,greater_shaupaut,greater_shaupaut,shaupaut/shared_lair_shaupaut.iff,ed
+Naboo,king venom nightspider,king_venom_nightspider,king_venom_nightspider,base/shared_poi_all_lair_insecthill_large.iff,ed
+Naboo,male great grass plains tusk cat,male_great_grass_plains_tusk_cat,tusk_cat,tusk_cat/shared_lair_tusk_cat.iff,ed
+Naboo,male swamp tusk cat,male_swamp_tusk_cat,male_swamp_tusk_cat,tusk_cat/shared_lair_tusk_cat.iff,ed
+Naboo,mauler veermok,mauler_veermok,veermok,veermok/shared_lair_veermok.iff,ed
+Naboo,maverick gualama,maverick_gualama,gualama,gualama/shared_lair_gualama.iff,ed
+Naboo,mountain ikopi,mountain_ikopi,ikopi,ikopi/shared_lair_ikopi.iff,ed
+Naboo,mountain krevol,mountain_krevol,horned_krevol,base/shared_poi_all_lair_insecthill_large.iff,ed
+Naboo,narglatch,narglatch,narglatch,langlatch/shared_lair_langlatch.iff,ed
+Naboo,narglatch female,narglatch_female,narglatch_female,langlatch/shared_lair_langlatch.iff,ed
+Naboo,peko peko,peko_peko,peko_peko,peko_peko/shared_lair_peko_peko.iff,ed
+Naboo,rogue falumpaset,rogue_falumpaset,falumpaset,falumpaset/shared_lair_falumpaset.iff,ed
+Naboo,rogue fambaa,rogue_fambaa,fambaa,fambaa/shared_lair_fambaa.iff,ed
+Naboo,spineflap handmaiden,spineflap_handmaiden,capper_spineflap,capper_spineflap/shared_lair_capper_spineflap.iff,ed
+Naboo,spineflap queen,spineflap_queen,spineflap_queen,capper_spineflap/shared_lair_capper_spineflap.iff,ed
+Naboo,veermok,naboo_veermok,veermok,veermok/shared_lair_veermok.iff,ed
+Naboo,veermok cannibal,veermok_cannibal,veermok,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Naboo,veermok hunter,veermok_hunter,veermok,veermok/shared_lair_veermok.iff,ed
+Naboo,veermok scout,naboo_veermok_scout,veermok,veermok/shared_lair_veermok.iff,ed
+Rori,charred krevol,charred_krevol,horned_krevol,base/shared_poi_all_lair_insecthill_large.iff,ed
+Rori,dashing vir vur,dashing_vir_vur,vir_vur,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,deranged squall,deranged_squall,squall,squall/shared_lair_squall.iff,ed
+Rori,dusk vir vur,dusk_vir_vur,vir_vur,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,elder pugoriss,elder_pugoriss,elder_pugoriss,pugoriss/shared_lair_pugoriss.iff,ed
+Rori,enraged wood mite king,enraged_wood_mite_king,enraged_wood_mite_king,bark_mite/shared_lair_bark_mite.iff,ed
+Rori,female kai tok,female_kai_tok,kai_tok,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,feral forest mite king,feral_forest_mite_king,bark_mite,bark_mite/shared_lair_bark_mite.iff,ed
+Rori,forest mite,forest_mite,forest_mite,bark_mite/shared_lair_bark_mite.iff,ed
+Rori,fuzzy jax,fuzzy_jax,bearded_jax,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,gnarled bark mite queen,gnarled_bark_mite_queen,gnarled_bark_mite_queen,bark_mite/shared_lair_bark_mite.iff,ed
+Rori,great Borgle,great_borgle,great_borgle,borgle/shared_lair_borgle.iff,ed
+Rori,grizzled bark mite,grizzled_bark_mite,bark_mite,bark_mite/shared_lair_bark_mite.iff,ed
+Rori,levia squall,leviasquall,leviasquall,squall/shared_lair_squall.iff,ed
+Rori,male kai tok,male_kai_tok,kai_tok,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,mammoth bearded jax,mammoth_bearded_jax,mammoth_bearded_jax,bearded_jax/shared_lair_bearded_jax.iff,ed
+Rori,midnight vir vur,midnight_vir_vur,vir_vur,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,mountain torton,mountain_torton,torton,torton/shared_lair_torton.iff,ed
+Rori,nudfuh,nudfuh,nudfuh,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,poisonous krevol queen,poisonous_krevol_queen,poisonous_krevol_queen,base/shared_poi_all_lair_insecthill_large.iff,ed
+Rori,potbellied vrobal,potbellied_vrobal,vrobal,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Rori,pugoriss,pugoriss,pugoriss,pugoriss/shared_lair_pugoriss.iff,ed
+Rori,ravenous torton,ravenous_torton,torton,torton/shared_lair_torton.iff,ed
+Rori,sap covered forest mite queen,sap_covered_forest_mite_queen,bark_mite,bark_mite/shared_lair_bark_mite.iff,ed
+Rori,savage pugoriss,savage_pugoriss,pugoriss,pugoriss/shared_lair_pugoriss.iff,ed
+Rori,screaming kai tok,screaming_kai_tok,kai_tok,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,shallow torton,shallow_torton,shallow_torton,torton/shared_lair_torton.iff,ed
+Rori,tattered torton,tattered_torton,torton,torton/shared_lair_torton.iff,ed
+Rori,torton,torton,torton,torton/shared_lair_torton.iff,ed
+Rori,twilight vir vur,twilight_vir_vur,vir_vur,base/shared_poi_all_lair_warren_large.iff,ed
+Rori,vicious squall,vicious_squall,squall,squall/shared_lair_squall.iff,ed
+Rori,vrobal,vrobal,vrobal,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Rori,vrobal bull,vrobal_bull,vrobal_bull,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Rori,vrobal sow,vrobal_sow,vrobal,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Rori,wood mite,wood_mite,wood_mite,bark_mite/shared_lair_bark_mite.iff,ed
+Rori,wood mite matriarch,wood_mite_matriarch,wood_mite_matriarch,bark_mite/shared_lair_bark_mite.iff,ed
+Talus,Roba female,roba_female,roba,roba/shared_lair_roba.iff,ed
+Talus,Roba male,roba_male,roba,roba/shared_lair_roba.iff,ed
+Talus,berserk kahmurra,beserk_kahmurra,kahmurra,base/shared_poi_all_lair_warren_large.iff,ed
+Talus,blister rot queen,blister_rot_queen,blister_rot_queen,base/shared_poi_all_lair_insecthill_large.iff,ed
+Talus,crazed Roba,crazed_roba,roba,roba/shared_lair_roba.iff,ed
+Talus,dung mite,dung_mite,dung_mite,base/shared_poi_all_lair_insecthill_large.iff,ed
+Talus,famished sludge panther,famished_sludge_panther,minor_sludge_panther,base/shared_poi_all_lair_warren_large.iff,ed
+Talus,festering dung queen,festering_dung_queen,decay_mite,base/shared_poi_all_lair_insecthill_large.iff,ed
+Talus,foaming vynock,foaming_vynock,vynock,vynock/shared_lair_vynock.iff,ed
+Talus,frenzied fynock guardian,frenzied_fynock_guardian,fynock,fynock/shared_lair_fynock.iff,ed
+Talus,fynock,fynock,fynock,fynock/shared_lair_fynock.iff,ed
+Talus,glutted fynock queen,glutted_fynock_queen,glutted_fynock_queen,fynock/shared_lair_fynock.iff,ed
+Talus,greater sludge panther,greater_sludge_panther,greater_sludge_panther,base/shared_poi_all_lair_warren_large.iff,ed
+Talus,guf drolg,guf_drolg,guf_drolg,guf_drolg/shared_lair_guf_drolg.iff,ed
+Talus,guf drolg female,guf_drolg_female,guf_drolg,guf_drolg/shared_lair_guf_drolg.iff,ed
+Talus,hilltop kima,hilltop_kima,kima,kima/shared_lair_kima.iff,ed
+Talus,huf dun,huf_dun,huf_dun,huf_dun/shared_lair_huf_dun.iff,ed
+Talus,huf dun bull,huf_dun_bull,huf_dun,huf_dun/shared_lair_huf_dun.iff,ed
+Talus,jungle fynock,jungle_fynock,fynock,fynock/shared_lair_fynock.iff,ed
+Talus,kahmurra,kahmurra,kahmurra,base/shared_poi_all_lair_warren_large.iff,ed
+Talus,kima,kima,kima,kima/shared_lair_kima.iff,ed
+Talus,meager tortur,meager_tortur,meager_tortur,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Talus,mutated kahmurra,mutated_kahmurra,mutated_kahmurra,base/shared_poi_all_lair_warren_large.iff,ed
+Talus,percussive rasp,percussive_rasp,plumed_rasp,base/shared_poi_all_lair_nest_large.iff,ed
+Talus,sickly decay mite queen,sickly_decay_mite_queen,decay_mite,base/shared_poi_all_lair_insecthill_large.iff,ed
+Talus,sludge panther,sludge_panther,minor_sludge_panther,base/shared_poi_all_lair_warren_large.iff,ed
+Talus,tortur,tortur,meager_tortur,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Talus,tortur bull,tortur_bull,meager_tortur,base/shared_poi_all_lair_rock_shelter_large.iff,ed
+Talus,vicious huf dun,vicious_huf_dun,huf_dun,huf_dun/shared_lair_huf_dun.iff,ed
+Talus,wolf kima,wolf_kima,kima,kima/shared_lair_kima.iff,ed
+Tatooine,bantha,bantha,bantha,bantha/shared_lair_bantha.iff,ed
+Tatooine,bocatt,bocatt,bocatt,bocatt/shared_lair_bocatt.iff,ed
+Tatooine,bull bantha,bull_bantha,bantha,bantha/shared_lair_bantha.iff,ed
+Tatooine,canyon krayt dragon,canyon_krayt_dragon,canyon_krayt_dragon,krayt_dragon/shared_lair_krayt_dragon.iff,ed
+Tatooine,dewback,dewback,dewback,dewback/shared_lair_dewback.iff,ed
+Tatooine,dewback cannibal,dewback_cannibal,dewback,dewback/shared_lair_dewback.iff,ed
+Tatooine,dragonet,dragonet,dragonet,base/shared_poi_all_lair_nest_large.iff,ed
+Tatooine,dune bantha,dune_bantha,bantha,bantha/shared_lair_bantha.iff,ed
+Tatooine,dune lizard,dune_lizard,dune_lizard,dune_lizard/shared_lair_dune_lizard.iff,ed
+Tatooine,feral bantha,feral_bantha,bantha,bantha/shared_lair_bantha.iff,ed
+Tatooine,giant canyon krayt dragon,giant_canyon_krayt_dragon,canyon_krayt_dragon,krayt_dragon/shared_lair_krayt_dragon.iff,ed
+Tatooine,giant sand beetle,giant_sand_beetle,giant_sand_beetle,base/shared_poi_all_lair_insecthill_large.iff,ed
+Tatooine,giant worrt,giant_worrt,giant_worrt,worrt/shared_lair_worrt.iff,ed
+Tatooine,greater desert womprat,greater_desert_womprat,greater_desert_womp_rat,womp_rat/shared_lair_womp_rat_desert.iff,ed
+Tatooine,grizzled dewback,grizzled_dewback,dewback,dewback/shared_lair_dewback.iff,ed
+Tatooine,juvenile canyon krayt,juvenile_canyon_krayt,juvenile_canyon_krayt,krayt_dragon/shared_lair_krayt_dragon.iff,ed
+Tatooine,matriarch bantha,matriarch_bantha,matriarch_bantha,bantha/shared_lair_bantha.iff,ed
+Tatooine,mountain dewback,mountain_dewback,mountain_dewback,dewback/shared_lair_dewback.iff,ed
+Tatooine,mountain squill,mountain_squill,mountain_squill,squill/shared_lair_squill.iff,ed
+Tatooine,mountain worrt,mountain_worrt,mountain_worrt,worrt/shared_lair_worrt.iff,ed
+Tatooine,mutant womprat,mutant_womprat,womp_rat,womp_rat/shared_lair_womp_rat.iff,ed
+Tatooine,rock beetle,rock_beetle,rock_beetle,base/shared_poi_all_lair_insecthill_large.iff,ed
+Tatooine,ronto,ronto,ronto,ronto/shared_lair_ronto.iff,ed
+Tatooine,ronto male,ronto_male,ronto,ronto/shared_lair_ronto.iff,ed
+Tatooine,squill,menagerie_squill,squill,squill/shared_lair_squill.iff,ed
+Tatooine,swarming lesser dewback,swarming_lesser_dewback,swarming_lesser_dewback,dewback/shared_lair_dewback.iff,ed
+Tatooine,variegated womprat,variegated_womprat,variegated_womp_rat,womp_rat/shared_lair_womp_rat_desert.iff,ed
+Yavin 4,Choku female,choku_female,choku,choku/shared_lair_choku.iff,ed
+Yavin 4,Choku hunter,choku_hunter,choku,choku/shared_lair_choku.iff,ed
+Yavin 4,Choku male,choku_male,choku,choku/shared_lair_choku.iff,ed
+Yavin 4,Kliknik defender,kliknik_defender,kliknik,kliknik/shared_lair_kliknik.iff,ed
+Yavin 4,Kliknik hunter,kliknik_hunter,kliknik,kliknik/shared_lair_kliknik.iff,ed
+Yavin 4,Kliknik queen,kliknik_queen,kliknik_queen,kliknik/shared_lair_kliknik.iff,ed
+Yavin 4,Kliknik queen harvester,kliknik_queen_harvester,kliknik,kliknik/shared_lair_kliknik.iff,ed
+Yavin 4,Kliknik scout,kliknik_scout,kliknik,kliknik/shared_lair_kliknik.iff,ed
+Yavin 4,Kliknik warrior,kliknik_warrior,kliknik,kliknik/shared_lair_kliknik.iff,ed
+Yavin 4,Kliknik worker,kliknik_worker,kliknik,kliknik/shared_lair_kliknik.iff,ed
+Yavin 4,Mamien ancient,mamien_ancient,mamien_ancient,mamien/shared_lair_mamien.iff,ed
+Yavin 4,Mamien elder,mamien_elder,mamien,mamien/shared_lair_mamien.iff,ed
+Yavin 4,Mamien female,mamien_female,mamien,mamien/shared_lair_mamien.iff,ed
+Yavin 4,Mamien male,mamien_male,mamien,mamien/shared_lair_mamien.iff,ed
+Yavin 4,Mamien matriarch,mamien_matriarch,mamien,mamien/shared_lair_mamien.iff,ed
+Yavin 4,Skreeg female,skreeg_female,skreeg,skreeg/shared_lair_skreeg.iff,ed
+Yavin 4,Skreeg gatherer,skreeg_gatherer,skreeg,skreeg/shared_lair_skreeg.iff,ed
+Yavin 4,Skreeg hunter,skreeg_hunter,skreeg,skreeg/shared_lair_skreeg.iff,ed
+Yavin 4,Skreeg male,skreeg_male,skreeg,skreeg/shared_lair_skreeg.iff,ed
+Yavin 4,Skreeg scout,skreeg_scout,skreeg,skreeg/shared_lair_skreeg.iff,ed
+Yavin 4,Skreeg warrior,skreeg_warrior,skreeg,skreeg/shared_lair_skreeg.iff,ed
+Yavin 4,Skreeg warrior elite,skreeg_warrior_elite,skreeg,skreeg/shared_lair_skreeg.iff,ed
+Yavin 4,Tanc mite warrior,tanc_mite_warrior,tanc_mite,tanc_mite/shared_lair_tanc_mite.iff,ed
+Yavin 4,crystal snake,crystal_snake,crystal_snake,crystal_snake/shared_lair_crystal_snake.iff,ed
+Yavin 4,frenzied Choku,frenzied_choku,choku,choku/shared_lair_choku.iff,ed
+Yavin 4,giant Tanc mite,giant_tanc_mite,giant_tanc_mite,tanc_mite/shared_lair_tanc_mite.iff,ed
+Yavin 4,giant angler,giant_angler,giant_angler,angler/shared_lair_angler.iff,ed
+Yavin 4,giant crystal snake,giant_crystal_snake,giant_crystal_snake,crystal_snake/shared_lair_crystal_snake.iff,ed
+Yavin 4,giant mawgax,giant_mawgax,giant_mawgax,mawgax/shared_lair_mawgax.iff,ed
+Yavin 4,giant stintaril,giant_stintaril,giant_stintaril,stintaril/shared_lair_stintaril.iff,ed
+Yavin 4,lurking angler,lurking_angler,angler,angler/shared_lair_angler.iff,ed

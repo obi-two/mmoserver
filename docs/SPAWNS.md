@@ -106,9 +106,27 @@ Confirmed on Corellia (Nov 2026): "a Corellian butterfly lair" with its
 drones outside Coronet; the lair's examine shows its hit points (2,500
 health, strength and constitution; KNOWN_ISSUES #49).
 
-Not yet: creatures above level 11 (krayt dragons, Tusken camps, ...): An
-Empire Divided's tables have them but no planet, so they need matching by
-name; and the lairs' names (`lair_n` keys are guessed from the creature).
+Above level 11 (Nov 2026): migrations 039-048, from the same generator
+(`planet_lairs_sql.py <planet> --guide ed`). The creatures are An Empire
+Divided's table (pp. 396-483), transcribed with page citations to
+`mmoserverdb/reference/prima_ed/creatures.csv` (364 wild creatures above
+level 11, each with its planet from the table's planet headings; read from
+the text layer and two OCR passes, and every row checked by eye against the
+page). Their client names, models and lair models are the `ed` rows of
+`planet_lairs.csv` (362; the shamaff has no client model). Bands and counts:
+
+| Levels | Distance from the nearest city's edge | Lairs per creature |
+|---|---|---|
+| 12-20 | 2,500 m and further | 4 |
+| 21-50 | 3,500 m and further | 3 |
+| 51+ | 4,500 m and further | 2 |
+
+A lair's hit points are 500 per level as before, at most 50,000 (a level
+300 krayt dragon's would otherwise have 150,000). By planet: Endor 75
+creatures, Lok 51, Rori 36, Dathomir 32, Naboo 31, Yavin 4 31, Talus 30,
+Tatooine 27, Corellia 26, Dantooine 23; 1,258 lairs in all. Their ids start
+apart from the lower levels' (templates 5001+, lairs 2101+, lair
+attributes 20001+, 100 or 1,000 per planet).
 
 Parked (ROADMAP): levels that change with how much an area is hunted; spawn
 areas set up by a community from the portal.

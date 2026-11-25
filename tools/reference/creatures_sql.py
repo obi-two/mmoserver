@@ -84,6 +84,22 @@ def stats_2004(r):
     return ham, values
 
 
+def stats_ed(r):
+    """HAM ranges and attribute values for a row of An Empire Divided's table."""
+    yes = lambda k: int(r[k] == "yes")
+    ham = {pool: (int(float(r[pool + "_min"])), int(float(r[pool + "_max"]))) for pool in POOLS}
+    values = {
+        "creature_tohit": r["to_hit"],
+        "creature_damage_min": r["damage_min"], "creature_damage_max": r["damage_max"],
+        "creature_xp": r["xp"],
+        "creature_social_group": r["social_group"],
+        "killer": yes("killer"), "Pack": yes("pack"), "Herd": yes("herd"),
+        "stalking": yes("stalker"), "creature_is_aggressive": yes("aggro"),
+        "creature_group_assist": yes("pack"),
+    }
+    return ham, values
+
+
 def stat_rows(npc_id, ham, values):
     """(npc_id, attribute, value) rows: each pool the middle of its range,
     the range itself, then the other values."""
@@ -114,18 +130,8 @@ def main():
             flags = r["notes"]
         else:
             r = ped[name]
-            yes = lambda k: int(r[k] == "yes")
-            ham = {pool: (int(r[pool + "_min"]), int(r[pool + "_max"])) for pool in POOLS}
+            ham, values = stats_ed(r)
             cite = "An Empire Divided, pp. %s-%s" % (r["page"], r["facing"])
-            values = {
-                "creature_tohit": r["to_hit"],
-                "creature_damage_min": r["damage_min"], "creature_damage_max": r["damage_max"],
-                "creature_xp": r["xp"],
-                "creature_social_group": r["social_group"],
-                "killer": yes("killer"), "Pack": yes("pack"), "Herd": yes("herd"),
-                "stalking": yes("stalker"), "creature_is_aggressive": yes("aggro"),
-                "creature_group_assist": yes("pack"),
-            }
             flags = ", ".join(k.capitalize() for k in ("aggro", "killer", "stalker", "pack", "herd")
                               if r[k] == "yes") + (", Tamable" if r["can_tame"] == "yes" else "")
             flags += "".join(", " + a for a in (r["special_attack_1"], r["special_attack_2"]) if a)

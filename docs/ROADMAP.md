@@ -86,8 +86,11 @@ and friends (#21).
    missions, factories, crafting, banks, camps, house signs; results in
    `docs/KNOWN_ISSUES.md`).
 3. **Fill the world** (in progress, `fill-the-world` branch; plan in
-   `docs/SPAWNS.md`): creature spawns and lairs on every planet (today:
-   around Bestine only). Exercises the AI and combat already built. The
+   `docs/SPAWNS.md`): creature spawns and lairs on every planet. Done:
+   lairs for every planet's wild creatures, levels 1-11 from the 2004 guide
+   (migrations 027-038) and above 11 from An Empire Divided (039-048),
+   placed in distance bands from the cities. Next: creature movement (they
+   stand still), then NPC camps (thugs, gangs, Tusken Raiders). Exercises the AI and combat already built. The
    client has no spawn or lair tables (those were the server's), so the
    sources are: the 2004 guide's creature tables, already transcribed (683
    creatures and NPCs, each with its planet), and its planet chapters (pp.

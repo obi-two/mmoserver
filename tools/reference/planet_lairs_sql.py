@@ -22,7 +22,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creatures_sql import REF, NEW_ATTRIBUTES, sql_str, stat_rows, stats_2004  # noqa: E402
+from creatures_sql import REF, NEW_ATTRIBUTES, sql_str, stat_rows, stats_2004, stats_ed  # noqa: E402
 
 # Distance bands from the nearest city's edge, in metres, by guide level.
 # (lowest level, highest level, min distance, max distance, lairs per creature)
@@ -30,6 +30,11 @@ BANDS = [
     (1, 5, 50, 600, 6),
     (6, 8, 600, 1500, 6),
     (9, 11, 1500, 1.0e9, 6),
+    # An Empire Divided's creatures above level 11 (migrations 039-048):
+    # further out, and fewer of the strongest.
+    (12, 20, 2500, 1.0e9, 4),
+    (21, 50, 3500, 1.0e9, 3),
+    (51, 1000, 4500, 1.0e9, 2),
 ]
 
 # The planets: the name in the guide's location column, the planet's id in
@@ -59,18 +64,23 @@ AREA = (-7600, -7600, 15200, 15200)
 # its own a generic one (base/: insect hill, nest, warren or rock shelter).
 
 
-def planet_info(planet):
+def planet_info(planet, guide="2004"):
+    """A planet's creatures from one guide: "2004" (levels 1-11, migrations
+    027 and 029-037) or "ed" (An Empire Divided, above level 11, 039-048),
+    each with its own range of ids."""
     location, planet_id, index = PLANETS[planet]
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "planet_lairs.csv"), newline="") as f:
-        creatures = [(r["name"], r["key"], r["model"], r["lair"]) for r in csv.DictReader(f) if r["planet"] == location]
-    return {
-        "planet_id": planet_id,
-        "area": AREA,
-        "ids": {"npc": 3001 + 100 * index, "lair_template": 101 + 100 * index,
-                "creature_group": 101 + 100 * index, "lair": 101 + 100 * index,
-                "spawn": 801 + index, "lair_attribute": 1001 + 1000 * index},
-        "creatures": creatures,
-    }
+        creatures = [(r["name"], r["key"], r["model"], r["lair"]) for r in csv.DictReader(f)
+                     if r["planet"] == location and r["guide"] == guide]
+    if guide == "2004":
+        ids = {"npc": 3001 + 100 * index, "lair_template": 101 + 100 * index,
+               "creature_group": 101 + 100 * index, "lair": 101 + 100 * index,
+               "spawn": 801 + index, "lair_attribute": 1001 + 1000 * index}
+    else:
+        ids = {"npc": 5001 + 100 * index, "lair_template": 2101 + 100 * index,
+               "creature_group": 2101 + 100 * index, "lair": 2101 + 100 * index,
+               "spawn": 801 + index, "lair_attribute": 20001 + 1000 * index}
+    return {"planet_id": planet_id, "area": AREA, "ids": ids, "creatures": creatures, "guide": guide}
 
 
 # Lair settings (reconstructed): its own hit points per creature level, the
@@ -78,6 +88,12 @@ def planet_info(planet):
 # quiet waves, how long until it respawns after destruction and until a
 # killed creature is replaced, and how far its creatures range.
 LAIR_HP_PER_LEVEL = 500
+LAIR_HP_MAX = 50000  # a level 300 krayt dragon's lair would otherwise have 150,000
+
+
+def lair_hp(level):
+    return min(LAIR_HP_PER_LEVEL * level, LAIR_HP_MAX)
+
 WAVE_SIZE = {"group": 5, "solo": 3}
 PASSIVE_WAVES = 3
 LAIR_RESPAWN_MS = 300000
@@ -145,10 +161,22 @@ def main():
     if len(sys.argv) > 1 and sys.argv[1] == "--lair-names":
         lair_names()
         return
-    planet = sys.argv[1] if len(sys.argv) > 1 else "tatooine"
-    p = planet_info(planet)
-    with open(os.path.join(REF, "prima_2004", "creatures.csv"), newline="") as f:
-        table = {r["name"]: r for r in csv.DictReader(f) if r["section"] == "Creatures"}
+    args = sys.argv[1:]
+    guide = "2004"
+    if "--guide" in args:
+        k = args.index("--guide")
+        guide = args[k + 1]
+        del args[k:k + 2]
+    planet = args[0] if args else "tatooine"
+    p = planet_info(planet, guide)
+    if guide == "2004":
+        with open(os.path.join(REF, "prima_2004", "creatures.csv"), newline="") as f:
+            table = {r["name"]: r for r in csv.DictReader(f) if r["section"] == "Creatures"}
+        stats_of, book = stats_2004, "Prima 2004"
+    else:
+        with open(os.path.join(REF, "prima_ed", "creatures.csv"), newline="") as f:
+            table = {r["name"]: r for r in csv.DictReader(f) if r["planet"] == PLANETS[planet][0]}
+        stats_of, book = stats_ed, "An Empire Divided"
 
     ids = dict(p["ids"])
     npcs, stats, templates, groups, lairs, lair_attrs, summary, names = [], [], [], [], [], [], [], []
@@ -165,7 +193,7 @@ def main():
         ids["creature_group"] += 1
         ids["lair"] += 1
 
-        ham, values = stats_2004(r)
+        ham, values = stats_of(r)
         npcs.append("  (%d, 8, 1, 1, %s, %s, 'mob/creature_names', %d, 1, 0, 0, 0, 1)" % (
             npc_id, sql_str("object/mobile/shared_%s.iff" % model), sql_str(key), level))
         stats.extend(stat_rows(npc_id, ham, values))
@@ -184,20 +212,31 @@ def main():
             (lair_id, "lair_creatures_max_spawn_distance", CREATURE_RANGE),
             (lair_id, "lair_creatures_respawn_delay", CREATURE_RESPAWN_MS),
             (lair_id, "creature_xp", r["xp"]),
-            (lair_id, "creature_health", LAIR_HP_PER_LEVEL * level),
-            (lair_id, "creature_strength", LAIR_HP_PER_LEVEL * level),
-            (lair_id, "creature_constitution", LAIR_HP_PER_LEVEL * level),
+            (lair_id, "creature_health", lair_hp(level)),
+            (lair_id, "creature_strength", lair_hp(level)),
+            (lair_id, "creature_constitution", lair_hp(level)),
             (lair_id, "lair_min_city_distance", dmin),
         ]
         if dmax < 1.0e9:
             lair_attrs.append((lair_id, "lair_max_city_distance", dmax))
         far = "%d m+" % dmin if dmax >= 1.0e9 else "%d-%d m" % (dmin, dmax)
-        summary.append("--   %-24s lvl %-2d %-11s %d lairs  model %s%s  (Prima 2004, pp. %s-%s)" % (
-            name, level, far, count, model, "" if model == key else " (key %s)" % key, r["page"], r["facing"]))
+        summary.append("--   %-24s lvl %-2d %-11s %d lairs  model %s%s  (%s, pp. %s-%s)" % (
+            name, level, far, count, model, "" if model == key else " (key %s)" % key, book, r["page"], r["facing"]))
 
-    x, z, w, l = p["area"]
     out = sys.stdout
-    out.write("""\
+    if guide == "2004":
+        out.write(HEADER_2004 % (planet.capitalize(), LAIR_HP_PER_LEVEL))
+    else:
+        out.write(HEADER_ED % (planet.capitalize(), LAIR_HP_PER_LEVEL, LAIR_HP_MAX))
+    out.write("\n".join(summary) + "\n--\n")
+    if planet == "tatooine" and guide == "2004":
+        out.write("-- The old test lairs near Bestine (25 womp rat and 25 rill lairs at random,\n"
+                  "-- level 10 by the city) are switched off: count 0.\n")
+    out.write("\n")
+    _body(out, p, planet, guide, npcs, stats, templates, groups, lairs, lair_attrs)
+
+
+HEADER_2004 = """\
 -- %s: creature lairs (docs/SPAWNS.md, roadmap step 3). Written by
 -- tools/reference/planet_lairs_sql.py; edit that, not this.
 --
@@ -217,12 +256,33 @@ def main():
 -- The counts and the lairs' own settings (hit points %d per level, waves,
 -- respawn times) are reconstructed too. All of it is data, to tune.
 --
-""" % (planet.capitalize(), LAIR_HP_PER_LEVEL))
-    out.write("\n".join(summary) + "\n--\n")
-    if planet == "tatooine":
-        out.write("-- The old test lairs near Bestine (25 womp rat and 25 rill lairs at random,\n"
-                  "-- level 10 by the city) are switched off: count 0.\n")
-    out.write("\n")
+"""
+
+HEADER_ED = """\
+-- %s: creature lairs above level 11 (docs/SPAWNS.md, roadmap step 3).
+-- Written by tools/reference/planet_lairs_sql.py --guide ed; edit that, not
+-- this.
+--
+-- The planet's wild creatures in An Empire Divided's table above level 11
+-- (mmoserverdb/reference/prima_ed/creatures.csv; levels 1-11 came from the
+-- 2004 guide, migrations 027-037), each with its stats from the table, the
+-- client's model and name, and the client's lair model. A creature with no
+-- model or lair of its own takes its species'.
+--
+-- Where: as for the lower levels, lairs are placed at random on the planet
+-- within a distance band from the nearest city's edge, by level, further
+-- out and fewer the stronger the creature:
+--   levels 12-20  2,500 m and further, 4 lairs each
+--   levels 21-50  3,500 m and further, 3 lairs each
+--   levels 51+    4,500 m and further, 2 lairs each
+-- The counts and the lairs' own settings (hit points %d per level, at most
+-- %d; waves, respawn times) are reconstructed. All of it is data, to tune.
+--
+"""
+
+
+def _body(out, p, planet, guide, npcs, stats, templates, groups, lairs, lair_attrs):
+    x, z, w, l = p["area"]
 
     out.write("-- creature_groups.creature_id has a foreign key to a `creatures` table that\n"
               "-- does not exist (it is a non_persistent_npcs id), so no row could be\n"
@@ -262,7 +322,7 @@ def main():
                                      "SELECT %d, %d, %s, %s" % (base + n, i, sql_str(a), sql_str(v)) for n, (i, a, v) in enumerate(lair_attrs)))
     out.write("\n  ) v JOIN swganh.attributes a ON a.name = v.name;\n\n")
 
-    if planet == "tatooine":
+    if planet == "tatooine" and guide == "2004":
         out.write("UPDATE swganh.lairs SET count = 0 WHERE id IN (3, 4);\n\n")
     out.write("SET FOREIGN_KEY_CHECKS = 1;\n")
 
