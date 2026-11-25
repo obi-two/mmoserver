@@ -136,6 +136,19 @@ within 15 m every 30-45 s, at 1 m/s, within 30 m of where it spawned
 (reconstructed; the attributes `creature_roaming_delay`,
 `creature_roaming_speed`, `creature_roaming_max_distance`).
 
+Krayt dragons (migration 050): only at the Krayt Graveyard, as they were
+rare. The client's POI list puts the graveyard at (6839, 4320); its two
+no-build circles keep random lairs out, so the krayt lairs there have
+fixed positions: 2 juvenile canyon krayt lairs, 1 canyon krayt dragon lair
+and 1 giant canyon krayt dragon lair, each calling one krayt at a time (a
+killed krayt back after 10 minutes, a destroyed lair after 30). 039's random
+krayt lairs are switched off (count 0).
+
+The base data's `persistent_npcs` had 15 wild animals placed by hand
+(Tatooine's desert razorbacks and giant sand beetles, Lok's fanned rawls,
+a fynock youth on Rori, a gubbur on Corellia) as conversing NPCs that could
+not be attacked; 050 removes them, as the lairs now place those creatures.
+
 Parked (ROADMAP): levels that change with how much an area is hunted; spawn
 areas set up by a community from the portal.
 
