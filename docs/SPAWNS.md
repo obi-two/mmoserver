@@ -125,5 +125,8 @@ areas set up by a community from the portal.
      right places, nothing inside a city.
 2. **Then the other planets**, one pull request each or in pairs, the same
    way.
-3. NPC camps and the planets' named NPCs (the other rows of the tables) come
-   with factions (roadmap step 4) and content (step 8).
+3. **NPC camps**: hostile, non-faction NPCs (thugs, gangs, Tusken Raiders
+   and the like, from the 2004 table's NPC rows with their planets and
+   levels) in camps placed in the same bands. Faction NPCs (patrols,
+   bases) come with factions (roadmap step 4); named NPCs and quests with
+   content (step 8).

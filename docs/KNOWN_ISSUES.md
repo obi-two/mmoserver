@@ -1305,7 +1305,7 @@ hour.
 To check against the guides: whether the bank paid for maintenance
 pre-CU, and how fast an unpaid structure decayed.
 
-### 40. Idle servers use a lot of CPU — partly fixed, to retest
+### 40. Idle servers use a lot of CPU — fixed
 
 Found on the VM (Nov 2026, `sar` over a night with no players): about 25%
 of four cores went to kernel time and 9-10% to user time, flat, with the
@@ -1334,6 +1334,10 @@ between passes instead of 1 ms (the schedulers keep their own time;
 packets wait at most that much longer). Measured on an idle tutorial zone:
 11% of a core before, 3.5% after; the ConnectionServer 8.5% to 5% (its
 own main loop still runs every 1 ms, as does the chat server's).
+Retested on the VM (Nov 2026): four zones idle at 5-13% each (the rest is
+their creatures' AI), and all eleven zones run together at 4.5-7.5% each
+once loaded, about 65% of one of the four cores in all. Memory is the next
+limit: about 0.5-0.65 GB per planet zone, 5 GB for all eleven.
 
 ### 41. Crafted values didn't become the item's stats — fixed for weapons
 
