@@ -28,9 +28,20 @@ Reference data: migrations take their values from here and cite the page.
 
 - `creatures.csv` (creature tables, pp. 396-483, each row across a page
   pair: `page` the names and stats, `facing` the to-hit, XP and flags):
-  only the creatures the server spawns that the 2004 guide's table leaves
-  out (it stops at level 11; `../prima_2004/`). HAM is per pool here,
-  one range for the three in 2004.
+  every wild creature above level 11 in the planets' sections (the 2004
+  guide's table, `../prima_2004/`, covers levels 1-11), with the planet of
+  the section it is printed in (`planet`). Not the NPCs (humanoids, tribes,
+  townspeople, named characters), nor the section "not bound to a
+  particular planet". HAM is per pool here, one range for the three in
+  2004; the guide prints the same range for all three. `invulnerable`
+  and the specials as printed (one bantha, p. 472, is marked
+  invulnerable).
+
+  Read from the page images (Nov 2026): three OCR readings of each row
+  (the PDF's text layer, tesseract on the page, tesseract on each column)
+  merged, then every row checked against the page image by eye and
+  corrected; social groups normalised where the scan garbled them. The two
+  womp rats transcribed earlier by hand came out the same.
 
 Used by: migrations 007 (`tools/reference/weapons_sql.py`, from
 `weapons.csv`) and 010 (`tools/reference/specials_sql.py`, from
