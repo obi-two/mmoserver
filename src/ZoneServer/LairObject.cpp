@@ -39,6 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "MessageLib/MessageLib.h"
 #include "Utils/rand.h"
 
+#include <algorithm>
 #include <cassert>
 
 static const int64 dormantDefaultPeriodTime = 10000;
@@ -669,7 +670,12 @@ void LairObject::respawn(void)
 
         // Put the lair in the Dormant queue.
         // I do not want all lair running at same respawn period to do their initial spawn at the same time.
-        this->mInitialSpawnDelay = (int64)this->getRespawnDelay() + (int64)(((uint64)gRandom->getRand() * 1000) % (this->getRespawnDelay() + 1));
+        // The first spawn after the zone starts waits one to two times the
+        // respawn delay, at most 5 minutes as the base: a rare lair with a
+        // long respawn delay (the krayts', 30 minutes) still appears within
+        // 10 minutes of a start (docs/SPAWNS.md).
+        uint64 initialBase = std::min<uint64>(this->getRespawnDelay(), 5 * 60 * 1000);
+        this->mInitialSpawnDelay = (int64)initialBase + (int64)(((uint64)gRandom->getRand() * 1000) % (initialBase + 1));
         if (this->isMissionLair())
         {
             // the player is on the way: spawn on the next dormant tick
