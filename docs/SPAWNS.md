@@ -131,10 +131,16 @@ attributes 20001+, 100 or 1,000 per planet).
 Movement: the creatures stood still. A creature only wanders when its
 template has `creature_is_roaming` set, and only the six old womp rat and
 rill templates had it. Migration 049 gives every creature template without
-its own settings: wander when a player is within 64 m, to a random spot
-within 15 m every 30-45 s, at 1 m/s, within 30 m of where it spawned
+its own settings: wander when a player is near, to a random spot within
+15 m every 30-45 s, at 1 m/s, within 30 m of where it spawned
 (reconstructed; the attributes `creature_roaming_delay`,
 `creature_roaming_speed`, `creature_roaming_max_distance`).
+
+Still too still on the VM (Nov 2026): a creature woke only for a player
+within 64 m, though players see creatures to 128 m, and its first wander
+came 30-45 s after waking, so most were seen standing. Now a creature wakes
+for a player within the viewing range (`Zone_Player_ViewingRange`, 128 m)
+and first wanders within 8 s of waking.
 
 Krayt dragons (migration 050): only at the Krayt Graveyard, as they were
 rare. The client's POI list puts the graveyard at (6839, 4320); its two
@@ -191,7 +197,9 @@ Cannibal enclave, dervish camp, Desert Demon settlement, swoop gang camp,
 Dim-U chapel, Dune Stalker camp, evil settlement, outlaw camp, moisture
 thief camp, Jabba swooper and enforcer camps, the kitonaks, the Jawa
 warband, the Rodian clan camp, the Trandosian slaver camp, the Valarian
-swooper and enforcer outposts and the Weequay settlement. Not yet: Tusken
+swooper and enforcer outposts and the Weequay settlement. Confirmed on the
+VM (Nov 2026): a dervish camp, its banner named, its dervishes shooting
+with their carbines; the radar much busier. Not yet: Tusken
 Raiders (not in the 2004 table's NPC rows), the camp buildings (the client's
 `object/building/poi/` theaters), the other planets.
 

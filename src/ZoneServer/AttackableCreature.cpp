@@ -645,8 +645,13 @@ void AttackableCreature::handleEvents()
 
 namespace {
 // Players this close wake a creature up (it roams, and an aggressive one
-// watches for players in its attack range).
-const float kNoticeRange = 64.0f;
+// watches for players in its attack range): the players' viewing range
+// (Zone_Player_ViewingRange, 128 m), so a creature a player can see moves.
+// At 64 m, those seen further off stood still.
+float noticeRange()
+{
+    return static_cast<float>(gWorldConfig->getPlayerViewingRange());
+}
 // How far from home a creature follows a target when it has no stalking
 // distance of its own, in metres.
 const float kDefaultLeash = 64.0f;
@@ -732,11 +737,17 @@ void AttackableCreature::_think(void)
         }
     }
 
-    bool playersNear = _nearestPlayer(kNoticeRange) != NULL;
+    bool playersNear = _nearestPlayer(noticeRange()) != NULL;
     if (mCombatState == State_Idle && playersNear)
     {
         mCombatState = State_Alerted;
         setAiState(NpcIsReady);
+        // First wander within a few seconds of waking (then every 30-45 s),
+        // so a player who arrives sees the creatures move.
+        if (isRoaming() && getRoamingSteps() <= 0)
+        {
+            SetReadyDelay(1 + gRandom->getRand() % 8);
+        }
     }
     else if (mCombatState == State_Alerted && !playersNear && getRoamingSteps() == 0)
     {
