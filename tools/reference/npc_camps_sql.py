@@ -30,8 +30,10 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creatures_sql import REF, NEW_ATTRIBUTES, sql_str, stat_rows, stats_2004  # noqa: E402
-from planet_lairs_sql import PLANETS, AREA, band_for, lair_hp  # noqa: E402
+from creatures_sql import REF, NEW_ATTRIBUTES, sql_str, stat_rows, stats_2004, stats_ed  # noqa: E402
+from planet_lairs_sql import PLANETS, AREA, band_for, lair_hp, special_ed  # noqa: E402
+
+GUIDE = "2004"
 
 # The guide's weapon sets (its NPC table's Weapons column) as one client
 # weapon each. The damage stays the NPC's own; the weapon gives the model
@@ -162,15 +164,31 @@ def main():
     if len(sys.argv) > 2 and sys.argv[1] == "--buildings":
         buildings(sys.argv[2])
         return
-    planet = sys.argv[1] if len(sys.argv) > 1 else "tatooine"
+    global GUIDE
+    args = sys.argv[1:]
+    if "--guide" in args:
+        k = args.index("--guide")
+        GUIDE = args[k + 1]
+        del args[k:k + 2]
+    planet = args[0] if args else "tatooine"
     location, planet_id, index = PLANETS[planet]
-    with open(os.path.join(REF, "prima_2004", "creatures.csv"), newline="") as f:
-        table = {r["name"]: r for r in csv.DictReader(f) if r["section"] == "NPCs"}
+    if GUIDE == "2004":
+        with open(os.path.join(REF, "prima_2004", "creatures.csv"), newline="") as f:
+            table = {r["name"]: r for r in csv.DictReader(f) if r["section"] == "NPCs"}
+    else:
+        # An Empire Divided's NPCs (mmoserverdb/reference/prima_ed/npcs.csv).
+        with open(os.path.join(REF, "prima_ed", "npcs.csv"), newline="") as f:
+            table = {r["name"]: r for r in csv.DictReader(f) if r["planet"] == location}
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "npc_camps.csv"), newline="") as f:
-        rows = [r for r in csv.DictReader(f) if r["planet"] == location]
+        rows = [r for r in csv.DictReader(f) if r["planet"] == location and (r.get("guide") or "2004") == GUIDE]
 
-    ids = {"npc": 7001 + 100 * index, "camp": 3101 + 100 * index,
-           "group_row": 1, "lair_attribute": 40001 + 1000 * index}
+    if GUIDE == "2004":
+        ids = {"npc": 7001 + 100 * index, "camp": 3101 + 100 * index,
+               "group_row": 1, "lair_attribute": 40001 + 1000 * index}
+    else:
+        # Up to 200 NPCs a planet (Endor's tribes are 145).
+        ids = {"npc": 10001 + 200 * index, "camp": 4101 + 100 * index,
+               "group_row": 1, "lair_attribute": 60001 + 1000 * index}
     spawn = 801 + index
     camps = {}
     for r in rows:
@@ -187,14 +205,26 @@ def main():
             levels.append(level)
             npc_id = ids["npc"]
             ids["npc"] += 1
-            ham, values = stats_2004(t)
+            ham, values = stats_2004(t) if GUIDE == "2004" else stats_ed(t)
             group_flags = group_flags or bool(values["Pack"] or values["Herd"])
             # NPCs have no meat, hide or bone.
             for k in ("res_meat", "creature_meat_qty", "res_hide", "creature_hide_qty",
                       "res_bone", "creature_bone_qty", "creature_milk"):
                 values.pop(k, None)
-            weapon = WEAPON_SETS.get(r["weapons"], "")
-            values["creature_humanoid"] = 1
+            # The 2004 table's weapon sets; for An Empire Divided's NPCs the
+            # weapon itself (the book gives none: reconstructed by group), or
+            # "creature" for its creatures (the clans' rancors, the Tusken
+            # bantha), which fight as creatures do.
+            weapon = WEAPON_SETS.get(r["weapons"], "") if GUIDE == "2004" else r["weapons"]
+            if weapon == "creature":
+                weapon = ""
+            else:
+                values["creature_humanoid"] = 1
+            if GUIDE != "2004":
+                values["tamable"] = 1 if t["can_tame"] == "yes" else 0
+                for a, c in (("spec_atk_1", "special_attack_1"), ("spec_atk_2", "special_attack_2")):
+                    if t[c]:
+                        values[a] = special_ed(t[c])
             if weapon:
                 values["creature_weapon"] = weapon
             values["creature_damage_max_range"] = reach(weapon)
@@ -227,7 +257,7 @@ def main():
         ]
         if dmax < 1.0e9:
             lair_attrs.append((camp_id, "lair_max_city_distance", dmax))
-        if planet != "tatooine":
+        if planet != "tatooine" or GUIDE != "2004":
             # Tatooine's camps (053) were written before the buildings; 054
             # adds them. Later planets' camps get them from the start.
             lair_attrs += camp_attributes(location, camp, camp_id, info["building"])
@@ -237,7 +267,10 @@ def main():
             info["key"], top, far, ", ".join(members), ", ".join(pages)))
 
     out = sys.stdout
-    if planet != "tatooine":
+    if GUIDE != "2004":
+        allpages = sorted({int(table[r["name"]]["page"]) for r in rows})
+        out.write(HEADER_ED % (planet.capitalize(), allpages[0], allpages[-1], CAMPS_PER_KIND, WAVE_SIZE))
+    elif planet != "tatooine":
         allpages = sorted({int(table[r["name"]]["page"]) for r in rows})
         out.write(HEADER_LATER % (planet.capitalize(), allpages[0], allpages[-1], CAMPS_PER_KIND, WAVE_SIZE))
     else:
@@ -267,6 +300,29 @@ HEADER_LATER = """\
 --
 """
 
+HEADER_ED = """\
+-- %s: An Empire Divided's NPC camps (docs/SPAWNS.md, roadmap step 3).
+-- Written by tools/reference/npc_camps_sql.py --guide ed; edit that, not
+-- this.
+--
+-- The planet's hostile, non-faction NPCs in An Empire Divided's tables
+-- (pp. %d-%d; mmoserverdb/reference/prima_ed/npcs.csv): those above level 11
+-- and those the 2004 guide's table lacks. Each a template with the book's
+-- stats, the client's model and name, and a weapon; each group in camps of
+-- up to six kinds by level, %d of each, placed at random on the planet in
+-- the band of its strongest NPC's level, named after the group's camp in
+-- the client's lair_n, each the client's camp building for the group where
+-- the client has one, with an invisible lair (nothing to destroy).
+--
+-- Reconstructed, and data to tune: the book gives no weapons, so each NPC
+-- carries one by group (Tusken rifles, Jawa ion rifles, stone knives for
+-- the tribes, vibroblades for the Nightsisters and the Singing Mountain
+-- clan) or by level (pistol below 15, carbine to 29, rifle above); models
+-- for NPCs the client has no outfit of their own for (the group's);
+-- splitting large groups by level; the camps. Camps call %d at a time.
+--
+"""
+
 HEADER_TATOOINE = """\
 -- %s: NPC camps (docs/SPAWNS.md, roadmap step 3). Written by
 -- tools/reference/npc_camps_sql.py; edit that, not this.
@@ -292,7 +348,7 @@ def _body(out, summary, planet, npcs, stats, templates, groups, lairs, lair_attr
     out.write("SET FOREIGN_KEY_CHECKS = 0;\n\n")
     out.write("INSERT IGNORE INTO swganh.attributes (name, internal, attribute_internal_description)\n  VALUES ")
     out.write(",\n         ".join("(%s, 1, %s)" % (sql_str(n), sql_str(d)) for n, d in
-                                    NEW_ATTRIBUTES + NPC_ATTRIBUTES + ([] if planet == "tatooine" else CAMP_ATTRIBUTES)))
+                                    NEW_ATTRIBUTES + NPC_ATTRIBUTES + ([] if planet == "tatooine" and GUIDE == "2004" else CAMP_ATTRIBUTES)))
     out.write(";\n\n")
     out.write("INSERT IGNORE INTO swganh.non_persistent_npcs\n"
               "  (id, family, species_id, loot_group_id, type, stf_variable_id, stf_file_id, level, faction, posture, moodID, state, scale)\n  VALUES\n")

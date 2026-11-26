@@ -272,6 +272,34 @@ names the Publish 14 client lacks, and calls the sand panther "a razor
 cat". They take their plain keys. Any other key that shows instead of a
 name has the same cause: report it and it gets its Publish 14 key.
 
+High-level NPCs (migrations 062-071, Nov 2026): An Empire Divided's
+hostile, non-faction NPCs (`mmoserverdb/reference/prima_ed/npcs.csv`,
+432 rows read from the book's tables, pp. 396-483, each checked against
+the page): every one above level 11, and those the 2004 table lacks at any
+level. 420 have a client name (the Nightsister sentinel, flail enforcer,
+masterful Gondula warrior, Borvos bruiser, Poodoo gang and two Cobral
+NPCs have none). By planet: Endor 145 (the Ewok and Dulok tribes, the
+outcasts, the marauders), Corellia 47, Dantooine 46 (the Janta, Kunga and
+Mokk tribes, the Dantari raiders, the Force renegades and Kun's remnants),
+Lok 43 (Nym's men, the Blood Razor and canyon corsair pirates, the
+mercenaries, the marooned pirates), Rori 40, Tatooine 31 (the Tusken
+Raiders, Alkhara, Jabba's and Valarian's men...), Talus 28, Naboo 22,
+Dathomir 15 (the Nightsisters and the Singing Mountain clan), Yavin 4 3
+(the Hutt expedition force). 98 kinds of camp, 392 camps:
+
+- a group of more than six kinds is several camps by level, each named and
+  built as the client's camps for the group run from small to large (a
+  Janta warrior camp, rockshaper camp, leader encampment);
+- the book gives no weapons: Tusken rifles for the Tuskens and the Dune
+  Stalkers, ion rifles for the Jawas, stone knives for the tribes,
+  vibroblades for the Nightsisters, the Singing Mountain clan and the Force
+  renegades, a vibro-axe for the Endor marauders, DL-44s for the Gungans,
+  and by level for the rest (pistol below 15, carbine to 29, rifle above).
+  The clans' rancors and the Tusken bantha fight as creatures.
+  Reconstructed;
+- `npc_camps.csv` holds them with `guide` "ed"; `npc_camps_sql.py <planet>
+  --guide ed` writes the migration (its ids apart from the 2004 camps').
+
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
 creatures; ours are all named. To revisit.

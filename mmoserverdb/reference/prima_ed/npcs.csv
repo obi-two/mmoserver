@@ -82,7 +82,7 @@ Dantooine,Kunga warrior,80,Kunga tribe,_,6675,11125,6675,11125,6675,11125,414.75
 Dantooine,Mokk clan leader,90,Mokk tribe,a,7350,12250,7350,12250,7350,12250,462,484,no,55,26818,yes,no,yes,yes,no,no,no,,,422,423
 Dantooine,Mokk clan primalist,50,Mokk tribe,_—,4425,7375,4425,7375,4425,7375,257.25,269.5,no,55,9955,no,no,yes,yes,no,no,no,,,422,423
 Dantooine,Mokk harvester,30,Mokk tribe,~,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,,,422,423
-Dantooine,Mokkherbalist,20,Mokk tribe,=,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk herbalist,20,Mokk tribe,=,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,,,422,423
 Dantooine,Mokk hunter,40,Mokk tribe,—,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,yes,no,yes,yes,no,no,no,,,422,423
 Dantooine,Mokk loreweaver,50,Mokk tribe,--,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,yes,no,yes,yes,no,no,no,,,422,423
 Dantooine,Mokk rockshaper,70,Mokk tribe,—,5925,9875,5925,9875,5925,9875,362.25,379.5,no,55,17517,no,no,yes,yes,no,no,no,,,422,423
@@ -97,10 +97,10 @@ Dathomir,Nightsister initiate,50,Nightsister,on Ee,4275,7125,4275,7125,4275,7125
 Dathomir,Nightsister outcast,75,Nightsister,Ee,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,no,yes,no,yes,no,no,,,426,427
 Dathomir,Nightsister rancor,50,Nightsister,ro,4275,7125,4275,7125,4275,7125,246.75,258.5,no,55,9955,yes,yes,yes,no,yes,no,no,PostureDownAttack,IntimidationAttack,426,427
 Dathomir,Nightsister rancor tamer,75,Nightsister,the =,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,no,yes,no,yes,no,no,,,426,427
-Dathomir,Nightsisterranger,75,Nightsister,the te,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,yes,yes,no,yes,no,no,,,426,427
+Dathomir,Nightsister ranger,75,Nightsister,the te,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,yes,yes,no,yes,no,no,,,426,427
 Dathomir,Nightsister sentinel,80,Nightsister,te ae,6525,10875,6525,10875,6525,10875,404.25,423.5,no,55,21952,yes,no,yes,no,yes,no,no,,,426,427
 Dathomir,Nightsister sentry,20,Nightsister,ae,1875,3125,1875,3125,1875,3125,105,110,no,30,1997,no,no,no,no,no,no,no,,,426,427
-Dathomir,Nightsisterstalker,85,Nightsister,be os,6900,11500,6900,11500,6900,11500,430.5,451,no,55,24332,yes,yes,yes,no,yes,no,no,,,426,427
+Dathomir,Nightsister stalker,85,Nightsister,be os,6900,11500,6900,11500,6900,11500,430.5,451,no,55,24332,yes,yes,yes,no,yes,no,no,,,426,427
 Dathomir,Singing Mountain clan rancor,50,Singing Mountain clan,—,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,no,yes,yes,no,yes,no,no,IntimidationAttack,IntimidationAttack,426,427
 Dathomir,Singing Mountain clan sentry,20,Singing Mountain clan,=,1875,3125,1875,3125,1875,3125,105,110,no,30,1997,no,no,no,no,no,no,no,,,426,427
 Dathomir,Singing Mountain clan dragoon,95,Singing Mountain clan,_,7650,12750,7650,12750,7650,12750,483,506,no,55,29412,yes,no,yes,no,yes,no,no,,,428,429
@@ -154,7 +154,7 @@ Endor,frenzied Korga,35,Korga tribe,=,3150,5250,3150,5250,3150,5250,168,176,no,5
 Endor,frenzied marauder,50,marauder,_,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,9955,yes,no,yes,no,yes,no,no,,,432,433
 Endor,frenzied Pubam,40,Pubam,—,3525,5875,3525,5875,3525,5875,194.25,203.5,no,55,6839,yes,no,yes,no,yes,no,no,,,432,433
 Endor,gifted Gondula shaman,40,Gondula tribe,—,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,432,433
-Endor,giftedJinda shaman,30,Jinda tribe,—,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,,432,433
+Endor,gifted Jinda shaman,30,Jinda tribe,—,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,,432,433
 Endor,gifted Panshee shaman,10,Panshee tribe,=,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,432,433
 Endor,gnarled Donkuwah spiritmaster,20,Donkuwah tribe,—,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,434,435
 Endor,gnarled Korga spiritmaster,20,Korga tribe,-,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,434,435
@@ -300,7 +300,7 @@ Lok,Nym pirate weak,22,Nym,=,1950,3250,1950,3250,1950,3250,105,110,no,55,2370,ye
 Lok,Nym surveyer,20,Nym,a,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,yes,no,no,no,no,no,no,,,446,447
 Naboo,Borvos bruiser,3,Hutt,oa,37.5,62.5,37.5,62.5,37.5,62.5,15,20,no,25,25,no,no,yes,no,no,no,no,,,448,449
 Naboo,Borvos champion,8,Hutt,_,375,625,375,625,375,625,40,45,no,30,194,no,no,yes,no,no,no,no,,,448,449
-Naboo,Borvosguard,3,Hutt,=,56.25,93.75,56.25,93.75,56.25,93.75,20,25,no,25,25,no,no,no,yes,no,no,no,,,448,449
+Naboo,Borvos guard,3,Hutt,=,56.25,93.75,56.25,93.75,56.25,93.75,20,25,no,25,25,no,no,no,yes,no,no,no,,,448,449
 Naboo,Borvos mercenary,6,Hutt,_,225,375,225,375,225,375,30,35,no,30,68,no,no,yes,no,no,no,no,,,448,449
 Naboo,Borvos thief,3,Hutt,_—,37.5,62.5,37.5,62.5,37.5,62.5,15,20,no,25,25,no,no,yes,no,no,no,no,,,448,449
 Naboo,Borvos thug,4,Hutt,—,56.25,93.75,56.25,93.75,56.25,93.75,20,25,no,30,30,no,no,no,yes,yes,no,no,,,448,449
@@ -399,7 +399,7 @@ Talus,Lost Aqualish Warchief,27,Lost Aqualish Regiment,_-,2250,3750,2250,3750,22
 Talus,Lost Aqualish Warrior,13,Lost Aqualish Regiment,—,900,1500,900,1500,900,1500,65,70,no,35,965,no,no,yes,yes,no,no,no,,,466,467
 Tatooine,Alkhara Bandit,13,Alkhara,cel,750,1250,750,1250,750,1250,55,60,no,35,965,yes,yes,yes,no,yes,no,no,,,468,469
 Tatooine,Alkhara Bandit King,16,Alkhara,=,975,1625,975,1625,975,1625,70,75,no,40,1355,yes,yes,yes,no,yes,no,no,,,468,469
-Tatooine,Alllara lllampiln,15,Alkhara,=,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,yes,yes,no,yes,no,no,,,468,469
+Tatooine,Alkhara Champion,15,Alkhara,=,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,yes,yes,no,yes,no,no,,,468,469
 Tatooine,Alkhara Lieutenant,14,Alkhara,af =,825,1375,825,1375,825,1375,60,65,no,40,1085,yes,yes,yes,no,yes,no,no,,,468,469
 Tatooine,crimelord,12,Jabba,_,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,no,no,no,no,,,470,471
 Tatooine,desert demon bodyguard,11,Desert Demon,--,750,1250,750,1250,750,1250,55,60,no,30,564,no,no,yes,no,no,no,no,,,470,471
