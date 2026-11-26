@@ -1696,6 +1696,15 @@ distance: it is now 32 m (reconstructed, half the 64 m at which a creature
 notices players). To test: approach an aggressive creature; it attacks at
 about 30 m.
 
+### 56. A level 275 krayt dragon hit for 1 — fixed, to test
+
+Seen at the Krayt Graveyard (Nov 2026): six minutes of combat with a canyon
+krayt dragon and the player barely hurt. Its damage in An Empire Divided's
+table is 1,433.25-1,501.5; the zone read damage as a whole number, the read
+of "1433.25" failed, the damage became 0 and every hit did the least, 1.
+103 of the book's creatures have damage with decimals. Fixed: damage is read
+as a decimal and rounded. To test: a krayt kills a player in a few hits.
+
 ### 54. A creature's special attack shows its animation without sound — open
 
 Seen with #51: the krayt's roar animation played without its sound. The

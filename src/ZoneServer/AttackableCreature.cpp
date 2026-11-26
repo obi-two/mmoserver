@@ -1625,7 +1625,10 @@ void AttackableCreature::respawn(void)
 
     if (this->hasInternalAttribute("creature_damage_min"))
     {
-        int32 minDamage = this->getInternalAttribute<int32>("creature_damage_min");
+        // Read as a decimal: An Empire Divided prints some damage with
+        // decimals (1433.25), which failed as a whole number and left the
+        // creature hitting for 1 (KNOWN_ISSUES #56).
+        int32 minDamage = static_cast<int32>(this->getInternalAttribute<float>("creature_damage_min") + 0.5f);
         mMinDamage = minDamage;
     }
     else
@@ -1636,7 +1639,10 @@ void AttackableCreature::respawn(void)
 
     if (this->hasInternalAttribute("creature_damage_max"))
     {
-        int32 maxDamage = this->getInternalAttribute<int32>("creature_damage_max");
+        // Read as a decimal: An Empire Divided prints some damage with
+        // decimals (1433.25), which failed as a whole number and left the
+        // creature hitting for 1 (KNOWN_ISSUES #56).
+        int32 maxDamage = static_cast<int32>(this->getInternalAttribute<float>("creature_damage_max") + 0.5f);
         mMaxDamage = maxDamage;
     }
     else
