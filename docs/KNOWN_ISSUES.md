@@ -1616,6 +1616,28 @@ creature attributes, most of them not marked internal. As far as we
 remember, pre-CU examine showed far less for a creature; to check against
 the guides' screenshots, then mark the server-only ones internal.
 
+A pre-CU screenshot of the live game (an ancient reptilian flier's examine
+window, found Nov 2026 in the swganh wiki's image collection) shows what it
+listed: Armor Rating; Special Protection (Kinetic, Energy, Heat, Cold,
+Acid, as percentages); Effectiveness (Blast, Restraint); Vulnerability
+(Stun, Electricity); Aggressive, Stalker, Tamable (Yes/No); Hide Type, Meat
+Type; Deathblows (Yes/No); Ferocity; Difficulty Level; Special Attack 1 and
+2. No HAM values, no To Hit. So: mark the HAM, to-hit and other server
+values internal, show these fields, and send the yes/no ones as Yes/No
+rather than 1/0. The armour and resistance values are in the guides'
+tables where given.
+
+### 50. A level 120 krayt dragon is "no match" for a master marksman — open
+
+Seen at the Krayt Graveyard (Nov 2026): a juvenile canyon krayt dragon
+(level 120 in An Empire Divided's table, sent as the creature's level)
+examines as "Combat Difficulty: *** ... is no match for you", to a master
+marksman. Pre-CU, a krayt dragon was far beyond any one player. Lead: the
+server sends every player's level as 0 (`PlayerObjectFactory` sets
+`setCL(0)`); pre-CU a player had a combat level from their combat skills,
+and the client's difficulty rating compares the two. To find how the
+client rates difficulty and what level a player should send, then fix.
+
 ### 24. A cloned player stays a corpse — fixed
 
 Killed by womp rats near Bestine (three incaps inside the reset time, the
