@@ -101,7 +101,10 @@ and friends (#21).
    `object/mobile/` templates (which creatures it can draw).
 4. **Factions and the Galactic Civil War**: joining, rank and recruiters,
    overt and covert, TEF, faction kills and points. Needed by PvP, the
-   theme parks and the pilot professions.
+   theme parks and the pilot professions. City garrisons (raised Nov 2026):
+   the towns' troops stand still today; pre-CU some patrolled and others
+   guarded the town, and they joined a fight they saw on the side of a
+   player in favour with their faction.
 5. **Finish the combat professions**: players' worn armour (2004 guide,
    pp. 168-169), encumbrance, the remaining states, poison and disease, the
    medic review (stimpacks, `KNOWN_ISSUES.md` #25), the elites and cones;
