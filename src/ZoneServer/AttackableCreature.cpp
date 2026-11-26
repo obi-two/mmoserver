@@ -1868,8 +1868,9 @@ void AttackableCreature::respawn(void)
         }
         else
         {
-            //assert(false && "Missing creature stalking max distance");
-            mStalkerDistanceMax = 64.0;
+            // A stalker follows twice as far from home as other creatures
+            // (64 m, kDefaultLeash). Reconstructed: no source gives it.
+            mStalkerDistanceMax = 128.0;
         }
     }
 

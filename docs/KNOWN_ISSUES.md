@@ -1656,6 +1656,41 @@ equipping a weapon or gaining or dropping a skill. A master marksman with
 a carbine, pistol or rifle is level 11, so a level 120 krayt is red. To
 test: the krayt cons red and examines as beyond you; a womp rat green.
 
+### 51. Killed far from a town: no clone window — fixed, to test
+
+Seen at the Krayt Graveyard (Nov 2026): killed by a giant canyon krayt
+dragon, the player lay as a corpse and no clone window opened. The window
+lists the cloning facilities found within 8,192 m of the player, and the
+graveyard is further than that from all of them, so the list was empty and
+nothing opened. Fixed: it lists the planet's cloning facilities wherever
+the player is (`WorldManager::getCloningFacilities`); the same 8 km search
+moved a player who logged out dead to a facility, and is fixed the same
+way. To test: die far from any town; the window offers the closest
+facility.
+
+### 52. A corpse stays in combat and cannot /peace — fixed, to test
+
+Seen with #51: the dead player still showed in combat, and Peace answered
+"You cannot transition from this Action state". Incapacitation and death
+lock state changes, and the combat state was cleared after the lock, so
+the clear was refused. Fixed: the states are cleared, and the client told,
+before the posture changes, at incapacitation and at death. To test: be
+killed; the combat icon goes and no "cannot transition" message shows.
+
+### 53. A krayt dragon gives up the chase quickly — fixed, to test
+
+Seen with #51: every creature stopped following 64 m from its home. Pre-CU
+stalkers followed further. No source gives a distance: a stalker without
+its own distance (`creature_stalking_max_distance`) now follows to 128 m,
+others still 64 m. To test: run from a krayt (a stalker) and from a
+non-stalker; to tune if either feels wrong.
+
+### 54. A creature's special attack shows its animation without sound — open
+
+Seen with #51: the krayt's roar animation played without its sound. To
+look at how the server sends a special attack (the combat action message
+and its animation) against what the client needs to play the sound.
+
 ### 24. A cloned player stays a corpse — fixed
 
 Killed by womp rats near Bestine (three incaps inside the reset time, the

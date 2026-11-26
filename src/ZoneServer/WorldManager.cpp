@@ -1366,3 +1366,22 @@ void WorldManager::removePlayerfromAccountMap(uint64 playerID)
         LOG(ERR) << "Error removing player from account map [" << player->getAccountId() << "]";
     }
 }
+
+//======================================================================================================================
+//
+// Every cloning facility on the planet. The clone window searched only 8 km
+// around the player, so a player killed further out (the Krayt Graveyard is
+// more than that from any town) got no window and could not clone.
+//
+
+void WorldManager::getCloningFacilities(ObjectSet* facilities)
+{
+    for (ObjectMap::iterator it = mObjectMap.begin(); it != mObjectMap.end(); ++it)
+    {
+        BuildingObject* building = dynamic_cast<BuildingObject*>(it->second);
+        if (building && building->getBuildingFamily() == BuildingFamily_Cloning_Facility)
+        {
+            facilities->insert(building);
+        }
+    }
+}

@@ -320,7 +320,7 @@ void WorldManager::destroyObject(Object* object)
 				std::vector<BuildingObject*>	buildings;
 				BuildingObject*					nearestBuilding = NULL;
 
-				gSpatialIndexManager->getObjectsInRange(object,&inRangeBuildings,ObjType_Building,8192,false);
+				gWorldManager->getCloningFacilities(&inRangeBuildings);
 
 				ObjectSet::iterator buildingIt = inRangeBuildings.begin();
 
