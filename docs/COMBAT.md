@@ -358,6 +358,23 @@ takes the reach, but its own base is -15 unarmed against -5 with the
 pistol; where the 10 comes from (weapon type, the target's defence
 against melee) is not known.
 
+## Combat level and difficulty
+
+A player's combat level (pre-CU) comes from the "private combat
+difficulty" skill mods of the weapon kind equipped (unarmed with none):
+every player starts at 500, each 100 points is a level, and the level is
+at most 25 (swganh wiki, "Combat Difficulty Rating", from the live game).
+The skill boxes' mods are the client's skill data: a master marksman has
+600 for carbines, pistols and rifles, level 11 with one of those. The zone
+works it out at login, travel, on equipping a weapon and on gaining or
+dropping a skill (`PlayerObject::updateCombatLevel`), and sends it as the
+creature's level; the client rates a target's difficulty (the con colour,
+examine's "Combat Difficulty") by the target's level against it: green up
+to 30% of the player's, blue to 80%, white to 120%, yellow to 150%, red
+beyond. Before, every player was sent as level 0 (KNOWN_ISSUES #50). Not
+yet: a group's level (half the members' levels added together) and the
+Jedi's limit of 40.
+
 ## What is not
 
 - **To-hit:** no block, dodge or counterattack (the skill mods exist),

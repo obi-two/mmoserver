@@ -1607,7 +1607,7 @@ Still open:
   they need is missing (return 3), and the chat server ignores the return
   code.
 
-### 49. Examining a creature lists its internal stats — open
+### 49. Examining a creature lists its internal stats — fixed, to test
 
 Seen while testing Tatooine's lairs (Nov 2026): examining an eopie lists
 each HAM attribute (Health, Constitution, Action, ... 455), To Hit, Stalker
@@ -1627,7 +1627,17 @@ values internal, show these fields, and send the yes/no ones as Yes/No
 rather than 1/0. The armour and resistance values are in the guides'
 tables where given.
 
-### 50. A level 120 krayt dragon is "no match" for a master marksman — open
+Fixed: the zone sends a creature's examine as that list
+(`AttackableCreature::sendAttributes`): Armor Rating, protections that are
+not zero, Aggressive, Stalker, Tamable, hide and meat types when it has
+them, Deathblows, Ferocity when it has one, Difficulty Level (its level)
+and Special Attack 1 and 2 ("---" for none). Migration 052 adds Tamable and
+the special attacks from the guides' tables to the lair creatures, named
+as the guides name them ("Stun Attack"; the live game's names, like
+"Blinding Strike", are not in our sources). The guides give no armour for
+creatures, so they show "None". To test: examine a lair creature.
+
+### 50. A level 120 krayt dragon is "no match" for a master marksman — fixed, to test
 
 Seen at the Krayt Graveyard (Nov 2026): a juvenile canyon krayt dragon
 (level 120 in An Empire Divided's table, sent as the creature's level)
@@ -1637,6 +1647,14 @@ server sends every player's level as 0 (`PlayerObjectFactory` sets
 `setCL(0)`); pre-CU a player had a combat level from their combat skills,
 and the client's difficulty rating compares the two. To find how the
 client rates difficulty and what level a player should send, then fix.
+
+Fixed: a player's combat level is now worked out as pre-CU (the swganh
+wiki's "Combat Difficulty Rating" page): 500 plus the private combat
+difficulty skill mod of the equipped weapon's kind, a level per 100, at
+most 25 (`docs/COMBAT.md`). It is sent at login and travel and again on
+equipping a weapon or gaining or dropping a skill. A master marksman with
+a carbine, pistol or rifle is level 11, so a level 120 krayt is red. To
+test: the krayt cons red and examines as beyond you; a womp rat green.
 
 ### 24. A cloned player stays a corpse — fixed
 

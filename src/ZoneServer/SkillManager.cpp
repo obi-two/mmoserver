@@ -526,6 +526,7 @@ bool SkillManager::learnSkill(uint32 skillId,CreatureObject* creatureObject,bool
         gMessageLib->sendSkillDeltasCreo1(skill,SMSkillAdd,player);
 
         gMessageLib->sendSkillModUpdateCreo4(player);
+        player->updateCombatLevel();
         //gMessageLib->sendBaselinesCREO_4(player);
         gMessageLib->sendSkillCmdDeltasPLAY_9(player);
         gMessageLib->sendSchematicDeltasPLAY_9(player);
@@ -850,6 +851,7 @@ void SkillManager::dropSkill(uint32 skillId,CreatureObject* creatureObject, bool
         gMessageLib->sendBaselinesCREO_4(player);
         gMessageLib->sendSkillCmdDeltasPLAY_9(player);
         gMessageLib->sendSchematicDeltasPLAY_9(player);
+        player->updateCombatLevel();
 
         if(showMessage)
             gMessageLib->SendSystemMessage(L"Skill surrendered.", player);

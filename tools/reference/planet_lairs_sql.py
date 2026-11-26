@@ -19,6 +19,7 @@ settings are reconstructed. They are data: tune them in the database.
 
 import csv
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -157,9 +158,80 @@ def lair_names():
             template_id += 1
 
 
+# Special attacks as the guides name them: the 2004 table's notes ("Stun
+# attack", "Intimidation atk", ...) and An Empire Divided's columns
+# ("StunAttack", "KnockDownAttack", ...), written the same way for examine.
+SPECIAL_2004 = {
+    "stun attack": "Stun Attack", "posture down attack": "Posture Down Attack",
+    "posture down atk": "Posture Down Attack", "intimidation attack": "Intimidation Attack",
+    "intimidation atk": "Intimidation Attack", "mild poison attack": "Mild Poison Attack",
+    "mild poison atk": "Mild Poison Attack", "mild disease attack": "Mild Disease Attack",
+    "blind attack": "Blind Attack", "dizzy attack": "Dizzy Attack",
+}
+
+
+def special_ed(name):
+    if not name:
+        return ""
+    words = re.findall(r"[A-Z][a-z]*", name)
+    return " ".join(words).replace("Knock Down", "Knockdown")
+
+
+def examine_values():
+    """Migration 052: each lair creature's Tamable and special attacks from
+    its guide's table, for the pre-CU examine window (KNOWN_ISSUES #49)."""
+    with open(os.path.join(REF, "prima_2004", "creatures.csv"), newline="") as f:
+        t2004 = {r["name"]: r for r in csv.DictReader(f) if r["section"] == "Creatures"}
+    with open(os.path.join(REF, "prima_ed", "creatures.csv"), newline="") as f:
+        ted = {(r["planet"], r["name"]): r for r in csv.DictReader(f)}
+    rows = []
+    for guide in ("2004", "ed"):
+        for planet in PLANETS:
+            p = planet_info(planet, guide)
+            npc_id = p["ids"]["npc"]
+            for name, _, _, _ in p["creatures"]:
+                if guide == "2004":
+                    r = t2004[name]
+                    notes = [w.strip() for w in r["notes"].split(",")]
+                    tame = "Tamable" in notes
+                    attacks = [SPECIAL_2004[w.lower()] for w in notes if w.lower() in SPECIAL_2004]
+                else:
+                    r = ted[(PLANETS[planet][0], name)]
+                    tame = r["can_tame"] == "yes"
+                    attacks = [special_ed(r["special_attack_1"]), special_ed(r["special_attack_2"])]
+                attacks = (attacks + ["", ""])[:2]
+                rows.append((npc_id, "tamable", "1" if tame else "0"))
+                for k, a in zip(("spec_atk_1", "spec_atk_2"), attacks):
+                    if a:
+                        rows.append((npc_id, k, a))
+                npc_id += 1
+    out = sys.stdout
+    out.write("""\
+-- What examining a creature shows (KNOWN_ISSUES #49): pre-CU, a creature's
+-- examine window listed its armour, Aggressive, Stalker, Tamable, hide and
+-- meat types, Deathblows, Ferocity, Difficulty Level and two special
+-- attacks, not its HAM or to-hit (a live-game screenshot). The zone now sends
+-- those (AttackableCreature::sendAttributes); this adds the two the lair
+-- creatures' templates lacked, from their guide's table: Tamable (the 2004
+-- table's notes, An Empire Divided's Can Tame column) and the special
+-- attacks (the 2004 notes, An Empire Divided's two columns), named as the
+-- guides name them. Written by tools/reference/planet_lairs_sql.py
+-- --examine.
+
+""")
+    out.write("INSERT IGNORE INTO swganh.non_persistent_npc_attributes (npc_id, attribute_id, value, `order`)\n"
+              "  SELECT v.npc_id, a.id, v.value, 0 FROM (\n")
+    out.write("\n    UNION ALL ".join("    SELECT %d AS npc_id, %s AS name, %s AS value" % (i, sql_str(a), sql_str(v)) if n == 0 else
+                                     "SELECT %d, %s, %s" % (i, sql_str(a), sql_str(v)) for n, (i, a, v) in enumerate(rows)))
+    out.write("\n  ) v JOIN swganh.attributes a ON a.name = v.name;\n")
+
+
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == "--lair-names":
         lair_names()
+        return
+    if len(sys.argv) > 1 and sys.argv[1] == "--examine":
+        examine_values()
         return
     args = sys.argv[1:]
     guide = "2004"

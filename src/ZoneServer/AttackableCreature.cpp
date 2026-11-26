@@ -27,6 +27,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "ZoneServer/AttackableCreature.h"
 
+#include <cstdlib>
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "NetworkManager/Message.h"
+#include "NetworkManager/MessageFactory.h"
+#include "ZoneServer/ZoneOpcodes.h"
+
 #include "Utils/rand.h"
 
 #include "MessageLib/MessageLib.h"
@@ -2170,4 +2179,102 @@ float AttackableCreature::getMaxSpawnDistance(void)
     }
 
     return maxSpawnDistance;
+}
+
+//=============================================================================
+//
+// Examine (KNOWN_ISSUES #49). Pre-CU, a creature's examine window showed its
+// armour, Aggressive, Stalker, Tamable, hide and meat types, Deathblows,
+// Ferocity, Difficulty Level and two special attacks (a live-game screenshot
+// of an ancient reptilian flier), not its HAM, to-hit or the server's own
+// values. The keys are the client's attribute names; a value the template
+// lacks is left out, except the yes/no fields and the special attacks
+// ("---" for none), which the window always showed.
+//
+
+void AttackableCreature::sendAttributes(PlayerObject* playerObject)
+{
+    if (!playerObject || !playerObject->isConnected())
+    {
+        return;
+    }
+
+    std::vector<std::pair<std::string, std::string> > rows;
+    auto text = [this](const char* key) -> std::string {
+        return hasAttribute(key) ? getAttribute<std::string>(key) : std::string();
+    };
+    auto yesNo = [](bool yes) { return std::string(yes ? "Yes" : "No"); };
+
+    std::string armor = text("armor_rating");
+    rows.push_back(std::make_pair(std::string("armorrating"), armor.empty() ? std::string("None") : armor));
+
+    // Protections, effectiveness and vulnerabilities that are not zero.
+    static const char* const categories[] = {
+        "cat_armor_special_protection", "cat_armor_effectiveness", "cat_armor_vulnerability"
+    };
+    static const char* const kinds[] = {
+        "armor_eff_kinetic", "armor_eff_energy", "armor_eff_blast", "armor_eff_stun",
+        "armor_eff_elemental_heat", "armor_eff_elemental_cold", "armor_eff_elemental_acid",
+        "armor_eff_elemental_electrical", "armor_eff_restraint"
+    };
+    for (const char* category : categories)
+    {
+        for (const char* kind : kinds)
+        {
+            std::string key = std::string(category) + "." + kind;
+            std::string value = text(key.c_str());
+            float percent = value.empty() ? 0.0f : static_cast<float>(std::atof(value.c_str()));
+            if (percent != 0.0f)
+            {
+                char formatted[32];
+                snprintf(formatted, sizeof(formatted), "%.1f%%", percent);
+                rows.push_back(std::make_pair(key, std::string(formatted)));
+            }
+        }
+    }
+
+    std::string tamable = text("tamable");
+    rows.push_back(std::make_pair(std::string("aggro"), yesNo(mIsAgressive)));
+    rows.push_back(std::make_pair(std::string("stalking"), yesNo(mIsStalker)));
+    rows.push_back(std::make_pair(std::string("tamable"), yesNo(!tamable.empty() && tamable != "0")));
+
+    std::string hide = text("res_hide");
+    if (!hide.empty())
+    {
+        rows.push_back(std::make_pair(std::string("res_hide"), hide));
+    }
+    std::string meat = text("res_meat");
+    if (!meat.empty())
+    {
+        rows.push_back(std::make_pair(std::string("res_meat"), meat));
+    }
+
+    rows.push_back(std::make_pair(std::string("killer"), yesNo(mIsKiller)));
+
+    std::string ferocity = text("ferocity");
+    if (!ferocity.empty())
+    {
+        rows.push_back(std::make_pair(std::string("ferocity"), ferocity));
+    }
+
+    rows.push_back(std::make_pair(std::string("challenge_level"), std::to_string(getCL())));
+
+    std::string attack1 = text("spec_atk_1");
+    std::string attack2 = text("spec_atk_2");
+    rows.push_back(std::make_pair(std::string("spec_atk_1"), attack1.empty() ? std::string("---") : attack1));
+    rows.push_back(std::make_pair(std::string("spec_atk_2"), attack2.empty() ? std::string("---") : attack2));
+
+    gMessageFactory->StartMessage();
+    gMessageFactory->addUint32(opAttributeListMessage);
+    gMessageFactory->addUint64(getId());
+    gMessageFactory->addUint32(static_cast<uint32>(rows.size()));
+    for (const auto& row : rows)
+    {
+        gMessageFactory->addString(BString(row.first.c_str()));
+        BString value(row.second.c_str());
+        value.convert(BSTRType_Unicode16);
+        gMessageFactory->addString(value);
+    }
+    Message* message = gMessageFactory->EndMessage();
+    (playerObject->getClient())->SendChannelAUnreliable(message, playerObject->getAccountId(), CR_Client, 9);
 }

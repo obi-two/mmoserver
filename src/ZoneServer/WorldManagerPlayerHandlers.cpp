@@ -410,7 +410,8 @@ void WorldManager::warpPlanet(PlayerObject* playerObject, const glm::vec3& desti
 	gMessageLib->sendStartScene(mZoneId,playerObject);
 	gMessageLib->sendServerTime(gWorldManager->getServerTime(),playerObject->getClient());
 
-	// add us to the cell should we be in one
+	// add us to the cell should we be in one (with our combat level)
+	playerObject->updateCombatLevel(false);
 	gSpatialIndexManager->createInWorld(playerObject);
 
 	// initialize at new position

@@ -76,6 +76,9 @@ public:
     virtual ~AttackableCreature();
     virtual void prepareCustomRadialMenu(CreatureObject* creatureObject, uint8 itemCount);
     virtual void handleObjectMenuSelect(uint8 messageType,Object* srcObject);
+
+    // Examine: the pre-CU creature fields only (KNOWN_ISSUES #49).
+    virtual void sendAttributes(PlayerObject* playerObject);
     // void setDeathEffect(uint32 effectId) {mDeathEffectId = effectId;}
 
     virtual void	addKnownObject(Object* object);

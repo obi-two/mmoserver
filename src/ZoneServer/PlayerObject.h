@@ -357,6 +357,11 @@ class PlayerObject : public CreatureObject
         CraftingSession*	getCraftingSession(){ return mCraftingSession; }
         void				setCraftingSession(CraftingSession* craftingSession){ mCraftingSession = craftingSession; }
         void				prepareSchematicIds();
+
+        // The player's combat level (docs/COMBAT.md): from the private
+        // combat difficulty skill mod of the equipped weapon's kind, sent
+        // to the client, which rates a target's difficulty against it.
+        void				updateCombatLevel(bool sendDelta = true);
         void				addSchematicIds(Skill* skill);
         bool				checkSchematicId(uint64 id);
         SchematicsIdList*	getSchematicsIdList(){ return &mSchematicIdList; }
