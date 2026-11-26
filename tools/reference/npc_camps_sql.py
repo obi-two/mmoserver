@@ -44,6 +44,11 @@ WEAPON_SETS = {
     "Rebel weapons (hard)": "object/weapon/ranged/rifle/shared_rifle_t21.iff",
     "Tusken weapons": "object/weapon/ranged/rifle/shared_rifle_tusken.iff",
     "ranged weapons": "object/weapon/ranged/carbine/shared_carbine_cdef.iff",
+    "Pirate weapons (hard)": "object/weapon/ranged/rifle/shared_rifle_cdef.iff",
+    "Imperial weapons (medium)": "object/weapon/ranged/carbine/shared_carbine_e11.iff",
+    "Nyax Pirate weapons (medium)": "object/weapon/ranged/carbine/shared_carbine_cdef.iff",
+    "general melee weapons": "object/weapon/melee/knife/shared_knife_vibroblade.iff",
+    "Ewok weapons": "object/weapon/melee/knife/shared_knife_stone.iff",
 }
 # Reach by weapon kind, in metres; an NPC without a weapon fights unarmed.
 REACH = {"pistol": 35, "carbine": 50, "rifle": 64}
@@ -98,9 +103,9 @@ CAMP_ATTRIBUTES = [
 ]
 
 
-def camp_attributes(location, camp, camp_id):
+def camp_attributes(location, camp, camp_id, building=""):
     rows = [(camp_id, "lair_invisible", 1)]
-    building = CAMP_BUILDINGS.get((location, camp))
+    building = building or CAMP_BUILDINGS.get((location, camp))
     if building:
         rows.append((camp_id, "lair_building", POI % building))
     return rows
@@ -169,7 +174,7 @@ def main():
     spawn = 801 + index
     camps = {}
     for r in rows:
-        camps.setdefault(r["camp"], {"key": r["camp_key"], "npcs": []})["npcs"].append(r)
+        camps.setdefault(r["camp"], {"key": r["camp_key"], "building": r.get("building", ""), "npcs": []})["npcs"].append(r)
 
     npcs, stats, templates, groups, lairs, lair_attrs, summary = [], [], [], [], [], [], []
     for camp, info in camps.items():
@@ -225,14 +230,44 @@ def main():
         if planet != "tatooine":
             # Tatooine's camps (053) were written before the buildings; 054
             # adds them. Later planets' camps get them from the start.
-            lair_attrs += camp_attributes(location, camp, camp_id)
+            lair_attrs += camp_attributes(location, camp, camp_id, info["building"])
         far = "%d m+" % dmin if dmax >= 1.0e9 else "%d-%d m" % (dmin, dmax)
         pages = sorted({table[r["name"]]["page"] for r in info["npcs"]})
         summary.append("--   %-45s up to lvl %-2d %-10s %s; pp. %s" % (
             info["key"], top, far, ", ".join(members), ", ".join(pages)))
 
     out = sys.stdout
-    out.write("""\
+    if planet != "tatooine":
+        allpages = sorted({int(table[r["name"]]["page"]) for r in rows})
+        out.write(HEADER_LATER % (planet.capitalize(), allpages[0], allpages[-1], CAMPS_PER_KIND, WAVE_SIZE))
+    else:
+        out.write(HEADER_TATOOINE % (planet.capitalize(), CAMPS_PER_KIND, WAVE_SIZE))
+    _body(out, summary, planet, npcs, stats, templates, groups, lairs, lair_attrs, ids)
+
+
+HEADER_LATER = """\
+-- %s: NPC camps (docs/SPAWNS.md, roadmap step 3). Written by
+-- tools/reference/npc_camps_sql.py; edit that, not this.
+--
+-- The planet's hostile, non-faction NPC groups in the 2004 guide's table
+-- (Prima 2004, pp. %d-%d): each NPC a template with the table's stats, the
+-- client's model and name, and a weapon; each group a camp, %d of each kind,
+-- placed at random on the planet in the distance band of its strongest
+-- NPC's level (as the creature lairs), named after the group's camp in the
+-- client's lair_n. A camp is the group's building from the client
+-- (object/building/poi/) with its NPCs and nothing to destroy (an invisible
+-- lair); the planet's camps without a client building, and those whose
+-- client name ends "_none", are their NPCs only.
+--
+-- Reconstructed, and data to tune: each of the guide's weapon sets is one
+-- client weapon (pistols reach 35 m, carbines 50 m, rifles 64 m; the
+-- damage is the NPC's own, from the table); the models of groups the
+-- client has no outfit of their own for (a generic one by kind: thug,
+-- hoodlum, crook...); the camps. Camps call %d NPCs at a time.
+--
+"""
+
+HEADER_TATOOINE = """\
 -- %s: NPC camps (docs/SPAWNS.md, roadmap step 3). Written by
 -- tools/reference/npc_camps_sql.py; edit that, not this.
 --
@@ -249,7 +284,10 @@ def main():
 -- client weapon (pistols reach 35 m, carbines 50 m, rifles 64 m); the
 -- damage is the NPC's own, from the table. Camps call %d NPCs at a time.
 --
-""" % (planet.capitalize(), CAMPS_PER_KIND, WAVE_SIZE))
+"""
+
+
+def _body(out, summary, planet, npcs, stats, templates, groups, lairs, lair_attrs, ids):
     out.write("\n".join(summary) + "\n--\n\n")
     out.write("SET FOREIGN_KEY_CHECKS = 0;\n\n")
     out.write("INSERT IGNORE INTO swganh.attributes (name, internal, attribute_internal_description)\n  VALUES ")

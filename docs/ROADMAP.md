@@ -90,9 +90,10 @@ and friends (#21).
    lairs for every planet's wild creatures, levels 1-11 from the 2004 guide
    (migrations 027-038) and above 11 from An Empire Divided (039-048),
    placed in distance bands from the cities; creatures wander (049); krayt
-   dragons at the Krayt Graveyard (050). In progress: NPC camps, Tatooine
-   first (053: armed gang and cult NPCs at camp banners), then the camp
-   buildings and the other planets. Exercises the AI and combat already built. The
+   dragons at the Krayt Graveyard (050). NPC camps with the client's camp
+   buildings on Tatooine (053-054), Corellia, Naboo, Rori, Talus and Endor
+   (055-059). Still to do: Tusken Raiders and the other high-level NPCs
+   (An Empire Divided's NPC tables), plain names for wild creature lairs. Exercises the AI and combat already built. The
    client has no spawn or lair tables (those were the server's), so the
    sources are: the 2004 guide's creature tables, already transcribed (683
    creatures and NPCs, each with its planet), and its planet chapters (pp.

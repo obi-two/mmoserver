@@ -225,6 +225,41 @@ Confirmed on the VM (Nov 2026): a Weequay settlement, the client's camp
 (tents, banner, a crashed hull) on the ground with its zealots and thugs
 around it, and the client stable.
 
+The other planets (migrations 055-059, Nov 2026): Corellia 14 kinds of
+camp, Naboo 14, Rori 6, Talus 8, Endor 5; 138 NPCs, 188 camps, from the
+same generator (`npc_camps_sql.py <planet>`, which now writes the
+buildings and invisible lairs from the start; `npc_camps.csv` has a
+building column for them). Notes:
+
+- Models: groups the client dresses (Binayre, Cobral, Kobola, Narmle,
+  First Brigade, Fed-Dub, Lost Aqualish, Spice Collective, Liberation
+  Party, Borvos, Maulers, RSF, plasma thieves) keep their own; species
+  groups their species (Drall, Selonians and the Afarathu cult, Gungans,
+  Ewoks for Gondula and Panshee, Jinda, Duloks for Korga and Pubam); the
+  street gangs the client has no outfit for (Meatlumps, Chunkers, Sleemos,
+  Mummers, Skaak Tippers, Ragtags, Gundarks, smashball) one of its generic
+  ones by kind (goon, hoodlum, crook, ruffian, desperado). Reconstructed.
+- Buildings: Corellia, Naboo and Endor have the client's camps (Afarathu,
+  Drall, Greck, Meatlump, Selonian, Nyax, smashball, swoop; Borvos, Mauler,
+  RSF, plasma thieves, Trade Federation, swamp rat gang, Gungans; Ewok and
+  Dulok villages). The Publish 14 client has no camp buildings for Rori
+  and Talus, so their camps are their NPCs only.
+- Two groups have more kinds than a lair holds and are two camps, as the
+  client names them: Selonian separatists and raiders (Corellia), the
+  Chunker bruiser and goon camps (Talus).
+- Left out: townspeople and officials, the Corellia Times reporters, the
+  Kahmurra bio-engineer, the Warren's scientists (Dantooine) and the
+  Dathomir prison camps' slaves (content to come); and three NPCs the
+  client has no name for (Cobral hooligan, Cobral mugger, Sleemo vandal).
+- More weapon sets: "Pirate weapons (hard)" a CDEF rifle, "Imperial weapons
+  (medium)" an E-11 carbine, "Nyax Pirate weapons (medium)" a CDEF carbine,
+  "general melee weapons" a vibroblade, "Ewok weapons" a stone knife.
+
+Aggression is the table's: a group marked Aggro (dervishes, Dune Stalkers,
+the evil settlers, Afarathu, Pubam...) attacks players who come near; the
+others (the Weequay, most gangs) fight only when attacked, and then as a
+pack.
+
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
 creatures; ours are all named. To revisit.
