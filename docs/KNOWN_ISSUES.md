@@ -1305,7 +1305,7 @@ hour.
 To check against the guides: whether the bank paid for maintenance
 pre-CU, and how fast an unpaid structure decayed.
 
-### 40. Idle servers use a lot of CPU — open
+### 40. Idle servers use a lot of CPU — fixed
 
 Found on the VM (Nov 2026, `sar` over a night with no players): about 25%
 of four cores went to kernel time and 9-10% to user time, flat, with the
@@ -1316,6 +1316,28 @@ fix after the step 2 pass. Not the cause of the VM freeze on 18 November:
 memory, swap and CPU were flat up to the last sample at 04:00, so it is
 put down to the host PC (the VM runs in VirtualBox on it). A long run on a
 rented cloud VM would rule the host out (ROADMAP, Parked).
+
+Running all eleven zones at once (Nov 2026, testing lairs on every planet)
+froze the 4-core VM: each zone spent half its time waiting for a CPU, with
+about 13% system time against 4% user. The socket read thread's `select`
+waited 250 microseconds, under a comment saying 250 ms, then slept 10
+microseconds: about 4,000 wake-ups a second per socket with nothing to read.
+It waits up to 10 ms now (select returns as soon as a packet arrives).
+Measured on an idle ConnectionServer: 24% of a core before, 8.5% after,
+system time down from 12% to 3.5%. What is left is each server's 1 ms loops
+(the main loop and the socket write threads, about 5,000 futex wake-ups a
+second): the write threads could wait for work instead; to do if the
+retest still shows the zones crowding the VM.
+The retest did (four zones at about 14% of a core each, 10% of it system
+time). A zone's main loop and each socket write thread now wait 5 ms
+between passes instead of 1 ms (the schedulers keep their own time;
+packets wait at most that much longer). Measured on an idle tutorial zone:
+11% of a core before, 3.5% after; the ConnectionServer 8.5% to 5% (its
+own main loop still runs every 1 ms, as does the chat server's).
+Retested on the VM (Nov 2026): four zones idle at 5-13% each (the rest is
+their creatures' AI), and all eleven zones run together at 4.5-7.5% each
+once loaded, about 65% of one of the four cores in all. Memory is the next
+limit: about 0.5-0.65 GB per planet zone, 5 GB for all eleven.
 
 ### 41. Crafted values didn't become the item's stats — fixed for weapons
 
@@ -1584,6 +1606,157 @@ Still open:
 - The factory functions turn a factory off without a word when something
   they need is missing (return 3), and the chat server ignores the return
   code.
+
+### 49. Examining a creature lists its internal stats — fixed
+
+Seen while testing Tatooine's lairs (Nov 2026): examining an eopie lists
+each HAM attribute (Health, Constitution, Action, ... 455), To Hit, Stalker
+0, Deathblows 0, and its meat, hide and bone types. These are the server's
+creature attributes, most of them not marked internal. As far as we
+remember, pre-CU examine showed far less for a creature; to check against
+the guides' screenshots, then mark the server-only ones internal.
+
+A pre-CU screenshot of the live game (an ancient reptilian flier's examine
+window, found Nov 2026 in the swganh wiki's image collection) shows what it
+listed: Armor Rating; Special Protection (Kinetic, Energy, Heat, Cold,
+Acid, as percentages); Effectiveness (Blast, Restraint); Vulnerability
+(Stun, Electricity); Aggressive, Stalker, Tamable (Yes/No); Hide Type, Meat
+Type; Deathblows (Yes/No); Ferocity; Difficulty Level; Special Attack 1 and
+2. No HAM values, no To Hit. So: mark the HAM, to-hit and other server
+values internal, show these fields, and send the yes/no ones as Yes/No
+rather than 1/0. The armour and resistance values are in the guides'
+tables where given.
+
+Fixed: the zone sends a creature's examine as that list
+(`AttackableCreature::sendAttributes`): Armor Rating, protections that are
+not zero, Aggressive, Stalker, Tamable, hide and meat types when it has
+them, Deathblows, Ferocity when it has one, Difficulty Level (its level)
+and Special Attack 1 and 2 ("---" for none). Migration 052 adds Tamable and
+the special attacks from the guides' tables to the lair creatures, named
+as the guides name them ("Stun Attack"; the live game's names, like
+"Blinding Strike", are not in our sources). The guides give no armour for
+creatures, so they show "None". To test: examine a lair creature.
+
+Confirmed on the VM (Nov 2026): a juvenile and a canyon krayt dragon examine
+with exactly these fields and the client's labels.
+
+### 50. A level 120 krayt dragon is "no match" for a master marksman — fixed
+
+Seen at the Krayt Graveyard (Nov 2026): a juvenile canyon krayt dragon
+(level 120 in An Empire Divided's table, sent as the creature's level)
+examines as "Combat Difficulty: *** ... is no match for you", to a master
+marksman. Pre-CU, a krayt dragon was far beyond any one player. Lead: the
+server sends every player's level as 0 (`PlayerObjectFactory` sets
+`setCL(0)`); pre-CU a player had a combat level from their combat skills,
+and the client's difficulty rating compares the two. To find how the
+client rates difficulty and what level a player should send, then fix.
+
+Fixed: a player's combat level is now worked out as pre-CU (the swganh
+wiki's "Combat Difficulty Rating" page): 500 plus the private combat
+difficulty skill mod of the equipped weapon's kind, a level per 100, at
+most 25 (`docs/COMBAT.md`). It is sent at login and travel and again on
+equipping a weapon or gaining or dropping a skill. A master marksman with
+a carbine, pistol or rifle is level 11, so a level 120 krayt is red. To
+test: the krayt cons red and examines as beyond you; a womp rat green.
+
+### 51. Killed far from a town: no clone window — fixed
+
+Seen at the Krayt Graveyard (Nov 2026): killed by a giant canyon krayt
+dragon, the player lay as a corpse and no clone window opened. The window
+lists the cloning facilities found within 8,192 m of the player, and the
+graveyard is further than that from all of them, so the list was empty and
+nothing opened. Fixed: it lists the planet's cloning facilities wherever
+the player is (`WorldManager::getCloningFacilities`); the same 8 km search
+moved a player who logged out dead to a facility, and is fixed the same
+way. To test: die far from any town; the window offers the closest
+facility.
+
+Confirmed on the VM (Nov 2026): killed at the graveyard, the window offered
+the closest facility and the player cloned there.
+
+### 52. A corpse stays in combat and cannot /peace — fixed
+
+Seen with #51: the dead player still showed in combat, and Peace answered
+"You cannot transition from this Action state". Incapacitation and death
+lock state changes, and the combat state was cleared after the lock, so
+the clear was refused. Fixed: the states are cleared, and the client told,
+before the posture changes, at incapacitation and at death. To test: be
+killed; the combat icon goes and no "cannot transition" message shows.
+
+Confirmed on the VM (Nov 2026): no messages at death or cloning.
+
+### 53. A krayt dragon gives up the chase quickly — fixed, to test
+
+Seen with #51: every creature stopped following 64 m from its home. Pre-CU
+stalkers followed further. No source gives a distance: a stalker without
+its own distance (`creature_stalking_max_distance`) now follows to 128 m,
+others still 64 m. To test: run from a krayt (a stalker) and from a
+non-stalker; to tune if either feels wrong.
+
+### 55. An aggressive krayt dragon ignored a player 20 m away — fixed
+
+Seen at the Krayt Graveyard (Nov 2026): a juvenile canyon krayt dragon
+(Aggressive: Yes) stood idle with a player about 20 m off, and attacked
+("fights" in the zone log) only when the player came closer. An aggressive
+creature attacks a player within its attack range, which without a
+`creature_attack_range` of its own was 15 m. No source gives the pre-CU
+distance: it is now 32 m (reconstructed, half the 64 m at which a creature
+notices players). To test: approach an aggressive creature; it attacks at
+about 30 m.
+
+Confirmed on the VM (Nov 2026): the range seemed right.
+
+### 56. A level 275 krayt dragon hit for 1 — fixed
+
+Seen at the Krayt Graveyard (Nov 2026): six minutes of combat with a canyon
+krayt dragon and the player barely hurt. Its damage in An Empire Divided's
+table is 1,433.25-1,501.5; the zone read damage as a whole number, the read
+of "1433.25" failed, the damage became 0 and every hit did the least, 1.
+103 of the book's creatures have damage with decimals. Fixed: damage is read
+as a decimal and rounded. To test: a krayt kills a player in a few hits.
+
+Confirmed on the VM (Nov 2026): a juvenile canyon krayt killed the player.
+
+### 59. Lairs are placed in water — open, low
+
+Seen on Corellia (Nov 2026): a vynock lair and its vynocks in a lake. A
+random lair's spot is tested against the city bands and the no-build
+areas, not water: the heightmap gives the ground's height, and the lakes
+and rivers are in the client's terrain files (.trn water layers). To do:
+read the planets' water from the terrain files (or their water heights)
+and reject spots under water.
+
+### 58. NPC camps crashed the zone at start — fixed
+
+Seen on the first start with migration 053 (Nov 2026): the Tatooine zone
+asserted in `LairObject::setCreatureTemplate` while loading the lairs. A
+lair held at most 5 kinds of creature, and the Jawa warband camp calls 7
+(the Dim-U chapel 6). Fixed: a lair holds up to 8, and a lair template with
+more kinds logs a warning and uses the first 8 instead of asserting.
+
+### 57. A krayt dragon stays level on a slope — open, low
+
+Seen at the Krayt Graveyard (Nov 2026): a krayt climbing a hill stayed
+level, its legs in the hillside. The server sends only a creature's
+position and heading; how the model sits on the ground is the client's. To
+look at later, if anything the server sends can change it.
+
+### 54. A creature's special attack shows its animation without sound — open
+
+Seen with #51: the krayt's roar animation played without its sound. The
+roar is its attack: the server sends a combat action with the animation
+`creature_attack_light` (`NpcManager`, as for every creature), and the
+client plays the animation but no sound. To
+look at how the server sends a special attack (the combat action message
+and its animation) against what the client needs to play the sound.
+
+The client has the sounds (Publish 14, `sound/`): for each krayt
+`cr_<creature>_attack_hvy`, `_attack_lgt`, `_hit_hvy`, `_hit_lgt` and
+`_vocalize` (canyon krayt dragon, juvenile canyon krayt; the older
+`cr_kraytdragon_*` set too), and the graveyard's ambient
+`amb_tatooine_krayt_graveyard_lp` and `_os`. The client picks them from the
+creature's appearance and the action it is told about, so the server's
+message is the likely gap, not the data.
 
 ### 24. A cloned player stays a corpse — fixed
 

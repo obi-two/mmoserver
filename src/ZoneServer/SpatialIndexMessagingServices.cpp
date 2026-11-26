@@ -38,6 +38,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "ZoneServer/FactoryCrate.h"
 #include "ZoneServer/HouseObject.h"
 #include "ZoneServer/Inventory.h"
+#include "ZoneServer/LairObject.h"
 #include "ZoneServer/IntangibleObject.h"
 #include "ZoneServer/ManufacturingSchematic.h"
 #include "ZoneServer/MissionObject.h"
@@ -74,6 +75,15 @@ bool SpatialIndexManager::sendCreateObject(Object* object,PlayerObject* player, 
         // creatures
     case ObjType_Creature:
     {
+
+        // An invisible lair (a camp's spawn point) is never shown.
+        if (LairObject* lair = dynamic_cast<LairObject*>(object))
+        {
+            if (lair->isInvisible())
+            {
+                break;
+            }
+        }
 
         // If it's a creature owned by me or my group I want to see it.
         if (CreatureObject* targetCreature = dynamic_cast<CreatureObject*>(object))

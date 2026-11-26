@@ -64,6 +64,58 @@ def sql_str(s):
     return "'" + str(s).replace("\\", "\\\\").replace("'", "\\'") + "'"
 
 
+def stats_2004(r):
+    """HAM ranges and attribute values for a row of the 2004 guide's table."""
+    f = flags_2004(r["notes"])
+    ham = {pool: (int(r["ham_min"]), int(r["ham_max"])) for pool in POOLS}
+    values = {
+        "creature_tohit": r["to_hit"],
+        "creature_damage_min": r["damage_min"], "creature_damage_max": r["damage_max"],
+        "creature_xp": r["xp"],
+        "creature_social_group": r["social_group"],
+        "killer": int(f["Killer"]), "Pack": int(f["Pack"]), "Herd": int(f["Herd"]),
+        "stalking": int(f["Stalker"]), "creature_is_aggressive": int(f["Aggro"]),
+        "creature_group_assist": int(f["Pack"]),
+        "res_meat": resource("Meat", r["meat"]), "creature_meat_qty": r["meat_qty"] or 0,
+        "res_hide": resource("Hide", r["hide"]), "creature_hide_qty": r["hide_qty"] or 0,
+        "res_bone": resource("Bone", r["bone"]), "creature_bone_qty": r["bone_qty"] or 0,
+        "creature_milk": r["milk"].replace("milk (wild)", "wild"),
+    }
+    return ham, values
+
+
+def stats_ed(r):
+    """HAM ranges and attribute values for a row of An Empire Divided's table."""
+    yes = lambda k: int(r[k] == "yes")
+    ham = {pool: (int(float(r[pool + "_min"])), int(float(r[pool + "_max"]))) for pool in POOLS}
+    values = {
+        "creature_tohit": r["to_hit"],
+        "creature_damage_min": r["damage_min"], "creature_damage_max": r["damage_max"],
+        "creature_xp": r["xp"],
+        "creature_social_group": r["social_group"],
+        "killer": yes("killer"), "Pack": yes("pack"), "Herd": yes("herd"),
+        "stalking": yes("stalker"), "creature_is_aggressive": yes("aggro"),
+        "creature_group_assist": yes("pack"),
+    }
+    return ham, values
+
+
+def stat_rows(npc_id, ham, values):
+    """(npc_id, attribute, value) rows: each pool the middle of its range,
+    the range itself, then the other values."""
+    rows = []
+    for pool, attrs in POOLS.items():
+        lo, hi = ham[pool]
+        for a in attrs:
+            rows.append((npc_id, a, (lo + hi) // 2))
+    rows.append((npc_id, "creature_ham_min", ham["health"][0]))
+    rows.append((npc_id, "creature_ham_max", ham["health"][1]))
+    for a, v in values.items():
+        if v != "":
+            rows.append((npc_id, a, v))
+    return rows
+
+
 def main():
     p2004 = load(os.path.join(REF, "prima_2004", "creatures.csv"))
     ped = load(os.path.join(REF, "prima_ed", "creatures.csv"))
@@ -73,50 +125,18 @@ def main():
     for npc_id, guide, name in CREATURES:
         if guide == "2004":
             r = p2004[name]
-            f = flags_2004(r["notes"])
-            ham = {pool: (int(r["ham_min"]), int(r["ham_max"])) for pool in POOLS}
+            ham, values = stats_2004(r)
             cite = "Prima 2004, pp. %s-%s" % (r["page"], r["facing"])
-            values = {
-                "creature_tohit": r["to_hit"],
-                "creature_damage_min": r["damage_min"], "creature_damage_max": r["damage_max"],
-                "creature_xp": r["xp"],
-                "creature_social_group": r["social_group"],
-                "killer": int(f["Killer"]), "Pack": int(f["Pack"]), "Herd": int(f["Herd"]),
-                "stalking": int(f["Stalker"]), "creature_is_aggressive": int(f["Aggro"]),
-                "creature_group_assist": int(f["Pack"]),
-                "res_meat": resource("Meat", r["meat"]), "creature_meat_qty": r["meat_qty"] or 0,
-                "res_hide": resource("Hide", r["hide"]), "creature_hide_qty": r["hide_qty"] or 0,
-                "res_bone": resource("Bone", r["bone"]), "creature_bone_qty": r["bone_qty"] or 0,
-                "creature_milk": r["milk"].replace("milk (wild)", "wild"),
-            }
             flags = r["notes"]
         else:
             r = ped[name]
-            yes = lambda k: int(r[k] == "yes")
-            ham = {pool: (int(r[pool + "_min"]), int(r[pool + "_max"])) for pool in POOLS}
+            ham, values = stats_ed(r)
             cite = "An Empire Divided, pp. %s-%s" % (r["page"], r["facing"])
-            values = {
-                "creature_tohit": r["to_hit"],
-                "creature_damage_min": r["damage_min"], "creature_damage_max": r["damage_max"],
-                "creature_xp": r["xp"],
-                "creature_social_group": r["social_group"],
-                "killer": yes("killer"), "Pack": yes("pack"), "Herd": yes("herd"),
-                "stalking": yes("stalker"), "creature_is_aggressive": yes("aggro"),
-                "creature_group_assist": yes("pack"),
-            }
             flags = ", ".join(k.capitalize() for k in ("aggro", "killer", "stalker", "pack", "herd")
                               if r[k] == "yes") + (", Tamable" if r["can_tame"] == "yes" else "")
             flags += "".join(", " + a for a in (r["special_attack_1"], r["special_attack_2"]) if a)
         levels.append((npc_id, r["level"]))
-        for pool, attrs in POOLS.items():
-            lo, hi = ham[pool]
-            for a in attrs:
-                rows.append((npc_id, a, (lo + hi) // 2))
-        rows.append((npc_id, "creature_ham_min", ham["health"][0]))
-        rows.append((npc_id, "creature_ham_max", ham["health"][1]))
-        for a, v in values.items():
-            if v != "":
-                rows.append((npc_id, a, v))
+        rows.extend(stat_rows(npc_id, ham, values))
         table.append("--   %-4d %-24s %-3s %-10s %3s%%  %-8s %-5s %s" % (
             npc_id, name, r["level"], "%d-%d" % ham["health"], r["to_hit"],
             "%s-%s" % (r["damage_min"], r["damage_max"]), r["xp"], cite))
@@ -175,4 +195,5 @@ DROP TEMPORARY TABLE creatures_011;
 """)
 
 
-main()
+if __name__ == "__main__":
+    main()

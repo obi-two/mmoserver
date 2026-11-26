@@ -1893,6 +1893,27 @@ void MessageLib::sendWeaponIdUpdate(CreatureObject* creatureObject)
 
 //======================================================================================================================
 //
+// Creature Deltas Type 6
+// update: combat level (the level the client rates difficulty against)
+//
+
+void MessageLib::sendCombatLevelUpdate(CreatureObject* creatureObject)
+{
+    mMessageFactory->StartMessage();
+    mMessageFactory->addUint32(opDeltasMessage);
+    mMessageFactory->addUint64(creatureObject->getId());
+    mMessageFactory->addUint32(opCREO);
+    mMessageFactory->addUint8(6);
+    mMessageFactory->addUint32(6);
+    mMessageFactory->addUint16(1);
+    mMessageFactory->addUint16(2);
+    mMessageFactory->addUint16(creatureObject->getCL());
+
+    _sendToInRange(mMessageFactory->EndMessage(),creatureObject,5);
+}
+
+//======================================================================================================================
+//
 // Creature Deltas Type 3
 // update: incapacitation timer
 //

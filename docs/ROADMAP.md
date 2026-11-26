@@ -81,17 +81,19 @@ Done (Nov 2026): creature tables from both Prima guides (#17 on the fork),
 scout harvesting (#18), specials (#19), security (#20), player search, chat
 and friends (#21).
 
-1. **Bazaar pass** (in progress, `bazaar` branch): listing and buying
-   confirmed; next, a listing's details, retrieving and cancelling, then
-   bidding. Then the pull request.
-2. **Test pass of what is built but never played** (the audit's "Code"
-   rows; tests T27-T40 in `docs/TEST_PLAN.md`): crafting and
-   experimentation, harvesters and factories, housing and permissions,
-   mission terminals, groups, vehicles, image design. Each confirmed or
-   turned into issues; it may find working systems before any
-   new work starts.
-3. **Fill the world**: creature spawns and lairs on every planet (today:
-   around Bestine only). Exercises the AI and combat already built. The
+1. ~~Bazaar pass~~: done (#23 on the fork).
+2. ~~Test pass of what is built but never played~~: done (#25 on the fork:
+   missions, factories, crafting, banks, camps, house signs; results in
+   `docs/KNOWN_ISSUES.md`).
+3. **Fill the world** (in progress, `fill-the-world` branch; plan in
+   `docs/SPAWNS.md`): creature spawns and lairs on every planet. Done:
+   lairs for every planet's wild creatures, levels 1-11 from the 2004 guide
+   (migrations 027-038) and above 11 from An Empire Divided (039-048),
+   placed in distance bands from the cities; creatures wander (049); krayt
+   dragons at the Krayt Graveyard (050). NPC camps with the client's camp
+   buildings on Tatooine (053-054), Corellia, Naboo, Rori, Talus and Endor
+   (055-059). Still to do: Tusken Raiders and the other high-level NPCs
+   (An Empire Divided's NPC tables), plain names for wild creature lairs. Exercises the AI and combat already built. The
    client has no spawn or lair tables (those were the server's), so the
    sources are: the 2004 guide's creature tables, already transcribed (683
    creatures and NPCs, each with its planet), and its planet chapters (pp.
@@ -100,7 +102,10 @@ and friends (#21).
    `object/mobile/` templates (which creatures it can draw).
 4. **Factions and the Galactic Civil War**: joining, rank and recruiters,
    overt and covert, TEF, faction kills and points. Needed by PvP, the
-   theme parks and the pilot professions.
+   theme parks and the pilot professions. City garrisons (raised Nov 2026):
+   the towns' troops stand still today; pre-CU some patrolled and others
+   guarded the town, and they joined a fight they saw on the side of a
+   player in favour with their faction.
 5. **Finish the combat professions**: players' worn armour (2004 guide,
    pp. 168-169), encumbrance, the remaining states, poison and disease, the
    medic review (stimpacks, `KNOWN_ISSUES.md` #25), the elites and cones;
@@ -132,6 +137,9 @@ when it unblocks the current step.
 | Management portal (beyond accounts), load testing (Tools, below) | After the gameplay steps | `portal/`: accounts, resets, roles and permissions, audit log, Linux installer |
 | A long run on a rented cloud VM (Azure, AWS or similar) | The test VM froze once overnight with memory, swap and CPU flat, put down to the host PC (KNOWN_ISSUES #40); a cloud VM would rule the host out, and is a step towards a public server | |
 | Housing set-up and test steps | Record how to place, sign, name and test each house type once Tatooine is populated; signs are tuned so far for the Tatooine large and small houses and the guild halls (KNOWN_ISSUES #30) | |
+| Creature levels that change with hunting | Raised Nov 2026: much-hunted areas stay low level, untouched creatures grow stronger. Not pre-CU (creatures had the guide's fixed level) and changes balance (XP, loot, missions); an optional server rule once there is a population to watch | Distance bands by level (`docs/SPAWNS.md`) |
+| Server settings page in the portal | Raised Nov 2026: toggles a server owner changes without SQL. The zones read their settings from `config_server` (by name; `all` or one zone) at start | First candidates: `Lair_First_Spawn_Max_Minutes` (0 on a test server, migration 051), `Player_Bank_Capacity`, `motD` |
+| Spawn areas set by a community from the portal | No source gives spawn locations, so communities may want to place their own | Bands and lairs are data (`docs/SPAWNS.md`) |
 | Deleting test characters in bulk | The test server has about 40 test characters; the character select screen's Delete removes them properly, one at a time. A `tools/` script through the same deletion procedure would do a list | |
 
 ## Database

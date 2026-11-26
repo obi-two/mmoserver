@@ -330,6 +330,10 @@ public:
 
     const					Anh_Math::Rectangle getSpawnArea(uint64 spawnRegionId);
 
+    // Every cloning facility on the planet, wherever the player is: a
+    // player who dies far from any town still gets the clone window.
+    void					getCloningFacilities(ObjectSet* facilities);
+
     // retrieve object maps
     ObjectMap*				getWorldObjectMap() {
         return &mObjectMap;

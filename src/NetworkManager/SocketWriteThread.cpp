@@ -165,7 +165,9 @@ void SocketWriteThread::run()
 			//DLOG(INFO) << "sending : " << packetsSend << "Packets";
 		//}
 
-        boost::this_thread::sleep(boost::posix_time::milliseconds(1));
+        // 5 ms between sends: 1 ms woke every socket's write thread a
+        // thousand times a second when idle (KNOWN_ISSUES #40).
+        boost::this_thread::sleep(boost::posix_time::milliseconds(5));
     }
 
     // Shutdown internally

@@ -61,6 +61,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "UIPlayerSelectBox.h"
 #include "UICloneSelectListBox.h"
 #include "VehicleController.h"
+#include "Weapon.h"
 #include "WorldConfig.h"
 #include "WorldManager.h"
 #include "ZoneOpcodes.h"
@@ -2380,4 +2381,62 @@ bool PlayerObject::handleLocomotionUpdate(::common::IEventPtr triggered_event)
         return true;
     }
     return false;
+}
+
+//=============================================================================
+//
+// The player's combat level (pre-CU): each 100 points of the "private combat
+// difficulty" skill mod for the kind of weapon equipped (unarmed with none)
+// is a level, on top of the 500 every player starts with (level 5), at most
+// 25. The client rates a creature's or NPC's difficulty against it. Source:
+// the swganh wiki's "Combat Difficulty Rating" page (the live game's
+// mechanics); the mods per skill box are the client's skill data.
+//
+
+namespace {
+uint16 combatLevelFor(int32 difficulty)
+{
+    int32 level = (500 + std::max<int32>(difficulty, 0)) / 100;
+    return static_cast<uint16>(std::min<int32>(level, 25));
+}
+}
+
+void PlayerObject::updateCombatLevel(bool sendDelta)
+{
+    uint32 group = WeaponGroup_Unarmed;
+    if (Weapon* weapon = dynamic_cast<Weapon*>(getEquipManager()->getEquippedObject(CreatureEquipSlot_Hold_Left)))
+    {
+        group = weapon->getGroup();
+    }
+
+    // getSkillModValue gives -1000 for a mod the player hasn't got.
+    int32 difficulty = 0;
+    switch (group)
+    {
+    case WeaponGroup_1h:      difficulty = getSkillModValue(SMod_private_onehandmelee_combat_difficulty); break;
+    case WeaponGroup_2h:      difficulty = getSkillModValue(SMod_private_twohandmelee_combat_difficulty); break;
+    case WeaponGroup_Polearm: difficulty = getSkillModValue(SMod_private_polearm_combat_difficulty); break;
+    case WeaponGroup_Rifle:   difficulty = getSkillModValue(SMod_private_rifle_combat_difficulty); break;
+    case WeaponGroup_Pistol:  difficulty = getSkillModValue(SMod_private_pistol_combat_difficulty); break;
+    case WeaponGroup_Carbine: difficulty = getSkillModValue(SMod_private_carbine_combat_difficulty); break;
+    case WeaponGroup_Flamethrower:
+    case WeaponGroup_Launcher: difficulty = getSkillModValue(SMod_private_heavyweapon_combat_difficulty); break;
+    case WeaponGroup_Saber:
+        difficulty = std::max(getSkillModValue(SMod_private_onehandlightsaber_combat_difficulty),
+                     std::max(getSkillModValue(SMod_private_twohandlightsaber_combat_difficulty),
+                              getSkillModValue(SMod_private_polearmlightsaber_combat_difficulty)));
+        break;
+    default:                  difficulty = getSkillModValue(SMod_private_unarmed_combat_difficulty); break;
+    }
+
+    uint16 level = combatLevelFor(difficulty);
+    if (level == getCL())
+    {
+        return;
+    }
+    setCL(level);
+    if (sendDelta)
+    {
+        gMessageLib->sendCombatLevelUpdate(this);
+    }
 }

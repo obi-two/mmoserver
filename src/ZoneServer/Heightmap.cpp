@@ -25,6 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 ---------------------------------------------------------------------------------------
 */
 #include "Heightmap.h"
+
+#include <algorithm>
 #include "ZoneServer/WorldManager.h"
 
 
@@ -488,6 +490,11 @@ float Heightmap::getCachedHeight(float xPos, float zPos) const
     {
         int32 x = round_coord(xPos) + (heightMapHeight/2);
         int32 z = round_coord(zPos) + (heightMapWidth/2);
+
+        // The map covers -7680 to 7680: a point past its edge takes the
+        // edge's height rather than reading outside the cache.
+        x = std::max<int32>(0, std::min<int32>(x, heightMapWidth - 1));
+        z = std::max<int32>(0, std::min<int32>(z, heightMapHeight - 1));
 
         yPos = (float)(mHeightmapCache[z/mCacheResoulutionDivider][x/mCacheResoulutionDivider])/20;
     }

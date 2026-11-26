@@ -262,6 +262,7 @@ bool EquipManager::EquipItem(Object* object)
     if(item->getItemFamily() == ItemFamily_Weapon)
     {
         gMessageLib->sendWeaponIdUpdate(owner);
+        owner->updateCombatLevel();
     }
 
     return true;
@@ -322,6 +323,7 @@ bool EquipManager::unEquipItem(Object* object)
     if(item->getItemFamily() == ItemFamily_Weapon)
     {
         gMessageLib->sendWeaponIdUpdate(owner);
+        owner->updateCombatLevel();
     }
 
     return true;

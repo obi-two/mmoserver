@@ -27,6 +27,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "ZoneServer/AttackableCreature.h"
 
+#include <cstdlib>
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "NetworkManager/Message.h"
+#include "NetworkManager/MessageFactory.h"
+#include "ZoneServer/ZoneOpcodes.h"
+
 #include "Utils/rand.h"
 
 #include "MessageLib/MessageLib.h"
@@ -636,8 +645,13 @@ void AttackableCreature::handleEvents()
 
 namespace {
 // Players this close wake a creature up (it roams, and an aggressive one
-// watches for players in its attack range).
-const float kNoticeRange = 64.0f;
+// watches for players in its attack range): the players' viewing range
+// (Zone_Player_ViewingRange, 128 m), so a creature a player can see moves.
+// At 64 m, those seen further off stood still.
+float noticeRange()
+{
+    return static_cast<float>(gWorldConfig->getPlayerViewingRange());
+}
 // How far from home a creature follows a target when it has no stalking
 // distance of its own, in metres.
 const float kDefaultLeash = 64.0f;
@@ -723,11 +737,17 @@ void AttackableCreature::_think(void)
         }
     }
 
-    bool playersNear = _nearestPlayer(kNoticeRange) != NULL;
+    bool playersNear = _nearestPlayer(noticeRange()) != NULL;
     if (mCombatState == State_Idle && playersNear)
     {
         mCombatState = State_Alerted;
         setAiState(NpcIsReady);
+        // First wander within a few seconds of waking (then every 30-45 s),
+        // so a player who arrives sees the creatures move.
+        if (isRoaming() && getRoamingSteps() <= 0)
+        {
+            SetReadyDelay(1 + gRandom->getRand() % 8);
+        }
     }
     else if (mCombatState == State_Alerted && !playersNear && getRoamingSteps() == 0)
     {
@@ -1616,7 +1636,10 @@ void AttackableCreature::respawn(void)
 
     if (this->hasInternalAttribute("creature_damage_min"))
     {
-        int32 minDamage = this->getInternalAttribute<int32>("creature_damage_min");
+        // Read as a decimal: An Empire Divided prints some damage with
+        // decimals (1433.25), which failed as a whole number and left the
+        // creature hitting for 1 (KNOWN_ISSUES #56).
+        int32 minDamage = static_cast<int32>(this->getInternalAttribute<float>("creature_damage_min") + 0.5f);
         mMinDamage = minDamage;
     }
     else
@@ -1627,7 +1650,10 @@ void AttackableCreature::respawn(void)
 
     if (this->hasInternalAttribute("creature_damage_max"))
     {
-        int32 maxDamage = this->getInternalAttribute<int32>("creature_damage_max");
+        // Read as a decimal: An Empire Divided prints some damage with
+        // decimals (1433.25), which failed as a whole number and left the
+        // creature hitting for 1 (KNOWN_ISSUES #56).
+        int32 maxDamage = static_cast<int32>(this->getInternalAttribute<float>("creature_damage_max") + 0.5f);
         mMaxDamage = maxDamage;
     }
     else
@@ -1645,6 +1671,27 @@ void AttackableCreature::respawn(void)
     {
         //assert(false && "Missing creature damage max range attribute");
         mWeaponMaxRange = 4;
+    }
+
+    // An armed NPC (docs/SPAWNS.md, NPC camps): its template names the
+    // client weapon it carries (creature_weapon); it holds it from the
+    // start. The weapon decides the model in its hands and the attack
+    // animation; the damage stays the NPC's own (the guide's table), and
+    // its reach is creature_damage_max_range. The factory's spare weapon
+    // object is reused, so a respawn makes nothing new.
+    if (mPrimaryWeapon && this->hasInternalAttribute("creature_weapon"))
+    {
+        std::string model = this->getInternalAttribute<std::string>("creature_weapon");
+        uint32 group = WeaponGroup_1h;
+        if (model.find("/pistol/") != std::string::npos)         group = WeaponGroup_Pistol;
+        else if (model.find("/carbine/") != std::string::npos)   group = WeaponGroup_Carbine;
+        else if (model.find("/rifle/") != std::string::npos)     group = WeaponGroup_Rifle;
+        else if (model.find("/2h_sword/") != std::string::npos)  group = WeaponGroup_2h;
+        else if (model.find("/polearm/") != std::string::npos)   group = WeaponGroup_Polearm;
+        mPrimaryWeapon->setModelString(BString(model.c_str()));
+        mPrimaryWeapon->setGroup(group);
+        mPrimaryWeapon->setInternalAttribute("weapon_group", std::to_string(group));
+        equipPrimaryWeapon();
     }
 
     if (this->hasAttribute("creature_attack"))
@@ -1753,8 +1800,11 @@ void AttackableCreature::respawn(void)
         }
         else
         {
-            //assert(false && "Missing creature attack range attribute");
-            this->setAttackRange(15.0);
+            // An aggressive creature attacks a player who comes this close.
+            // Reconstructed (no source gives it; was 15 m, which let a
+            // player stand beside a krayt dragon): half the 64 m at which a
+            // creature notices players. creature_attack_range overrides it.
+            this->setAttackRange(32.0);
         }
     }
 
@@ -1859,8 +1909,9 @@ void AttackableCreature::respawn(void)
         }
         else
         {
-            //assert(false && "Missing creature stalking max distance");
-            mStalkerDistanceMax = 64.0;
+            // A stalker follows twice as far from home as other creatures
+            // (64 m, kDefaultLeash). Reconstructed: no source gives it.
+            mStalkerDistanceMax = 128.0;
         }
     }
 
@@ -2170,4 +2221,102 @@ float AttackableCreature::getMaxSpawnDistance(void)
     }
 
     return maxSpawnDistance;
+}
+
+//=============================================================================
+//
+// Examine (KNOWN_ISSUES #49). Pre-CU, a creature's examine window showed its
+// armour, Aggressive, Stalker, Tamable, hide and meat types, Deathblows,
+// Ferocity, Difficulty Level and two special attacks (a live-game screenshot
+// of an ancient reptilian flier), not its HAM, to-hit or the server's own
+// values. The keys are the client's attribute names; a value the template
+// lacks is left out, except the yes/no fields and the special attacks
+// ("---" for none), which the window always showed.
+//
+
+void AttackableCreature::sendAttributes(PlayerObject* playerObject)
+{
+    if (!playerObject || !playerObject->isConnected())
+    {
+        return;
+    }
+
+    std::vector<std::pair<std::string, std::string> > rows;
+    auto text = [this](const char* key) -> std::string {
+        return hasAttribute(key) ? getAttribute<std::string>(key) : std::string();
+    };
+    auto yesNo = [](bool yes) { return std::string(yes ? "Yes" : "No"); };
+
+    std::string armor = text("armor_rating");
+    rows.push_back(std::make_pair(std::string("armorrating"), armor.empty() ? std::string("None") : armor));
+
+    // Protections, effectiveness and vulnerabilities that are not zero.
+    static const char* const categories[] = {
+        "cat_armor_special_protection", "cat_armor_effectiveness", "cat_armor_vulnerability"
+    };
+    static const char* const kinds[] = {
+        "armor_eff_kinetic", "armor_eff_energy", "armor_eff_blast", "armor_eff_stun",
+        "armor_eff_elemental_heat", "armor_eff_elemental_cold", "armor_eff_elemental_acid",
+        "armor_eff_elemental_electrical", "armor_eff_restraint"
+    };
+    for (const char* category : categories)
+    {
+        for (const char* kind : kinds)
+        {
+            std::string key = std::string(category) + "." + kind;
+            std::string value = text(key.c_str());
+            float percent = value.empty() ? 0.0f : static_cast<float>(std::atof(value.c_str()));
+            if (percent != 0.0f)
+            {
+                char formatted[32];
+                snprintf(formatted, sizeof(formatted), "%.1f%%", percent);
+                rows.push_back(std::make_pair(key, std::string(formatted)));
+            }
+        }
+    }
+
+    std::string tamable = text("tamable");
+    rows.push_back(std::make_pair(std::string("aggro"), yesNo(mIsAgressive)));
+    rows.push_back(std::make_pair(std::string("stalking"), yesNo(mIsStalker)));
+    rows.push_back(std::make_pair(std::string("tamable"), yesNo(!tamable.empty() && tamable != "0")));
+
+    std::string hide = text("res_hide");
+    if (!hide.empty())
+    {
+        rows.push_back(std::make_pair(std::string("res_hide"), hide));
+    }
+    std::string meat = text("res_meat");
+    if (!meat.empty())
+    {
+        rows.push_back(std::make_pair(std::string("res_meat"), meat));
+    }
+
+    rows.push_back(std::make_pair(std::string("killer"), yesNo(mIsKiller)));
+
+    std::string ferocity = text("ferocity");
+    if (!ferocity.empty())
+    {
+        rows.push_back(std::make_pair(std::string("ferocity"), ferocity));
+    }
+
+    rows.push_back(std::make_pair(std::string("challenge_level"), std::to_string(getCL())));
+
+    std::string attack1 = text("spec_atk_1");
+    std::string attack2 = text("spec_atk_2");
+    rows.push_back(std::make_pair(std::string("spec_atk_1"), attack1.empty() ? std::string("---") : attack1));
+    rows.push_back(std::make_pair(std::string("spec_atk_2"), attack2.empty() ? std::string("---") : attack2));
+
+    gMessageFactory->StartMessage();
+    gMessageFactory->addUint32(opAttributeListMessage);
+    gMessageFactory->addUint64(getId());
+    gMessageFactory->addUint32(static_cast<uint32>(rows.size()));
+    for (const auto& row : rows)
+    {
+        gMessageFactory->addString(BString(row.first.c_str()));
+        BString value(row.second.c_str());
+        value.convert(BSTRType_Unicode16);
+        gMessageFactory->addString(value);
+    }
+    Message* message = gMessageFactory->EndMessage();
+    (playerObject->getClient())->SendChannelAUnreliable(message, playerObject->getAccountId(), CR_Client, 9);
 }

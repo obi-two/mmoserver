@@ -183,9 +183,13 @@ void SocketReadThread::run(void)
         // Build a new fd_set structure
         FD_SET(mSocket, &socketSet);
 
-        // We're going to block for 250ms.
+        // Wait up to 10 ms for a packet (select returns as soon as one
+        // arrives). This was 250 microseconds, under a comment saying 250 ms:
+        // about 4,000 wake-ups a second per socket with nothing to read,
+        // most of an idle server's CPU, all of it kernel time
+        // (KNOWN_ISSUES #40).
         tv.tv_sec   = 0;
-        tv.tv_usec  = 250;
+        tv.tv_usec  = 10000;
 
         count = select(mSocket+1, &socketSet, 0, 0, &tv);
 

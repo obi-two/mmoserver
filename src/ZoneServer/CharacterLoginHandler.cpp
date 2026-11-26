@@ -207,6 +207,7 @@ void	CharacterLoginHandler::_processSelectCharacter(Message* message, DispatchCl
 
         //create us for others dont use create in world - we are still in the cell
         //we just want to reinitialize the grid for us
+        playerObject->updateCombatLevel(false);
         gSpatialIndexManager->InitializeObject(playerObject);
 
         //create ourselves for us
@@ -372,7 +373,8 @@ void CharacterLoginHandler::handleObjectReady(Object* object,DispatchClient* cli
         gMessageLib->sendStartScene(mZoneId,player);
         gMessageLib->sendServerTime(gWorldManager->getServerTime(),client);
 
-        //initialize us in the world
+        //initialize us in the world (with our combat level, which others see)
+        player->updateCombatLevel(false);
         gWorldManager->addObject(player);
 
         //create us for others

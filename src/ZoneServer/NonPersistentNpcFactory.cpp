@@ -303,6 +303,13 @@ void NonPersistentNpcFactory::handleDatabaseJobComplete(void* ref,DatabaseResult
         creatureTemplateBinding->addField(DFT_uint64,0,8,0);
 
         uint64 count = result->getRowCount();
+        if (count > MaxCreatureTypes)
+        {
+            // More kinds than a lair holds: use the first ones rather than
+            // assert (a crash at zone start).
+            LOG(WARNING) << "Lair template " << asyncContainer->mTemplateId << ": " << count
+                         << " kinds of creature, using the first " << MaxCreatureTypes;
+        }
 
         int32	spawnRateInc = 100/static_cast<uint32>(count);
         int32	spawnRate = -1;
@@ -310,10 +317,18 @@ void NonPersistentNpcFactory::handleDatabaseJobComplete(void* ref,DatabaseResult
         for (uint64 i = 0; i < count; i++)
         {
             result->getNextRow(creatureTemplateBinding, &creatureTemplateId);
+            if (i >= MaxCreatureTypes)
+            {
+                continue;
+            }
             npc->setCreatureTemplate((uint32)i, creatureTemplateId);
 
             spawnRate += spawnRateInc;
             npc->setCreatureSpawnRate((uint32)i, (uint32)spawnRate);
+        }
+        if (count > MaxCreatureTypes)
+        {
+            count = MaxCreatureTypes;
         }
         if (count > 0 && spawnRate < 99)
         {

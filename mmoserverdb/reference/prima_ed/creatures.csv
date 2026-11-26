@@ -1,3 +1,365 @@
-name,level,social_group,pvp_faction,health_min,health_max,action_min,action_max,mind_min,mind_max,damage_min,damage_max,ranged_attack,to_hit,xp,killer,stalker,pack,herd,aggro,can_tame,invulnerable,special_attack_1,special_attack_2,page,facing
-greater desert womprat,16,greater desert womprat,,1200,2000,1200,2000,1200,2000,85,90,yes,35,1355,no,yes,no,no,no,yes,no,BlindAttack,StunAttack,472,473
-variegated womprat,14,variegated womprat,,1050,1750,1050,1750,1050,1750,75,80,no,30,1085,no,no,no,yes,no,yes,no,,StunAttack,478,479
+planet,name,level,social_group,pvp_faction,health_min,health_max,action_min,action_max,mind_min,mind_max,damage_min,damage_max,ranged_attack,to_hit,xp,killer,stalker,pack,herd,aggro,can_tame,invulnerable,special_attack_1,special_attack_2,page,facing
+Corellia,Corellian butterfly defender,18,Corellian butterfly,,1200,2000,1200,2000,1200,2000,85,90,yes,40,1659,no,no,yes,yes,yes,yes,no,,IntimidationAttack,410,411
+Corellia,Corellian butterfly monarch,19,Corellian butterfly,,1275,2125,1275,2125,1275,2125,90,95,no,40,1824,yes,no,yes,yes,no,yes,no,KnockDownAttack,IntimidationAttack,410,411
+Corellia,Corellian butterfly warrior,14,Corellian butterfly,,900,1500,900,1500,900,1500,65,70,yes,30,1085,no,no,yes,yes,yes,yes,no,StunAttack,,410,411
+Corellia,crimson sand panther,26,sand panther,,2100,3500,2100,3500,2100,3500,120.75,126.5,no,55,3223,yes,no,yes,no,yes,yes,no,DizzyAttack,StunAttack,410,411
+Corellia,deranged wrix,17,deranged wrix,,1200,2000,1200,2000,1200,2000,85,90,no,45,1502,no,no,no,no,yes,yes,no,StunAttack,IntimidationAttack,412,413
+Corellia,devil gulginaw,16,devil gulginaw,,975,1625,975,1625,975,1625,70,75,yes,40,1355,yes,no,yes,yes,yes,yes,no,,DizzyAttack,412,413
+Corellia,dwarf gronda,12,dwarf gronda,,900,1500,900,1500,900,1500,65,70,no,35,747,no,no,no,yes,no,yes,no,StunAttack,,412,413
+Corellia,enraged tabage mother,16,tabage,,975,1625,975,1625,975,1625,70,75,no,40,1355,yes,no,yes,yes,yes,yes,no,StunAttack,,412,413
+Corellia,female grassland slice hound,12,grassland slice hound,,750,1250,750,1250,750,1250,55,60,no,35,747,no,no,yes,yes,yes,yes,no,,StunAttack,412,413
+Corellia,female sand panther,22,sand panther,,1425,2375,1425,2375,1425,2375,100,105,no,45,2370,yes,yes,yes,yes,yes,yes,no,DizzyAttack,BlindAttack,412,413
+Corellia,giant carrion spat,17,giant carrion spat,,1125,1875,1125,1875,1125,1875,80,85,no,45,1502,yes,yes,no,no,yes,yes,no,DizzyAttack,StunAttack,414,415
+Corellia,giant dalyrake,16,dalyrake,,1125,1875,1125,1875,1125,1875,80,85,no,40,1355,no,no,no,no,yes,yes,no,,DizzyAttack,414,415
+Corellia,grassland slice hound,13,grassland slice hound,,750,1250,750,1250,750,1250,55,60,no,35,965,yes,no,yes,yes,yes,yes,no,,PostureDownAttack,414,415
+Corellia,greater gulginaw,20,gulginaw,,1425,2375,1425,2375,1425,2375,100,105,yes,55,1997,no,no,yes,yes,no,yes,no,DizzyAttack,StunAttack,414,415
+Corellia,gronda,18,gronda,,1350,2250,1350,2250,1350,2250,95,100,no,45,1659,no,no,no,yes,no,yes,no,,KnockDownAttack,414,415
+Corellia,gulginaw,12,gulginaw,,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,yes,no,no,no,,IntimidationAttack,414,415
+Corellia,mottled wrix,12,mottled wrix,,525,875,525,875,525,875,50,55,no,35,747,yes,no,yes,yes,yes,yes,no,StunAttack,,416,417
+Corellia,mountain murra,16,mountain murra,,1200,2000,1200,2000,1200,2000,85,90,no,40,1355,no,no,no,yes,no,yes,no,,StunAttack,416,417
+Corellia,rogue bageraset,12,rogue bageraset,,750,1250,750,1250,750,1250,55,60,yes,35,747,yes,no,no,no,yes,yes,no,,StunAttack,416,417
+Corellia,sand panther,21,sand panther,,1875,3125,1875,3125,1875,3125,105,110,no,45,2180,no,no,yes,yes,no,yes,no,IntimidationAttack,StunAttack,416,417
+Corellia,shamaff,24,shamaff,,2175,3625,2175,3625,2175,3625,126,132,no,55,2779,no,no,no,no,no,no,no,DizzyAttack,StunAttack,416,417
+Corellia,shamaff bull,27,shamaff,,2325,3875,2325,3875,2325,3875,136.5,143,no,55,3453,no,no,yes,no,no,no,no,DizzyAttack,StunAttack,418,419
+Corellia,sickening dung mite worker,15,decay mite,,975,1625,975,1625,975,1625,70,75,yes,35,1215,no,no,yes,yes,yes,yes,no,StunAttack,,418,419
+Corellia,startled vrelt mother,13,vrelt,,900,1500,900,1500,900,1500,65,70,yes,35,965,no,no,yes,yes,no,yes,no,KnockDownAttack,IntimidationAttack,418,419
+Corellia,swamp gurrcat,12,swamp gurrcat,,825,1375,825,1375,825,1375,60,65,no,30,747,no,no,yes,yes,no,yes,no,,PostureDownAttack,418,419
+Corellia,tabage protector,14,tabage,,900,1500,900,1500,900,1500,65,70,no,40,1085,no,no,yes,yes,yes,yes,no,StunAttack,,418,419
+Corellia,tabage scavenger,13,tabage,,825,1375,825,1375,825,1375,60,65,no,35,965,no,yes,yes,yes,yes,yes,no,StunAttack,,418,419
+Corellia,war gronda,21,gronda,,1350,2250,1350,2250,1350,2250,95,100,no,55,2180,yes,no,yes,yes,yes,yes,no,KnockDownAttack,StunAttack,418,419
+Dantooine,bile drenched quenker,50,quenker,,4350,7250,4350,7250,4350,7250,252,264,yes,55,9955,no,no,yes,yes,yes,yes,no,DizzyAttack,,420,421
+Dantooine,bol,30,bol,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,KnockDownAttack,IntimidationAttack,420,421
+Dantooine,bol pack runner,20,bol,,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,StunAttack,DizzyAttack,420,421
+Dantooine,domestic bol mount,30,domestic bol mount,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,BlindAttack,DizzyAttack,420,421
+Dantooine,fierce piket protector,40,piket,,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,no,no,yes,no,yes,no,no,DizzyAttack,BlindAttack,420,421
+Dantooine,grassland voritor tracker,60,voritor lizard,,5100,8500,5100,8500,5100,8500,304.5,319,no,55,13517,no,yes,yes,no,yes,yes,no,KnockDownAttack,PostureDownAttack,420,421
+Dantooine,hostile thune mother,30,thune,,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,no,no,yes,yes,yes,no,no,,BlindAttack,420,421
+Dantooine,huurton howler,30,huurton,,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,yes,yes,yes,no,StunAttack,PostureDownAttack,420,421
+Dantooine,huurton huntress,30,huurton,,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,yes,yes,no,yes,yes,no,KnockDownAttack,StunAttack,420,421
+Dantooine,huurton matron,20,huurton,,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,yes,no,BlindAttack,StunAttack,420,421
+Dantooine,huurton stalker,40,huurton,,3525,5875,3525,5875,3525,5875,194.25,203.5,no,55,6839,yes,no,yes,no,yes,yes,no,StunAttack,DizzyAttack,420,421
+Dantooine,piket longhorn,30,piket,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,BlindAttack,IntimidationAttack,422,423
+Dantooine,piket longhorn female,30,piket,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,DizzyAttack,PostureDownAttack,422,423
+Dantooine,piket plains walker,20,piket,,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,DizzyAttack,,422,423
+Dantooine,quenker,40,quenker,,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,no,no,yes,no,yes,yes,no,IntimidationAttack,KnockDownAttack,422,423
+Dantooine,quenker ravager,60,quenker,,5025,8375,5025,8375,5025,8375,299.25,313.5,no,55,13517,yes,no,yes,no,yes,yes,no,DizzyAttack,StunAttack,422,423
+Dantooine,quenker relic reaper,70,quenker,,5925,9875,5925,9875,5925,9875,362.25,379.5,no,55,17517,no,no,no,no,yes,no,no,BlindAttack,IntimidationAttack,422,423
+Dantooine,savage quenker,40,quenker,,3600,6000,3600,6000,3600,6000,199.5,209,yes,55,6839,no,no,yes,no,yes,yes,no,IntimidationAttack,StunAttack,422,423
+Dantooine,seething bol crusher,40,bol,,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,yes,no,no,no,BlindAttack,DizzyAttack,422,423
+Dantooine,slinking voritor hunter,80,voritor lizard,,6525,10875,6525,10875,6525,10875,404.25,423.5,no,55,21952,yes,yes,yes,no,no,yes,no,PostureDownAttack,DizzyAttack,422,423
+Dantooine,thune herd leader,40,thune,,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,yes,no,yes,yes,no,no,no,DizzyAttack,PostureDownAttack,422,423
+Dantooine,vexed voritor lizard,70,voritor lizard,,5850,9750,5850,9750,5850,9750,357,374,no,55,17517,no,no,yes,no,yes,no,no,KnockDownAttack,DizzyAttack,422,423
+Dantooine,voritor dasher,50,voritor lizard,,4350,7250,4350,7250,4350,7250,252,264,yes,55,9955,no,no,yes,no,yes,yes,no,DizzyAttack,BlindAttack,424,425
+Dathomir,ancient bull rancor,95,rancor,,7650,12750,7650,12750,7650,12750,483,506,no,35,564,no,no,yes,yes,yes,no,no,IntimidationAttack,,424,425
+Dathomir,ancient graul,45,graul,,3975,6625,3975,6625,3975,6625,225.75,236.5,no,55,29412,yes,no,yes,no,yes,no,no,,DizzyAttack,424,425
+Dathomir,ancient reptilian flier,20,reptilian flier,,1350,2250,1350,2250,1350,2250,95,100,no,55,8341,no,no,yes,no,yes,yes,no,DizzyAttack,BlindAttack,424,425
+Dathomir,bull rancor,60,rancor,,5025,8375,5025,8375,5025,8375,299.25,313.5,no,30,290,no,no,yes,yes,no,yes,no,,PostureDownAttack,424,425
+Dathomir,enraged bull rancor,85,rancor,,6900,11500,6900,11500,6900,11500,430.5,451,no,30,194,no,no,no,no,no,yes,no,IntimidationAttack,,424,425
+Dathomir,enraged rancor,75,rancor,,6150,10250,6150,10250,6150,10250,378,396,no,55,24332,yes,no,yes,no,yes,no,no,KnockDownAttack,PostureDownAttack,424,425
+Dathomir,enraged reptilian flier,24,reptilian flier,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,19681,yes,no,yes,no,yes,no,no,KnockDownAttack,,424,425
+Dathomir,frenzied graul,50,graul,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,413,no,no,yes,yes,no,no,no,,IntimidationAttack,424,425
+Dathomir,gaping spider hunter,12,gaping,,525,875,525,875,525,875,50,55,yes,30,68,no,yes,yes,no,yes,yes,no,,MildPoison,424,425
+Dathomir,gaping spider queen,16,gaping,,975,1625,975,1625,975,1625,70,75,yes,35,747,yes,yes,yes,no,yes,yes,no,StunAttack,PostureDownAttack,424,425
+Dathomir,gaping spider recluse,13,gaping recluse,,825,1375,825,1375,825,1375,60,65,yes,40,1355,yes,yes,yes,no,yes,yes,no,KnockDownAttack,MediumPoison,424,425
+Dathomir,gnarled rancor,45,rancor,,3900,6500,3900,6500,3900,6500,220.5,231,no,30,68,no,no,no,yes,no,no,no,,,424,425
+Dathomir,graul,30,graul,,2475,4125,2475,4125,2475,4125,147,154,no,55,8341,yes,no,yes,no,yes,yes,no,KnockDownAttack,DizzyAttack,424,425
+Dathomir,graul mauler,34,graul,,3075,5125,3075,5125,3075,5125,162.75,170.5,no,55,4169,no,no,yes,no,yes,yes,no,IntimidationAttack,StunAttack,424,425
+Dathomir,infant graul,25,graul,,2100,3500,2100,3500,2100,3500,120.75,126.5,no,30,68,no,no,yes,yes,no,no,no,,,424,425
+Dathomir,injured purbole,12,purbole,,900,1500,900,1500,900,1500,65,70,no,35,747,no,yes,no,no,no,yes,no,PostureDownAttack,,426,427
+Dathomir,lurking shear mite,12,shear mite,,750,1250,750,1250,750,1250,55,60,yes,35,747,no,yes,yes,no,yes,yes,no,,IntimidationAttack,426,427
+Dathomir,malkloc bull,14,malkloc,,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,yes,no,no,no,StunAttack,,426,427
+Dathomir,mature reptilian flier,16,reptilian flier,,1050,1750,1050,1750,1050,1750,75,80,no,40,1355,no,no,yes,no,yes,yes,no,,BlindAttack,426,427
+Dathomir,mutant rancor,70,rancor,,5775,9625,5775,9625,5775,9625,351.75,368.5,no,55,17517,yes,no,yes,no,yes,no,no,KnockDownAttack,DizzyAttack,426,427
+Dathomir,purbole,16,purbole,,1125,1875,1125,1875,1125,1875,80,85,no,40,1355,no,yes,no,no,yes,yes,no,StunAttack,,426,427
+Dathomir,purbole elder,22,purbole,,1875,3125,1875,3125,1875,3125,105,110,no,55,2370,no,yes,yes,no,yes,yes,no,PostureDownAttack,StunAttack,426,427
+Dathomir,purbole hunter,18,purbole,,1125,1875,1125,1875,1125,1875,80,85,no,45,1659,yes,yes,yes,no,yes,yes,no,StunAttack,IntimidationAttack,426,427
+Dathomir,purbole scout,15,purbole,,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,yes,no,no,yes,yes,no,StunAttack,,426,427
+Dathomir,purbole stalker,18,purbole,,1125,1875,1125,1875,1125,1875,80,85,no,45,1659,yes,yes,yes,no,yes,yes,no,DizzyAttack,PostureDownAttack,426,427
+Dathomir,purbole youth,14,purbole,,900,1500,900,1500,900,1500,65,70,no,40,1085,no,yes,yes,no,yes,yes,no,StunAttack,,426,427
+Dathomir,rancor,50,rancor,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,55,9955,yes,yes,yes,no,yes,yes,no,,IntimidationAttack,426,427
+Dathomir,rancor youth,40,rancor,,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,no,yes,yes,no,yes,yes,no,KnockDownAttack,StunAttack,426,427
+Dathomir,reclusive shear mite,16,shear mite,,1050,1750,1050,1750,1050,1750,75,80,yes,40,1355,no,yes,yes,no,yes,yes,no,,BlindAttack,426,427
+Dathomir,reptilian flier,14,reptilian flier,,900,1500,900,1500,900,1500,65,70,no,40,1085,no,no,yes,no,yes,yes,no,,PostureDownAttack,426,427
+Dathomir,shear mite hunter,12,shear mite,,525,875,525,875,525,875,50,55,no,35,747,yes,yes,yes,no,yes,yes,no,,PostureDownAttack,426,427
+Dathomir,shear mite queen,18,shear mite,,1200,2000,1200,2000,1200,2000,85,90,yes,45,1659,no,yes,yes,no,yes,yes,no,DizzyAttack,StunAttack,426,427
+Endor,aggravated bordok mare,50,bordok,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,40,no,no,yes,yes,no,yes,no,,,428,429
+Endor,arachne drone,35,arachne,,3225,5375,3225,5375,3225,5375,173.25,181.5,yes,30,9955,yes,no,yes,no,yes,no,no,StunAttack,PostureDownAttack,428,429
+Endor,arachne warrior,25,arachne,,2100,3500,2100,3500,2100,3500,120.75,126.5,yes,25,20,no,no,yes,yes,no,yes,no,,,428,429
+Endor,arachne webmaster,30,arachne,,2400,4000,2400,4000,2400,4000,141.75,148.5,no,40,2996,no,yes,yes,yes,yes,yes,no,BlindAttack,StunAttack,428,429
+Endor,bark mite burrower,54,bark mite,,4650,7750,4650,7750,4650,7750,273,286,yes,55,13517,no,no,yes,no,no,no,no,,,428,429
+Endor,bark mite burrower queen,39,bark mite,,3450,5750,3450,5750,3450,5750,189,198,yes,30,11327,no,no,yes,no,yes,yes,no,IntimidationAttack,BlindAttack,428,429
+Endor,blood drenched merek king,55,merek,,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,yes,yes,yes,yes,yes,no,StunAttack,BlindAttack,430,431
+Endor,blood frenzied boar wolf,50,boar wolf,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,40,9955,yes,no,yes,no,yes,yes,no,KnockDownAttack,BlindAttack,430,431
+Endor,blood stained merek,30,blood,,2400,4000,2400,4000,2400,4000,141.75,148.5,yes,55,4169,yes,no,yes,no,yes,yes,no,KnockDownAttack,,430,431
+Endor,bloodseeker mite,30,bloodseeker,,2475,4125,2475,4125,2475,4125,147,154,yes,55,4169,no,no,yes,no,yes,yes,no,DizzyAttack,PostureDownAttack,430,431
+Endor,bloodseeker mite queen,25,bloodseeker,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,yes,no,DizzyAttack,StunAttack,430,431
+Endor,blooming jax,25,jax,,2175,3625,2175,3625,2175,3625,126,132,no,40,2996,no,no,yes,no,no,no,no,PostureDownAttack,BlindAttack,430,431
+Endor,blurrg,50,blurrg,,4425,7375,4425,7375,4425,7375,257.25,269.5,yes,30,9955,no,no,yes,no,no,no,no,StunAttack,BlindAttack,430,431
+Endor,blushing jax,25,jax,,2175,3625,2175,3625,2175,3625,126,132,no,40,2996,no,no,yes,no,no,no,no,BlindAttack,DizzyAttack,430,431
+Endor,boar wolf,20,boar wolf,,1350,2250,1350,2250,1350,2250,95,100,no,55,1997,no,no,yes,no,yes,yes,no,StunAttack,,430,431
+Endor,boar wolf ravager,25,boar wolf,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,yes,no,StunAttack,BlindAttack,430,431
+Endor,bolle bol bark biter,30,bolle bol,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,DizzyAttack,PostureDownAttack,430,431
+Endor,bolle bol female,50,bolle bol,,4425,7375,4425,7375,4425,7375,257.25,269.5,no,30,9955,no,no,yes,yes,no,no,no,PostureDownAttack,DizzyAttack,430,431
+Endor,bolle bol herd leader,30,bolle bol,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,KnockDownAttack,IntimidationAttack,430,431
+Endor,bolle bol male,35,bolle bol,,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,yes,no,no,no,PostureDownAttack,BlindAttack,430,431
+Endor,bolma pack master,25,bolma,,2175,3625,2175,3625,2175,3625,126,132,no,55,2996,no,no,yes,no,no,no,no,,BlindAttack,430,431
+Endor,bordok ancient,40,bordok,,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,BlindAttack,StunAttack,430,431
+Endor,bordok foal,25,bordok,,2175,3625,2175,3625,2175,3625,126,132,no,40,2996,no,no,yes,yes,no,no,no,IntimidationAttack,DizzyAttack,430,431
+Endor,bordok herd master,30,bordok,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,IntimidationAttack,,430,431
+Endor,Borgle life sapper,55,Borgle,,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,yes,yes,no,yes,no,no,PostureDownAttack,DizzyAttack,430,431
+Endor,cowardly gurreck,15,gurreck,,1050,1750,1050,1750,1050,1750,75,80,no,30,1215,no,no,yes,no,no,yes,no,,,430,431
+Endor,crazed gurreck,25,crazed gurreck,,2100,3500,2100,3500,2100,3500,120.75,126.5,no,55,2996,yes,no,no,no,yes,yes,no,DizzyAttack,StunAttack,430,431
+Endor,crimson blurrg,30,blurrg,,2550,4250,2550,4250,2550,4250,152.25,159.5,yes,55,4169,no,no,yes,yes,no,no,no,PostureDownAttack,KnockDownAttack,430,431
+Endor,delirious merek avenger,40,toxic,,3600,6000,3600,6000,3600,6000,199.5,209,yes,55,6839,no,yes,yes,no,yes,yes,no,IntimidationAttack,StunAttack,430,431
+Endor,deranged mantigrue,55,mantigrue,,4800,8000,4800,8000,4800,8000,283.5,297,no,55,11681,no,no,no,no,yes,yes,no,BlindAttack,StunAttack,430,431
+Endor,desert gurreck charger,20,gurreck,,1350,2250,1350,2250,1350,2250,95,100,no,55,1997,no,no,yes,no,yes,yes,no,,BlindAttack,432,433
+Endor,diseased blurrg,55,diseased blurrg,,4800,8000,4800,8000,4800,8000,283.5,297,no,55,11681,no,no,no,no,yes,yes,no,MildDisease,DizzyAttack,432,433
+Endor,disturbed bolma,25,disturbed bolma,,2100,3500,2100,3500,2100,3500,120.75,126.5,no,55,2996,no,no,yes,yes,yes,no,no,PostureDownAttack,KnockDownAttack,432,433
+Endor,domesticated merek,50,domestic merek,,4425,7375,4425,7375,4425,7375,257.25,269.5,yes,30,9955,no,no,yes,no,no,yes,no,PostureDownAttack,StunAttack,432,433
+Endor,elder Hanadak matriarch,35,Hanadak,,3150,5250,3150,5250,3150,5250,168,176,no,55,5448,yes,no,yes,yes,yes,yes,no,PostureDownAttack,IntimidationAttack,432,433
+Endor,erratic swirl prong,30,swirl prong,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,PostureDownAttack,IntimidationAttack,432,433
+Endor,festering squill,29,festering squill,,2475,4125,2475,4125,2475,4125,147,154,no,40,3926,no,no,yes,yes,no,yes,no,BlindAttack,PostureDownAttack,432,433
+Endor,fierce Borgle,55,Borgle,,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,no,yes,no,yes,no,no,,BlindAttack,432,433
+Endor,gorax,300,gorax,,15600,26000,15600,26000,15600,26000,1559.25,1633.5,no,55,224144,yes,no,yes,no,yes,no,no,,,434,435
+Endor,gurreck,50,gurreck,,4425,7375,4425,7375,4425,7375,257.25,269.5,no,30,9955,no,no,yes,no,no,yes,no,PostureDownAttack,IntimidationAttack,434,435
+Endor,Hanadak ancient,40,Hanadak,,3525,5875,3525,5875,3525,5875,194.25,203.5,no,55,6839,yes,no,yes,yes,yes,yes,no,KnockDownAttack,BlindAttack,434,435
+Endor,Hanadak drifter,25,Hanadak,,2025,3375,2025,3375,2025,3375,115.5,121,no,40,2996,yes,no,yes,yes,yes,yes,no,StunAttack,DizzyAttack,434,435
+Endor,kai tok prowler,25,kai tok,,2100,3500,2100,3500,2100,3500,120.75,126.5,yes,55,2996,no,yes,yes,yes,yes,yes,no,PostureDownAttack,BlindAttack,436,437
+Endor,kai tok scavenger,30,scavenger,,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,no,yes,yes,no,yes,yes,no,DizzyAttack,StunAttack,436,437
+Endor,kai tok slayer,35,slayer,,3150,5250,3150,5250,3150,5250,168,176,yes,55,5448,yes,yes,yes,no,yes,yes,no,IntimidationAttack,,436,437
+Endor,king merek harvester,50,merek,,4275,7125,4275,7125,4275,7125,246.75,258.5,yes,55,9955,yes,no,yes,yes,yes,yes,no,DizzyAttack,BlindAttack,436,437
+Endor,lice ridden remmer queen,30,remmer,,2475,4125,2475,4125,2475,4125,147,154,yes,55,4169,no,no,yes,no,yes,no,no,KnockDownAttack,DizzyAttack,436,437
+Endor,lumbering bolma,30,bolma,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,IntimidationAttack,StunAttack,436,437
+Endor,mantigrue night stalker,25,mantigrue,,2025,3375,2025,3375,2025,3375,115.5,121,yes,40,2996,yes,yes,yes,yes,yes,yes,no,,PostureDownAttack,436,437
+Endor,mantigrue screecher,55,mantigrue,,4725,7875,4725,7875,4725,7875,278.25,291.5,no,55,11681,no,no,yes,no,yes,yes,no,IntimidationAttack,KnockDownAttack,436,437
+Endor,mature Hanadak,30,Hanadak,,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,no,no,yes,yes,yes,yes,no,IntimidationAttack,DizzyAttack,436,437
+Endor,mature Hanadak rock smasher,30,Hanadak,,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,no,no,yes,no,yes,yes,no,StunAttack,DizzyAttack,436,437
+Endor,merek assassin,30,merek,,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,yes,yes,no,yes,yes,no,DizzyAttack,IntimidationAttack,436,437
+Endor,merek cavern creeper,40,creeper,,3600,6000,3600,6000,3600,6000,199.5,209,yes,55,6839,no,yes,yes,no,yes,yes,no,BlindAttack,IntimidationAttack,436,437
+Endor,merek deaths head,55,creeper,,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,no,yes,no,yes,yes,no,DizzyAttack,StunAttack,436,437
+Endor,merek harvester,55,harvester,,4725,7875,4725,7875,4725,7875,278.25,291.5,no,55,11681,no,no,yes,no,yes,yes,no,KnockDownAttack,DizzyAttack,436,437
+Endor,minor gorax,120,gorax,,8850,14750,8850,14750,8850,14750,614.25,643.5,no,55,43972,yes,no,yes,no,yes,no,no,,,436,437
+Endor,noxious squill,19,noxious,,1275,2125,1275,2125,1275,2125,90,95,no,30,1824,no,no,yes,yes,yes,yes,no,StunAttack,,436,437
+Endor,putrid Borgle,40,Borgle,,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,no,no,yes,no,yes,no,no,IntimidationAttack,PostureDownAttack,438,439
+Endor,queen arachne,60,arachne,,5025,8375,5025,8375,5025,8375,299.25,313.5,no,55,13517,yes,no,yes,yes,yes,yes,no,KnockDownAttack,DizzyAttack,438,439
+Endor,queen merek harvester,50,merek,,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,no,no,yes,yes,yes,yes,no,KnockDownAttack,StunAttack,438,439
+Endor,rancid remmer warrior,50,remmer,,4350,7250,4350,7250,4350,7250,252,264,yes,30,9955,no,no,yes,no,yes,no,no,StunAttack,PostureDownAttack,438,439
+Endor,ravenous Roba stalker,40,Roba,,3600,6000,3600,6000,3600,6000,199.5,209,no,30,6839,no,yes,yes,no,yes,yes,no,,KnockDownAttack,438,439
+Endor,reclusive Roba,30,reclusive Roba,,3000,5000,3000,5000,3000,5000,157.5,165,no,30,4169,no,no,no,no,no,no,no,StunAttack,BlindAttack,438,439
+Endor,remmer carrion keeper,40,remmer,,3600,6000,3600,6000,3600,6000,199.5,209,yes,40,6839,no,no,yes,no,yes,no,no,PostureDownAttack,BlindAttack,438,439
+Endor,roaming bordok stud,30,bordok,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,PostureDownAttack,DizzyAttack,438,439
+Endor,Roba,30,Roba,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,30,4169,no,no,yes,no,no,no,no,BlindAttack,StunAttack,438,439
+Endor,Roba pack leader,30,Roba,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,DizzyAttack,BlindAttack,438,439
+Endor,rotten gut remmer king,30,remmer,,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,no,yes,no,no,PostureDownAttack,DizzyAttack,438,439
+Endor,swirl prong,20,swirl prong,,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,no,no,no,no,StunAttack,KnockDownAttack,440,441
+Endor,swirl prong impaler,30,swirl prong,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,PostureDownAttack,440,441
+Endor,swirl prong pack leader,15,swirl prong,,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,yes,no,no,no,,,440,441
+Endor,toxic merek battlelord,45,merek,,3900,6500,3900,6500,3900,6500,220.5,231,yes,40,8341,yes,yes,yes,yes,yes,yes,no,StunAttack,BlindAttack,440,441
+Endor,young Hanadak rock crusher,15,Hanadak,,975,1625,975,1625,975,1625,70,75,no,40,1215,no,no,yes,yes,yes,yes,no,,DizzyAttack,440,441
+Endor,young Roba,50,Roba,,4425,7375,4425,7375,4425,7375,257.25,269.5,no,30,9955,no,no,yes,no,no,no,no,BlindAttack,StunAttack,440,441
+Lok,crazed gurk destroyer,40,gurk,,3525,5875,3525,5875,3525,5875,194.25,203.5,no,55,6839,yes,yes,yes,yes,yes,yes,no,KnockDownAttack,IntimidationAttack,442,443
+Lok,desert vesp,30,vesp,,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,no,no,yes,no,yes,yes,no,BlindAttack,StunAttack,442,443
+Lok,domesticated gurnaset,13,domestic gurnaset,,975,1625,975,1625,975,1625,70,75,yes,35,965,no,no,no,yes,no,yes,no,IntimidationAttack,,442,443
+Lok,domesticated snorbal,30,domestic snorbal,,3000,5000,3000,5000,3000,5000,157.5,165,no,55,4169,no,no,no,yes,no,no,no,DizzyAttack,StunAttack,442,443
+Lok,dune kimogila,80,kimogila,,6600,11000,6600,11000,6600,11000,409.5,429,no,55,21952,yes,no,no,no,yes,no,no,IntimidationAttack,KnockDownAttack,442,443
+Lok,elder snorbal female,35,snorbal,,3375,5625,3375,5625,3375,5625,183.75,192.5,no,55,5448,no,no,no,yes,no,no,no,DizzyAttack,StunAttack,442,443
+Lok,elder snorbal male,37,snorbal,,3450,5750,3450,5750,3450,5750,189,198,no,55,5991,no,no,yes,yes,no,no,no,PostureDownAttack,StunAttack,442,443
+Lok,enraged dune kimogila,120,kimogila,,8887.5,14812.5,8887.5,14812.5,8887.5,14812.5,619.5,649,no,55,43972,yes,no,no,no,yes,no,no,KnockDownAttack,BlindAttack,442,443
+Lok,enraged kimogila,90,kimogila,,7350,12250,7350,12250,7350,12250,462,484,no,55,26818,yes,no,no,no,yes,no,no,KnockDownAttack,DizzyAttack,442,443
+Lok,female snorbal calf,19,snorbal,,1425,2375,1425,2375,1425,2375,100,105,no,50,1824,no,no,no,yes,no,no,no,StunAttack,,442,443
+Lok,feral gurk,34,feral gurk,,3150,5250,3150,5250,3150,5250,168,176,no,55,5183,no,yes,yes,no,yes,no,no,DizzyAttack,StunAttack,442,443
+Lok,ferocious kusak,20,kusak,,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,yes,yes,no,yes,yes,no,BlindAttack,PostureDownAttack,442,443
+Lok,giant dune kimogila,90,kimogila,,7350,12250,7350,12250,7350,12250,462,484,no,55,26818,yes,no,no,no,yes,no,no,PostureDownAttack,StunAttack,442,443
+Lok,giant flit,15,flit,,975,1625,975,1625,975,1625,70,75,no,40,1215,no,no,yes,no,yes,yes,no,,PostureDownAttack,442,443
+Lok,giant kimogila,80,kimogila,,6600,11000,6600,11000,6600,11000,409.5,429,no,55,21952,yes,no,no,no,yes,no,no,KnockDownAttack,DizzyAttack,442,443
+Lok,giant spined snake,18,spined snake,,1200,2000,1200,2000,1200,2000,85,90,no,45,1659,yes,no,no,no,yes,yes,no,DizzyAttack,StrongPoison,444,445
+Lok,gorge vesp,26,vesp,,2175,3625,2175,3625,2175,3625,126,132,yes,55,3223,no,no,yes,no,yes,yes,no,BlindAttack,StunAttack,444,445
+Lok,gurk,30,gurk,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,DizzyAttack,StunAttack,444,445
+Lok,gurk gatherer,28,gurk,,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,3687,no,no,yes,no,no,no,no,PostureDownAttack,StunAttack,444,445
+Lok,gurk tracker,30,gurk,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,DizzyAttack,BlindAttack,444,445
+Lok,gurk whelp,25,gurk,,2175,3625,2175,3625,2175,3625,126,132,no,55,2996,no,no,yes,no,no,no,no,BlindAttack,IntimidationAttack,444,445
+Lok,gurnaset,15,gurnaset,,1125,1875,1125,1875,1125,1875,80,85,no,40,1215,no,no,no,yes,no,no,no,PostureDownAttack,,444,445
+Lok,kimogila,70,kimogila,,5850,9750,5850,9750,5850,9750,357,374,no,55,17517,yes,no,no,no,yes,no,no,BlindAttack,DizzyAttack,444,445
+Lok,kimogila hatchling,20,kimogila,,1425,2375,1425,2375,1425,2375,100,105,yes,55,1997,no,no,no,no,yes,yes,no,DizzyAttack,StunAttack,444,445
+Lok,kusak,16,kusak,,1050,1750,1050,1750,1050,1750,75,80,no,40,1355,no,yes,yes,no,yes,no,no,StunAttack,,444,445
+Lok,kusak mauler,22,kusak,,1875,3125,1875,3125,1875,3125,105,110,no,55,2370,no,yes,yes,no,yes,yes,no,PostureDownAttack,,444,445
+Lok,kusak stalker,24,kusak,,1950,3250,1950,3250,1950,3250,105,110,no,55,2779,yes,yes,yes,no,yes,yes,no,DizzyAttack,,444,445
+Lok,langlatch destroyer,18,langlatch,,1125,1875,1125,1875,1125,1875,80,85,no,45,1659,yes,yes,yes,yes,yes,yes,no,StunAttack,KnockDownAttack,444,445
+Lok,langlatch female,12,langlatch,,750,1250,750,1250,750,1250,55,60,no,35,747,no,no,yes,no,yes,yes,no,BlindAttack,StunAttack,444,445
+Lok,langlatch hunter,15,langlatch,,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,yes,yes,yes,yes,yes,no,DizzyAttack,,444,445
+Lok,langlatch male,14,langlatch,,900,1500,900,1500,900,1500,65,70,no,40,1085,no,no,yes,no,yes,yes,no,PostureDownAttack,,444,445
+Lok,lowland salt mynock,24,mynock,,1950,3250,1950,3250,1950,3250,105,110,no,55,2779,yes,no,yes,no,yes,yes,no,DizzyAttack,BlindAttack,444,445
+Lok,male snorbal calf,20,snorbal,,1875,3125,1875,3125,1875,3125,105,110,no,55,1997,no,no,no,yes,no,no,no,DizzyAttack,StunAttack,444,445
+Lok,mature snorbal female,30,snorbal,,3000,5000,3000,5000,3000,5000,157.5,165,no,55,4169,no,no,no,yes,no,no,no,PostureDownAttack,KnockDownAttack,444,445
+Lok,mature snorbal male,32,snorbal,,3075,5125,3075,5125,3075,5125,162.75,170.5,no,55,4667,no,no,yes,yes,no,no,no,PostureDownAttack,StunAttack,444,445
+Lok,mountain vesp,24,vesp,,2025,3375,2025,3375,2025,3375,115.5,121,yes,55,2779,no,no,yes,no,yes,yes,no,BlindAttack,DizzyAttack,446,447
+Lok,perlek,13,periek,,900,1500,900,1500,900,1500,65,70,yes,35,965,no,yes,no,no,yes,yes,no,IntimidationAttack,,446,447
+Lok,perlek ravager,17,periek,,1125,1875,1125,1875,1125,1875,80,85,yes,45,1502,yes,yes,no,no,yes,yes,no,DizzyAttack,StunAttack,446,447
+Lok,perlek scavenger,15,periek,,1050,1750,1050,1750,1050,1750,75,80,yes,40,1215,no,yes,no,no,yes,yes,no,,StunAttack,446,447
+Lok,recluse gurk king,45,gurk,,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,yes,yes,yes,no,PostureDownAttack,BlindAttack,446,447
+Lok,riverside sulfur mynock,32,mynock,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4667,yes,no,yes,no,yes,yes,no,BlindAttack,DizzyAttack,446,447
+Lok,salt mynock,22,fynock,,1875,3125,1875,3125,1875,3125,105,110,no,55,2370,no,no,yes,no,yes,yes,no,KnockDownAttack,BlindAttack,446,447
+Lok,shaggy gurk youth,30,gurk,,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,yes,no,,StunAttack,446,447
+Lok,sharptooth langlatch,16,langlatch,,1050,1750,1050,1750,1050,1750,75,80,no,40,1355,no,yes,yes,yes,yes,yes,no,DizzyAttack,,446,447
+Lok,snorbal matriarch,45,snorbal,,4050,6750,4050,6750,4050,6750,231,242,no,55,8341,no,no,yes,yes,no,no,no,PostureDownAttack,DizzyAttack,446,447
+Lok,spined snake,12,spined snake,,750,1250,750,1250,750,1250,55,60,yes,35,747,yes,no,no,no,yes,yes,no,MediumPoison,StunAttack,446,447
+Lok,spined snake recluse,14,spined snake recluse,,975,1625,975,1625,975,1625,70,75,yes,40,1085,no,no,no,no,yes,yes,no,StunAttack,MediumPoison,446,447
+Lok,sulfur pool mynock,30,fynock,,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,no,no,yes,no,yes,yes,no,IntimidationAttack,KnockDownAttack,446,447
+Lok,vesp,22,vesp,,1875,3125,1875,3125,1875,3125,105,110,no,55,2370,no,no,yes,no,yes,yes,no,BlindAttack,StunAttack,446,447
+Lok,vesp hunter,25,vesp,,2100,3500,2100,3500,2100,3500,120.75,126.5,yes,55,2996,no,no,yes,no,yes,yes,no,BlindAttack,PostureDownAttack,446,447
+Lok,vesp scavanger,27,vesp,,2250,3750,2250,3750,2250,3750,131.25,137.5,yes,55,3453,no,no,yes,no,yes,yes,no,IntimidationAttack,DizzyAttack,446,447
+Naboo,alpha veermok,19,veermok,,1350,2250,1350,2250,1350,2250,95,100,no,50,1824,no,no,yes,no,no,yes,no,KnockDownAttack,DizzyAttack,448,449
+Naboo,bachelor gualama,12,gualama,,900,1500,900,1500,900,1500,65,70,no,35,747,no,no,no,no,no,yes,no,StunAttack,,448,449
+Naboo,bolle bol,20,bolle bol,,1875,3125,1875,3125,1875,3125,105,110,no,55,1997,no,no,no,yes,no,no,no,DizzyAttack,StunAttack,448,449
+Naboo,carnivorous nuna,13,carnivorous nuna,,750,1250,750,1250,750,1250,55,60,no,30,965,yes,yes,yes,no,yes,yes,no,PostureDownAttack,,448,449
+Naboo,dappled gualama,12,dappled gualama,,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,no,no,yes,no,,StunAttack,448,449
+Naboo,domestic tusk cat,15,Naboo,,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,yes,no,,BlindAttack,448,449
+Naboo,falumpaset,12,falumpaset,,900,1500,900,1500,900,1500,65,70,no,35,747,no,no,no,yes,no,yes,no,PostureDownAttack,,448,449
+Naboo,fambaa,34,fambaa,,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5183,no,no,yes,no,no,no,no,DizzyAttack,PostureDownAttack,448,449
+Naboo,female great grass plains tusk cat,16,tusk cat,,1050,1750,1050,1750,1050,1750,75,80,no,40,1355,yes,yes,yes,no,no,yes,no,,StunAttack,448,449
+Naboo,female swamp tusk cat,16,swamp tusk cat,,975,1625,975,1625,975,1625,70,75,no,40,1355,yes,yes,yes,no,yes,yes,no,StunAttack,,448,449
+Naboo,giant peko peko,20,giant peko peko,,1875,3125,1875,3125,1875,3125,105,110,no,55,1997,no,no,no,yes,no,yes,no,DizzyAttack,StunAttack,450,451
+Naboo,giant veermok,20,giant veermok,,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,no,no,yes,yes,no,DizzyAttack,IntimidationAttack,450,451
+Naboo,greater shaupaut,14,greater shaupaut,,975,1625,975,1625,975,1625,70,75,no,30,1085,no,yes,no,no,yes,yes,no,BlindAttack,StunAttack,450,451
+Naboo,king venom nightspider,14,nightspider,,825,1375,825,1375,825,1375,60,65,yes,30,1085,yes,no,yes,yes,yes,yes,no,MildPoison,StunAttack,452,453
+Naboo,male great grass plains tusk cat,16,tusk cat,,1125,1875,1125,1875,1125,1875,80,85,no,40,1355,yes,yes,no,no,no,yes,no,,BlindAttack,452,453
+Naboo,male swamp tusk cat,16,swamp tusk cat,,1125,1875,1125,1875,1125,1875,80,85,no,40,1355,yes,yes,no,no,no,yes,no,BlindAttack,,452,453
+Naboo,mauler veermok,19,mauler,,1275,2125,1275,2125,1275,2125,90,95,no,50,1824,no,yes,yes,no,yes,yes,no,DizzyAttack,StunAttack,452,453
+Naboo,maverick gualama,14,maverick gualama,,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,no,no,yes,no,no,,StunAttack,452,453
+Naboo,mountain ikopi,16,mountain ikopi,,1125,1875,1125,1875,1125,1875,80,85,no,40,1355,no,no,yes,no,no,no,no,StunAttack,,452,453
+Naboo,mountain krevol,14,mountain krevol,,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,no,no,yes,no,PostureDownAttack,,452,453
+Naboo,narglatch,21,langlatch,,1425,2375,1425,2375,1425,2375,100,105,no,45,2180,no,yes,yes,no,yes,yes,no,DizzyAttack,StunAttack,454,455
+Naboo,narglatch female,22,langlatch,,1425,2375,1425,2375,1425,2375,100,105,no,45,2370,yes,yes,yes,no,yes,yes,no,IntimidationAttack,StunAttack,454,455
+Naboo,peko peko,14,peko peko,,1050,1750,1050,1750,1050,1750,75,80,no,40,1085,no,no,no,no,no,yes,no,,IntimidationAttack,454,455
+Naboo,rogue falumpaset,13,rogue falumpaset,,900,1500,900,1500,900,1500,65,70,yes,35,965,no,no,no,no,yes,no,no,StunAttack,,454,455
+Naboo,rogue fambaa,37,rogue fambaa,,3450,5750,3450,5750,3450,5750,189,198,no,55,5991,no,no,no,no,yes,no,no,PostureDownAttack,,454,455
+Naboo,spineflap handmaiden,15,capper spineflap,,1050,1750,1050,1750,1050,1750,75,80,yes,35,1215,no,no,yes,no,no,yes,no,,IntimidationAttack,456,457
+Naboo,spineflap queen,19,capper spineflap,,1275,2125,1275,2125,1275,2125,90,95,no,40,1824,no,no,yes,no,yes,yes,no,KnockDownAttack,,456,457
+Naboo,veermok,12,veermok,,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,no,no,yes,no,,StunAttack,456,457
+Naboo,veermok cannibal,18,veermok cannibal,,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,yes,no,no,yes,yes,no,BlindAttack,IntimidationAttack,456,457
+Naboo,veermok hunter,17,veermok,,1125,1875,1125,1875,1125,1875,80,85,no,45,1502,yes,yes,yes,no,no,yes,no,BlindAttack,StunAttack,456,457
+Naboo,veermok scout,13,veermok,,900,1500,900,1500,900,1500,65,70,no,35,965,no,yes,yes,no,no,yes,no,StunAttack,,456,457
+Rori,charred krevol,15,krevol,,1050,1750,1050,1750,1050,1750,75,80,yes,40,1215,no,no,yes,no,no,yes,no,PostureDownAttack,,458,459
+Rori,dashing vir vur,12,vir vur,,825,1375,825,1375,825,1375,60,65,no,30,747,no,no,yes,yes,no,yes,no,PostureDownAttack,,458,459
+Rori,deranged squall,15,deranged squall,,1050,1750,1050,1750,1050,1750,75,80,no,35,1215,no,no,no,no,yes,yes,no,StunAttack,,458,459
+Rori,dusk vir vur,15,vir vur,,1050,1750,1050,1750,1050,1750,75,80,no,35,1215,no,yes,yes,no,no,yes,no,IntimidationAttack,,458,459
+Rori,elder pugoriss,16,pugoriss,,1200,2000,1200,2000,1200,2000,85,90,no,40,1355,no,no,no,yes,no,yes,no,,BlindAttack,458,459
+Rori,enraged wood mite king,19,bark mite,,1200,2000,1200,2000,1200,2000,85,90,yes,40,1824,yes,no,yes,yes,yes,yes,no,KnockDownAttack,PostureDownAttack,458,459
+Rori,female kai tok,12,kai tok,,825,1375,825,1375,825,1375,60,65,yes,35,747,no,no,yes,no,no,yes,no,StunAttack,,458,459
+Rori,feral forest mite king,24,bark mite,,1950,3250,1950,3250,1950,3250,105,110,yes,30,2779,yes,no,yes,yes,yes,yes,no,BlindAttack,DizzyAttack,458,459
+Rori,forest mite,14,bark mite,,975,1625,975,1625,975,1625,70,75,yes,30,1085,no,no,yes,no,no,yes,no,,StunAttack,458,459
+Rori,fuzzy jax,12,jax,,900,1500,900,1500,900,1500,65,70,no,35,747,no,yes,no,yes,no,yes,no,,StunAttack,458,459
+Rori,gnarled bark mite queen,17,bark mite,,1125,1875,1125,1875,1125,1875,80,85,yes,35,1502,no,no,yes,yes,yes,yes,no,StunAttack,,460,461
+Rori,great Borgle,14,Borgle,,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,no,no,yes,no,,StunAttack,460,461
+Rori,grizzled bark mite,14,bark mite,,900,1500,900,1500,900,1500,65,70,yes,30,1085,no,no,yes,yes,yes,yes,no,IntimidationAttack,,460,461
+Rori,levia squall,19,Squall,,1350,2250,1350,2250,1350,2250,95,100,no,40,1824,no,no,yes,yes,no,yes,no,,StunAttack,460,461
+Rori,male kai tok,13,kai tok,,900,1500,900,1500,900,1500,65,70,yes,35,965,no,no,yes,no,no,yes,no,PostureDownAttack,,460,461
+Rori,mammoth bearded jax,17,jax,,1200,2000,1200,2000,1200,2000,85,90,no,45,1502,no,yes,yes,yes,no,yes,no,DizzyAttack,StunAttack,460,461
+Rori,midnight vir vur,17,vir vur,,1200,2000,1200,2000,1200,2000,85,90,no,35,1502,no,yes,yes,no,no,yes,no,,IntimidationAttack,460,461
+Rori,mountain torton,28,torton,,2325,3875,2325,3875,2325,3875,136.5,143,no,55,3687,yes,no,yes,yes,no,no,no,DizzyAttack,StunAttack,460,461
+Rori,nudfuh,13,nudfuh,,975,1625,975,1625,975,1625,70,75,no,35,965,no,no,no,yes,no,no,no,IntimidationAttack,,460,461
+Rori,poisonous krevol queen,12,krevol,,525,875,525,875,525,875,50,55,yes,35,747,yes,no,yes,yes,yes,yes,no,BlindAttack,StunAttack,460,461
+Rori,potbellied vrobal,12,vrobal,,900,1500,900,1500,900,1500,65,70,no,30,747,no,no,no,no,no,yes,no,,,462,463
+Rori,pugoriss,13,pugoriss,,975,1625,975,1625,975,1625,70,75,no,35,965,no,no,no,yes,no,yes,no,,IntimidationAttack,462,463
+Rori,ravenous torton,24,torton,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2779,no,no,yes,yes,yes,yes,no,KnockDownAttack,DizzyAttack,462,463
+Rori,sap covered forest mite queen,19,bark mite,,1350,2250,1350,2250,1350,2250,95,100,yes,40,1824,no,no,yes,yes,no,yes,no,PostureDownAttack,,462,463
+Rori,savage pugoriss,12,pugoriss,,750,1250,750,1250,750,1250,55,60,no,35,747,no,no,yes,no,yes,yes,no,IntimidationAttack,,462,463
+Rori,screaming kai tok,18,kai tok,,1275,2125,1275,2125,1275,2125,90,95,yes,45,1659,no,no,yes,no,no,yes,no,DizzyAttack,,462,463
+Rori,shallow torton,14,torton,,1050,1750,1050,1750,1050,1750,75,80,no,40,1085,no,no,no,yes,no,no,no,DizzyAttack,,462,463
+Rori,tattered torton,18,torton,,1350,2250,1350,2250,1350,2250,95,100,no,45,1659,no,no,no,yes,no,no,no,DizzyAttack,StunAttack,462,463
+Rori,torton,21,torton,,1875,3125,1875,3125,1875,3125,105,110,no,55,2180,no,no,yes,yes,no,no,no,KnockDownAttack,DizzyAttack,462,463
+Rori,twilight vir vur,13,vir vur,,900,1500,900,1500,900,1500,65,70,no,30,965,no,yes,yes,no,no,yes,no,IntimidationAttack,,462,463
+Rori,vicious squall,12,Squall,,750,1250,750,1250,750,1250,55,60,no,30,747,no,no,yes,yes,yes,yes,no,,,462,463
+Rori,vrobal,14,vrobal,,975,1625,975,1625,975,1625,70,75,no,30,1085,no,no,yes,no,no,yes,no,PostureDownAttack,,462,463
+Rori,vrobal bull,19,vrobal,,1350,2250,1350,2250,1350,2250,95,100,no,40,1824,no,no,yes,no,no,yes,no,StunAttack,,462,463
+Rori,vrobal sow,18,vrobal,,1275,2125,1275,2125,1275,2125,90,95,no,40,1659,no,no,yes,no,no,yes,no,,StunAttack,462,463
+Rori,wood mite,12,bark mite,,825,1375,825,1375,825,1375,60,65,no,30,747,no,no,yes,no,no,yes,no,BlindAttack,,462,463
+Rori,wood mite matriarch,14,bark mite,,900,1500,900,1500,900,1500,65,70,no,30,1085,no,no,yes,yes,yes,yes,no,IntimidationAttack,,462,463
+Talus,berserk kahmurra,17,kahmurra,,1050,1750,1050,1750,1050,1750,75,80,no,35,1502,yes,no,yes,no,yes,yes,no,,StunAttack,464,465
+Talus,blister rot queen,14,decay mite,,825,1375,825,1375,825,1375,60,65,yes,30,1085,yes,no,yes,yes,yes,yes,no,BlindAttack,StunAttack,464,465
+Talus,crazed Roba,12,crazed Roba,,525,875,525,875,525,875,50,55,no,35,747,yes,no,yes,no,yes,yes,no,,StunAttack,464,465
+Talus,dung mite,13,decay mite,,900,1500,900,1500,900,1500,65,70,no,30,965,no,no,yes,yes,no,yes,no,,IntimidationAttack,464,465
+Talus,famished sludge panther,19,sludge panther,,1275,2125,1275,2125,1275,2125,90,95,no,40,1824,no,no,yes,no,yes,yes,no,StunAttack,,464,465
+Talus,festering dung queen,17,decay mite,,1050,1750,1050,1750,1050,1750,75,80,no,35,1502,yes,no,yes,yes,yes,yes,no,DizzyAttack,,464,465
+Talus,foaming vynock,14,foaming vynock,,900,1500,900,1500,900,1500,65,70,no,30,1085,yes,no,no,no,yes,no,no,IntimidationAttack,,464,465
+Talus,frenzied fynock guardian,12,fynock,,750,1250,750,1250,750,1250,55,60,no,30,747,no,no,yes,yes,yes,yes,no,,PostureDownAttack,464,465
+Talus,fynock,12,fynock,,825,1375,825,1375,825,1375,60,65,no,30,747,no,no,yes,no,no,yes,no,StunAttack,,466,467
+Talus,glutted fynock queen,14,fynock,,825,1375,825,1375,825,1375,60,65,no,30,1085,yes,no,yes,yes,yes,yes,no,IntimidationAttack,,466,467
+Talus,greater sludge panther,23,sludge panther,,1950,3250,1950,3250,1950,3250,105,110,no,50,2570,yes,no,yes,no,no,yes,no,PostureDownAttack,,466,467
+Talus,guf drolg,13,guf drolg,,900,1500,900,1500,900,1500,65,70,no,35,965,no,yes,yes,no,no,yes,no,IntimidationAttack,,466,467
+Talus,guf drolg female,12,guf drolg,,825,1375,825,1375,825,1375,60,65,no,35,747,no,yes,yes,no,no,yes,no,,IntimidationAttack,466,467
+Talus,hilltop kima,21,hilltop kima,,1875,3125,1875,3125,1875,3125,105,110,no,45,2180,no,no,yes,no,no,yes,no,DizzyAttack,,466,467
+Talus,huf dun,17,huf dun,,1275,2125,1275,2125,1275,2125,90,95,no,45,1502,no,no,no,yes,no,no,no,BlindAttack,StunAttack,466,467
+Talus,huf dun bull,20,huf dun,,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,DizzyAttack,StunAttack,466,467
+Talus,jungle fynock,13,fynock,,900,1500,900,1500,900,1500,65,70,no,30,965,no,yes,yes,no,no,yes,no,,PostureDownAttack,466,467
+Talus,kahmurra,15,kahmurra,,1050,1750,1050,1750,1050,1750,75,80,no,35,1215,no,no,yes,no,no,yes,no,,IntimidationAttack,466,467
+Talus,kima,17,kima,,1275,2125,1275,2125,1275,2125,90,95,no,35,1502,no,no,no,no,no,yes,no,,IntimidationAttack,466,467
+Talus,meager tortur,13,tortur,,975,1625,975,1625,975,1625,70,75,no,35,965,no,no,no,yes,no,no,no,StunAttack,,466,467
+Talus,mutated kahmurra,22,kahmurra,,1950,3250,1950,3250,1950,3250,105,110,no,45,2370,no,no,yes,no,no,yes,no,,StunAttack,466,467
+Talus,percussive rasp,12,rasp,,825,1375,825,1375,825,1375,60,65,no,30,747,no,yes,yes,no,no,no,no,IntimidationAttack,,466,467
+Talus,Roba female,16,Roba,,1125,1875,1125,1875,1125,1875,80,85,no,40,1355,no,no,yes,yes,no,yes,no,DizzyAttack,,466,467
+Talus,Roba male,15,Roba,,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,yes,no,yes,no,,DizzyAttack,468,469
+Talus,sickly decay mite queen,19,decay mite,,1275,2125,1275,2125,1275,2125,90,95,yes,40,1824,no,no,yes,yes,yes,yes,no,BlindAttack,,468,469
+Talus,sludge panther,16,sand panther,,975,1625,975,1625,975,1625,70,75,no,35,1355,yes,yes,yes,no,yes,yes,no,StunAttack,,468,469
+Talus,tortur,21,tortur,,1950,3250,1950,3250,1950,3250,105,110,no,55,2180,no,no,no,yes,no,no,no,KnockDownAttack,DizzyAttack,468,469
+Talus,tortur bull,25,tortur,,2250,3750,2250,3750,2250,3750,131.25,137.5,no,55,2996,no,no,no,yes,no,no,no,KnockDownAttack,BlindAttack,468,469
+Talus,vicious huf dun,14,huf dun,,900,1500,900,1500,900,1500,65,70,no,40,1085,yes,no,yes,no,no,yes,no,StunAttack,,468,469
+Talus,wolf kima,16,wolf kima,,1125,1875,1125,1875,1125,1875,80,85,no,35,1355,no,yes,no,no,yes,yes,no,BlindAttack,StunAttack,468,469
+Tatooine,bantha,14,bantha,,1050,1750,1050,1750,1050,1750,75,80,no,30,413,no,no,yes,no,no,no,yes,,,468,469
+Tatooine,bocatt,19,bocatt,,1275,2125,1275,2125,1275,2125,90,95,yes,30,194,no,yes,yes,no,yes,yes,no,IntimidationAttack,MildDisease,468,469
+Tatooine,bull bantha,15,bantha,,1125,1875,1125,1875,1125,1875,80,85,no,40,1215,no,no,no,yes,no,yes,no,,StunAttack,470,471
+Tatooine,canyon krayt dragon,275,krayt dragon,,14700,24500,14700,24500,14700,24500,1433.25,1501.5,no,55,192335,yes,yes,no,no,yes,no,no,KnockDownAttack,StunAttack,470,471
+Tatooine,dewback,18,dewback,,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,no,yes,no,no,yes,no,,StunAttack,470,471
+Tatooine,dewback cannibal,18,dewback,,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,yes,no,no,yes,yes,no,,DizzyAttack,470,471
+Tatooine,dragonet,14,dragonet,,900,1500,900,1500,900,1500,65,70,yes,40,1085,no,yes,yes,no,yes,yes,no,DizzyAttack,,470,471
+Tatooine,dune bantha,13,dune bantha,,975,1625,975,1625,975,1625,70,75,no,35,965,no,no,no,yes,no,yes,no,,StunAttack,470,471
+Tatooine,dune lizard,16,dune lizard,,1050,1750,1050,1750,1050,1750,75,80,yes,40,1355,yes,yes,no,yes,yes,yes,no,DizzyAttack,,470,471
+Tatooine,feral bantha,15,bantha,,975,1625,975,1625,975,1625,70,75,no,40,1215,yes,no,no,yes,yes,yes,no,DizzyAttack,,472,473
+Tatooine,giant canyon krayt dragon,300,krayt dragon,,15637.5,26062.5,15637.5,26062.5,15637.5,26062.5,1564.5,1639,no,55,224144,yes,yes,no,no,yes,no,no,KnockDownAttack,DizzyAttack,472,473
+Tatooine,giant sand beetle,30,giant sand beetle,,3000,5000,3000,5000,3000,5000,157.5,165,yes,55,4169,no,no,no,no,no,yes,no,BlindAttack,StunAttack,472,473
+Tatooine,giant worrt,13,worrt,,900,1500,900,1500,900,1500,65,70,no,30,965,no,no,no,no,yes,yes,no,StunAttack,,472,473
+Tatooine,greater desert womprat,16,greater desert womprat,,1200,2000,1200,2000,1200,2000,85,90,yes,35,1355,no,yes,no,no,no,yes,no,BlindAttack,StunAttack,472,473
+Tatooine,grizzled dewback,22,dewback,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2370,no,no,no,no,no,no,no,KnockDownAttack,DizzyAttack,472,473
+Tatooine,juvenile canyon krayt,120,krayt dragon,,8887.5,14812.5,8887.5,14812.5,8887.5,14812.5,619.5,649,no,55,43972,yes,no,no,no,yes,no,no,PostureDownAttack,DizzyAttack,474,475
+Tatooine,matriarch bantha,16,bantha,,1125,1875,1125,1875,1125,1875,80,85,no,40,1355,no,no,yes,yes,no,yes,no,,PostureDownAttack,474,475
+Tatooine,mountain dewback,20,mountain dewback,,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,no,no,yes,no,KnockDownAttack,DizzyAttack,474,475
+Tatooine,mountain squill,34,mountain squill,,3225,5375,3225,5375,3225,5375,173.25,181.5,no,55,5183,no,yes,no,no,yes,yes,no,BlindAttack,IntimidationAttack,474,475
+Tatooine,mountain worrt,21,mountain worrt,,1950,3250,1950,3250,1950,3250,105,110,yes,45,2180,no,no,no,no,no,yes,no,KnockDownAttack,DizzyAttack,474,475
+Tatooine,mutant womprat,12,womprat,,750,1250,750,1250,750,1250,55,60,no,30,747,no,yes,yes,no,yes,yes,no,StunAttack,,474,475
+Tatooine,rock beetle,13,rock beetle,,975,1625,975,1625,975,1625,70,75,yes,35,965,no,no,no,yes,no,yes,no,,PostureDownAttack,476,477
+Tatooine,ronto,17,ronto,,1275,2125,1275,2125,1275,2125,90,95,no,45,1502,no,no,no,yes,no,yes,no,DizzyAttack,StunAttack,476,477
+Tatooine,ronto male,18,ronto,,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,no,yes,no,no,yes,no,PostureDownAttack,StunAttack,476,477
+Tatooine,squill,17,squill,,1200,2000,1200,2000,1200,2000,85,90,no,40,1502,no,yes,yes,no,no,yes,no,,StunAttack,476,477
+Tatooine,swarming lesser dewback,12,swarming lesser dewback,,825,1375,825,1375,825,1375,60,65,no,35,747,no,yes,yes,no,no,yes,no,StunAttack,,476,477
+Tatooine,variegated womprat,14,variegated womprat,,1050,1750,1050,1750,1050,1750,75,80,no,30,1085,no,no,no,yes,no,yes,no,,StunAttack,478,479
+Yavin 4,Choku female,12,Choku,,750,1250,750,1250,750,1250,55,60,no,35,747,no,yes,yes,no,yes,yes,no,,StunAttack,480,481
+Yavin 4,Choku hunter,14,Choku,,900,1500,900,1500,900,1500,65,70,no,40,1085,no,yes,yes,no,yes,yes,no,,PostureDownAttack,480,481
+Yavin 4,Choku male,16,Choku,,1050,1750,1050,1750,1050,1750,75,80,no,40,1355,no,yes,yes,no,yes,yes,no,StunAttack,,480,481
+Yavin 4,crystal snake,13,crystal snake,,825,1375,825,1375,825,1375,60,65,yes,35,965,no,no,yes,no,yes,yes,no,MediumPoison,StunAttack,480,481
+Yavin 4,frenzied Choku,20,Choku,,1350,2250,1350,2250,1350,2250,95,100,no,55,1997,no,yes,yes,no,yes,yes,no,DizzyAttack,StunAttack,480,481
+Yavin 4,giant angler,15,angler,,975,1625,975,1625,975,1625,70,75,yes,40,1215,no,yes,yes,no,yes,yes,no,,BlindAttack,480,481
+Yavin 4,giant crystal snake,15,crystal snake,,975,1625,975,1625,975,1625,70,75,yes,40,1215,no,no,yes,no,yes,yes,no,PostureDownAttack,StrongPoison,480,481
+Yavin 4,giant mawgax,12,mawgax,,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,yes,no,no,no,StunAttack,,480,481
+Yavin 4,giant stintaril,12,stintaril,,825,1375,825,1375,825,1375,60,65,yes,35,747,no,no,yes,no,no,yes,no,StunAttack,,480,481
+Yavin 4,giant Tanc mite,13,Tanc mite,,900,1500,900,1500,900,1500,65,70,yes,35,965,no,no,yes,yes,no,no,no,IntimidationAttack,,480,481
+Yavin 4,Kliknik defender,16,Kliknik,,1050,1750,1050,1750,1050,1750,75,80,yes,40,1355,no,no,yes,no,yes,yes,no,,IntimidationAttack,480,481
+Yavin 4,Kliknik hunter,14,Kliknik,,825,1375,825,1375,825,1375,60,65,yes,40,1085,yes,no,yes,no,yes,yes,no,,IntimidationAttack,480,481
+Yavin 4,Kliknik queen,18,Kliknik,,1200,2000,1200,2000,1200,2000,85,90,yes,45,1659,no,no,yes,no,yes,yes,no,DizzyAttack,,480,481
+Yavin 4,Kliknik queen harvester,15,Kliknik,,975,1625,975,1625,975,1625,70,75,yes,40,1215,no,yes,yes,yes,yes,yes,no,PostureDownAttack,,480,481
+Yavin 4,Kliknik scout,12,Kliknik,,750,1250,750,1250,750,1250,55,60,yes,35,747,no,no,yes,no,yes,yes,no,IntimidationAttack,,480,481
+Yavin 4,Kliknik warrior,12,Kliknik,,750,1250,750,1250,750,1250,55,60,yes,35,747,no,no,yes,no,yes,yes,no,,IntimidationAttack,480,481
+Yavin 4,Kliknik worker,12,Kliknik,,750,1250,750,1250,750,1250,55,60,no,35,747,no,no,yes,no,yes,yes,no,PostureDownAttack,,480,481
+Yavin 4,lurking angler,12,angler,,750,1250,750,1250,750,1250,55,60,yes,35,747,no,yes,yes,no,yes,yes,no,,IntimidationAttack,480,481
+Yavin 4,Mamien ancient,20,mamien,,1275,2125,1275,2125,1275,2125,90,95,no,30,1997,yes,no,yes,yes,yes,yes,no,,DizzyAttack,480,481
+Yavin 4,Mamien elder,18,mamien,,1200,2000,1200,2000,1200,2000,85,90,no,45,1659,no,no,yes,yes,yes,yes,no,KnockDownAttack,DizzyAttack,480,481
+Yavin 4,Mamien female,15,mamien,,1125,1875,1125,1875,1125,1875,80,85,no,40,1215,no,no,no,no,no,no,no,StunAttack,,482,483
+Yavin 4,Mamien male,13,mamien,,975,1625,975,1625,975,1625,70,75,no,35,965,no,no,no,no,no,yes,no,,StunAttack,482,483
+Yavin 4,Mamien matriarch,17,mamien,,1050,1750,1050,1750,1050,1750,75,80,no,45,1502,yes,no,yes,yes,yes,yes,no,KnockDownAttack,IntimidationAttack,482,483
+Yavin 4,Skreeg female,14,Skreeg,,900,1500,900,1500,900,1500,65,70,no,40,1085,no,no,yes,no,yes,yes,no,IntimidationAttack,,482,483
+Yavin 4,Skreeg gatherer,12,Skreeg,,750,1250,750,1250,750,1250,55,60,no,35,747,no,no,yes,no,yes,yes,no,IntimidationAttack,,482,483
+Yavin 4,Skreeg hunter,16,Skreeg,,975,1625,975,1625,975,1625,70,75,no,40,1355,yes,no,yes,no,yes,yes,no,StunAttack,,482,483
+Yavin 4,Skreeg male,15,Skreeg,,975,1625,975,1625,975,1625,70,75,no,40,1215,no,no,yes,no,yes,yes,no,,StunAttack,482,483
+Yavin 4,Skreeg scout,13,Skreeg,,825,1375,825,1375,825,1375,60,65,no,35,965,no,no,yes,no,yes,yes,no,IntimidationAttack,,482,483
+Yavin 4,Skreeg warrior,17,Skreeg,,1125,1875,1125,1875,1125,1875,80,85,no,45,1502,no,no,yes,no,yes,yes,no,PostureDownAttack,StunAttack,482,483
+Yavin 4,Skreeg warrior elite,20,Skreeg,,1350,2250,1350,2250,1350,2250,95,100,no,55,1997,no,no,yes,no,yes,yes,no,StunAttack,DizzyAttack,482,483
+Yavin 4,Tanc mite warrior,14,Tanc mite,,975,1625,975,1625,975,1625,70,75,yes,40,1085,no,no,yes,yes,no,no,no,StunAttack,,482,483

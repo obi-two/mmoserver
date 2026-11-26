@@ -26,18 +26,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "LairObject.h"
+#include "StructureManager.h"
 #include "MissionManager.h"
 #include "AttackableCreature.h"
+#include "BuildingObject.h"
 #include "CellObject.h"
 #include "NonPersistentNpcFactory.h"
 #include "NpcManager.h"
 #include "PlayerObject.h"
 #include "SpatialIndexManager.h"
+#include "WorldConfig.h"
 #include "WorldManager.h"
 
 #include "MessageLib/MessageLib.h"
 #include "Utils/rand.h"
 
+#include <algorithm>
 #include <cassert>
 
 static const int64 dormantDefaultPeriodTime = 10000;
@@ -60,6 +64,7 @@ LairObject::LairObject(uint64 templateId) : AttackableStaticNpc()
     , mSpawnPositionFixed(true)
     , mMissionId(0)
     , mMissionOwnerId(0)
+    , mCampBuildingId(0)
 {
     mNpcFamily	= NpcFamily_NaturalLairs;
     mType = ObjType_Lair;
@@ -345,13 +350,48 @@ void LairObject::makePeaceWithDefendersOutOfRange(void)
 //	Spawn this lair and initial wave.
 //
 
+bool LairObject::isInvisible(void)
+{
+    return hasInternalAttribute("lair_invisible") && getInternalAttribute<std::string>("lair_invisible") != "0";
+}
+
 void LairObject::spawn(void)
 {
     gLairSpawnCounter++;
     DLOG(INFO) << "Spawned lair # " <<gLairSpawnCounter << "( " <<gLairSpawnCounter - gLairDeathCounter<<")";
 
-    // Update the world about my presence.
+    // A camp's building (lair_building): the client's camp, put up once at
+    // the lair's first spot, where it stays. Not destroyable and not
+    // stored: it comes back with the zone.
+    if (!mCampBuildingId && hasInternalAttribute("lair_building"))
+    {
+        BuildingObject* camp = new BuildingObject();
+        camp->setId(gWorldManager->getRandomNpId());
+        camp->setParentId(0);
+        camp->setModelString(getInternalAttribute<std::string>("lair_building").c_str());
+        camp->setBuildingFamily(BuildingFamily_None);
+        camp->mPosition = mPosition;
+        camp->mDirection = mDirection;
+        if (gWorldManager->addObject(camp, true))
+        {
+            gSpatialIndexManager->createInWorld(camp);
+            mCampBuildingId = camp->getId();
+            LOG(INFO) << "Lair " << getId() << ": camp building " << camp->getId() << " ("
+                      << camp->getModelString().getAnsi() << ") at " << mPosition.x << ", " << mPosition.z;
+        }
+        else
+        {
+            delete camp;
+        }
+    }
+
+    // Update the world about my presence (an invisible lair is in the world
+    // for its creatures and the players near it, but never shown).
     gSpatialIndexManager->createInWorld(this);
+    if (isInvisible())
+    {
+        return;
+    }
 
     // Add us to the world.
     gMessageLib->broadcastContainmentMessage(this,this->getParentId(), -1);
@@ -500,8 +540,32 @@ void LairObject::respawn(void)
 
             // Ge a random position withing given region.
             // Note that creature can spawn outside the region, since thay have a radius from the lair where thet are allowed to spawn.
-            this->mPosition.x = position.x + (gRandom->getRand() % (int32)(xWidth+1));
-            this->mPosition.z = position.z + (gRandom->getRand() % (int32)(zHeight+1));
+            // Not in a city or other no-build area, and within the lair's
+            // distance band from the nearest city if it has one
+            // (lair_min_city_distance, lair_max_city_distance; docs/SPAWNS.md):
+            // try again, a number of times, before settling for the last spot.
+            float minCityDistance = this->hasInternalAttribute("lair_min_city_distance") ? this->getInternalAttribute<float>("lair_min_city_distance") : 0.0f;
+            float maxCityDistance = this->hasInternalAttribute("lair_max_city_distance") ? this->getInternalAttribute<float>("lair_max_city_distance") : 1.0e9f;
+            const int attempts = 100;
+            for (int attempt = 0; attempt < attempts; ++attempt)
+            {
+                this->mPosition.x = position.x + (gRandom->getRand() % (int32)(xWidth+1));
+                this->mPosition.z = position.z + (gRandom->getRand() % (int32)(zHeight+1));
+                bool allowed = !gStructureManager || !gStructureManager->checkNoBuildRegion(this->mPosition);
+                if (allowed && (minCityDistance > 0.0f || maxCityDistance < 1.0e9f))
+                {
+                    float cityDistance = NpcManager::Instance()->distanceToNearestCity(this->mPosition);
+                    allowed = cityDistance >= minCityDistance && cityDistance <= maxCityDistance;
+                }
+                if (allowed)
+                {
+                    break;
+                }
+                if (attempt == attempts - 1)
+                {
+                    LOG(WARNING) << "Lair " << this->getId() << ": no spot in its distance band or outside the no-build areas";
+                }
+            }
             if (this->getParentId() == 0)
             {
                 // Heightmap only works outside.
@@ -644,7 +708,14 @@ void LairObject::respawn(void)
 
         // Put the lair in the Dormant queue.
         // I do not want all lair running at same respawn period to do their initial spawn at the same time.
-        this->mInitialSpawnDelay = (int64)this->getRespawnDelay() + (int64)(((uint64)gRandom->getRand() * 1000) % (this->getRespawnDelay() + 1));
+        // The first spawn after the zone starts waits one to two times the
+        // respawn delay, with the base at most Lair_First_Spawn_Max_Minutes
+        // (default 5): a rare lair with a long respawn delay (the krayts',
+        // 30 minutes) still appears soon after a start. 0 spawns every lair
+        // straight away, for testing (docs/SPAWNS.md).
+        uint64 firstSpawnMaxMs = (uint64)gWorldConfig->getConfiguration<uint32>("Lair_First_Spawn_Max_Minutes", (uint32)5) * 60 * 1000;
+        uint64 initialBase = std::min<uint64>(this->getRespawnDelay(), firstSpawnMaxMs);
+        this->mInitialSpawnDelay = (int64)initialBase + (int64)(((uint64)gRandom->getRand() * 1000) % (initialBase + 1));
         if (this->isMissionLair())
         {
             // the player is on the way: spawn on the next dormant tick
@@ -673,7 +744,13 @@ void LairObject::reportedDead(uint64 deadCreatureId)
             found = true;
 
             // We have to make a new passive spawn( of the same kind of creature ??).
-            this->mPassiveCreature[i]--;
+            // An invisible lair (a camp) cannot be destroyed and so never
+            // resets: it replaces its creatures without end, or it would
+            // stay empty until the zone restarted.
+            if (!isInvisible())
+            {
+                this->mPassiveCreature[i]--;
+            }
 
             uint64 creatureTemplate = 0;
             uint8 creatureTypeIndex = gRandom->getRand() % (int32)100;	// Better to add all values...

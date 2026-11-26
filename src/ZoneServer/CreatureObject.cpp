@@ -761,8 +761,11 @@ void CreatureObject::incap()
         if(!incapKills)
         {
             // update the posture and locomotion
+            // Clear the states before the posture blocks changes (as at death).
+            states.unblock();
+            states.clearAllStates();
+            gMessageLib->sendStateUpdate(this);
             gStateManager.setCurrentPostureState(this, CreaturePosture_Incapacitated);
-            gStateManager.setCurrentActionState(this, CreatureState_ClearState);
 
             // send timer updates
             mCurrentIncapTime = static_cast<uint64>(incapSeconds) * 1000;
@@ -833,9 +836,14 @@ void CreatureObject::die(uint64 killerId)
 
     updateMovementProperties();
 
+    // Clear the states (combat and the rest) directly: incapacitation and
+    // the Dead posture block every state change, so asking the state
+    // manager was refused ("You cannot transition from this Action state")
+    // and the corpse stayed in combat, unable to /peace.
+    states.unblock();
+    states.clearAllStates();
+    gMessageLib->sendStateUpdate(this);
     gStateManager.setCurrentPostureState(this, CreaturePosture_Dead);
-    // clear states
-    gStateManager.setCurrentActionState(this, CreatureState_ClearState);
 
     //gMessageLib->sendPostureAndStateUpdate(this);
 
@@ -881,8 +889,9 @@ void CreatureObject::die(uint64 killerId)
         BuildingObject*	nearestBuilding = NULL;
         BuildingObject* preDesignatedBuilding = NULL;
 
-        // Search for cloning facilities.
-        gSpatialIndexManager->getObjectsInRange(this,&inRangeBuildings,ObjType_Building,8192, false);
+        // Search for cloning facilities: all of the planet's, as a player can
+        // die further than any search range from one.
+        gWorldManager->getCloningFacilities(&inRangeBuildings);
 
         ObjectSet::iterator buildingIt = inRangeBuildings.begin();
 

@@ -38,7 +38,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #define MaxWaveSize 6
-#define MaxCreatureTypes 5
+// The kinds of creature (or NPC) a lair can call: an NPC camp has up to 7
+// (the Jawa warband); 5 crashed the zone at load (docs/SPAWNS.md).
+#define MaxCreatureTypes 8
 
 
 typedef enum _Lair_State
@@ -68,6 +70,12 @@ public:
     bool	isMissionLair(void) const {
         return mMissionId != 0;
     }
+
+    // A camp (docs/SPAWNS.md, NPC camps): an invisible lair is not shown
+    // to players (lair_invisible; pre-CU "invisible lairs", spawn points
+    // with nothing to destroy) but calls its creatures as any lair; a lair
+    // with lair_building puts the client's camp building at its spot.
+    bool	isInvisible(void);
 
     // Attacked: its creatures that are alive and not fighting come for the
     // attacker.
@@ -128,6 +136,7 @@ private:
     bool	mInitialized;
     uint64	mMissionId;
     uint64	mMissionOwnerId;
+    uint64	mCampBuildingId;	// the camp building it put up, 0 for none
     bool	mSpawned;
     bool	mSpawnPositionFixed;
 };

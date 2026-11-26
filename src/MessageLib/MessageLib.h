@@ -429,6 +429,7 @@ public:
 	void				sendTerrainNegotiation(CreatureObject* creatureObject);
 	void				sendMoodString(CreatureObject* creatureObject,BString animation);
 	void				sendWeaponIdUpdate(CreatureObject* creatureObject);
+	void				sendCombatLevelUpdate(CreatureObject* creatureObject);
 	void				sendIncapTimerUpdate(CreatureObject* creatureObject);
 	bool				sendSkillModUpdateCreo4(PlayerObject* playerObject);
 
