@@ -260,6 +260,14 @@ the evil settlers, Afarathu, Pubam...) attacks players who come near; the
 others (the Weequay, most gangs) fight only when attacked, and then as a
 pack.
 
+Names (migration 060): six lair creatures (murra, mott, nuna, sand panther,
+quenker, squill) showed their key in game ("mob/creature_names:
+[menagerie_murra]"). The `mob/creature_names` file their keys were matched
+against is from a later client than Publish 14: it has `menagerie_*`
+names the Publish 14 client lacks, and calls the sand panther "a razor
+cat". They take their plain keys. Any other key that shows instead of a
+name has the same cause: report it and it gets its Publish 14 key.
+
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
 creatures; ours are all named. To revisit.

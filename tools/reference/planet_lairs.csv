@@ -58,7 +58,7 @@ Corellia,howling plumed rasp,howling_plumed_rasp,plumed_rasp,plumed_rasp/shared_
 Corellia,howling plumed rasp (large),howling_plumed_rasp_large,plumed_rasp,base/shared_poi_all_lair_nest_small.iff,2004
 Corellia,krahbu,krahbu,krahbu,krahbu/shared_lair_krahbu.iff,2004
 Corellia,minor gubbur,minor_gubbur,minor_gubbur,gubbur/shared_lair_gubbur.iff,2004
-Corellia,murra,menagerie_murra,murra,murra/shared_lair_murra.iff,2004
+Corellia,murra,murra,murra,murra/shared_lair_murra.iff,2004
 Corellia,mutated krevol clicker,mutated_krevol_clicker,mutated_krevol_clicker,horned_krevol/shared_lair_horned_krevol.iff,2004
 Corellia,noxious vrelt scavenger,noxious_vrelt_scavenger,noxious_vrelt_scavenger,base/shared_poi_all_lair_rock_shelter_large.iff,2004
 Corellia,paralope,paralope,paralope,base/shared_poi_all_lair_rock_shelter_small.iff,2004
@@ -122,14 +122,14 @@ Naboo,kaadu,kaadu,kaadu,kaadu/shared_lair_kaadu.iff,2004
 Naboo,large chuba,chuba_large,chuba,chuba/shared_lair_chuba.iff,2004
 Naboo,massive gnort,gnort_massive,gnort,gnort/shared_lair_gnort.iff,2004
 Naboo,motley kaadu,kaadu_motley,kaadu,kaadu/shared_lair_kaadu.iff,2004
-Naboo,mott,menagerie_mott,mott,mott/shared_lair_mott.iff,2004
+Naboo,mott,mott,mott,mott/shared_lair_mott.iff,2004
 Naboo,mott bull,mott_bull,mott_bull,mott/shared_lair_mott.iff,2004
 Naboo,mott calf,mott_calf,mott_calf,mott/shared_lair_mott.iff,2004
 Naboo,narglatch cub,narglatch_cub,narglatch_cub,narglatch/shared_lair_narglatch.iff,2004
 Naboo,nightspider,nightspider,nightspider,base/shared_poi_all_lair_insecthill_small.iff,2004
 Naboo,nightspider aggressor,nightspider_aggressor,nightspider_aggressor,base/shared_poi_all_lair_insecthill_large.iff,2004
 Naboo,nightspider poison spitter,nightspider_poison_spitter,nightspider_poison_spitter,base/shared_poi_all_lair_insecthill_large.iff,2004
-Naboo,nuna,menagerie_nuna,nuna,nuna/shared_lair_nuna.iff,2004
+Naboo,nuna,nuna,nuna,nuna/shared_lair_nuna.iff,2004
 Naboo,plodding falumpaset,domestic_falumpaset,falumpaset,falumpaset/shared_lair_falumpaset.iff,2004
 Naboo,rabid shaupaut,rabid_shaupaut,shaupaut,shaupaut/shared_lair_shaupaut.iff,2004
 Naboo,savage flewt queen,savage_flewt_queen,savage_flewt_queen,flewt/shared_lair_flewt.iff,2004
@@ -212,7 +212,7 @@ Corellia,gulginaw,gulginaw,gulginaw,gulginaw/shared_lair_gulginaw.iff,ed
 Corellia,mottled wrix,mottled_wrix,mottled_wrix,base/shared_poi_all_lair_rock_shelter_large.iff,ed
 Corellia,mountain murra,mountain_murra,mountain_murra,murra/shared_lair_murra.iff,ed
 Corellia,rogue bageraset,rogue_bageraset,bageraset,bageraset/shared_lair_bageraset.iff,ed
-Corellia,sand panther,menagerie_sand_panther,corellian_sand_panther,base/shared_poi_all_lair_warren_large.iff,ed
+Corellia,sand panther,sand_panther,corellian_sand_panther,base/shared_poi_all_lair_warren_large.iff,ed
 Corellia,sickening dung mite worker,sickening_dung_mite_worker,sickening_dung_mite_worker,base/shared_poi_all_lair_insecthill_large.iff,ed
 Corellia,startled vrelt mother,startled_vrelt_mother,startled_vrelt_mother,base/shared_poi_all_lair_rock_shelter_large.iff,ed
 Corellia,swamp gurrcat,swamp_gurrcat,gurrcat,base/shared_poi_all_lair_warren_large.iff,ed
@@ -233,7 +233,7 @@ Dantooine,huurton stalker,huurton_stalker,huurton,huurton/shared_lair_huurton.if
 Dantooine,piket longhorn,piket_longhorn,piket_longhorn,piket/shared_lair_piket.iff,ed
 Dantooine,piket longhorn female,piket_longhorn_female,piket,piket/shared_lair_piket.iff,ed
 Dantooine,piket plains walker,piket_plains_walker,piket_plains_walker,piket/shared_lair_piket.iff,ed
-Dantooine,quenker,menagerie_quenker,quenker,quenker/shared_lair_quenker.iff,ed
+Dantooine,quenker,quenker,quenker,quenker/shared_lair_quenker.iff,ed
 Dantooine,quenker ravager,quenker_ravager,quenker,quenker/shared_lair_quenker.iff,ed
 Dantooine,quenker relic reaper,quenker_relic_reaper,quenker_relic_reaper,quenker/shared_lair_quenker.iff,ed
 Dantooine,savage quenker,savage_quenker,quenker,quenker/shared_lair_quenker.iff,ed
@@ -521,7 +521,7 @@ Tatooine,mutant womprat,mutant_womprat,womp_rat,womp_rat/shared_lair_womp_rat.if
 Tatooine,rock beetle,rock_beetle,rock_beetle,base/shared_poi_all_lair_insecthill_large.iff,ed
 Tatooine,ronto,ronto,ronto,ronto/shared_lair_ronto.iff,ed
 Tatooine,ronto male,ronto_male,ronto,ronto/shared_lair_ronto.iff,ed
-Tatooine,squill,menagerie_squill,squill,squill/shared_lair_squill.iff,ed
+Tatooine,squill,squill,squill,squill/shared_lair_squill.iff,ed
 Tatooine,swarming lesser dewback,swarming_lesser_dewback,swarming_lesser_dewback,dewback/shared_lair_dewback.iff,ed
 Tatooine,variegated womprat,variegated_womprat,variegated_womp_rat,womp_rat/shared_lair_womp_rat_desert.iff,ed
 Yavin 4,Choku female,choku_female,choku,choku/shared_lair_choku.iff,ed
