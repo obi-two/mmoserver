@@ -1607,7 +1607,7 @@ Still open:
   they need is missing (return 3), and the chat server ignores the return
   code.
 
-### 49. Examining a creature lists its internal stats — fixed, to test
+### 49. Examining a creature lists its internal stats — fixed
 
 Seen while testing Tatooine's lairs (Nov 2026): examining an eopie lists
 each HAM attribute (Health, Constitution, Action, ... 455), To Hit, Stalker
@@ -1637,7 +1637,10 @@ as the guides name them ("Stun Attack"; the live game's names, like
 "Blinding Strike", are not in our sources). The guides give no armour for
 creatures, so they show "None". To test: examine a lair creature.
 
-### 50. A level 120 krayt dragon is "no match" for a master marksman — fixed, to test
+Confirmed on the VM (Nov 2026): a juvenile and a canyon krayt dragon examine
+with exactly these fields and the client's labels.
+
+### 50. A level 120 krayt dragon is "no match" for a master marksman — fixed
 
 Seen at the Krayt Graveyard (Nov 2026): a juvenile canyon krayt dragon
 (level 120 in An Empire Divided's table, sent as the creature's level)
@@ -1656,7 +1659,7 @@ equipping a weapon or gaining or dropping a skill. A master marksman with
 a carbine, pistol or rifle is level 11, so a level 120 krayt is red. To
 test: the krayt cons red and examines as beyond you; a womp rat green.
 
-### 51. Killed far from a town: no clone window — fixed, to test
+### 51. Killed far from a town: no clone window — fixed
 
 Seen at the Krayt Graveyard (Nov 2026): killed by a giant canyon krayt
 dragon, the player lay as a corpse and no clone window opened. The window
@@ -1668,7 +1671,10 @@ moved a player who logged out dead to a facility, and is fixed the same
 way. To test: die far from any town; the window offers the closest
 facility.
 
-### 52. A corpse stays in combat and cannot /peace — fixed, to test
+Confirmed on the VM (Nov 2026): killed at the graveyard, the window offered
+the closest facility and the player cloned there.
+
+### 52. A corpse stays in combat and cannot /peace — fixed
 
 Seen with #51: the dead player still showed in combat, and Peace answered
 "You cannot transition from this Action state". Incapacitation and death
@@ -1676,6 +1682,8 @@ lock state changes, and the combat state was cleared after the lock, so
 the clear was refused. Fixed: the states are cleared, and the client told,
 before the posture changes, at incapacitation and at death. To test: be
 killed; the combat icon goes and no "cannot transition" message shows.
+
+Confirmed on the VM (Nov 2026): no messages at death or cloning.
 
 ### 53. A krayt dragon gives up the chase quickly — fixed, to test
 
@@ -1685,7 +1693,7 @@ its own distance (`creature_stalking_max_distance`) now follows to 128 m,
 others still 64 m. To test: run from a krayt (a stalker) and from a
 non-stalker; to tune if either feels wrong.
 
-### 55. An aggressive krayt dragon ignored a player 20 m away — fixed, to test
+### 55. An aggressive krayt dragon ignored a player 20 m away — fixed
 
 Seen at the Krayt Graveyard (Nov 2026): a juvenile canyon krayt dragon
 (Aggressive: Yes) stood idle with a player about 20 m off, and attacked
@@ -1696,7 +1704,9 @@ distance: it is now 32 m (reconstructed, half the 64 m at which a creature
 notices players). To test: approach an aggressive creature; it attacks at
 about 30 m.
 
-### 56. A level 275 krayt dragon hit for 1 — fixed, to test
+Confirmed on the VM (Nov 2026): the range seemed right.
+
+### 56. A level 275 krayt dragon hit for 1 — fixed
 
 Seen at the Krayt Graveyard (Nov 2026): six minutes of combat with a canyon
 krayt dragon and the player barely hurt. Its damage in An Empire Divided's
@@ -1704,6 +1714,15 @@ table is 1,433.25-1,501.5; the zone read damage as a whole number, the read
 of "1433.25" failed, the damage became 0 and every hit did the least, 1.
 103 of the book's creatures have damage with decimals. Fixed: damage is read
 as a decimal and rounded. To test: a krayt kills a player in a few hits.
+
+Confirmed on the VM (Nov 2026): a juvenile canyon krayt killed the player.
+
+### 57. A krayt dragon stays level on a slope — open, low
+
+Seen at the Krayt Graveyard (Nov 2026): a krayt climbing a hill stayed
+level, its legs in the hillside. The server sends only a creature's
+position and heading; how the model sits on the ground is the client's. To
+look at later, if anything the server sends can change it.
 
 ### 54. A creature's special attack shows its animation without sound — open
 
