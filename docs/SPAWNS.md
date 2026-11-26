@@ -159,6 +159,42 @@ The base data's `persistent_npcs` had 15 wild animals placed by hand
 a fynock youth on Rori, a gubbur on Corellia) as conversing NPCs that could
 not be attacked; 050 removes them, as the lairs now place those creatures.
 
+## NPC camps
+
+Hostile, non-faction NPC groups (gangs, thugs, cults, Jawas...) in camps,
+placed as the creature lairs are (decided Nov 2026: NPCs first, the camp
+buildings next).
+
+- The NPCs: the 2004 guide's NPC rows for the planet (pp. 188-206), without
+  townspeople, Imperials and Rebels (factions, roadmap step 4), the mission
+  and named NPCs, and those that "can't be harmed". Each gets the table's
+  stats and the client's model (`dressed_tatooine_<name>` for most) and
+  name.
+- Weapons: the table gives each NPC a weapon set ("Pirate weapons
+  (light)", "Rebel weapons (hard)", "Tusken weapons") but not what is in
+  it, so each set is one client weapon (reconstructed): CDEF pistol and
+  carbine for the pirate sets, DL-44, DH-17 carbine and T-21 for the rebel
+  ones, the Tusken rifle. An NPC holds its weapon (`creature_weapon`),
+  attacks with that weapon's animation (`creature_humanoid`), and reaches 35
+  m with a pistol, 50 m with a carbine, 64 m with a rifle; its damage is the
+  table's. NPCs without a set fight unarmed.
+- A camp: a lair whose object is the client's objective banner, named
+  after the group's camp in the client's `lair_n` ("a Dune Stalker camp",
+  "a Trandosian slaver camp"), calling the group's NPCs 4 at a time, placed
+  at random in the band of its strongest NPC's level. 4 camps of each kind.
+- `tools/reference/npc_camps.csv` (names only) pairs each NPC with its
+  client name, model, weapon set and camp; `npc_camps_sql.py <planet>`
+  writes the migration.
+
+Tatooine (migration 053): 49 NPCs in 19 kinds of camp, 76 camps: the
+Cannibal enclave, dervish camp, Desert Demon settlement, swoop gang camp,
+Dim-U chapel, Dune Stalker camp, evil settlement, outlaw camp, moisture
+thief camp, Jabba swooper and enforcer camps, the kitonaks, the Jawa
+warband, the Rodian clan camp, the Trandosian slaver camp, the Valarian
+swooper and enforcer outposts and the Weequay settlement. Not yet: Tusken
+Raiders (not in the 2004 table's NPC rows), the camp buildings (the client's
+`object/building/poi/` theaters), the other planets.
+
 Parked (ROADMAP): levels that change with how much an area is hunted; spawn
 areas set up by a community from the portal.
 

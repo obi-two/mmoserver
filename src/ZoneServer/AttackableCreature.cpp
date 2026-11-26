@@ -1662,6 +1662,27 @@ void AttackableCreature::respawn(void)
         mWeaponMaxRange = 4;
     }
 
+    // An armed NPC (docs/SPAWNS.md, NPC camps): its template names the
+    // client weapon it carries (creature_weapon); it holds it from the
+    // start. The weapon decides the model in its hands and the attack
+    // animation; the damage stays the NPC's own (the guide's table), and
+    // its reach is creature_damage_max_range. The factory's spare weapon
+    // object is reused, so a respawn makes nothing new.
+    if (mPrimaryWeapon && this->hasInternalAttribute("creature_weapon"))
+    {
+        std::string model = this->getInternalAttribute<std::string>("creature_weapon");
+        uint32 group = WeaponGroup_1h;
+        if (model.find("/pistol/") != std::string::npos)         group = WeaponGroup_Pistol;
+        else if (model.find("/carbine/") != std::string::npos)   group = WeaponGroup_Carbine;
+        else if (model.find("/rifle/") != std::string::npos)     group = WeaponGroup_Rifle;
+        else if (model.find("/2h_sword/") != std::string::npos)  group = WeaponGroup_2h;
+        else if (model.find("/polearm/") != std::string::npos)   group = WeaponGroup_Polearm;
+        mPrimaryWeapon->setModelString(BString(model.c_str()));
+        mPrimaryWeapon->setGroup(group);
+        mPrimaryWeapon->setInternalAttribute("weapon_group", std::to_string(group));
+        equipPrimaryWeapon();
+    }
+
     if (this->hasAttribute("creature_attack"))
     {
         float attackSpeed = this->getAttribute<float>("creature_attack");

@@ -731,7 +731,9 @@ uint8 NpcManager::_executeAttack(CreatureObject* attacker,CreatureObject* defend
     {
         // This is just a temp fix, we need to solve how to differ creatures from human npc's.
         uint32 animCrc;
-        if (gWorldConfig->isTutorial())
+        // A humanoid NPC (creature_humanoid) attacks as a person does with
+        // its weapon, not with a creature's attack (docs/SPAWNS.md).
+        if (gWorldConfig->isTutorial() || attackerNpc->hasInternalAttribute("creature_humanoid"))
         {
             animCrc = gCombatManager->getDefaultAttackAnimation(weapon->getGroup());
         }
