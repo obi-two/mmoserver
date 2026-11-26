@@ -200,8 +200,30 @@ warband, the Rodian clan camp, the Trandosian slaver camp, the Valarian
 swooper and enforcer outposts and the Weequay settlement. Confirmed on the
 VM (Nov 2026): a dervish camp, its banner named, its dervishes shooting
 with their carbines; the radar much busier. Not yet: Tusken
-Raiders (not in the 2004 table's NPC rows), the camp buildings (the client's
-`object/building/poi/` theaters), the other planets.
+Raiders (not in the 2004 table's NPC rows), the other planets.
+
+Camp buildings (migration 054). The swganh wiki's "Lairs" page describes
+three kinds of spawn: mission lairs (spawned by a mission, named, to
+destroy), wild lairs, and invisible lairs (spawn points: a group with
+nothing to destroy). The client's camp names fit: `_theater` camps ("a Dune
+Stalker camp") had a building, `_none` ones ("a Jawa warband camp", "a
+Desert Demon patrol outpost") did not. So a wild camp is now its group's
+building with its NPCs, and the destroyable banner is left to destroy
+missions:
+
+- each camp's lair is invisible (`lair_invisible`): in the world for its
+  NPCs but never shown, and it replaces its NPCs without end (60 s after
+  each death), as it cannot be destroyed to reset;
+- a camp with a building (`lair_building`) puts up the client's camp for
+  its group (`object/building/poi/shared_tatooine_dunestalkers_medium.iff`
+  and so on, sized as the client's camp name) at the lair's spot, once; not
+  stored, it comes back with the zone (at a new spot);
+- the cannibal enclave, the kitonaks and the Jawa warband are spawn points
+  only, as their client names say.
+
+The wiki also says wild creature lairs had plain names ("a pile of rocks",
+"a pile of leaves") and only mission lairs were named after their
+creatures; ours are all named. To revisit.
 
 Parked (ROADMAP): levels that change with how much an area is hunted; spawn
 areas set up by a community from the portal.

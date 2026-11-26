@@ -15,8 +15,10 @@ strongest NPC's level (planet_lairs_sql.py's bands).
 The NPCs, their camps' names and their models are in
 tools/reference/npc_camps.csv (names only, from the Publish 14 client).
 Townspeople, Imperials, Rebels and the guide's mission and named NPCs are
-not camps. The camp buildings (the client's object/building/poi/ theaters)
-come later; for now a camp is its banner and its NPCs.
+not camps. Tatooine's camps (053) were written as banners; --buildings
+tatooine writes 054, which gives them their buildings and makes their
+lairs invisible. A new planet's camps will need the same (see
+CAMP_BUILDINGS).
 
 Reconstructed, and data to tune: the weapon each of the guide's weapon
 sets stands for (the guide names the sets, not their weapons), each
@@ -54,6 +56,31 @@ BANNER = {
 }
 GENERIC_BANNER = "object/tangible/lair/base/shared_objective_banner_generic_1.iff"
 
+# Each camp's building: the client's camp for the group (object/building/
+# poi/), the size its lair_n name gives where it has one. A camp whose
+# client name ends "_none" (a patrol, an enclave, a warband) had no
+# building: a spawn point only. Every camp's lair is invisible (pre-CU
+# "invisible lairs": nothing to destroy; the destroyable banners belong to
+# destroy missions).
+POI = "object/building/poi/shared_%s.iff"
+CAMP_BUILDINGS = {
+    ("Tatooine", "dervish"): "tatooine_dervishcamp_medium",
+    ("Tatooine", "desert_demon"): "tatooine_desert_demons_camp_large1",
+    ("Tatooine", "desert_swoop"): "tatooine_swoop_medium",
+    ("Tatooine", "dim_u"): "tatooine_dim_u_medium",
+    ("Tatooine", "dune_stalker"): "tatooine_dunestalkers_medium",
+    ("Tatooine", "evil"): "tatooine_evil_settlers_medium",
+    ("Tatooine", "outlaw"): "tatooine_fugitive_camp_medium",
+    ("Tatooine", "moisture_thief"): "tatooine_nomad_squatter_medium1",
+    ("Tatooine", "jabba_swooper"): "tatooine_swoop_medium2",
+    ("Tatooine", "jabba_enforcer"): "tatooine_hutt_assassin_camp_medium1",
+    ("Tatooine", "rodian"): "tatooine_rodianhunter_large1",
+    ("Tatooine", "slaver"): "tatooine_slaver_medium",
+    ("Tatooine", "valarian_swooper"): "tatooine_valariangang_medium",
+    ("Tatooine", "valarian_enforcer"): "tatooine_valariangang_medium",
+    ("Tatooine", "weequay"): "tatooine_weequayzealots_large1",
+}
+
 CAMPS_PER_KIND = 4
 WAVE_SIZE = 4
 PASSIVE_WAVES = 3
@@ -65,6 +92,58 @@ NPC_ATTRIBUTES = [
     ("creature_weapon", "An NPC's weapon: the client weapon template it holds"),
     ("creature_humanoid", "An NPC that attacks as a person with its weapon, not as a creature"),
 ]
+CAMP_ATTRIBUTES = [
+    ("lair_invisible", "A lair not shown to players: a spawn point for its creatures"),
+    ("lair_building", "A camp's building: the client building template put up at the lair"),
+]
+
+
+def camp_attributes(location, camp, camp_id):
+    rows = [(camp_id, "lair_invisible", 1)]
+    building = CAMP_BUILDINGS.get((location, camp))
+    if building:
+        rows.append((camp_id, "lair_building", POI % building))
+    return rows
+
+
+def buildings(planet):
+    """Migration 054: the camps' buildings and invisible lairs for a planet
+    whose camps were written before them (Tatooine, 053)."""
+    location, _, index = PLANETS[planet]
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "npc_camps.csv"), newline="") as f:
+        camps = []
+        for r in csv.DictReader(f):
+            if r["planet"] == location and r["camp"] not in camps:
+                camps.append(r["camp"])
+    rows = []
+    for n, camp in enumerate(camps):
+        rows += camp_attributes(location, camp, 3101 + 100 * index + n)
+    base = 49001 + 100 * index
+    out = sys.stdout
+    out.write("""\
+-- %s: the NPC camps' buildings (docs/SPAWNS.md, NPC camps). Migration 053
+-- put each camp at a destroyable banner; pre-CU a wild camp was the
+-- group's camp building with its NPCs and nothing to destroy (the swganh
+-- wiki's "Lairs": wild lairs, invisible lairs; destroyable lairs for
+-- missions), so each camp's lair is now invisible and puts up the client's
+-- camp building for its group (object/building/poi/), sized as the
+-- group's camp name in the client's lair_n. Camps whose client name ends
+-- "_none" (the cannibal enclave, the kitonaks, the Jawa warband) had no
+-- building and are spawn points only. Written by
+-- tools/reference/npc_camps_sql.py --buildings %s.
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+""" % (planet.capitalize(), planet))
+    out.write("INSERT IGNORE INTO swganh.attributes (name, internal, attribute_internal_description)\n  VALUES ")
+    out.write(",\n         ".join("(%s, 1, %s)" % (sql_str(n), sql_str(d)) for n, d in CAMP_ATTRIBUTES))
+    out.write(";\n\n")
+    out.write("INSERT IGNORE INTO swganh.lair_attributes (id, lair_id, attribute_id, value, `order`)\n"
+              "  SELECT v.id, v.lair_id, a.id, v.value, 0 FROM (\n")
+    out.write("\n    UNION ALL ".join("    SELECT %d AS id, %d AS lair_id, %s AS name, %s AS value" % (base + n, i, sql_str(a), sql_str(v)) if n == 0 else
+                                     "SELECT %d, %d, %s, %s" % (base + n, i, sql_str(a), sql_str(v)) for n, (i, a, v) in enumerate(rows)))
+    out.write("\n  ) v JOIN swganh.attributes a ON a.name = v.name;\n\n")
+    out.write("SET FOREIGN_KEY_CHECKS = 1;\n")
 
 
 def reach(weapon):
@@ -75,6 +154,9 @@ def reach(weapon):
 
 
 def main():
+    if len(sys.argv) > 2 and sys.argv[1] == "--buildings":
+        buildings(sys.argv[2])
+        return
     planet = sys.argv[1] if len(sys.argv) > 1 else "tatooine"
     location, planet_id, index = PLANETS[planet]
     with open(os.path.join(REF, "prima_2004", "creatures.csv"), newline="") as f:
@@ -140,6 +222,10 @@ def main():
         ]
         if dmax < 1.0e9:
             lair_attrs.append((camp_id, "lair_max_city_distance", dmax))
+        if planet != "tatooine":
+            # Tatooine's camps (053) were written before the buildings; 054
+            # adds them. Later planets' camps get them from the start.
+            lair_attrs += camp_attributes(location, camp, camp_id)
         far = "%d m+" % dmin if dmax >= 1.0e9 else "%d-%d m" % (dmin, dmax)
         pages = sorted({table[r["name"]]["page"] for r in info["npcs"]})
         summary.append("--   %-45s up to lvl %-2d %-10s %s; pp. %s" % (
@@ -167,7 +253,8 @@ def main():
     out.write("\n".join(summary) + "\n--\n\n")
     out.write("SET FOREIGN_KEY_CHECKS = 0;\n\n")
     out.write("INSERT IGNORE INTO swganh.attributes (name, internal, attribute_internal_description)\n  VALUES ")
-    out.write(",\n         ".join("(%s, 1, %s)" % (sql_str(n), sql_str(d)) for n, d in NEW_ATTRIBUTES + NPC_ATTRIBUTES))
+    out.write(",\n         ".join("(%s, 1, %s)" % (sql_str(n), sql_str(d)) for n, d in
+                                    NEW_ATTRIBUTES + NPC_ATTRIBUTES + ([] if planet == "tatooine" else CAMP_ATTRIBUTES)))
     out.write(";\n\n")
     out.write("INSERT IGNORE INTO swganh.non_persistent_npcs\n"
               "  (id, family, species_id, loot_group_id, type, stf_variable_id, stf_file_id, level, faction, posture, moodID, state, scale)\n  VALUES\n")

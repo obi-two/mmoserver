@@ -29,6 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "StructureManager.h"
 #include "MissionManager.h"
 #include "AttackableCreature.h"
+#include "BuildingObject.h"
 #include "CellObject.h"
 #include "NonPersistentNpcFactory.h"
 #include "NpcManager.h"
@@ -63,6 +64,7 @@ LairObject::LairObject(uint64 templateId) : AttackableStaticNpc()
     , mSpawnPositionFixed(true)
     , mMissionId(0)
     , mMissionOwnerId(0)
+    , mCampBuildingId(0)
 {
     mNpcFamily	= NpcFamily_NaturalLairs;
     mType = ObjType_Lair;
@@ -348,13 +350,48 @@ void LairObject::makePeaceWithDefendersOutOfRange(void)
 //	Spawn this lair and initial wave.
 //
 
+bool LairObject::isInvisible(void)
+{
+    return hasInternalAttribute("lair_invisible") && getInternalAttribute<std::string>("lair_invisible") != "0";
+}
+
 void LairObject::spawn(void)
 {
     gLairSpawnCounter++;
     DLOG(INFO) << "Spawned lair # " <<gLairSpawnCounter << "( " <<gLairSpawnCounter - gLairDeathCounter<<")";
 
-    // Update the world about my presence.
+    // A camp's building (lair_building): the client's camp, put up once at
+    // the lair's first spot, where it stays. Not destroyable and not
+    // stored: it comes back with the zone.
+    if (!mCampBuildingId && hasInternalAttribute("lair_building"))
+    {
+        BuildingObject* camp = new BuildingObject();
+        camp->setId(gWorldManager->getRandomNpId());
+        camp->setParentId(0);
+        camp->setModelString(getInternalAttribute<std::string>("lair_building").c_str());
+        camp->setBuildingFamily(BuildingFamily_None);
+        camp->mPosition = mPosition;
+        camp->mDirection = mDirection;
+        if (gWorldManager->addObject(camp, true))
+        {
+            gSpatialIndexManager->createInWorld(camp);
+            mCampBuildingId = camp->getId();
+            LOG(INFO) << "Lair " << getId() << ": camp building " << camp->getId() << " ("
+                      << camp->getModelString().getAnsi() << ") at " << mPosition.x << ", " << mPosition.z;
+        }
+        else
+        {
+            delete camp;
+        }
+    }
+
+    // Update the world about my presence (an invisible lair is in the world
+    // for its creatures and the players near it, but never shown).
     gSpatialIndexManager->createInWorld(this);
+    if (isInvisible())
+    {
+        return;
+    }
 
     // Add us to the world.
     gMessageLib->broadcastContainmentMessage(this,this->getParentId(), -1);
@@ -707,7 +744,13 @@ void LairObject::reportedDead(uint64 deadCreatureId)
             found = true;
 
             // We have to make a new passive spawn( of the same kind of creature ??).
-            this->mPassiveCreature[i]--;
+            // An invisible lair (a camp) cannot be destroyed and so never
+            // resets: it replaces its creatures without end, or it would
+            // stay empty until the zone restarted.
+            if (!isInvisible())
+            {
+                this->mPassiveCreature[i]--;
+            }
 
             uint64 creatureTemplate = 0;
             uint8 creatureTypeIndex = gRandom->getRand() % (int32)100;	// Better to add all values...

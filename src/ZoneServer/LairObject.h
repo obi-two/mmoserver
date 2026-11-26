@@ -71,6 +71,12 @@ public:
         return mMissionId != 0;
     }
 
+    // A camp (docs/SPAWNS.md, NPC camps): an invisible lair is not shown
+    // to players (lair_invisible; pre-CU "invisible lairs", spawn points
+    // with nothing to destroy) but calls its creatures as any lair; a lair
+    // with lair_building puts the client's camp building at its spot.
+    bool	isInvisible(void);
+
     // Attacked: its creatures that are alive and not fighting come for the
     // attacker.
     void	defend(uint64 attackerId) const;
@@ -130,6 +136,7 @@ private:
     bool	mInitialized;
     uint64	mMissionId;
     uint64	mMissionOwnerId;
+    uint64	mCampBuildingId;	// the camp building it put up, 0 for none
     bool	mSpawned;
     bool	mSpawnPositionFixed;
 };
