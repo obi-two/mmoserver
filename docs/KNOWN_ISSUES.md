@@ -1685,9 +1685,23 @@ its own distance (`creature_stalking_max_distance`) now follows to 128 m,
 others still 64 m. To test: run from a krayt (a stalker) and from a
 non-stalker; to tune if either feels wrong.
 
+### 55. An aggressive krayt dragon ignored a player 20 m away — fixed, to test
+
+Seen at the Krayt Graveyard (Nov 2026): a juvenile canyon krayt dragon
+(Aggressive: Yes) stood idle with a player about 20 m off, and attacked
+("fights" in the zone log) only when the player came closer. An aggressive
+creature attacks a player within its attack range, which without a
+`creature_attack_range` of its own was 15 m. No source gives the pre-CU
+distance: it is now 32 m (reconstructed, half the 64 m at which a creature
+notices players). To test: approach an aggressive creature; it attacks at
+about 30 m.
+
 ### 54. A creature's special attack shows its animation without sound — open
 
-Seen with #51: the krayt's roar animation played without its sound. To
+Seen with #51: the krayt's roar animation played without its sound. The
+roar is its attack: the server sends a combat action with the animation
+`creature_attack_light` (`NpcManager`, as for every creature), and the
+client plays the animation but no sound. To
 look at how the server sends a special attack (the combat action message
 and its animation) against what the client needs to play the sound.
 

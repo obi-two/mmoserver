@@ -1762,8 +1762,11 @@ void AttackableCreature::respawn(void)
         }
         else
         {
-            //assert(false && "Missing creature attack range attribute");
-            this->setAttackRange(15.0);
+            // An aggressive creature attacks a player who comes this close.
+            // Reconstructed (no source gives it; was 15 m, which let a
+            // player stand beside a krayt dragon): half the 64 m at which a
+            // creature notices players. creature_attack_range overrides it.
+            this->setAttackRange(32.0);
         }
     }
 
