@@ -221,6 +221,10 @@ missions:
 - the cannibal enclave, the kitonaks and the Jawa warband are spawn points
   only, as their client names say.
 
+Confirmed on the VM (Nov 2026): a Weequay settlement, the client's camp
+(tents, banner, a crashed hull) on the ground with its zealots and thugs
+around it, and the client stable.
+
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
 creatures; ours are all named. To revisit.
