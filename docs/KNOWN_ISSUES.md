@@ -1691,6 +1691,14 @@ Seen with #51: the krayt's roar animation played without its sound. To
 look at how the server sends a special attack (the combat action message
 and its animation) against what the client needs to play the sound.
 
+The client has the sounds (Publish 14, `sound/`): for each krayt
+`cr_<creature>_attack_hvy`, `_attack_lgt`, `_hit_hvy`, `_hit_lgt` and
+`_vocalize` (canyon krayt dragon, juvenile canyon krayt; the older
+`cr_kraytdragon_*` set too), and the graveyard's ambient
+`amb_tatooine_krayt_graveyard_lp` and `_os`. The client picks them from the
+creature's appearance and the action it is told about, so the server's
+message is the likely gap, not the data.
+
 ### 24. A cloned player stays a corpse — fixed
 
 Killed by womp rats near Bestine (three incaps inside the reset time, the
