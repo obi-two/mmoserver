@@ -150,6 +150,10 @@ the server setting `Lair_First_Spawn_Max_Minutes` (`config_server`,
 migration 051; default 5): set it to 0 on a test server and every lair
 spawns at once, then restart the zones.
 
+Confirmed on the VM (Nov 2026): all four graveyard lairs spawned with one
+krayt each (at 7250, 4330; 7540, 4620; 6960, 4440; 6700, 4230); a juvenile
+canyon krayt dragon by "a krayt dragon lair", with the client's model.
+
 The base data's `persistent_npcs` had 15 wild animals placed by hand
 (Tatooine's desert razorbacks and giant sand beetles, Lok's fanned rawls,
 a fynock youth on Rori, a gubbur on Corellia) as conversing NPCs that could
