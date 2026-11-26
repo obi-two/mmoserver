@@ -38,7 +38,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #define MaxWaveSize 6
-#define MaxCreatureTypes 5
+// The kinds of creature (or NPC) a lair can call: an NPC camp has up to 7
+// (the Jawa warband); 5 crashed the zone at load (docs/SPAWNS.md).
+#define MaxCreatureTypes 8
 
 
 typedef enum _Lair_State

@@ -1717,6 +1717,14 @@ as a decimal and rounded. To test: a krayt kills a player in a few hits.
 
 Confirmed on the VM (Nov 2026): a juvenile canyon krayt killed the player.
 
+### 58. NPC camps crashed the zone at start — fixed, to test
+
+Seen on the first start with migration 053 (Nov 2026): the Tatooine zone
+asserted in `LairObject::setCreatureTemplate` while loading the lairs. A
+lair held at most 5 kinds of creature, and the Jawa warband camp calls 7
+(the Dim-U chapel 6). Fixed: a lair holds up to 8, and a lair template with
+more kinds logs a warning and uses the first 8 instead of asserting.
+
 ### 57. A krayt dragon stays level on a slope — open, low
 
 Seen at the Krayt Graveyard (Nov 2026): a krayt climbing a hill stayed
