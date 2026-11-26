@@ -1717,6 +1717,19 @@ as a decimal and rounded. To test: a krayt kills a player in a few hits.
 
 Confirmed on the VM (Nov 2026): a juvenile canyon krayt killed the player.
 
+### 60. 23 high-level creatures had another creature's to-hit, XP and flags — fixed
+
+Found while transcribing An Empire Divided's NPC rows (Nov 2026): the book's
+tables run over two facing pages, and on the three pages where a planet's
+table starts partway down (pp. 424, 428, 468) the transcription paired each
+row below the heading with the facing row above or below it. A level 95
+ancient bull rancor had 35% to-hit and 564 XP (the alpha bolma's), a bantha
+the Alkhara lieutenant's. The rows were read again from the page images,
+paired by position (the book's XP by level confirms it), and corrected in
+`mmoserverdb/reference/prima_ed/creatures.csv`; migration 061 updates the
+23 creatures (Dathomir 15, Endor 6, Tatooine 2) and their lairs' XP. The
+other pages have one table each and were not affected.
+
 ### 59. Lairs are placed in water — open, low
 
 Seen on Corellia (Nov 2026): a vynock lair and its vynocks in a lake. A
