@@ -1717,7 +1717,16 @@ as a decimal and rounded. To test: a krayt kills a player in a few hits.
 
 Confirmed on the VM (Nov 2026): a juvenile canyon krayt killed the player.
 
-### 58. NPC camps crashed the zone at start — fixed, to test
+### 59. Lairs are placed in water — open, low
+
+Seen on Corellia (Nov 2026): a vynock lair and its vynocks in a lake. A
+random lair's spot is tested against the city bands and the no-build
+areas, not water: the heightmap gives the ground's height, and the lakes
+and rivers are in the client's terrain files (.trn water layers). To do:
+read the planets' water from the terrain files (or their water heights)
+and reject spots under water.
+
+### 58. NPC camps crashed the zone at start — fixed
 
 Seen on the first start with migration 053 (Nov 2026): the Tatooine zone
 asserted in `LairObject::setCreatureTemplate` while loading the lairs. A

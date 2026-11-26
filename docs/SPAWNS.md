@@ -260,6 +260,10 @@ the evil settlers, Afarathu, Pubam...) attacks players who come near; the
 others (the Weequay, most gangs) fight only when attacked, and then as a
 pack.
 
+Confirmed on the VM (Nov 2026): Corellia's camps up with their buildings
+(Monumenter, Selonian, swoop, Afarathu, Solitude, CorSec traitor, Hidden
+Daggers in the zone log), a foot of Solitude camp reached on foot.
+
 Names (migration 060): six lair creatures (murra, mott, nuna, sand panther,
 quenker, squill) showed their key in game ("mob/creature_names:
 [menagerie_murra]"). The `mob/creature_names` file their keys were matched
