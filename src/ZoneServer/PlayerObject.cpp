@@ -1309,46 +1309,28 @@ void PlayerObject::handleUIEvent(uint32 action,int32 element,BString inputStr,UI
     {
         // gLogger->log(LogManager::DEBUG,"PlayerObject::handleUIEvent element = %d",element);
 
-        // Handle non-selected response as if closest cloning facility was selected,
-        // until we learn how to restart the dialog when nothing selected.
-        if (element < 0 || element > 1)
-        {
-            element = 0;
-            // No selection made, re-open the dialog.
-            // window->sendCreate();
-            // break;
-        }
-
         UICloneSelectListBox* lb = dynamic_cast<UICloneSelectListBox*>(window);
 
         if ((lb) && (lb->getBuildingList()->size() > 0))
         {
+            // No selection: the top of the list (the stored clone, or else
+            // the nearest facility).
+            if (element < 0 || element >= static_cast<int32>(lb->getBuildingList()->size()))
+            {
+                element = 0;
+            }
+
             if (BuildingObject* building = lb->getBuildingList()->at(element))
             {
                 if (SpawnPoint* sp = building->getRandomSpawnPoint())
                 {
-                    if (element == 1)
+                    if (building->getId() == getPreDesignatedCloningFacilityId())
                     {
-                        // Clone at the pre-designated facility...
+                        // Clone at the pre-designated facility (the stored clone)...
                         mObjectController.cloneAtPreDesignatedFacility(this, sp);
                     }
-                    else //  if (element == 0)  // Handle non-selected response as if closest cloning facility was selected,
-                        // until we learn how to restart the dialog when nothing selected.
+                    else
                     {
-                        // We selected the closest facility, but that CAN be the same as the pre-designated.
-                        if (lb->getBuildingList()->size() > 1)
-                        {
-                            // We do have more than one selection
-                            if (BuildingObject* preDesignatedBuilding = lb->getBuildingList()->at(1))
-                            {
-                                if (preDesignatedBuilding == building)
-                                {
-                                    // Clone at the pre-designated facility...
-                                    mObjectController.cloneAtPreDesignatedFacility(this, sp);
-                                    break;
-                                }
-                            }
-                        }
                         if (this->mNewPlayerExemptions == 0)
                         {
                             // Fill the pools first: a wound can't exceed the
