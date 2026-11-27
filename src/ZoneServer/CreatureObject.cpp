@@ -738,6 +738,7 @@ void CreatureObject::incap()
         if (player)
         {
             player->disableAutoAttack();
+            player->getController()->clearCombatQueue();
         }
         //See if our player is mounted -- if so dismount him
         if(player->checkIfMounted())
@@ -830,6 +831,7 @@ void CreatureObject::die(uint64 killerId)
     {
         gMessageLib->SendSystemMessage(::common::OutOfBand("base_player", "victim_dead"), player);
         player->disableAutoAttack();
+        player->getController()->clearCombatQueue();
     }
 
     // reset ham regeneration

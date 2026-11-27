@@ -238,6 +238,9 @@ public:
     bool					mHandlerCompleted;
 
     void					clearQueues();
+    // Drop the queued combat commands (incapacitated or dead: pre-CU, the
+    // combat queue emptied), telling the client so its queue display clears.
+    void					clearCombatQueue();
 
     // target
     void					handleSetTarget(Message* message);
@@ -797,6 +800,7 @@ private:
 		boost::pool<boost::default_user_allocator_malloc_free>		mEventPool;
 
 		CommandQueue				mCommandQueue;
+		bool						mClearCombatQueue = false;
 		EventQueue					mEventQueue;
 		ObjectSet						mInRangeObjects;
 		ObjectSet::iterator mObjectSetIt;
