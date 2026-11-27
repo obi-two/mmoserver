@@ -339,6 +339,31 @@ the server spawns outdoors only), and the battle sites (Tusken against
 Jawa, Nightsister against the Singing Mountain clan, Imperial against
 Gungan), which need NPCs that fight each other.
 
+### Fort Tusken (migration 075)
+
+Fort Tusken was the hard place (players remember Jedi grinding there), but
+An Empire Divided's Tuskens top out at level 20 and the commoner is 9. The
+fort has its own commoner, captain, chief and elite guard with the swganh
+wiki's stats (`mmoserverdb/reference/swganh_wiki/tuskens.csv`, written by
+`tools/reference/fort_tusken_sql.py`):
+
+| Tusken | Level | HAM | Damage | To hit | XP | |
+|---|---|---|---|---|---|---|
+| Commoner | 16 | 2,900-3,500 | 170-180 | 31% | 690 | aggressive, pack |
+| Captain | 40 | 9,300-11,300 | 345-400 | 44% | 4,006 | killer, stalker |
+| Chief | 43 | 9,600-11,800 | 365-440 | 46% | 4,279 | killer, stalker |
+| Elite guard | 44 | 9,600-11,800 | 365-440 | 46% | 4,370 | killer, stalker |
+
+The wiki gives no publish for these, and has no pages for the raider,
+sniper, warlord, King or bantha, which stay the book's. The Tusken village
+and camps keep the book's Tuskens. Four lairs replace 073's three: 4 of
+commoners, raiders and snipers; 3 of captains and chiefs; 2 of elite
+guards; 1 of the warlord, the King and a bantha (reconstructed). The
+armour shows on examine only. To come: the waves the Publish 1 notes give
+(13 August 2003, "Set up Fort Tusken to spawn in waves"; the wiki: three
+waves, each harder), and fixed positions so none land inside the walls
+(the server has no wall shapes).
+
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
 creatures; ours are all named. To revisit.

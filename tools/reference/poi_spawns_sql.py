@@ -31,6 +31,7 @@ from planet_lairs_sql import PLANETS  # noqa: E402
 # planet, region name in planet_regions, half-size of the spawn area (m),
 # then (number of lairs, [name keys of the people a lair calls]).
 POIS = [
+    # Migration 075 (fort_tusken_sql.py) replaces these three lairs (6001-6003).
     ("tatooine", "forttusken", 150, [
         (4, ["tusken_commoner", "tusken_raider", "tusken_sniper"]),
         (2, ["tusken_captain", "tusken_chief"]),
