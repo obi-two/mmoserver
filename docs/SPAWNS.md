@@ -375,8 +375,17 @@ A lair goes in waves with `lair_wave_stages` (how many of its kinds, in
 the group's row order, each wave calls from: "3,3,2"), `lair_wave_boss`
 (the last wave's last kind is its leader: one of it) and `lair_wave_delay`
 (ms between waves); `lair_respawn_delay` is the pause before starting
-over. To come: fixed positions so none land inside the walls (the server
-has no wall shapes).
+over.
+
+Migration 079 pins the waves to four spots clear of the walls, found in
+game: the courtyard (-3980, 6253; the only one whose third wave has the
+King), the gate (-3982, 6292), the back left corner by the cave (-3962,
+6232) and the opposite corner (-4009, 6235); each wave appears within 3-6
+m of its spot. Still to do: the catwalks (-4010, 6290 and -3957, 6288, at
+height 68), as the server puts creatures on the terrain, under them; the
+fort's buildings and the cave below, which need spawning inside cells; and
+roaming, which can still walk a Tusken through a wall (30 m from its spot,
+with no wall shapes on the server).
 
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
