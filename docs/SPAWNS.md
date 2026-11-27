@@ -303,6 +303,8 @@ Dathomir 15 (the Nightsisters and the Singing Mountain clan), Yavin 4 3
 Confirmed on the VM (Nov 2026): a Tusken village (the client's
 `tatooine_tuskenwar_medium`) with its Tusken king, examining as the book
 gives (level 20, aggressive, stalker, deathblows), attacking on sight.
+Lok: all 40 camps up, the 12 Nym camps with their buildings; Nym's guards
+and patrols fight back but do not attack first (not Aggro in the book).
 
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
