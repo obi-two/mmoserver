@@ -82,6 +82,20 @@ private:
     void _handleTestKitMenu(PlayerObject* player, uint32 action, int32 element, BString inputStr, UIWindow* window);
 
     std::map<uint64, std::vector<OpenMenu> > mMenuTrail;
+
+    // CSR: warp to a planet's starports and points of interest; NPCs
+    // ignoring the CSR (character_csr_flags).
+    struct WarpDestination
+    {
+        std::string	name;
+        uint32		planet;
+        float		x, y, z;
+    };
+    std::map<uint64, std::vector<WarpDestination> > mWarpDestinations;
+    void _openWarpPlanets(PlayerObject* player);
+    void _handleWarpPlanetMenu(PlayerObject* player, int32 element);
+    void _handleWarpDestinationMenu(PlayerObject* player, int32 element);
+    void _toggleNpcsIgnore(PlayerObject* player);
     BStringVector		mTestKitMenu;
     std::vector<uint32>	mTestKitItems;
 

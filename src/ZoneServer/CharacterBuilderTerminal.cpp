@@ -46,6 +46,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "Resource.h"
 #include "Inventory.h"
 #include "ObjectFactory.h"
+#include "Heightmap.h"
+#include "Item_Enums.h"
+#include "DatabaseManager/Database.h"
+#include "DatabaseManager/DatabaseResult.h"
+#include <cppconn/resultset.h>
 
 #include "Utils/utils.h"
 
@@ -81,6 +86,8 @@ void CharacterBuilderTerminal::InitMenus()
     mMainCsrMenu.push_back("Manage Wounds");
     mMainCsrMenu.push_back("Manage States");
     mMainCsrMenu.push_back("Teleport X,Y");
+    mMainCsrMenu.push_back("Warp to Planet");
+    mMainCsrMenu.push_back("NPC Aggression On/Off");
 
     // Step 2 test pass (docs/TEST_PLAN.md): experimenting needs a crafting
     // tool with its station within 25 m (the generic tool has no station),
@@ -853,7 +860,14 @@ void CharacterBuilderTerminal::_handleMainCsrMenu(PlayerObject* playerObject, ui
                                           SUI_Window_CharacterBuilderTeleportMenu_InputBox,
                                           25);
         }
-    
+        break;
+    case 11: // Warp to Planet
+        _openWarpPlanets(playerObject);
+        break;
+    case 12: // NPC Aggression On/Off
+        _toggleNpcsIgnore(playerObject);
+        break;
+
     default:
         break;
     }
@@ -1366,7 +1380,12 @@ void CharacterBuilderTerminal::_handleBlueFrogMenu(PlayerObject* playerObject, u
     {
         case 0:
         {
-            GiveItem(playerObject,2789);
+            // The portable frog: an item of the terminal family (ItemTerminal),
+            // made directly; it has no row among the frog's items, so
+            // GiveItem found "No such item".
+            gObjectFactory->requestNewDefaultItem(playerObject->getInventory(), ItemFamily_Terminal, ItemType_BlueFrog,
+                                                  playerObject->getInventory()->getId(), 99, glm::vec3(), "Personal Blue Frog");
+            gMessageLib->SendSystemMessage(L"The item has been placed in your inventory.", playerObject);
         }
         break;
     }
@@ -2563,6 +2582,12 @@ void CharacterBuilderTerminal::_dispatchUIEvent(PlayerObject* playerObject, uint
     case SUI_Window_CharacterBuilder_ListBox_TestKitMenu:
         _handleTestKitMenu(playerObject, action, element, inputStr, window);
         break;
+    case SUI_Window_CharacterBuilder_ListBox_WarpPlanetMenu:
+        _handleWarpPlanetMenu(playerObject, element);
+        break;
+    case SUI_Window_CharacterBuilder_ListBox_WarpDestinationMenu:
+        _handleWarpDestinationMenu(playerObject, element);
+        break;
     case SUI_Window_CharacterBuilderMainMenu_ListBox:
         _handleMainMenu(playerObject, action, element, inputStr, window);
         break;
@@ -2892,4 +2917,216 @@ void CharacterBuilderTerminal::_handleTestKitMenu(PlayerObject* player, uint32 a
     if (element < 0 || element >= static_cast<int32>(mTestKitItems.size()))
         return;
     GiveItem(player, mTestKitItems[element]);
+}
+
+//=============================================================================
+// CSR: warp to a planet's starports and points of interest.
+
+namespace {
+// The ten planets, by planet id.
+const char* const kWarpPlanets[] = {
+    "Corellia", "Dantooine", "Dathomir", "Endor", "Lok", "Naboo", "Rori", "Talus", "Tatooine", "Yavin 4"
+};
+
+// "fort_tusken" -> "Fort Tusken".
+std::string prettyRegionName(const std::string& raw)
+{
+    std::string name;
+    bool start = true;
+    for (char c : raw)
+    {
+        if (c == '_')
+        {
+            name += ' ';
+            start = true;
+            continue;
+        }
+        name += start ? static_cast<char>(toupper(static_cast<unsigned char>(c))) : c;
+        start = false;
+    }
+    return name;
+}
+}
+
+void CharacterBuilderTerminal::_openWarpPlanets(PlayerObject* player)
+{
+    if (!player->getCsrTag())
+    {
+        return;
+    }
+    BStringVector planets;
+    for (const char* planet : kWarpPlanets)
+    {
+        planets.push_back(planet);
+    }
+    _openList(player, "handleWarpPlanet", "Warp to Planet", "Select a planet.", planets, SUI_Window_CharacterBuilder_ListBox_WarpPlanetMenu);
+}
+
+void CharacterBuilderTerminal::_handleWarpPlanetMenu(PlayerObject* player, int32 element)
+{
+    const int32 planetCount = static_cast<int32>(sizeof(kWarpPlanets) / sizeof(kWarpPlanets[0]));
+    if (!player->getCsrTag() || element < 0 || element >= planetCount)
+    {
+        return;
+    }
+    const uint32 planet = static_cast<uint32>(element);
+    Database* db = gWorldManager->getDatabase();
+    std::vector<WarpDestination> destinations;
+
+    // Starports and shuttleports: where travellers arrive (the travel
+    // terminals' shuttle spawn points).
+    if (DatabaseResult* result = db->executeSynchSql(
+            "SELECT t.dataStr, MIN(s.X), MIN(s.Y), MIN(s.Z) FROM %s.terminals t INNER JOIN %s.spawn_shuttle s ON (t.dataInt3 = s.id)"
+            " WHERE t.terminal_type = 16 AND t.planet_id = %u GROUP BY t.dataStr ORDER BY t.dataStr",
+            db->galaxy(), db->galaxy(), planet))
+    {
+        if (result->getResultSet())
+        {
+            std::unique_ptr<sql::ResultSet>& rows = result->getResultSet();
+            while (rows->next())
+            {
+                WarpDestination d;
+                d.name = rows->getString(1);
+                d.planet = planet;
+                d.x = static_cast<float>(rows->getDouble(2));
+                d.y = static_cast<float>(rows->getDouble(3));
+                d.z = static_cast<float>(rows->getDouble(4));
+                destinations.push_back(d);
+            }
+        }
+        db->destroyResult(result);
+    }
+
+    // Points of interest: the planet's badge places and the places with
+    // inhabitants of their own (the spawn areas from 901, centred on them).
+    std::map<std::string, WarpDestination> pois;
+    if (DatabaseResult* result = db->executeSynchSql(
+            "SELECT region_file, x, z FROM %s.planet_regions WHERE planet_id = %u AND region_name LIKE '%%\\_badge'",
+            db->galaxy(), planet))
+    {
+        if (result->getResultSet())
+        {
+            std::unique_ptr<sql::ResultSet>& rows = result->getResultSet();
+            while (rows->next())
+            {
+                WarpDestination d;
+                d.name = prettyRegionName(rows->getString(1));
+                d.planet = planet;
+                d.x = static_cast<float>(rows->getDouble(2));
+                d.y = 0.0f;
+                d.z = static_cast<float>(rows->getDouble(3));
+                pois[d.name] = d;
+            }
+        }
+        db->destroyResult(result);
+    }
+    if (DatabaseResult* result = db->executeSynchSql(
+            "SELECT s.id, r.region_name, r.x, r.z FROM %s.spawns s INNER JOIN %s.planet_regions r ON (r.planet_id = s.spawn_planet"
+            " AND ABS(r.x - (s.spawn_x + s.spawn_width / 2)) < 1 AND ABS(r.z - (s.spawn_z + s.spawn_length / 2)) < 1)"
+            " WHERE s.id BETWEEN 901 AND 999 AND s.spawn_planet = %u ORDER BY s.id",
+            db->galaxy(), db->galaxy(), planet))
+    {
+        if (result->getResultSet())
+        {
+            // A spawn area can match more than one region at its centre: the
+            // written-out name ("Jawa Fortress") over the short one.
+            std::map<uint64, WarpDestination> bySpawn;
+            std::unique_ptr<sql::ResultSet>& rows = result->getResultSet();
+            while (rows->next())
+            {
+                uint64 id = rows->getUInt64(1);
+                std::string name = rows->getString(2);
+                bool spelled = name.find(' ') != std::string::npos;
+                auto it = bySpawn.find(id);
+                if (it == bySpawn.end() || (spelled && it->second.name.find(' ') == std::string::npos))
+                {
+                    WarpDestination d;
+                    d.name = spelled ? name : prettyRegionName(name);
+                    d.planet = planet;
+                    d.x = static_cast<float>(rows->getDouble(3));
+                    d.y = 0.0f;
+                    d.z = static_cast<float>(rows->getDouble(4));
+                    bySpawn[id] = d;
+                }
+            }
+            for (auto& entry : bySpawn)
+            {
+                // The same place as a badge one (Fort Tusken): keep the badge's.
+                bool known = false;
+                for (auto& poi : pois)
+                {
+                    float dx = poi.second.x - entry.second.x;
+                    float dz = poi.second.z - entry.second.z;
+                    known = known || (dx * dx + dz * dz < 300.0f * 300.0f);
+                }
+                if (!known)
+                {
+                    pois[entry.second.name] = entry.second;
+                }
+            }
+        }
+        db->destroyResult(result);
+    }
+    for (auto& entry : pois)
+    {
+        destinations.push_back(entry.second);
+    }
+
+    if (destinations.empty())
+    {
+        gMessageLib->SendSystemMessage(L"No starports or points of interest found for that planet.", player);
+        return;
+    }
+
+    BStringVector names;
+    for (const WarpDestination& d : destinations)
+    {
+        names.push_back(d.name.c_str());
+    }
+    mWarpDestinations[player->getId()] = destinations;
+    std::string caption = std::string("Warp to ") + kWarpPlanets[planet];
+    _openList(player, "handleWarpDestination", caption.c_str(), "Starports first, then points of interest.", names,
+              SUI_Window_CharacterBuilder_ListBox_WarpDestinationMenu);
+}
+
+void CharacterBuilderTerminal::_handleWarpDestinationMenu(PlayerObject* player, int32 element)
+{
+    std::vector<WarpDestination>& destinations = mWarpDestinations[player->getId()];
+    if (!player->getCsrTag() || element < 0 || element >= static_cast<int32>(destinations.size()))
+    {
+        return;
+    }
+    const WarpDestination d = destinations[element];
+    if (d.planet == gWorldManager->getZoneId())
+    {
+        glm::vec3 destination(d.x, d.y, d.z);
+        if (destination.y == 0.0f)
+        {
+            destination.y = gHeightmap ? gHeightmap->getHeight(d.x, d.z) : 0.0f;
+        }
+        gWorldManager->warpPlanet(player, destination, 0);
+    }
+    else
+    {
+        gMessageLib->SendSystemMessage(L"Requesting zone transfer...", player);
+        gMessageLib->sendClusterZoneTransferRequestByPosition(player, glm::vec3(d.x, 0.0f, d.z), d.planet);
+    }
+}
+
+void CharacterBuilderTerminal::_toggleNpcsIgnore(PlayerObject* player)
+{
+    if (!player->getCsrTag())
+    {
+        return;
+    }
+    const bool ignored = !player->isIgnoredByNpcs();
+    player->setIgnoredByNpcs(ignored);
+    Database* db = gWorldManager->getDatabase();
+    db->destroyResult(db->executeSynchSql(
+        "INSERT INTO %s.character_csr_flags (character_id, npcs_ignore) VALUES (%" PRIu64 ", %u)"
+        " ON DUPLICATE KEY UPDATE npcs_ignore = VALUES(npcs_ignore)",
+        db->galaxy(), player->getId(), ignored ? 1u : 0u));
+    gMessageLib->SendSystemMessage(ignored
+        ? L"NPC aggression off: creatures and NPCs will not attack you first or join a fight against you."
+        : L"NPC aggression on: creatures and NPCs will attack you as normal.", player);
 }

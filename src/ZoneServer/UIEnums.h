@@ -175,6 +175,8 @@ unsigned int
     SUI_Window_CharacterBuilder_ListBox_StateMenu,
     SUI_Window_CharacterBuilder_ListBox_PersonalFrogMenu,
     SUI_Window_CharacterBuilder_ListBox_TestKitMenu,
+    SUI_Window_CharacterBuilder_ListBox_WarpPlanetMenu,
+    SUI_Window_CharacterBuilder_ListBox_WarpDestinationMenu,
 
     //trade
     SUI_Window_Trade_BankTip_ConfirmSurcharge

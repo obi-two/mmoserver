@@ -194,6 +194,11 @@ class PlayerObject : public CreatureObject
 
         uint8				getCsrTag(){ return mCsrTag; }
         void				setCsrTag(uint8 csrTag){ mCsrTag = csrTag; }
+        // A CSR's switch: creatures and NPCs do not notice or attack this
+        // player first, nor join a fight against it
+        // (character_csr_flags.npcs_ignore).
+        bool				isIgnoredByNpcs() const { return mNpcsIgnore != 0; }
+        void				setIgnoredByNpcs(bool ignored) { mNpcsIgnore = ignored ? 1 : 0; }
 
         void				togglePlayerFlagOn(uint32 flag){ mPlayerFlags = mPlayerFlags | flag; }
         void				togglePlayerFlagOff(uint32 flag){ mPlayerFlags = mPlayerFlags & ~flag; }
@@ -554,6 +559,7 @@ class PlayerObject : public CreatureObject
         int8				mBindPlanet;
         int8				mHomePlanet;
         uint8				mCsrTag;
+        uint8				mNpcsIgnore = 0;
         uint8				mFlourishCount;
         uint8				mHoloCharge; //thats the amount of charges our hologenerator has
         uint8				mNewPlayerExemptions;
