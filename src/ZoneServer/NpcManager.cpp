@@ -834,8 +834,16 @@ uint8 NpcManager::_executeAttack(CreatureObject* attacker,CreatureObject* defend
     // default attack
     // if(cmdProperties->mCmdCrc == 0xa8fef90a)
     {
-        // combatSpam = gCombatManager->getDefaultSpam(weapon->getGroup());
-        combatSpam = "creature";
+        // A humanoid NPC's spam is its weapon's, as a player's ("shoots at
+        // you and hits"); a creature's is the creature one.
+        if (weapon && attackerNpc->hasInternalAttribute("creature_humanoid"))
+        {
+            combatSpam = gCombatManager->getDefaultSpam(weapon->getGroup());
+        }
+        else
+        {
+            combatSpam = "creature";
+        }
     }
     // special attack
     /*

@@ -1564,8 +1564,10 @@ void MessageLib::sendCombatSpam(Object* attacker,Object* defender,int32 damage,B
     mMessageFactory->addString(customText);
 
     Message* newMessage = mMessageFactory->EndMessage();
-    //this is fastpath
-    _sendToInRangeUnreliable(newMessage,attacker,5,true);
+    // The client shows combat spam only when it is addressed to the player's
+    // own object: each player in range gets a copy addressed to it, so the
+    // one attacked sees what attacks it, not only what it attacks.
+    _sendToInRangeUnreliableAddressed(newMessage,attacker,5);
 
     /*
         PlayerObjectSet* inRangePlayers	= attacker->getKnownPlayers();

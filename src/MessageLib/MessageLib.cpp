@@ -217,6 +217,33 @@ void MessageLib::_sendToInRangeUnreliable(Message* message, Object* const object
     }
 }
 
+void MessageLib::_sendToInRangeUnreliableAddressed(Message* message, Object* const object, unsigned char priority) {
+    auto send = [=] (PlayerObject* const recipient) {
+        mMessageFactory->StartMessage();
+        mMessageFactory->addData(message->getData(), message->getSize());
+        Message* copy = mMessageFactory->EndMessage();
+
+        // The object controller's object: the recipient (after the
+        // opcode, the controller flags and the command's opcode).
+        char* data = copy->getData() + 12;
+        *(reinterpret_cast<uint64_t*>(data)) = recipient->getId();
+        recipient->getClient()->SendChannelAUnreliable(copy, recipient->getAccountId(), CR_Client, priority);
+    };
+
+    gContainerManager->sendToRegisteredPlayers(object, [=] (PlayerObject* const recipient) {
+        if(_checkPlayer(recipient) && _checkDistance(recipient->mPosition, object, mMessageFactory->HeapWarningLevel())) {
+            send(recipient);
+        }
+    });
+
+    PlayerObject* const player = dynamic_cast<PlayerObject*>(object);
+    if(_checkPlayer(player)) {
+        send(player);
+    }
+
+    mMessageFactory->DestroyMessage(message);
+}
+
 void MessageLib::_sendToInRangeUnreliableChat(Message* message, const CreatureObject* object, unsigned char priority, uint32_t crc) {
     ObjectListType in_range_players;
     mGrid->GetChatRangeCellContents(object->getGridBucket(), &in_range_players);
