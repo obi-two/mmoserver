@@ -300,6 +300,10 @@ Dathomir 15 (the Nightsisters and the Singing Mountain clan), Yavin 4 3
 - `npc_camps.csv` holds them with `guide` "ed"; `npc_camps_sql.py <planet>
   --guide ed` writes the migration (its ids apart from the 2004 camps').
 
+Confirmed on the VM (Nov 2026): a Tusken village (the client's
+`tatooine_tuskenwar_medium`) with its Tusken king, examining as the book
+gives (level 20, aggressive, stalker, deathblows), attacking on sight.
+
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
 creatures; ours are all named. To revisit.
