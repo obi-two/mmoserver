@@ -43,6 +43,23 @@ Reference data: migrations take their values from here and cite the page.
   corrected; social groups normalised where the scan garbled them. The two
   womp rats transcribed earlier by hand came out the same.
 
+- `npcs.csv`: the hostile, non-faction NPCs of the same tables (pp.
+  396-483), 432 rows on ten planets: every one above level 11, and the
+  ones the 2004 guide's table lacks at any level (Tusken Raiders, Alkhara,
+  Nym's men and the Lok pirates, the Dantooine and Endor tribes,
+  Nightsisters and the Singing Mountain clan, Garyn, Cobral, Narmle...).
+  Same columns as `creatures.csv`. Left out: townspeople, Imperials,
+  Rebels, named characters, droids, mounts and pets, and NPCs the 2004
+  table already has (it is used for those). Read the same way, every row
+  checked by eye against the page; social groups normalised.
+
+  The tables run over two facing pages. On the three pages where a
+  planet's table starts partway down (pp. 424, 428, 468), the rows below
+  the heading were first paired with the wrong facing row; they were read
+  again from the whole page, paired by position (the book's XP by level
+  confirms it). 23 creatures in `creatures.csv` were corrected the same
+  way (KNOWN_ISSUES #60).
+
 Used by: migrations 007 (`tools/reference/weapons_sql.py`, from
 `weapons.csv`) and 010 (`tools/reference/specials_sql.py`, from
 `specials.csv`), 011 (`tools/reference/creatures_sql.py`, with

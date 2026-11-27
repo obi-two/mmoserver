@@ -1,0 +1,433 @@
+planet,name,level,social_group,pvp_faction,health_min,health_max,action_min,action_max,mind_min,mind_max,damage_min,damage_max,ranged_attack,to_hit,xp,killer,stalker,pack,herd,aggro,can_tame,invulnerable,special_attack_1,special_attack_2,page,facing
+Corellia,afarathu cult brute,10,Afarathu,=,375,625,375,625,375,625,40,45,no,30,413,yes,no,yes,no,yes,no,no,,,410,411
+Corellia,afarathu cult hellion,15,Afarathu,_,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,no,yes,no,yes,no,no,,,410,411
+Corellia,afarathu cult ruffian,5,Afarathu,_,75,125,75,125,75,125,25,30,no,30,40,no,no,yes,no,no,no,no,,,410,411
+Corellia,afarathu cult savage,7,Afarathu,—,262.5,437.5,262.5,437.5,262.5,437.5,36,40,no,30,121,no,no,yes,no,no,no,no,,,410,411
+Corellia,beldonnas enforcer,9,Beldonnas league,--,375,625,375,625,375,625,40,45,no,30,290,yes,no,yes,no,no,no,no,,,410,411
+Corellia,beldonnas marshal,12,Beldonnas league,_-,750,1250,750,1250,750,1250,55,60,no,35,747,yes,no,yes,no,no,no,no,,,410,411
+Corellia,beldonnas scout,7,Beldonnas league,—,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,121,no,no,yes,no,no,no,no,,,410,411
+Corellia,beldonnas soldier,6,Beldonnas league,_,225,375,225,375,225,375,30,35,no,30,68,no,no,yes,no,no,no,no,,,410,411
+Corellia,CorSec Renegade,12,rogue CorSec,—,900,1500,900,1500,900,1500,65,70,no,30,747,no,no,no,no,no,no,no,,,410,411
+Corellia,CorSec Rogue,7,rogue CorSec,—,375,625,375,625,375,625,40,45,no,25,121,no,no,no,no,no,no,no,,,410,411
+Corellia,CorSec Traitor,16,rogue CorSec,,1125,1875,1125,1875,1125,1875,80,85,no,35,1355,yes,no,no,no,no,no,no,,,410,411
+Corellia,drall abbot,11,Drall,ve,750,1250,750,1250,750,1250,55,60,no,35,564,no,no,yes,no,no,no,no,,,412,413
+Corellia,drall chieftain,18,Drall,= ps,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,no,yes,no,no,no,no,,,412,413
+Corellia,drall master,14,Drall,= rei,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,no,no,no,no,,,412,413
+Corellia,drall monk,9,Drall,rei,450,750,450,750,450,750,45,50,no,30,290,no,no,yes,no,no,no,no,,,412,413
+Corellia,drall patriot conqueror,14,Drall,me i,825,1375,825,1375,825,1375,60,65,no,40,1085,yes,no,yes,no,yes,no,no,,,412,413
+Corellia,drall patriot footsoldier,9,Drall,at me,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,290,yes,no,yes,no,yes,no,no,,,412,413
+Corellia,drall patriot legionnare,12,Drall,at,525,875,525,875,525,875,50,55,no,35,747,yes,no,yes,no,yes,no,no,,,412,413
+Corellia,drall sentry,4,Drall,re! -,56.25,93.75,56.25,93.75,56.25,93.75,20,25,no,30,30,no,no,yes,no,no,no,no,,,412,413
+Corellia,eye of solitude,5,solitude,Rebel,75,125,75,125,75,125,25,30,no,30,40,no,no,yes,no,no,no,no,,,412,413
+Corellia,feral Selonian,12,Selonian,wis _,750,1250,750,1250,750,1250,55,60,no,35,747,yes,no,no,no,yes,no,no,,,412,413
+Corellia,flail boss,15,flail,wis be,975,1625,975,1625,975,1625,70,75,no,35,1215,yes,no,yes,no,no,no,no,,,412,413
+Corellia,flail butcher,14,flail,be,825,1375,825,1375,825,1375,60,65,no,30,1085,yes,no,yes,no,yes,no,no,,,412,413
+Corellia,flail cutthroat,9,flail,we e,450,750,450,750,450,750,45,50,no,30,290,no,no,yes,no,no,no,no,,,412,413
+Corellia,flail enforcer,9,flail,we,450,750,450,750,450,750,45,50,no,30,290,no,no,yes,no,no,no,no,,,412,413
+Corellia,flail executioner,17,flail,i,1050,1750,1050,1750,1050,1750,75,80,no,35,1502,yes,no,yes,no,yes,no,no,,,412,413
+Corellia,flail killer,11,flail,ee =,750,1250,750,1250,750,1250,55,60,no,30,564,no,no,yes,no,no,no,no,,,412,413
+Corellia,flail slayer,12,flail,Rebel ee,525,875,525,875,525,875,50,55,no,30,747,yes,no,yes,no,yes,no,no,,,412,413
+Corellia,hand of solitude,8,solitude,Rebel,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,194,yes,no,yes,no,no,no,no,,,414,415
+Corellia,Hidden Daggers extremist,8,Hidden Daggers,a,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,194,yes,no,yes,no,no,no,no,,,414,415
+Corellia,Hidden Daggers leader,15,Hidden Daggers,=,975,1625,975,1625,975,1625,70,75,no,40,1215,yes,no,yes,no,no,no,no,,,414,415
+Corellia,Lord Nyax disciple,15,followers of Lord Nyax,= —,975,1625,975,1625,975,1625,70,75,no,40,1215,yes,no,yes,no,no,no,no,,,414,415
+Corellia,Lord Nyax fanatic,19,followers of Lord Nyax,=,1275,2125,1275,2125,1275,2125,90,95,no,50,1824,yes,no,yes,no,no,no,no,,,414,415
+Corellia,Lord Nyax fiend,26,followers of Lord Nyax,= = —,2100,3500,2100,3500,2100,3500,120.75,126.5,no,55,3223,yes,no,yes,no,yes,no,no,,,414,415
+Corellia,Lord Nyax minion,12,followers of Lord Nyax,= = —,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,no,no,no,no,,,414,415
+Corellia,Lord Nyax visionary,29,followers of Lord Nyax,= = —,2325,3875,2325,3875,2325,3875,136.5,143,no,55,3926,yes,no,yes,no,yes,no,no,,,414,415
+Corellia,Lord Nyax zealot,22,followers of Lord Nyax,= iz —,1425,2375,1425,2375,1425,2375,100,105,no,55,2370,yes,no,yes,no,yes,no,no,,,414,415
+Corellia,mind of solitude,13,solitude,Rebel,900,1500,900,1500,900,1500,65,70,no,35,965,no,no,yes,no,no,no,no,,,416,417
+Corellia,monumenter marauder,9,Monumenter,=,450,750,450,750,450,750,45,50,no,30,290,no,no,yes,no,no,no,no,,,416,417
+Corellia,monumenter smuggler,7,Monumenter,=,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,121,no,no,yes,no,no,no,no,,,416,417
+Corellia,Selonian Captain,14,Selonian,=,900,1500,900,1500,900,1500,65,70,no,40,1085,yes,no,yes,no,no,no,no,,,416,417
+Corellia,Selonian Champion,16,Selonian,== =,1050,1750,1050,1750,1050,1750,75,80,no,40,1355,yes,no,yes,no,no,no,no,,,416,417
+Corellia,Selonian Separatist Captain,13,Selonian,=,750,1250,750,1250,750,1250,55,60,no,35,965,yes,no,yes,no,yes,no,no,,,416,417
+Corellia,Selonian Separatist General,16,Selonian,=,975,1625,975,1625,975,1625,70,75,no,40,1355,yes,no,yes,no,yes,no,no,,,416,417
+Corellia,Selonian warlord,19,Selonian,=,1275,2125,1275,2125,1275,2125,90,95,no,50,1824,yes,no,yes,no,no,no,no,,,416,417
+Corellia,Selonian warrior,13,Selonian,=,825,1375,825,1375,825,1375,60,65,no,35,965,yes,no,yes,no,no,no,no,,,416,417
+Corellia,swooper leader,7,swoop,“e,375,625,375,625,375,625,40,45,no,25,121,no,no,no,no,no,no,no,,,418,419
+Corellia,will of solitude,10,solitude,Rebel,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,418,419
+Dantooine,Dantari raider,10,Dantari raiders,—,450,750,450,750,450,750,45,50,no,30,413,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,Dantari raider battlelord,30,Dantari raiders,—,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,Dantari raider chief,40,Dantari raiders,—,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,Dantari raider strategist,20,Dantari raiders,_,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,no,no,no,no,,,420,421
+Dantooine,dark side savage,70,remnants of Kun,_,5850,9750,5850,9750,5850,9750,357,374,no,55,17517,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,force sensitive crypt crawler,90,remnants of Kun,—,7350,12250,7350,12250,7350,12250,462,484,no,55,26818,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,force sensitive renegade,80,force renegade,_,6600,11000,6600,11000,6600,11000,409.5,429,no,55,21952,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,force trained archaist,90,force renegade,_,7350,12250,7350,12250,7350,12250,462,484,no,55,26818,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,forsaken force drifter,80,force renegade,_—,6600,11000,6600,11000,6600,11000,409.5,429,no,55,21962,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,Janta clan leader,90,Janta tribe,_—,7350,12250,7350,12250,7350,12250,462,484,no,55,26818,yes,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta harvester,30,Janta tribe,_,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta herbalist,20,Janta tribe,—,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta hunter,40,Janta tribe,—,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,yes,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta loreweaver,50,Janta tribe,_,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,yes,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta primalist,40,Janta tribe,—,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta rockshaper,60,Janta tribe,=,5175,8625,5175,8625,5175,8625,309.75,324.5,no,55,13517,no,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta scout,50,Janta tribe,_,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,yes,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta shaman,60,Janta tribe,,5100,8500,5100,8500,5100,8500,304.5,319,no,55,13517,yes,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta soothsayer,60,Janta tribe,—,5175,8625,5175,8625,5175,8625,309.75,324.5,no,55,13517,no,no,yes,yes,no,no,no,,,420,421
+Dantooine,Janta tribesman,10,Janta tribe,a,450,750,450,750,450,750,45,50,no,30,413,yes,no,yes,no,no,no,no,,,420,421
+Dantooine,Janta warrior,80,Janta tribe,=,6675,11125,6675,11125,6675,11125,414.75,434.5,no,55,21952,no,no,yes,yes,no,no,no,,,420,421
+Dantooine,Kunga clan primalist,40,Kunga tribe,—,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga harvester,30,Kunga tribe,a,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga herbalist,20,Kunga tribe,—,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga hunter,40,Kunga tribe,_,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga loreweaver,50,Kunga tribe,—,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga rockshaper,70,Kunga tribe,—,5925,9875,5925,9875,5925,9875,362.25,379.5,no,55,17517,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga scout,50,Kunga tribe,—,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga shaman,60,Kunga tribe,_,5100,8500,5100,8500,5100,8500,304.5,319,no,55,13517,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga soothsayer,30,Kunga tribe,—,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga tribesman,10,Kunga tribe,oa,450,750,450,750,450,750,45,50,no,30,413,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Kunga warrior,80,Kunga tribe,_,6675,11125,6675,11125,6675,11125,414.75,434.5,no,55,21952,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk clan leader,90,Mokk tribe,a,7350,12250,7350,12250,7350,12250,462,484,no,55,26818,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk clan primalist,50,Mokk tribe,_—,4425,7375,4425,7375,4425,7375,257.25,269.5,no,55,9955,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk harvester,30,Mokk tribe,~,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk herbalist,20,Mokk tribe,=,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk hunter,40,Mokk tribe,—,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk loreweaver,50,Mokk tribe,--,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk rockshaper,70,Mokk tribe,—,5925,9875,5925,9875,5925,9875,362.25,379.5,no,55,17517,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk scout,50,Mokk tribe,—,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk shaman,60,Mokk tribe,_,5100,8500,5100,8500,5100,8500,304.5,319,no,55,13517,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk soothsayer,40,Mokk tribe,—,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk tribesman,10,Mokk tribe,—,450,750,450,750,450,750,45,50,no,30,413,yes,no,yes,yes,no,no,no,,,422,423
+Dantooine,Mokk warrior,80,Mokk tribe,—,6675,11125,6675,11125,6675,11125,414.75,434.5,no,55,21952,no,no,yes,yes,no,no,no,,,422,423
+Dantooine,novice force mystic,60,force renegade,_,5100,8500,5100,8500,5100,8500,304.5,319,no,55,13517,yes,no,yes,no,no,no,no,,,422,423
+Dantooine,untrained wielder of the dark side,60,remnants of Kun,_,5100,8500,5100,8500,5100,8500,304.5,319,no,55,13517,yes,no,yes,no,no,no,no,,,422,423
+Dathomir,Nightsister initiate,50,Nightsister,on Ee,4275,7125,4275,7125,4275,7125,246.75,258.5,no,55,9955,yes,yes,yes,no,yes,no,no,,,426,427
+Dathomir,Nightsister outcast,75,Nightsister,Ee,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,no,yes,no,yes,no,no,,,426,427
+Dathomir,Nightsister rancor,50,Nightsister,ro,4275,7125,4275,7125,4275,7125,246.75,258.5,no,55,9955,yes,yes,yes,no,yes,no,no,PostureDownAttack,IntimidationAttack,426,427
+Dathomir,Nightsister rancor tamer,75,Nightsister,the =,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,no,yes,no,yes,no,no,,,426,427
+Dathomir,Nightsister ranger,75,Nightsister,the te,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,yes,yes,no,yes,no,no,,,426,427
+Dathomir,Nightsister sentinel,80,Nightsister,te ae,6525,10875,6525,10875,6525,10875,404.25,423.5,no,55,21952,yes,no,yes,no,yes,no,no,,,426,427
+Dathomir,Nightsister sentry,20,Nightsister,ae,1875,3125,1875,3125,1875,3125,105,110,no,30,1997,no,no,no,no,no,no,no,,,426,427
+Dathomir,Nightsister stalker,85,Nightsister,be os,6900,11500,6900,11500,6900,11500,430.5,451,no,55,24332,yes,yes,yes,no,yes,no,no,,,426,427
+Dathomir,Singing Mountain clan rancor,50,Singing Mountain clan,—,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,no,yes,yes,no,yes,no,no,IntimidationAttack,IntimidationAttack,426,427
+Dathomir,Singing Mountain clan sentry,20,Singing Mountain clan,=,1875,3125,1875,3125,1875,3125,105,110,no,30,1997,no,no,no,no,no,no,no,,,426,427
+Dathomir,Singing Mountain clan dragoon,95,Singing Mountain clan,_,7650,12750,7650,12750,7650,12750,483,506,no,55,29412,yes,no,yes,no,yes,no,no,,,428,429
+Dathomir,Singing Mountain clan huntress,75,Singing Mountain clan,—,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,yes,yes,no,yes,no,no,,,428,429
+Dathomir,Singing Mountain clan initiate,50,Singing Mountain clan,_,4275,7125,4275,7125,4275,7125,246.75,258.5,no,55,9955,yes,no,yes,no,yes,no,no,,,428,429
+Dathomir,Singing Mountain clan outcast,75,Singing Mountain clan,~,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,no,yes,no,yes,no,no,,,428,429
+Dathomir,Singing Mountain clan rancor tamer,75,Singing Mountain clan,—,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,yes,yes,no,yes,no,no,,,428,429
+Dathomir,Singing Mountain clan scout,75,Singing Mountain clan,—,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,yes,yes,no,yes,no,no,,,428,429
+Endor,adept Jinda shaman,10,Jinda tribe,—,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,428,429
+Endor,adept Panshee shaman,10,Panshee tribe,—,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,428,429
+Endor,archaic Gondula ritualist,30,Gondula tribe,—,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,,428,429
+Endor,archaic Jinda ritualist,60,Jinda tribe,a,5175,8625,5175,8625,5175,8625,309.75,324.5,no,55,13517,no,no,yes,no,no,no,no,,,428,429
+Endor,archaic Panshee ritualist,60,Panshee tribe,_,5175,8625,5175,8625,5175,8625,309.75,324.5,no,55,13517,no,no,yes,no,no,no,no,,,428,429
+Endor,bedraggled Korga laborer,10,Korga tribe,_,450,750,450,750,450,750,45,50,no,30,413,no,no,yes,no,yes,no,no,,,428,429
+Endor,bedraggled Pubam laborer,20,Pubam,_—,1350,2250,1350,2250,1350,2250,95,100,no,30,1997,no,no,yes,no,yes,no,no,,,428,429
+Endor,beguiling Donkuwah scout,10,Donkuwah tribe,—,375,625,375,625,375,625,40,45,no,30,413,yes,yes,yes,no,yes,no,no,,,428,429
+Endor,beguiling Korga scout,10,Korga tribe,=,375,625,375,625,375,625,40,45,no,30,413,yes,yes,yes,no,yes,no,no,,,428,429
+Endor,beguiling Pubam scout,25,Pubam,a,2025,3375,2025,3375,2025,3375,1155,121,no,30,2996,yes,yes,yes,no,yes,no,no,,,428,429
+Endor,bewitching Donkuwah shaman,10,Donkuwah tribe,=,375,625,375,625,375,625,40,45,no,30,413,yes,no,yes,no,yes,no,no,,,430,431
+Endor,bewitching Korga dark shaman,10,Korga tribe,os,375,625,375,625,375,625,40,45,no,30,413,yes,no,yes,no,yes,no,no,,,430,431
+Endor,bewitching Pubam dark shaman,30,Pubam,_,2400,4000,2400,4000,2400,4000,141.75,148.5,no,30,4169,yes,no,yes,no,yes,no,no,,,430,431
+Endor,blood crazed plains marauder,55,marauder,_,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,yes,yes,no,yes,no,no,,,430,431
+Endor,competent Gondula ritualist,15,Gondula tribe,—,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,430,431
+Endor,competent Jinda ritualist,50,Jinda tribe,_—,4425,7375,4425,7375,4425,7375,257.25,269.5,no,25,9955,no,no,yes,no,no,no,no,,,430,431
+Endor,competent Panshee ritualist,50,Panshee tribe,—,4425,7375,4425,7375,4425,7375,257.25,269.5,no,25,9955,no,no,yes,no,no,no,no,,,430,431
+Endor,crafty Donkuwah scout,10,Donkuwah tribe,—,375,625,375,625,375,625,40,45,no,30,413,yes,no,yes,no,yes,no,no,,,430,431
+Endor,crafty Korga scout,10,Korga tribe,—,375,625,375,625,375,625,40,45,no,30,413,yes,no,yes,no,yes,no,no,,,430,431
+Endor,crafty Pubam scout,35,Pubam,_,3150,5250,3150,5250,3150,5250,168,176,no,30,5448,yes,no,yes,no,yes,no,no,,,430,431
+Endor,Donkuwah battlelord,15,Donkuwah tribe,=_,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,no,yes,no,yes,no,no,,,432,433
+Endor,Donkuwah chieftan,55,Donkuwah tribe,-,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,no,yes,no,yes,no,no,,,432,433
+Endor,Donkuwah cub,3,Donkuwah tribe,-,37.5,62.5,37.5,62.5,37.5,62.5,10,20,no,25,25,no,no,yes,no,yes,no,no,,,432,433
+Endor,Donkuwah laborer,10,Donkuwah tribe,-,450,750,450,750,450,750,45,50,no,30,413,no,no,yes,no,yes,no,no,,,432,433
+Endor,Donkuwah scout,15,Donkuwah tribe,—,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,no,yes,no,yes,no,no,,,432,433
+Endor,Donkuwah shaman,15,Donkuwah tribe,—,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,no,yes,no,yes,no,no,,,432,433
+Endor,Donkuwah spiritmaster,15,Donkuwah tribe,_,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,no,yes,no,yes,no,no,,,432,433
+Endor,Donkuwah tribesman,15,Donkuwah tribe,~,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,no,yes,no,yes,no,no,,,432,433
+Endor,dulok outcast,20,dulok outcast,-,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,432,433
+Endor,dulok outcast raider,20,dulok outcast,-,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,432,433
+Endor,eerie Donkuwah spiritmaster,10,Donkuwah tribe,-_ —,375,625,375,625,375,625,40,45,no,30,413,yes,no,yes,no,yes,no,no,,,432,433
+Endor,eerie Korga spiritmaster,10,Korga tribe,-_,375,625,375,625,375,625,40,45,no,30,413,yes,no,yes,no,yes,no,no,,,432,433
+Endor,enraged Donkuwah,30,Donkuwah tribe,—_ _,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,no,yes,no,no,,,432,433
+Endor,enraged Korga,30,Korga tribe,—_,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,no,yes,no,no,,,432,433
+Endor,Ewok outcast,30,Ewok outcast,-,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,,432,433
+Endor,Ewok outcast raider,30,Ewok outcast,-,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,,432,433
+Endor,feral marauder,45,marauder,—,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,432,433
+Endor,foul Donkuwah laborer,20,Donkuwah tribe,—,1350,2250,1350,2250,1350,2250,95,100,no,55,1997,no,no,yes,no,yes,no,no,,,432,433
+Endor,foul Korga laborer,20,Korga tribe,—,1350,2250,1350,2250,1350,2250,95,100,no,55,1997,no,no,yes,no,yes,no,no,,,432,433
+Endor,foul Pubam laborer,30,Pubam,=,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,no,no,yes,no,yes,no,no,,,432,433
+Endor,frenzied Donkuwah,35,Donkuwah tribe,_,3150,5250,3150,5250,3150,5250,168,176,no,55,5448,yes,no,yes,no,yes,no,no,,,432,433
+Endor,frenzied Korga,35,Korga tribe,=,3150,5250,3150,5250,3150,5250,168,176,no,55,5448,yes,no,yes,no,yes,no,no,,,432,433
+Endor,frenzied marauder,50,marauder,_,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,9955,yes,no,yes,no,yes,no,no,,,432,433
+Endor,frenzied Pubam,40,Pubam,—,3525,5875,3525,5875,3525,5875,194.25,203.5,no,55,6839,yes,no,yes,no,yes,no,no,,,432,433
+Endor,gifted Gondula shaman,40,Gondula tribe,—,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,432,433
+Endor,gifted Jinda shaman,30,Jinda tribe,—,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,,432,433
+Endor,gifted Panshee shaman,10,Panshee tribe,=,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,432,433
+Endor,gnarled Donkuwah spiritmaster,20,Donkuwah tribe,—,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,434,435
+Endor,gnarled Korga spiritmaster,20,Korga tribe,-,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,434,435
+Endor,gnarled Pubam spiritmaster,30,Pubam,—,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,no,yes,no,no,,,434,435
+Endor,Gondula chief,50,Gondula tribe,_,4425,7375,4425,7375,4425,7375,257.25,269.5,no,25,9955,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula elder,55,Gondula tribe,—,4800,8000,4800,8000,4800,8000,283.5,297,no,55,11681,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula elder worker,15,Gondula tribe,—,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula loremaster,15,Gondula tribe,_-,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula matriarch,15,Gondula tribe,—,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula outcast,15,Gondula tribe,a,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula ritualist,20,Gondula tribe,=,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula shaman,15,Gondula tribe,—,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula warrior,20,Gondula tribe,_,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula worker,35,Gondula tribe,—,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,no,no,no,no,,,434,435
+Endor,Gondula veteran,10,Gondula tribe,—,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,434,435
+Endor,grassland blood marauder,55,marauder,_,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,yes,yes,no,yes,no,no,,,434,435
+Endor,grungy Donkuwah laborer,25,Donkuwah tribe,_,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,434,435
+Endor,grungy Korga laborer,25,Korga tribe,_,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,434,435
+Endor,grungy Pubam laborer,45,Pubam,—,3900,6500,3900,6500,3900,6500,220.5,231,no,55,8341,yes,no,yes,no,yes,no,no,,,434,435
+Endor,haggard Donkuwah battlelord,20,Donkuwah tribe,—,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,434,435
+Endor,haggard Pubam battlelord,50,Pubam,—,4275,7125,4275,7125,4275,7125,246.75,258.5,no,55,9955,yes,no,yes,no,yes,no,no,,,434,435
+Endor,hardened Gondula warrior,50,Gondula tribe,—,4350,7250,4350,7250,4350,7250,252,264,no,30,9955,yes,no,yes,no,no,no,no,,,434,435
+Endor,hardened Jinda warrior,30,Jinda tribe,_,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,yes,no,yes,no,no,no,no,,,434,435
+Endor,hardened Panshee warrior,15,Panshee tribe,—,975,1625,975,1625,975,1625,70,75,no,30,1215,yes,no,yes,no,no,no,no,,,434,435
+Endor,Jinda chief,55,Jinda tribe,_,4800,8000,4800,8000,4800,8000,283.5,297,no,55,11681,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda elder,15,Jinda tribe,-,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda elder worker,15,Jinda tribe,—,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda loremaster,15,Jinda tribe,—_,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda matriarch,40,Jinda tribe,—_,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda outcast,15,Jinda tribe,-,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda ritualist,10,Jinda tribe,_,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda shaman,20,Jinda tribe,—,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda tribesman,35,Jinda tribe,—,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda veteran,35,Jinda tribe,_,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,no,no,no,no,,,434,435
+Endor,Jinda warrior,40,Jinda tribe,=,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,436,437
+Endor,Jinda worker,50,Jinda tribe,~-,4425,7375,4425,7375,4425,7375,257.25,269.5,no,30,9955,no,no,yes,no,no,no,no,,,436,437
+Endor,Korga ancient,25,Korga tribe,_,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,436,437
+Endor,Korga battlelord,45,Korga tribe,ae =,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,436,437
+Endor,Korga chieftan,60,Korga tribe,,5025,8375,5025,8375,5025,8375,299.25,313.5,no,55,13517,yes,no,yes,no,yes,no,no,,,436,437
+Endor,Korga dark shaman,45,Korga tribe,,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,436,437
+Endor,Korga elder,20,Korga tribe,=,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,436,437
+Endor,Korga laborer,45,Korga tribe,_,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,436,437
+Endor,Korga scout,45,Korga tribe,—,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,436,437
+Endor,Korga spiritmaster,45,Korga tribe,_,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,436,437
+Endor,marauder,45,marauder,ral _,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,436,437
+Endor,masterful Gondula warrior,10,Gondula tribe,,450,750,450,750,450,750,45,50,no,30,413,yes,no,yes,no,no,no,no,,,436,437
+Endor,masterful Jinda warrior,35,Jinda tribe,_—,3225,5375,3225,5375,3225,5375,173.25,181.5,no,55,5448,yes,no,yes,no,no,no,no,,,436,437
+Endor,masterful Panshee warrior,35,Panshee tribe,7,3225,5375,3225,5375,3225,5375,173.25,181.5,no,55,5448,yes,no,yes,no,no,no,no,,,436,437
+Endor,Panshee elder,45,Panshee tribe,=,4050,6750,4050,6750,4050,6750,231,242,no,40,8341,no,no,yes,no,no,no,no,,,436,437
+Endor,Panshee elder worker,45,Panshee tribe,_,4050,6750,4050,6750,4050,6750,231,242,no,40,8341,no,no,yes,no,no,no,no,,,436,437
+Endor,Panshee loremaster,25,Panshee tribe,- Fa,2175,3625,2175,3625,2175,3625,126,132,no,55,2996,no,no,yes,no,no,no,no,,,438,439
+Endor,Panshee matriarch,45,Panshee tribe,Fa,4050,6750,4050,6750,4050,6750,231,242,no,40,8341,no,no,yes,no,no,no,no,,,438,439
+Endor,Panshee ritualist,5,Panshee tribe,pe -,75,125,75,125,75,125,25,30,no,30,40,no,no,yes,no,no,no,no,,,438,439
+Endor,Panshee shaman,30,Panshee tribe,pe aa,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,,438,439
+Endor,Panshee tribesman,40,Panshee tribe,aa as,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,438,439
+Endor,Panshee veteran,35,Panshee tribe,as,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,no,no,no,no,,,438,439
+Endor,Panshee warrior,40,Panshee tribe,=,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,438,439
+Endor,Panshee worker,50,Panshee tribe,a,4425,7375,4425,7375,4425,7375,257.25,269.5,no,30,9955,no,no,yes,no,no,no,no,,,438,439
+Endor,proficient Gondula worker,35,Gondula tribe,Be =,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,no,no,no,no,,,438,439
+Endor,proficient Jinda worker,35,Jinda tribe,Be,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,no,no,no,no,,,438,439
+Endor,proficient Panshee worker,35,Panshee tribe,i,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,no,no,no,no,,,438,439
+Endor,Pubam battlelord,45,Pubam,=,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,438,439
+Endor,Pubam chieftan,60,Pubam,we =,5025,8375,5025,8375,5025,8375,299.25,313.5,no,55,13517,yes,no,yes,no,yes,no,no,,,438,439
+Endor,Pubam dark shaman,45,Pubam,—,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,438,439
+Endor,Pubam scout,45,Pubam,cE,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,438,439
+Endor,Pubam tribesman,45,Pubam,aye,3900,6500,3900,6500,3900,6500,220.5,231,no,40,8341,yes,no,yes,no,yes,no,no,,,438,439
+Endor,revered Panshee matriarch,40,Panshee tribe,“a,3675,6125,3675,6125,3675,6125,204.75,114.5,no,55,6839,no,no,yes,no,no,no,no,,,438,439
+Endor,seasoned Gondula warrior,40,Gondula tribe,om nt,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,438,439
+Endor,seasoned Jinda warrior,40,Jinda tribe,nt,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,438,439
+Endor,seasoned Panshee warrior,40,Panshee tribe,ie =,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,438,439
+Endor,shaggy Donkuwah youth,5,Donkuwah tribe,ie sea,75,125,75,125,75,125,25,30,no,30,40,no,no,yes,no,no,no,no,,,438,439
+Endor,shaggy Korga youth,15,Korga tribe,sea wa,1050,1750,1050,1750,1050,1750,75,80,no,55,1215,no,no,yes,no,no,no,no,,,438,439
+Endor,shaggy Pubam youth,5,Pubam,wa,75,125,75,125,75,125,25,30,no,30,40,no,no,yes,no,no,no,no,,,438,439
+Endor,skilled Gondula worker,40,Gondula tribe,ay,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,438,439
+Endor,skilled Jinda worker,40,Jinda tribe,”,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,440,441
+Endor,skilled Panshee worker,40,Panshee tribe,fa a,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,440,441
+Endor,spooky Donkuwah spiritmaster,25,Donkuwah tribe,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,spooky Korga spiritmaster,50,Korga tribe,=,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,9955,yes,no,yes,no,yes,no,no,,,440,441
+Endor,spooky Pubam spiritmaster,35,Pubam,ra -,3150,5250,3150,5250,3150,5250,168,176,no,55,5448,yes,no,yes,no,yes,no,no,,,440,441
+Endor,tainted Donkuwah dark shaman,25,Donkuwah tribe,im =,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,tainted Korga dark shaman,25,Korga tribe,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,tainted Pubam dark shaman,35,Pubam,23 =,3150,5250,3150,5250,3150,5250,168,176,no,55,5448,yes,no,yes,no,yes,no,no,,,440,441
+Endor,tricky Donkuwah scout,20,Donkuwah tribe,ra me,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,440,441
+Endor,tricky Korga scout,25,Korga tribe,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,tricky Pubam scout,55,Pubam,=,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,no,yes,no,yes,no,no,,,440,441
+Endor,twisted Donkuwah scavenger,25,Donkuwah tribe,at a,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,twisted Korga scavenger,20,Korga tribe,at,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,440,441
+Endor,twisted Pubam scavenger,35,Pubam,os =,3150,5250,3150,5250,3150,5250,168,176,no,55,5448,yes,no,yes,no,yes,no,no,,,440,441
+Endor,vicious Donkuwah battlelord,25,Donkuwah tribe,=,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,vicious Korga battlelord,25,Korga tribe,ra =,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,vicious Pubam battlelord,35,Pubam,ra,3150,5250,3150,5250,3150,5250,168,176,no,55,5448,yes,no,yes,no,yes,no,no,,,440,441
+Endor,vile Donkuwah battlelord,25,Donkuwah tribe,a,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,vile Korga battlelord,25,Korga tribe,=,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,440,441
+Endor,wandering desert marauder,50,marauder,a,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,9955,yes,no,yes,no,yes,no,no,,,440,441
+Endor,weathered Gondula shaman,40,Gondula tribe,as —,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,440,441
+Endor,weathered Jinda shaman,20,Jinda tribe,as ale,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,no,no,no,no,,,440,441
+Endor,weathered Panshee shaman,30,Panshee tribe,ale,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,no,no,yes,no,no,no,no,,,440,441
+Endor,wise Gondula ritualist,40,Gondula tribe,hes =,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,no,no,yes,no,no,no,no,,,440,441
+Endor,wise Jinda ritualist,20,Jinda tribe,hes,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,no,no,no,no,,,440,441
+Endor,wise Panshee ritualist,35,Panshee tribe,Lag =,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,no,no,yes,no,no,no,no,,,440,441
+Lok,blood razor berzerker,38,Blood Razor pirates,—,3375,5625,3375,5625,3375,5625,183.75,192.5,no,55,6269,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor captain,40,Blood Razor pirates,_—,3525,5875,3525,5875,3525,5875,194.25,203.5,no,55,6839,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor cutthroat,32,Blood Razor pirates,—,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4667,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor destroyer,36,Blood Razor pirates,_—,3225,5375,3225,5375,3225,5375,173.25,181.5,no,55,5717,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor guard,36,Blood Razor pirates,_,3225,5375,3225,5375,3225,5375,173.25,181.5,no,55,5717,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor officer,38,Blood Razor pirates,—,3375,5625,3375,5625,3375,5625,183.75,192.5,no,55,6269,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor pirate elite,30,Blood Razor pirates,_—,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor pirate strong,25,Blood Razor pirates,_,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor pirate weak,20,Blood Razor pirates,oo,1275,2125,1275,2125,1275,2125,90,95,no,55,1997,yes,no,yes,no,yes,no,no,,,442,443
+Lok,blood razor scout,30,Blood Razor pirates,—,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,no,yes,no,no,,,442,443
+Lok,canyon corsair captain,50,canyon corsairs,—,4425,7375,4425,7375,4425,7375,257.25,269.5,no,55,9955,yes,no,no,no,no,no,no,,,442,443
+Lok,canyon corsair cutthroat,32,canyon corsairs,—,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4667,yes,no,yes,no,yes,no,no,,,442,443
+Lok,canyon corsair destroyer,38,canyon corsairs,_,3375,5625,3375,5625,3375,5625,183.75,192.5,no,55,6269,yes,no,yes,no,yes,no,no,,,442,443
+Lok,canyon corsair guard,36,canyon corsairs,_,3225,5375,3225,5375,3225,5375,173.25,181.5,no,55,5717,yes,no,yes,no,yes,no,no,,,442,443
+Lok,canyon corsair pirate elite,40,canyon corsairs,_,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,yes,no,no,no,no,no,no,,,442,443
+Lok,canyon corsair pirate strong,35,canyon corsairs,=,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5448,yes,no,no,no,no,no,no,,,442,443
+Lok,canyon corsair pirate weak,30,canyon corsairs,_,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,yes,no,no,no,no,no,no,,,442,443
+Lok,canyon corsair scout,30,canyon corsairs,os,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,no,yes,no,no,,,442,443
+Lok,elite canyon corsair,45,canyon corsairs,_,4050,6750,4050,6750,4050,6750,231,242,no,55,8341,yes,no,no,no,no,no,no,,,442,443
+Lok,marooned pirate,18,pirates of Lok,—,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,yes,no,no,no,no,no,no,,,444,445
+Lok,marooned pirate captain,22,pirates of Lok,—,1950,3250,1950,3250,1950,3250,105,110,no,55,2370,yes,no,no,no,no,no,no,,,444,445
+Lok,marooned pirate engineer,18,pirates of Lok,_,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,yes,no,no,no,no,no,no,,,444,445
+Lok,marooned pirate first mate,20,pirates of Lok,—,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,yes,no,no,no,no,no,no,,,444,445
+Lok,mercenary commander,40,mercenary,—,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,yes,yes,no,no,yes,no,no,,,444,445
+Lok,mercenary destroyer,38,mercenary,_—,3375,5625,3375,5625,3375,5625,183.75,192.5,no,55,6269,yes,no,yes,no,yes,no,no,,,444,445
+Lok,mercenary elite,38,mercenary,_,3450,5750,3450,5750,3450,5750,189,198,no,55,6269,yes,yes,no,no,yes,no,no,,,444,445
+Lok,mercenary messenger,20,mercenary,—,1875,3125,1875,3125,1875,3125,105,110,no,55,1997,no,no,no,no,no,no,no,,,444,445
+Lok,mercenary strong,36,mercenary,_,3300,5500,3300,5500,3300,5500,178.5,187,no,55,5717,yes,yes,no,no,yes,no,no,,,444,445
+Lok,mercenary warlord,45,mercenary,=,3975,6625,3975,6625,3975,6625,225.75,236.5,no,55,8341,yes,yes,no,no,yes,no,no,,,444,445
+Lok,mercenary weak,34,mercenary,_,3150,5250,3150,5250,3150,5250,168,176,no,55,5183,yes,yes,no,no,yes,no,no,,,444,445
+Lok,Nym bodyguard,27,Nym,,2325,3875,2325,3875,2325,3875,136.5,143,no,55,3453,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym brawler,25,Nym,=,2175,3625,2175,3625,2175,3625,126,132,no,55,2996,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym destroyer,38,Nym,a,3525,5875,3525,5875,3525,5875,194.25,203.5,no,55,6269,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym guard elite,38,Nym,an 6,3525,5875,3525,5875,3525,5875,194.25,203.5,no,55,6269,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym guard strong,34,Nym,ae,3225,5375,3225,5375,3225,5375,173.25,181.5,no,55,5183,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym guard weak,30,Nym,as,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym patrol elite,40,Nym,,3675,6125,3675,6125,3675,6125,204.75,214.5,no,55,6839,yes,yes,no,no,no,no,no,,,446,447
+Lok,Nym patrol strong,36,Nym,=~ —,3375,5625,3375,5625,3375,5625,183.75,192.5,no,55,5717,yes,yes,no,no,no,no,no,,,446,447
+Lok,Nym patrol weak,32,Nym,,3075,5125,3075,5125,3075,5125,162.75,170.5,no,55,4667,yes,yes,no,no,no,no,no,,,446,447
+Lok,Nym pirate elite,30,Nym,me =,2550,4250,2550,4250,2550,4250,152.25,159.5,no,55,4169,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym pirate strong,26,Nym,,2250,3750,2250,3750,2250,3750,131.25,137.5,no,55,3223,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym pirate weak,22,Nym,=,1950,3250,1950,3250,1950,3250,105,110,no,55,2370,yes,no,no,no,no,no,no,,,446,447
+Lok,Nym surveyer,20,Nym,a,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,yes,no,no,no,no,no,no,,,446,447
+Naboo,Borvos bruiser,3,Hutt,oa,37.5,62.5,37.5,62.5,37.5,62.5,15,20,no,25,25,no,no,yes,no,no,no,no,,,448,449
+Naboo,Borvos champion,8,Hutt,_,375,625,375,625,375,625,40,45,no,30,194,no,no,yes,no,no,no,no,,,448,449
+Naboo,Borvos guard,3,Hutt,=,56.25,93.75,56.25,93.75,56.25,93.75,20,25,no,25,25,no,no,no,yes,no,no,no,,,448,449
+Naboo,Borvos mercenary,6,Hutt,_,225,375,225,375,225,375,30,35,no,30,68,no,no,yes,no,no,no,no,,,448,449
+Naboo,Borvos thief,3,Hutt,_—,37.5,62.5,37.5,62.5,37.5,62.5,15,20,no,25,25,no,no,yes,no,no,no,no,,,448,449
+Naboo,Borvos thug,4,Hutt,—,56.25,93.75,56.25,93.75,56.25,93.75,20,25,no,30,30,no,no,no,yes,yes,no,no,,,448,449
+Naboo,Gungan bomber,14,Gungan,_,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan boss,15,Gungan,=,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan Captain,11,Gungan,—,525,875,525,875,525,875,50,55,no,35,564,yes,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan General,12,Gungan,_,750,1250,750,1250,750,1250,55,60,no,35,747,yes,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan Grand Army Soldier,7,Gungan,_,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,121,no,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan Guard,8,Gungan,a2,375,625,375,625,375,625,40,45,no,30,194,no,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan hunter,7,Gungan,—,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,121,no,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan kaadu rider,6,Gungan,~,225,375,225,375,225,375,30,35,no,30,68,no,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan scout,6,Gungan,_,225,375,225,375,225,375,30,35,no,30,68,no,no,yes,no,no,no,no,,,450,451
+Naboo,Gungan war chief,9,Gungan,—,375,625,375,625,375,625,40,45,no,30,290,yes,no,yes,no,no,no,no,,,450,451
+Naboo,mauler,14,Mauler,_,900,1500,900,1500,900,1500,65,70,no,30,1085,yes,yes,yes,no,no,no,no,,,452,453
+Naboo,mauler acolyte,9,Mauler,—,375,625,375,625,375,625,40,45,no,30,290,no,no,yes,no,yes,no,no,,,452,453
+Naboo,mauler lord,25,Mauler,—,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2996,yes,no,yes,no,yes,no,no,,,452,453
+Naboo,mauler master,50,Mauler,=,4350,7250,4350,7250,4350,7250,252,264,no,55,9955,yes,no,no,no,yes,no,no,,,452,453
+Naboo,Trade Federation avenger,5,Trade Federation,—,75,125,75,125,75,125,25,30,no,30,40,no,yes,yes,no,no,no,no,,,456,457
+Naboo,Trade Federation loyalist,3,Trade Federation,—,37.5,62.5,37.5,62.5,37.5,62.5,15,20,no,25,25,no,no,yes,no,no,no,no,,,456,457
+Naboo,Trade Federation zealot,7,Trade Federation,—,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,121,no,no,yes,no,no,no,no,,,456,457
+Rori,Brigade Captain,23,Brigade,an -,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2570,no,no,yes,yes,no,no,no,,,458,459
+Rori,Brigade General,26,Brigade,an,2250,3750,2250,3750,2250,3750,131.25,137.5,no,55,3223,no,no,yes,no,no,no,no,,,458,459
+Rori,Brigade Infiltrator,13,Brigade,By,900,1500,900,1500,900,1500,65,70,no,35,965,no,yes,yes,yes,no,no,no,,,458,459
+Rori,Brigade Marine,15,Brigade,=,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,yes,no,no,no,,,458,459
+Rori,Brigade Officer,17,Brigade,*,1200,2000,1200,2000,1200,2000,85,90,no,45,1502,no,no,yes,yes,no,no,no,,,458,459
+Rori,cobral assassin,23,Cobral,as a,1950,3250,1950,3250,1950,3250,105,110,no,50,2570,yes,no,yes,no,no,no,no,,,458,459
+Rori,cobral bandit,17,Cobral,as 2s,1200,2000,1200,2000,1200,2000,85,90,no,35,1502,no,no,yes,no,no,no,no,,,458,459
+Rori,cobral boss,29,Cobral,2s,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,3926,yes,no,yes,no,no,no,no,,,458,459
+Rori,cobral hitman,20,Cobral,=,1350,2250,1350,2250,1350,2250,95,100,no,40,1997,no,yes,yes,no,yes,no,no,,,458,459
+Rori,cobral hooligan,7,Cobral,=,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,25,121,no,no,yes,no,no,no,no,,,458,459
+Rori,cobral mugger,6,Cobral,ne =,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,25,68,no,no,no,no,no,no,no,,,458,459
+Rori,cobral overlord,33,Cobral,ne,3075,5125,3075,5125,3075,5125,162.75,170.5,no,55,4923,yes,no,yes,no,no,no,no,,,458,459
+Rori,cobral runner,13,Cobral,ne =,900,1500,900,1500,900,1500,65,70,no,30,965,no,no,yes,no,no,no,no,,,458,459
+Rori,cobral thief,11,Cobral,ne,750,1250,750,1250,750,1250,55,60,no,30,564,no,yes,yes,no,no,no,no,,,458,459
+Rori,cobral thug,10,Cobral,=,450,750,450,750,450,750,45,50,no,30,413,no,no,yes,no,yes,no,no,,,458,459
+Rori,Garyn Dragoon,15,Garyn,_,975,1625,975,1625,975,1625,70,75,no,35,1215,yes,no,yes,no,no,no,no,,,460,461
+Rori,Garyn Lieutenant,18,Garyn,—,1200,2000,1200,2000,1200,2000,85,90,no,35,1659,yes,no,yes,no,no,no,no,,,460,461
+Rori,Garyn Marauder,13,Garyn,—,825,1375,825,1375,825,1375,60,65,no,30,965,no,no,yes,no,yes,no,no,,,460,461
+Rori,Garyn Mugger,9,Garyn,_,450,750,450,750,450,750,45,50,no,30,290,no,no,yes,no,no,no,no,,,460,461
+Rori,Garyn Pirate,10,Garyn,St _,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,460,461
+Rori,Garyn Raider,11,Garyn,_,525,875,525,875,525,875,50,55,no,30,564,no,no,yes,no,yes,no,no,,,460,461
+Rori,Garyn Thief,8,Garyn,_,375,625,375,625,375,625,40,45,no,30,194,no,yes,yes,no,no,no,no,,,460,461
+Rori,Garyn Vigo,19,Garyn,_,1275,2125,1275,2125,1275,2125,90,95,no,40,1824,yes,no,yes,no,no,no,no,,,460,461
+Rori,Kobola assassin,17,Kobola,_,1125,1875,1125,1875,1125,1875,80,85,no,45,1502,yes,no,yes,no,no,no,no,,,460,461
+Rori,Kobola guard,12,Kobola,_,750,1250,750,1250,750,1250,55,60,no,35,747,no,no,yes,no,yes,no,no,,,460,461
+Rori,Kobola pitboss,20,Kobola,_,1350,2250,1350,2250,1350,2250,95,100,no,55,1997,yes,no,yes,no,no,no,no,,,460,461
+Rori,Kobola underboss,22,Kobola,_,1875,3125,1875,3125,1875,3125,105,110,no,55,2370,yes,no,yes,yes,no,no,no,,,460,461
+Rori,Narmle Captain,17,Narmle,—,1200,2000,1200,2000,1200,2000,85,90,no,45,1502,no,no,yes,yes,no,no,no,,,460,461
+Rori,Narmle Colonel,21,Narmle,=,1875,3125,1875,3125,1875,3125,105,110,no,55,2180,no,no,yes,yes,no,no,no,,,460,461
+Rori,Narmle Commander,23,Narmle,_,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2570,no,no,yes,yes,no,no,no,,,460,461
+Rori,Narmle Commando,19,Narmle,_,1275,2125,1275,2125,1275,2125,90,95,no,50,1824,yes,no,yes,yes,no,no,no,,,460,461
+Rori,Narmle Major,19,Narmle,st,1350,2250,1350,2250,1350,2250,95,100,no,50,1824,no,no,yes,yes,no,no,no,,,460,461
+Rori,Narmle Rifleman,13,Narmle,_,900,1500,900,1500,900,1500,65,70,no,35,965,no,no,yes,yes,no,no,no,,,460,461
+Rori,poodoo crook,5,Poodoo gang,—,225,375,225,375,225,375,30,35,no,25,40,no,no,no,no,no,no,no,,,460,461
+Rori,poodoo desperado,8,Poodoo gang,—,450,750,450,750,450,750,45,50,no,30,194,no,yes,no,no,no,no,no,,,460,461
+Rori,poodoo hooligan,6,Poodoo gang,—_,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,25,68,no,no,no,no,no,no,no,,,462,463
+Rori,poodoo raider,9,Poodoo gang,—,450,750,450,750,450,750,45,50,no,30,290,no,no,yes,no,no,no,no,,,462,463
+Rori,poodoo rogue,7,Poodoo gang,_—,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,25,121,no,no,yes,no,no,no,no,,,462,463
+Rori,poodoo ruffian,9,Poodoo gang,—,375,625,375,625,375,625,40,45,no,30,290,no,no,yes,no,yes,no,no,,,462,463
+Rori,rorgungan boss,20,Rorgungan,—,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,,,462,463
+Rori,rorgungan commoner,14,Rorgungan,—,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,yes,no,no,no,,,462,463
+Rori,rorgungan scout,12,Rorgungan,_,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,yes,no,no,no,,,462,463
+Rori,rorgungan warchief,18,Rorgungan,=,1200,2000,1200,2000,1200,2000,85,90,no,45,1659,yes,no,yes,yes,no,no,no,,,462,463
+Rori,rorgungan warrior,16,Rorgungan,—,1125,1875,1125,1875,1125,1875,80,85,no,40,1355,no,no,yes,yes,no,no,no,,,462,463
+Rori,Spice Collective eliteguard,24,Spice Collective,—,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2779,yes,no,yes,yes,no,no,no,,,462,463
+Rori,Spice Collective foreman,18,Spice Collective,_—,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,no,yes,yes,no,no,no,,,462,463
+Rori,Spice Collective heavyguard,21,Spice Collective,_,1425,2375,1425,2375,1425,2375,100,105,no,55,2180,yes,no,yes,yes,no,no,no,,,462,463
+Rori,Spice Collective sentry,14,Spice Collective,—,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,yes,no,no,no,,,462,463
+Talus,Aakuan champion,30,Aakuans,—,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,yes,no,yes,no,no,no,no,,,464,465
+Talus,Aakuan defender,20,Aakuans,—,1350,2250,1350,2250,1350,2250,95,100,no,40,1997,yes,no,yes,no,no,no,no,,,464,465
+Talus,Aakuan guardian,23,Aakuans,_,1950,3250,1950,3250,1950,3250,105,110,no,50,2570,yes,no,yes,no,no,no,no,,,464,465
+Talus,Aakuan keeper,13,Aakuans,_,825,1375,825,1375,825,1375,60,65,no,30,965,yes,no,yes,no,no,no,no,,,464,465
+Talus,Aakuan sentinel,16,Aakuans,—,1050,1750,1050,1750,1050,1750,75,80,no,35,1355,yes,no,yes,no,no,no,no,,,464,465
+Talus,Aakuan steward,14,Aakuans,_,900,1500,900,1500,900,1500,65,70,no,30,1085,yes,no,yes,no,no,no,no,,,464,465
+Talus,Aakuan warder,27,Aakuans,=,2250,3750,2250,3750,2250,3750,131.25,137.5,no,55,3453,yes,no,yes,no,no,no,no,,,464,465
+Talus,Binayre chief,21,Binayre,_,1875,3125,1875,3125,1875,3125,105,110,no,45,2180,no,no,yes,no,no,no,no,,,464,465
+Talus,Binayre pirate,15,Binayre,_—,1050,1750,1050,1750,1050,1750,75,80,no,35,1215,no,no,yes,no,no,no,no,,,464,465
+Talus,Binayre ruffian,13,Binayre,—,825,1375,825,1375,825,1375,60,65,no,30,965,no,no,yes,no,yes,no,no,,,464,465
+Talus,Binayre smuggler,17,Binayre,a,1200,2000,1200,2000,1200,2000,85,90,no,35,1502,no,no,yes,no,no,no,no,,,464,465
+Talus,Binayre swindler,19,Binayre,—,1350,2250,1350,2250,1350,2250,95,100,no,40,1824,no,no,yes,no,no,no,no,,,464,465
+Talus,Fed-Dub captain,18,Fed-Dub,—,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,no,yes,yes,no,no,no,,,464,465
+Talus,Fed-Dub commander,21,Fed-Dub,—_,1875,3125,1875,3125,1875,3125,105,110,no,55,2180,no,no,yes,yes,no,no,no,,,464,465
+Talus,Fed-Dub constable,10,Fed-Dub,—,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,yes,no,no,no,,,464,465
+Talus,Fed-Dub investigator,13,Fed-Dub,—,900,1500,900,1500,900,1500,65,70,no,35,965,no,no,yes,yes,no,no,no,,,464,465
+Talus,liberation Activist,17,Liberation Party,—,1200,2000,1200,2000,1200,2000,85,90,no,45,1502,no,no,yes,yes,no,no,no,,,466,467
+Talus,liberation Patriot,9,Liberation Party,—,450,750,450,750,450,750,45,50,no,30,290,no,no,yes,yes,no,no,no,,,466,467
+Talus,liberation Reactionist,14,Liberation Party,_,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,yes,no,no,no,,,466,467
+Talus,Lost Aqualish Bomber,15,Lost Aqualish Regiment,_—,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,yes,no,no,no,,,466,467
+Talus,Lost Aqualish Captain,20,Lost Aqualish Regiment,—,1425,2375,1425,2375,1425,2375,100,105,no,55,1997,no,no,yes,yes,no,no,no,,,466,467
+Talus,lost Aqualish Commando,14,Lost Aqualish Regiment,_,825,1375,825,1375,825,1375,60,65,no,40,1085,yes,no,yes,yes,yes,no,no,,,466,467
+Talus,Lost Aqualish Infiltrator,18,Lost Aqualish Regiment,—,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,yes,yes,yes,no,no,no,,,466,467
+Talus,Lost Aqualish Marksman,15,Lost Aqualish Regiment,_,1050,1750,1050,1750,1050,1750,75,80,no,40,1215,no,no,yes,yes,no,no,no,,,466,467
+Talus,Lost Aqualish Marshal,24,Lost Aqualish Regiment,—,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2779,yes,no,yes,yes,no,no,no,,,466,467
+Talus,lost Aqualish Outrider,12,Lost Aqualish Regiment,—,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,yes,no,no,no,,,466,467
+Talus,Lost Aqualish Warchief,27,Lost Aqualish Regiment,_-,2250,3750,2250,3750,2250,3750,131.25,137.5,no,55,3453,yes,no,yes,yes,no,no,no,,,466,467
+Talus,Lost Aqualish Warrior,13,Lost Aqualish Regiment,—,900,1500,900,1500,900,1500,65,70,no,35,965,no,no,yes,yes,no,no,no,,,466,467
+Tatooine,Alkhara Bandit,13,Alkhara,cel,750,1250,750,1250,750,1250,55,60,no,35,965,yes,yes,yes,no,yes,no,no,,,468,469
+Tatooine,Alkhara Bandit King,16,Alkhara,=,975,1625,975,1625,975,1625,70,75,no,40,1355,yes,yes,yes,no,yes,no,no,,,468,469
+Tatooine,Alkhara Champion,15,Alkhara,=,900,1500,900,1500,900,1500,65,70,no,40,1215,yes,yes,yes,no,yes,no,no,,,468,469
+Tatooine,Alkhara Lieutenant,14,Alkhara,af =,825,1375,825,1375,825,1375,60,65,no,40,1085,yes,yes,yes,no,yes,no,no,,,468,469
+Tatooine,crimelord,12,Jabba,_,825,1375,825,1375,825,1375,60,65,no,35,747,no,no,yes,no,no,no,no,,,470,471
+Tatooine,desert demon bodyguard,11,Desert Demon,--,750,1250,750,1250,750,1250,55,60,no,30,564,no,no,yes,no,no,no,no,,,470,471
+Tatooine,desert demon brawler,8,Desert Demon,—,375,625,375,625,375,625,40,45,no,30,194,no,no,yes,no,no,no,no,,,470,471
+Tatooine,desert demon leader,13,Desert Demon,,825,1375,825,1375,825,1375,60,65,no,30,965,yes,no,yes,no,no,no,no,,,470,471
+Tatooine,desert demon marksman,8,Desert Demon,—,375,625,375,625,375,625,40,45,no,30,194,no,no,yes,no,no,no,no,,,470,471
+Tatooine,dune stalker brawler,9,Dune Stalker,—,450,750,450,750,450,750,45,50,no,30,290,no,yes,yes,no,no,no,no,,,470,471
+Tatooine,dune stalker leader,10,Dune Stalker,—,525,875,525,875,525,875,50,55,no,30,413,no,yes,yes,no,no,no,no,,,470,471
+Tatooine,dune stalker marksman,9,Dune Stalker,_—,450,750,450,750,450,750,45,50,no,30,290,no,yes,yes,no,no,no,no,,,470,471
+Tatooine,Jabba assassin,12,Jabba,=,750,1250,750,1250,750,1250,55,60,no,30,747,yes,no,yes,no,no,no,no,,,472,473
+Tatooine,Jabba compound guard,14,Jabba,=,900,1500,900,1500,900,1500,65,70,no,30,1085,yes,no,yes,no,no,no,no,,,472,473
+Tatooine,Jabba enforcer,10,Jabba,=,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,472,473
+Tatooine,Jawa warlord,8,Jawa,ae =,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,30,194,yes,yes,yes,no,no,no,no,,,474,475
+Tatooine,Rodian clan warchief,13,Rodian,—,825,1375,825,1375,825,1375,60,65,no,35,965,yes,yes,yes,no,no,no,no,,,476,477
+Tatooine,spice fiend,7,thug,-,375,625,375,625,375,625,40,45,no,25,121,no,yes,no,no,no,no,no,,,476,477
+Tatooine,Tusken Bantha,20,Tusken Raider,_,1425,2375,1425,2375,1425,2375,100,105,no,40,1997,no,no,yes,no,no,no,no,PostureDownAttack,,476,477
+Tatooine,Tusken Captain,16,Tusken Raider,=,975,1625,975,1625,975,1625,70,75,no,35,1355,yes,yes,yes,no,yes,no,no,,,476,477
+Tatooine,Tusken Chief,18,Tusken Raider,_,1125,1875,1125,1875,1125,1875,80,85,no,40,1659,yes,yes,yes,no,yes,no,no,,,476,477
+Tatooine,Tusken Commoner,9,Tusken Raider,=,375,625,375,625,375,625,40,45,no,30,290,no,no,yes,no,yes,no,no,,,476,477
+Tatooine,Tusken King,20,Tusken Raider,pa,1275,2125,1275,2125,1275,2125,90,95,no,40,1997,yes,yes,yes,no,yes,no,no,,,476,477
+Tatooine,Tusken Raider,12,Tusken Raider,=,525,875,525,875,525,875,50,55,no,30,747,yes,yes,yes,no,yes,no,no,,,476,477
+Tatooine,Tusken Sniper,13,Tusken Raider,,825,1375,825,1375,825,1375,60,65,no,30,965,yes,yes,yes,no,no,no,no,,,476,477
+Tatooine,Tusken Warlord,19,Tusken Raider,_,1200,2000,1200,2000,1200,2000,85,90,no,40,1824,yes,yes,yes,no,yes,no,no,,,476,477
+Tatooine,Valarian assassin,12,Valarian,_,750,1250,750,1250,750,1250,55,60,no,30,747,yes,no,yes,no,no,no,no,,,476,477
+Tatooine,Valarian compound guard,12,Valarian,—_,750,1250,750,1250,750,1250,55,60,no,30,747,yes,no,yes,no,no,no,no,,,478,479
+Tatooine,Valarian enforcer,10,Valarian,_—,525,875,525,875,525,875,50,55,no,30,413,no,no,yes,no,no,no,no,,,478,479
+Tatooine,Valarian swooper leader,7,Valarian,_,262.5,437.5,262.5,437.5,262.5,437.5,35,40,no,25,121,no,no,yes,no,no,no,no,,,478,479
+Tatooine,Weequay champion,12,Weequay,—_,750,1250,750,1250,750,1250,55,60,no,35,747,yes,yes,yes,no,no,no,no,,,478,479
+Yavin 4,Hutt expedition force leader,16,Hutt,_—,975,1625,975,1625,975,1625,70,75,no,40,1355,yes,no,yes,no,yes,no,no,,,480,481
+Yavin 4,Hutt expedition force member,12,Hutt,—,525,875,525,875,525,875,50,55,no,35,747,yes,no,yes,no,yes,no,no,,,480,481
+Yavin 4,Hutt expedition force surveyer,10,Hutt,_—,375,625,375,625,375,625,40,45,no,30,413,yes,no,yes,no,yes,no,no,,,480,481

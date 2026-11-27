@@ -92,8 +92,14 @@ and friends (#21).
    placed in distance bands from the cities; creatures wander (049); krayt
    dragons at the Krayt Graveyard (050). NPC camps with the client's camp
    buildings on Tatooine (053-054), Corellia, Naboo, Rori, Talus and Endor
-   (055-059). Still to do: Tusken Raiders and the other high-level NPCs
-   (An Empire Divided's NPC tables), plain names for wild creature lairs. Exercises the AI and combat already built. The
+   (055-059). An Empire Divided's NPCs (Tuskens, the tribes, Nym,
+   Nightsisters...) in camps on every planet (062-071). Still to do: plain
+   names for wild creature lairs, lairs kept out of water; the named
+   places' own spawns (raised Nov 2026): outdoor points of interest such
+   as Fort Tusken and Jabba's palace (fixed lairs at the client's POI
+   positions, as the Krayt Graveyard), then caves and dungeons (the server
+   spawns lairs outdoors only: spawning in a building's cells and moving
+   creatures through them needs server work). Exercises the AI and combat already built. The
    client has no spawn or lair tables (those were the server's), so the
    sources are: the 2004 guide's creature tables, already transcribed (683
    creatures and NPCs, each with its planet), and its planet chapters (pp.

@@ -350,7 +350,7 @@ Endor,toxic merek battlelord,toxic_merek_battlelord,merek,merek/shared_lair_mere
 Endor,young Hanadak rock crusher,young_hanadak_rock_crusher,young_hanadak_rock_crusher,hanadak/shared_lair_hanadak.iff,ed
 Endor,young Roba,young_roba,young_roba,roba/shared_lair_roba.iff,ed
 Lok,crazed gurk destroyer,crazed_gurk_destroyer,gurk,gurk/shared_lair_gurk.iff,ed
-Lok,desert vesp,desert_vesp,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,desert vesp,desert_vesp,vesp,base/shared_poi_all_lair_nest_large.iff,ed
 Lok,domesticated gurnaset,domesticated_gurnaset,gurnaset,gurnaset/shared_lair_gurnaset.iff,ed
 Lok,domesticated snorbal,domesticated_snorbal,snorbal,snorbal/shared_lair_snorbal.iff,ed
 Lok,dune kimogila,dune_kimogila,kimogila,kimogila/shared_lair_kimogila.iff,ed
@@ -365,7 +365,7 @@ Lok,giant dune kimogila,giant_dune_kimogila,giant_dune_kimogila,kimogila/shared_
 Lok,giant flit,giant_flit,giant_flit,flit/shared_lair_flit.iff,ed
 Lok,giant kimogila,giant_kimogila,giant_kimogila,kimogila/shared_lair_kimogila.iff,ed
 Lok,giant spined snake,giant_spined_snake,giant_spined_snake,spined_snake/shared_lair_spined_snake.iff,ed
-Lok,gorge vesp,gorge_vesp,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,gorge vesp,gorge_vesp,vesp,base/shared_poi_all_lair_nest_large.iff,ed
 Lok,gurk,gurk,gurk,gurk/shared_lair_gurk.iff,ed
 Lok,gurk gatherer,gurk_gatherer,gurk,gurk/shared_lair_gurk.iff,ed
 Lok,gurk tracker,gurk_tracker,gurk,gurk/shared_lair_gurk.iff,ed
@@ -384,7 +384,7 @@ Lok,lowland salt mynock,lowland_salt_mynock,salt_mynock,mynock/shared_lair_mynoc
 Lok,male snorbal calf,male_snorbal_calf,male_snorbal_calf,snorbal/shared_lair_snorbal.iff,ed
 Lok,mature snorbal female,mature_snorbal_female,snorbal,snorbal/shared_lair_snorbal.iff,ed
 Lok,mature snorbal male,mature_snorbal_male,snorbal,snorbal/shared_lair_snorbal.iff,ed
-Lok,mountain vesp,mission_mountain_villager,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,mountain vesp,vesp,vesp,base/shared_poi_all_lair_nest_large.iff,ed
 Lok,perlek,perlek,perlek,perlek/shared_lair_perlek.iff,ed
 Lok,perlek ravager,perlek_ravager,perlek,base/shared_poi_all_lair_warren_large.iff,ed
 Lok,perlek scavenger,perlek_scavanger,perlek,base/shared_poi_all_lair_warren_large.iff,ed
@@ -397,9 +397,9 @@ Lok,snorbal matriarch,snorbal_matriarch,snorbal_matriarch,snorbal/shared_lair_sn
 Lok,spined snake,spined_snake,spined_snake,spined_snake/shared_lair_spined_snake.iff,ed
 Lok,spined snake recluse,spined_snake_recluse,spined_snake,base/shared_poi_all_lair_insecthill_large.iff,ed
 Lok,sulfur pool mynock,sulfur_pool_mynock,mynock,fynock/shared_lair_fynock.iff,ed
-Lok,vesp,vesp,vesp,vesp/shared_lair_vesp.iff,ed
-Lok,vesp hunter,vesp_hunter,vesp,vesp/shared_lair_vesp.iff,ed
-Lok,vesp scavanger,vesp_scavanger,vesp,vesp/shared_lair_vesp.iff,ed
+Lok,vesp,vesp,vesp,base/shared_poi_all_lair_nest_large.iff,ed
+Lok,vesp hunter,vesp_hunter,vesp,base/shared_poi_all_lair_nest_large.iff,ed
+Lok,vesp scavanger,vesp_scavanger,vesp,base/shared_poi_all_lair_nest_large.iff,ed
 Naboo,alpha veermok,alpha_veermok,alpha_veermok,veermok/shared_lair_veermok.iff,ed
 Naboo,bachelor gualama,bachelor_gualama,gualama,gualama/shared_lair_gualama.iff,ed
 Naboo,bolle bol,bolle_bol,bolle_bol,bolle_bol/shared_lair_bolle_bol.iff,ed

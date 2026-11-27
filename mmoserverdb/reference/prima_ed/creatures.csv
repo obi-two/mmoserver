@@ -50,21 +50,21 @@ Dantooine,slinking voritor hunter,80,voritor lizard,,6525,10875,6525,10875,6525,
 Dantooine,thune herd leader,40,thune,,3600,6000,3600,6000,3600,6000,199.5,209,no,55,6839,yes,no,yes,yes,no,no,no,DizzyAttack,PostureDownAttack,422,423
 Dantooine,vexed voritor lizard,70,voritor lizard,,5850,9750,5850,9750,5850,9750,357,374,no,55,17517,no,no,yes,no,yes,no,no,KnockDownAttack,DizzyAttack,422,423
 Dantooine,voritor dasher,50,voritor lizard,,4350,7250,4350,7250,4350,7250,252,264,yes,55,9955,no,no,yes,no,yes,yes,no,DizzyAttack,BlindAttack,424,425
-Dathomir,ancient bull rancor,95,rancor,,7650,12750,7650,12750,7650,12750,483,506,no,35,564,no,no,yes,yes,yes,no,no,IntimidationAttack,,424,425
-Dathomir,ancient graul,45,graul,,3975,6625,3975,6625,3975,6625,225.75,236.5,no,55,29412,yes,no,yes,no,yes,no,no,,DizzyAttack,424,425
-Dathomir,ancient reptilian flier,20,reptilian flier,,1350,2250,1350,2250,1350,2250,95,100,no,55,8341,no,no,yes,no,yes,yes,no,DizzyAttack,BlindAttack,424,425
-Dathomir,bull rancor,60,rancor,,5025,8375,5025,8375,5025,8375,299.25,313.5,no,30,290,no,no,yes,yes,no,yes,no,,PostureDownAttack,424,425
-Dathomir,enraged bull rancor,85,rancor,,6900,11500,6900,11500,6900,11500,430.5,451,no,30,194,no,no,no,no,no,yes,no,IntimidationAttack,,424,425
-Dathomir,enraged rancor,75,rancor,,6150,10250,6150,10250,6150,10250,378,396,no,55,24332,yes,no,yes,no,yes,no,no,KnockDownAttack,PostureDownAttack,424,425
-Dathomir,enraged reptilian flier,24,reptilian flier,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,19681,yes,no,yes,no,yes,no,no,KnockDownAttack,,424,425
-Dathomir,frenzied graul,50,graul,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,413,no,no,yes,yes,no,no,no,,IntimidationAttack,424,425
-Dathomir,gaping spider hunter,12,gaping,,525,875,525,875,525,875,50,55,yes,30,68,no,yes,yes,no,yes,yes,no,,MildPoison,424,425
-Dathomir,gaping spider queen,16,gaping,,975,1625,975,1625,975,1625,70,75,yes,35,747,yes,yes,yes,no,yes,yes,no,StunAttack,PostureDownAttack,424,425
-Dathomir,gaping spider recluse,13,gaping recluse,,825,1375,825,1375,825,1375,60,65,yes,40,1355,yes,yes,yes,no,yes,yes,no,KnockDownAttack,MediumPoison,424,425
-Dathomir,gnarled rancor,45,rancor,,3900,6500,3900,6500,3900,6500,220.5,231,no,30,68,no,no,no,yes,no,no,no,,,424,425
-Dathomir,graul,30,graul,,2475,4125,2475,4125,2475,4125,147,154,no,55,8341,yes,no,yes,no,yes,yes,no,KnockDownAttack,DizzyAttack,424,425
-Dathomir,graul mauler,34,graul,,3075,5125,3075,5125,3075,5125,162.75,170.5,no,55,4169,no,no,yes,no,yes,yes,no,IntimidationAttack,StunAttack,424,425
-Dathomir,infant graul,25,graul,,2100,3500,2100,3500,2100,3500,120.75,126.5,no,30,68,no,no,yes,yes,no,no,no,,,424,425
+Dathomir,ancient bull rancor,95,rancor,,7650,12750,7650,12750,7650,12750,483,506,no,55,29412,yes,no,yes,no,yes,no,no,,DizzyAttack,424,425
+Dathomir,ancient graul,45,graul,,3975,6625,3975,6625,3975,6625,225.75,236.5,no,55,8341,no,no,yes,no,yes,yes,no,DizzyAttack,BlindAttack,424,425
+Dathomir,ancient reptilian flier,20,reptilian flier,,1350,2250,1350,2250,1350,2250,95,100,no,55,1997,no,no,yes,no,yes,yes,no,,BlindAttack,424,425
+Dathomir,bull rancor,60,rancor,,5025,8375,5025,8375,5025,8375,299.25,313.5,no,55,13517,yes,no,yes,no,yes,yes,no,PostureDownAttack,DizzyAttack,424,425
+Dathomir,enraged bull rancor,85,rancor,,6900,11500,6900,11500,6900,11500,430.5,451,no,55,24332,yes,no,yes,no,yes,no,no,KnockDownAttack,PostureDownAttack,424,425
+Dathomir,enraged rancor,75,rancor,,6150,10250,6150,10250,6150,10250,378,396,no,55,19681,yes,no,yes,no,yes,no,no,KnockDownAttack,,424,425
+Dathomir,enraged reptilian flier,24,reptilian flier,,2025,3375,2025,3375,2025,3375,115.5,121,no,55,2779,no,no,yes,no,yes,yes,no,DizzyAttack,BlindAttack,424,425
+Dathomir,frenzied graul,50,graul,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,55,9955,yes,no,yes,no,yes,yes,no,DizzyAttack,StunAttack,424,425
+Dathomir,gaping spider hunter,12,gaping,,525,875,525,875,525,875,50,55,yes,35,747,yes,yes,yes,no,yes,yes,no,StunAttack,PostureDownAttack,424,425
+Dathomir,gaping spider queen,16,gaping,,975,1625,975,1625,975,1625,70,75,yes,40,1355,yes,yes,yes,no,yes,yes,no,KnockDownAttack,MediumPoison,424,425
+Dathomir,gaping spider recluse,13,gaping recluse,,825,1375,825,1375,825,1375,60,65,yes,35,965,yes,yes,no,no,yes,yes,no,BlindAttack,MildPoison,424,425
+Dathomir,gnarled rancor,45,rancor,,3900,6500,3900,6500,3900,6500,220.5,231,no,55,8341,yes,no,yes,no,yes,yes,no,KnockDownAttack,DizzyAttack,424,425
+Dathomir,graul,30,graul,,2475,4125,2475,4125,2475,4125,147,154,no,55,4169,no,no,yes,no,yes,yes,no,IntimidationAttack,StunAttack,424,425
+Dathomir,graul mauler,34,graul,,3075,5125,3075,5125,3075,5125,162.75,170.5,no,55,5183,yes,no,yes,no,yes,yes,no,PostureDownAttack,IntimidationAttack,424,425
+Dathomir,infant graul,25,graul,,2100,3500,2100,3500,2100,3500,120.75,126.5,no,55,2996,no,no,yes,no,yes,yes,no,DizzyAttack,StunAttack,424,425
 Dathomir,injured purbole,12,purbole,,900,1500,900,1500,900,1500,65,70,no,35,747,no,yes,no,no,no,yes,no,PostureDownAttack,,426,427
 Dathomir,lurking shear mite,12,shear mite,,750,1250,750,1250,750,1250,55,60,yes,35,747,no,yes,yes,no,yes,yes,no,,IntimidationAttack,426,427
 Dathomir,malkloc bull,14,malkloc,,975,1625,975,1625,975,1625,70,75,no,40,1085,no,no,yes,yes,no,no,no,StunAttack,,426,427
@@ -82,12 +82,12 @@ Dathomir,reclusive shear mite,16,shear mite,,1050,1750,1050,1750,1050,1750,75,80
 Dathomir,reptilian flier,14,reptilian flier,,900,1500,900,1500,900,1500,65,70,no,40,1085,no,no,yes,no,yes,yes,no,,PostureDownAttack,426,427
 Dathomir,shear mite hunter,12,shear mite,,525,875,525,875,525,875,50,55,no,35,747,yes,yes,yes,no,yes,yes,no,,PostureDownAttack,426,427
 Dathomir,shear mite queen,18,shear mite,,1200,2000,1200,2000,1200,2000,85,90,yes,45,1659,no,yes,yes,no,yes,yes,no,DizzyAttack,StunAttack,426,427
-Endor,aggravated bordok mare,50,bordok,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,40,no,no,yes,yes,no,yes,no,,,428,429
-Endor,arachne drone,35,arachne,,3225,5375,3225,5375,3225,5375,173.25,181.5,yes,30,9955,yes,no,yes,no,yes,no,no,StunAttack,PostureDownAttack,428,429
-Endor,arachne warrior,25,arachne,,2100,3500,2100,3500,2100,3500,120.75,126.5,yes,25,20,no,no,yes,yes,no,yes,no,,,428,429
-Endor,arachne webmaster,30,arachne,,2400,4000,2400,4000,2400,4000,141.75,148.5,no,40,2996,no,yes,yes,yes,yes,yes,no,BlindAttack,StunAttack,428,429
-Endor,bark mite burrower,54,bark mite,,4650,7750,4650,7750,4650,7750,273,286,yes,55,13517,no,no,yes,no,no,no,no,,,428,429
-Endor,bark mite burrower queen,39,bark mite,,3450,5750,3450,5750,3450,5750,189,198,yes,30,11327,no,no,yes,no,yes,yes,no,IntimidationAttack,BlindAttack,428,429
+Endor,aggravated bordok mare,50,bordok,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,30,9955,yes,no,yes,no,yes,yes,no,StunAttack,PostureDownAttack,428,429
+Endor,arachne drone,35,arachne,,3225,5375,3225,5375,3225,5375,173.25,181.5,yes,30,5448,no,no,yes,no,yes,yes,no,IntimidationAttack,DizzyAttack,428,429
+Endor,arachne warrior,25,arachne,,2100,3500,2100,3500,2100,3500,120.75,126.5,yes,40,2996,no,yes,yes,yes,yes,yes,no,BlindAttack,StunAttack,428,429
+Endor,arachne webmaster,30,arachne,,2400,4000,2400,4000,2400,4000,141.75,148.5,no,55,4169,yes,no,yes,yes,yes,yes,no,StunAttack,KnockDownAttack,428,429
+Endor,bark mite burrower,54,bark mite,,4650,7750,4650,7750,4650,7750,273,286,yes,30,11327,no,no,yes,no,yes,yes,no,IntimidationAttack,BlindAttack,428,429
+Endor,bark mite burrower queen,39,bark mite,,3450,5750,3450,5750,3450,5750,189,198,yes,30,6552,yes,no,yes,no,yes,yes,no,StunAttack,IntimidationAttack,428,429
 Endor,blood drenched merek king,55,merek,,4650,7750,4650,7750,4650,7750,273,286,no,55,11681,yes,yes,yes,yes,yes,yes,no,StunAttack,BlindAttack,430,431
 Endor,blood frenzied boar wolf,50,boar wolf,,4275,7125,4275,7125,4275,7125,246.75,258.5,no,40,9955,yes,no,yes,no,yes,yes,no,KnockDownAttack,BlindAttack,430,431
 Endor,blood stained merek,30,blood,,2400,4000,2400,4000,2400,4000,141.75,148.5,yes,55,4169,yes,no,yes,no,yes,yes,no,KnockDownAttack,,430,431
@@ -305,8 +305,8 @@ Talus,tortur,21,tortur,,1950,3250,1950,3250,1950,3250,105,110,no,55,2180,no,no,n
 Talus,tortur bull,25,tortur,,2250,3750,2250,3750,2250,3750,131.25,137.5,no,55,2996,no,no,no,yes,no,no,no,KnockDownAttack,BlindAttack,468,469
 Talus,vicious huf dun,14,huf dun,,900,1500,900,1500,900,1500,65,70,no,40,1085,yes,no,yes,no,no,yes,no,StunAttack,,468,469
 Talus,wolf kima,16,wolf kima,,1125,1875,1125,1875,1125,1875,80,85,no,35,1355,no,yes,no,no,yes,yes,no,BlindAttack,StunAttack,468,469
-Tatooine,bantha,14,bantha,,1050,1750,1050,1750,1050,1750,75,80,no,30,413,no,no,yes,no,no,no,yes,,,468,469
-Tatooine,bocatt,19,bocatt,,1275,2125,1275,2125,1275,2125,90,95,yes,30,194,no,yes,yes,no,yes,yes,no,IntimidationAttack,MildDisease,468,469
+Tatooine,bantha,14,bantha,,1050,1750,1050,1750,1050,1750,75,80,no,40,1085,no,no,no,yes,no,yes,no,,DizzyAttack,468,469
+Tatooine,bocatt,19,bocatt,,1275,2125,1275,2125,1275,2125,90,95,yes,50,1824,no,yes,yes,no,yes,yes,no,PostureDownAttack,StunAttack,468,469
 Tatooine,bull bantha,15,bantha,,1125,1875,1125,1875,1125,1875,80,85,no,40,1215,no,no,no,yes,no,yes,no,,StunAttack,470,471
 Tatooine,canyon krayt dragon,275,krayt dragon,,14700,24500,14700,24500,14700,24500,1433.25,1501.5,no,55,192335,yes,yes,no,no,yes,no,no,KnockDownAttack,StunAttack,470,471
 Tatooine,dewback,18,dewback,,1275,2125,1275,2125,1275,2125,90,95,no,45,1659,no,no,yes,no,no,yes,no,,StunAttack,470,471
