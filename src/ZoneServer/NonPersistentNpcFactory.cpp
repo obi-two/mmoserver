@@ -286,7 +286,7 @@ void NonPersistentNpcFactory::handleDatabaseJobComplete(void* ref,DatabaseResult
         // Do not transfer object refs, use the handle, i.e. asyncContainer->mId
         // asContainer->mObject = npc;
 
-        mDatabase->executeSqlAsync(this, asContainer, "SELECT creature_groups.creature_id FROM %s.creature_groups WHERE creature_groups.creature_group_id=%u;",mDatabase->galaxy(), lair.mCreatureGroup);
+        mDatabase->executeSqlAsync(this, asContainer, "SELECT creature_groups.creature_id FROM %s.creature_groups WHERE creature_groups.creature_group_id=%u ORDER BY creature_groups.id;",mDatabase->galaxy(), lair.mCreatureGroup);
         
 
     }

@@ -359,10 +359,24 @@ sniper, warlord, King or bantha, which stay the book's. The Tusken village
 and camps keep the book's Tuskens. Four lairs replace 073's three: 4 of
 commoners, raiders and snipers; 3 of captains and chiefs; 2 of elite
 guards; 1 of the warlord, the King and a bantha (reconstructed). The
-armour shows on examine only. To come: the waves the Publish 1 notes give
-(13 August 2003, "Set up Fort Tusken to spawn in waves"; the wiki: three
-waves, each harder), and fixed positions so none land inside the walls
-(the server has no wall shapes).
+armour shows on examine only.
+
+Migration 076 puts the fort in waves, as the Publish 1 notes give (13
+August 2003, "Set up Fort Tusken to spawn in waves"; the wiki: "three
+waves of progressively more difficult NPCs before starting over"). Three
+wave lairs, each calling waves of six: commoners, raiders and snipers;
+then captains, chiefs and warlords; then the Tusken King with five elite
+guards (the wiki's bunker: "five of these NPCs along with the Tusken
+King"). The next wave comes 30 s after one is down; after the third, the
+first comes back after 5 minutes. The bantha is left out (a lair holds 8
+kinds). Reconstructed, and data to tune: the members, sizes and delays.
+
+A lair goes in waves with `lair_wave_stages` (how many of its kinds, in
+the group's row order, each wave calls from: "3,3,2"), `lair_wave_boss`
+(the last wave's last kind is its leader: one of it) and `lair_wave_delay`
+(ms between waves); `lair_respawn_delay` is the pause before starting
+over. To come: fixed positions so none land inside the walls (the server
+has no wall shapes).
 
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their

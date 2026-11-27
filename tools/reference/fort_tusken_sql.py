@@ -151,5 +151,98 @@ def main():
     out.write("SET FOREIGN_KEY_CHECKS = 1;\n")
 
 
+WAVES_DOC = """\
+-- Fort Tusken in waves (docs/SPAWNS.md). The Publish 1 notes (13 August
+-- 2003, wiki.swganh.org/index.php/Publish_1_Notes:_13_August_03): "Set up
+-- Fort Tusken to spawn in waves"; the wiki's carnage champion page: "three
+-- waves of progressively more difficult NPCs before starting over"; its
+-- elite guard page: the bunker's last room held "five of these NPCs along
+-- with the Tusken King". Written by tools/reference/fort_tusken_sql.py
+-- --waves; edit that, not this.
+--
+-- Replaces 075's four fort lairs (6101-6104) with %d wave lairs (6111),
+-- each calling waves of %d:
+--   wave 1: commoners (wiki), raiders, snipers (book)
+--   wave 2: captains, chiefs (wiki), warlords (book)
+--   wave 3: the Tusken King (book) and five elite guards (wiki)
+-- A wave follows %d s after the last one is down; after the third, the
+-- first comes back after %d minutes. Reconstructed, and data to tune: the
+-- waves' members and size, the delays, the number of lairs. The bantha is
+-- left out of the fort (a lair holds 8 kinds; the village has them).
+--
+"""
+
+WAVE_LAIR = 6111
+WAVE_LAIRS = 3
+WAVE_SIZE = 6
+WAVE_DELAY_MS = 30000
+CYCLE_MS = 300000
+WAVE_GROUP_ROW = 1101
+WAVE_ATTR_FIRST = 81101
+STAGES = [
+    [("wiki", "tusken_commoner"), ("book", "tusken_raider"), ("book", "tusken_sniper")],
+    [("wiki", "tusken_captain"), ("wiki", "tusken_chief"), ("book", "tusken_warlord")],
+    # The last kind is the wave's leader (lair_wave_boss): one King.
+    [("wiki", "tusken_elite_guard"), ("book", "tusken_king")],
+]
+
+
+def waves():
+    """Migration 076, the fort in waves:
+
+    python3 tools/reference/fort_tusken_sql.py --waves > mmoserverdb/migrations/076_fort_tusken_waves.sql
+    """
+    wiki_ids = {}
+    with open(os.path.join(REF, "swganh_wiki", "tuskens.csv"), newline="") as f:
+        for n, r in enumerate(csv.DictReader(f)):
+            wiki_ids[r["key"]] = NPC_FIRST + n
+    out = sys.stdout
+    out.write(WAVES_DOC % (WAVE_LAIRS, WAVE_SIZE, WAVE_DELAY_MS // 1000, CYCLE_MS // 60000))
+    out.write("\nSET FOREIGN_KEY_CHECKS = 0;\n\n")
+    out.write("INSERT IGNORE INTO swganh.attributes (name, internal, attribute_internal_description)\n  VALUES "
+              "('lair_wave_stages', 1, 'A lair in waves: how many of its kinds (in group order) each wave calls from, e.g. 3,3,2'),\n"
+              "         ('lair_wave_boss', 1, 'A lair in waves: its last kind leads the last wave, one of it'),\n"
+              "         ('lair_wave_delay', 1, 'A lair in waves: ms from a wave''s end to the next');\n\n")
+    old = ", ".join(str(LAIR_FIRST + i) for i in range(len(MIXES)))
+    out.write("-- Migration 075's fort lairs.\n")
+    out.write("DELETE FROM swganh.lair_attributes WHERE lair_id IN (%s);\n" % old)
+    out.write("DELETE FROM swganh.creature_groups WHERE creature_group_id IN (%s);\n" % old)
+    out.write("DELETE FROM swganh.lairs WHERE id IN (%s);\n" % old)
+    out.write("DELETE FROM swganh.lair_templates WHERE id IN (%s);\n\n" % old)
+    out.write("INSERT IGNORE INTO swganh.lair_templates (id, lair_object_string, stf_name, stf_file, stf_detail_name, stf_detail_file)\n"
+              "  VALUES (%d, %s, 'global_outlaw_neutral_none', 'lair_n', '', '');\n\n" % (WAVE_LAIR, sql_str(LAIR_OBJECT)))
+    groups, row = [], WAVE_GROUP_ROW
+    for stage in STAGES:
+        for source, key in stage:
+            if source == "wiki":
+                creature = str(wiki_ids[key])
+            else:
+                creature = ("(SELECT MIN(id) FROM swganh.non_persistent_npcs WHERE family = 8"
+                            " AND id >= 3001 AND id < %d AND stf_variable_id = %s)" % (NPC_FIRST, sql_str(key)))
+            groups.append("SELECT %d, %d, %s" % (row, WAVE_LAIR, creature))
+            row += 1
+    out.write("-- In wave order: the lair reads its kinds by row id.\n")
+    out.write("INSERT IGNORE INTO swganh.creature_groups (id, creature_group_id, creature_id)\n  ")
+    out.write("\n  UNION ALL ".join(groups) + ";\n\n")
+    out.write("INSERT IGNORE INTO swganh.lairs\n"
+              "  (id, creature_spawn_region, family, faction, lair_template, creature_group, count, spawn_x, spawn_y, spawn_z, spawn_dir_Y, spawn_dir_W)\n"
+              "  VALUES (%d, %d, 9, 1, %d, %d, %d, 0, 0, 0, 1, 0);\n\n" % (WAVE_LAIR, SPAWN, WAVE_LAIR, WAVE_LAIR, WAVE_LAIRS))
+    attrs = [("lair_fix_position", 0), ("lair_at_poi", 1), ("lair_invisible", 1),
+             ("lair_wave_size", WAVE_SIZE), ("lair_passive_waves", 3),
+             ("lair_wave_stages", ",".join(str(len(s)) for s in STAGES)), ("lair_wave_boss", 1),
+             ("lair_wave_delay", WAVE_DELAY_MS), ("lair_respawn_delay", CYCLE_MS),
+             ("lair_creatures_max_spawn_distance", 25), ("lair_creatures_respawn_delay", 3000),
+             ("creature_xp", 0), ("creature_health", 1000), ("creature_strength", 1000), ("creature_constitution", 1000)]
+    out.write("INSERT IGNORE INTO swganh.lair_attributes (id, lair_id, attribute_id, value, `order`)\n"
+              "  SELECT v.id, v.lair_id, a.id, v.value, 0 FROM (\n")
+    out.write("\n    UNION ALL ".join("    SELECT %d AS id, %d AS lair_id, %s AS name, %s AS value" % (WAVE_ATTR_FIRST + n, WAVE_LAIR, sql_str(a), sql_str(v)) if n == 0 else
+                                     "SELECT %d, %d, %s, %s" % (WAVE_ATTR_FIRST + n, WAVE_LAIR, sql_str(a), sql_str(v)) for n, (a, v) in enumerate(attrs)))
+    out.write("\n  ) v JOIN swganh.attributes a ON a.name = v.name;\n\n")
+    out.write("SET FOREIGN_KEY_CHECKS = 1;\n")
+
+
 if __name__ == "__main__":
-    main()
+    if "--waves" in sys.argv[1:]:
+        waves()
+    else:
+        main()
