@@ -95,9 +95,9 @@ and friends (#21).
    (055-059). An Empire Divided's NPCs (Tuskens, the tribes, Nym,
    Nightsisters...) in camps on every planet (062-071). Still to do: plain
    names for wild creature lairs, lairs kept out of water; the named
-   places' own spawns (raised Nov 2026): outdoor points of interest such
-   as Fort Tusken and Jabba's palace (fixed lairs at the client's POI
-   positions, as the Krayt Graveyard), then caves and dungeons (the server
+   places' own spawns (raised Nov 2026): outdoor points of interest done
+   (073: Fort Tusken, the Dantooine strongholds and 23 more); caves and
+   dungeons (the server
    spawns lairs outdoors only: spawning in a building's cells and moving
    creatures through them needs server work). Exercises the AI and combat already built. The
    client has no spawn or lair tables (those were the server's), so the

@@ -306,6 +306,39 @@ gives (level 20, aggressive, stalker, deathblows), attacking on sight.
 Lok: all 40 camps up, the 12 Nym camps with their buildings; Nym's guards
 and patrols fight back but do not attack first (not Aggro in the book).
 
+## Points of interest
+
+The named outdoor places with inhabitants of their own (migration 073,
+`tools/reference/poi_spawns_sql.py`). Each gets a small spawn area centred
+on its position in `planet_regions` (the base data, from the client's
+region files) and a few invisible lairs placed at random in it, calling
+the place's people from the templates already made. A lair with
+`lair_at_poi` skips the no-build and band tests: every such place is a
+no-build area, which kept the random lairs and camps out of it.
+
+Who lives where follows the place (the swganh wiki's POI pages, from the
+live game: Fort Tusken's "Sandpeople, Commoners, Raiders, Snipers,
+Warlords, and even the Tusken King"); how many, and in which mixes, is
+reconstructed:
+
+| Planet | Places |
+|---|---|
+| Tatooine | Fort Tusken (Tuskens up to the king), the Jawa fortress, Beggar's Canyon (womp rats) |
+| Dantooine | the Janta, Kunga and Mokk strongholds, three Dantari villages |
+| Dathomir | outside the Nightsister and Singing Mountain clan strongholds |
+| Endor | two Dulok villages (Donkuwah, Pubam), the marauders' place |
+| Lok | the canyon corsair hideout, the Blood Razor base |
+| Naboo | the Mauler stronghold, the Gungan warrior stronghold |
+| Rori | the Cobral hideout, the Rorgungan swamp town, the Kobola site |
+| Talus | the Binayre pirate base |
+| Corellia | the Nyax cultists' outpost, the Afarathu and Drall places |
+
+25 places, 103 lairs. Not here: the insides of caves and dungeons (Fort
+Tusken's caverns, the Hutt hideout, the Nightsister stronghold's halls;
+the server spawns outdoors only), and the battle sites (Tusken against
+Jawa, Nightsister against the Singing Mountain clan, Imperial against
+Gungan), which need NPCs that fight each other.
+
 The wiki also says wild creature lairs had plain names ("a pile of rocks",
 "a pile of leaves") and only mission lairs were named after their
 creatures; ours are all named. To revisit.

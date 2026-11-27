@@ -546,11 +546,20 @@ void LairObject::respawn(void)
             // try again, a number of times, before settling for the last spot.
             float minCityDistance = this->hasInternalAttribute("lair_min_city_distance") ? this->getInternalAttribute<float>("lair_min_city_distance") : 0.0f;
             float maxCityDistance = this->hasInternalAttribute("lair_max_city_distance") ? this->getInternalAttribute<float>("lair_max_city_distance") : 1.0e9f;
-            const int attempts = 100;
+            // A point of interest's spawn (lair_at_poi): anywhere in its own
+            // small area around the place, which is a no-build area itself
+            // (Fort Tusken, a stronghold): no no-build or band test.
+            const bool atPoi = this->hasInternalAttribute("lair_at_poi")
+                && this->getInternalAttribute<std::string>("lair_at_poi") != "0";
+            const int attempts = atPoi ? 1 : 100;
             for (int attempt = 0; attempt < attempts; ++attempt)
             {
                 this->mPosition.x = position.x + (gRandom->getRand() % (int32)(xWidth+1));
                 this->mPosition.z = position.z + (gRandom->getRand() % (int32)(zHeight+1));
+                if (atPoi)
+                {
+                    break;
+                }
                 bool allowed = !gStructureManager || !gStructureManager->checkNoBuildRegion(this->mPosition);
                 if (allowed && (minCityDistance > 0.0f || maxCityDistance < 1.0e9f))
                 {
