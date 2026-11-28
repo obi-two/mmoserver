@@ -96,6 +96,10 @@ public:
 
     void	spawn(void);
     void	reportedDead(uint64 deadCreatureId);
+    // A creature of this lair has just died (its corpse stays a few
+    // minutes; reportedDead comes when it goes). A lair in waves counts it
+    // now, so the next wave follows the last kill, not the last corpse.
+    void	creatureDied(uint64 creatureId) { if (!mStageEnd.empty()) { reportedDead(creatureId); } }
     bool	requestAssistance(uint64 targetId, uint64 sourceId) const;
     void	requestLairAssistance(void) const;
 

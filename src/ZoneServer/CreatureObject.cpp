@@ -57,6 +57,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include <cfloat>
 #include <cstring>
 #include "NpcManager.h"
+#include "LairObject.h"
 
 using ::common::IEventPtr;
 using ::common::EventDispatcher;
@@ -1058,6 +1059,15 @@ void CreatureObject::die(uint64 killerId)
         {
             // Give XP to the one(s) attacking me.
             npc->updateAttackersXp();
+
+            // A lair in waves hears of the death now, not when the corpse goes.
+            if (AttackableCreature* creature = dynamic_cast<AttackableCreature*>(npc))
+            {
+                if (LairObject* lair = dynamic_cast<LairObject*>(gWorldManager->getObjectById(creature->getLairId())))
+                {
+                    lair->creatureDied(getId());
+                }
+            }
         }
 
         // Put this creature in the pool of delayed destruction.
