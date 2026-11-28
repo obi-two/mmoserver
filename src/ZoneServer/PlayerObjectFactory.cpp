@@ -705,7 +705,7 @@ PlayerObject* PlayerObjectFactory::_createPlayer(DatabaseResult* result)
 void PlayerObjectFactory::_setupDatabindings()
 {
     //player binding
-    mPlayerBinding = mDatabase->createDataBinding(185);
+    mPlayerBinding = mDatabase->createDataBinding(186);
     mPlayerBinding->addField(DFT_uint64,offsetof(PlayerObject,mId),8,0);
     mPlayerBinding->addField(DFT_uint64,offsetof(PlayerObject,mParentId),8,1);
     mPlayerBinding->addField(DFT_uint32,offsetof(PlayerObject,mAccountId),4,2);
@@ -786,7 +786,7 @@ void PlayerObjectFactory::_setupDatabindings()
         mPlayerBinding->addField(DFT_uint16,offsetof(PlayerObject,mCustomization)+(i*2),2,i + 17);//+113 = 183
 
     mPlayerBinding->addField(DFT_uint16,offsetof(PlayerObject,mCustomization[171]),2,130);
-    mPlayerBinding->addField(DFT_uint16,offsetof(PlayerObject,mCustomization[172]),2,131);				   //185
+    mPlayerBinding->addField(DFT_uint16,offsetof(PlayerObject,mCustomization[172]),2,131);				   //186 (with npcs_ignore)
 
     //hair binding
     mHairBinding = mDatabase->createDataBinding(3);
