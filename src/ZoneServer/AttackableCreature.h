@@ -232,7 +232,9 @@ private:
     // players that come close if aggressive, give up a fight too far from
     // home, wake up and doze off as players come and go.
     void	_think(void);
-    PlayerObject*	_nearestPlayer(float range);
+    // The nearest player in range; players NPCs ignore (a CSR's switch) only
+    // when asked for, e.g. to wake the creature, not to pick a fight.
+    PlayerObject*	_nearestPlayer(float range, bool includeIgnored = false);
     uint64	_liveDefender(void);
     bool	_withinLeash(CreatureObject* target) const;
     float	_leash(void) const;

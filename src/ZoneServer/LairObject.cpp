@@ -39,10 +39,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "WorldManager.h"
 
 #include "MessageLib/MessageLib.h"
+#include "Utils/clock.h"
 #include "Utils/rand.h"
 
 #include <algorithm>
 #include <cassert>
+#include <sstream>
+#include <string>
 
 static const int64 dormantDefaultPeriodTime = 10000;
 static const int64 readyDefaultPeriodTime = 1000;
@@ -178,6 +181,21 @@ uint64 LairObject::handleState(uint64 timeOverdue)
     }
     break;
 
+    }
+
+    // A lair in waves with a wave due (whatever its state, once spawned).
+    if (mNextWaveAt && mLairState != State_LairUnspawned && mLairState != State_LairDead)
+    {
+        if (Anh_Utils::Clock::getSingleton()->getLocalTime() >= mNextWaveAt)
+        {
+            mNextWaveAt = 0;
+            this->spawnStageWave();
+        }
+        else if (waitTime == 0 || waitTime > 1000)
+        {
+            // Look again soon.
+            waitTime = 1000;
+        }
     }
     return waitTime;
 }
@@ -416,8 +434,61 @@ void LairObject::spawn(void)
 //	Spawn the initial wave.
 //
 
+uint64 LairObject::pickCreatureTemplate(int32 slot) const
+{
+    if (isStaged())
+    {
+        int32 start = mStage ? mStageEnd[mStage - 1] : 0;
+        int32 end = mStageEnd[mStage];
+        if (mWaveBoss && mStage == static_cast<int32>(mStageEnd.size()) - 1 && end - start > 1)
+        {
+            if (slot == 0)
+            {
+                return mCreatureTemplates[end - 1];
+            }
+            --end;
+        }
+        return mCreatureTemplates[start + (gRandom->getRand() % (end - start))];
+    }
+
+    uint8 creatureTypeIndex = gRandom->getRand() % (int32)100;	// Better to add all values...
+    for (int32 y = 0; y < MaxCreatureTypes; y++)
+    {
+        if (creatureTypeIndex <= this->mCreatureSpawnRate[y])
+        {
+            return this->mCreatureTemplates[y];
+        }
+    }
+    return 0;
+}
+
+void LairObject::spawnStageWave(void)
+{
+    mStageAlive = 0;
+    for (int32 i = 0; i < this->mWaveSize; i++)
+    {
+        uint64 creatureTemplate = pickCreatureTemplate(i);
+        uint64 npcNewId = creatureTemplate ? gWorldManager->getRandomNpNpcIdSequence() : 0;
+        this->mCreatureId[i] = npcNewId;
+        if (npcNewId != 0)
+        {
+            ++mStageAlive;
+            gNonPersistentNpcFactory->requestNpcObject(NpcManager::Instance(), creatureTemplate, npcNewId, this->getParentId(), this->mPosition, this->mDirection, 0, this->getId());
+        }
+    }
+    LOG(INFO) << "Lair " << this->getId() << ": wave " << (mStage + 1) << " of " << mStageEnd.size()
+              << ", " << mStageAlive << " creatures";
+}
+
 void LairObject::spawnInitialWave(void)
 {
+    if (isStaged())
+    {
+        mStage = 0;
+        spawnStageWave();
+        return;
+    }
+
     // Let's do this very basic as a starter...
 
     // First we need X creatures :)
@@ -546,11 +617,20 @@ void LairObject::respawn(void)
             // try again, a number of times, before settling for the last spot.
             float minCityDistance = this->hasInternalAttribute("lair_min_city_distance") ? this->getInternalAttribute<float>("lair_min_city_distance") : 0.0f;
             float maxCityDistance = this->hasInternalAttribute("lair_max_city_distance") ? this->getInternalAttribute<float>("lair_max_city_distance") : 1.0e9f;
-            const int attempts = 100;
+            // A point of interest's spawn (lair_at_poi): anywhere in its own
+            // small area around the place, which is a no-build area itself
+            // (Fort Tusken, a stronghold): no no-build or band test.
+            const bool atPoi = this->hasInternalAttribute("lair_at_poi")
+                && this->getInternalAttribute<std::string>("lair_at_poi") != "0";
+            const int attempts = atPoi ? 1 : 100;
             for (int attempt = 0; attempt < attempts; ++attempt)
             {
                 this->mPosition.x = position.x + (gRandom->getRand() % (int32)(xWidth+1));
                 this->mPosition.z = position.z + (gRandom->getRand() % (int32)(zHeight+1));
+                if (atPoi)
+                {
+                    break;
+                }
                 bool allowed = !gStructureManager || !gStructureManager->checkNoBuildRegion(this->mPosition);
                 if (allowed && (minCityDistance > 0.0f || maxCityDistance < 1.0e9f))
                 {
@@ -594,6 +674,44 @@ void LairObject::respawn(void)
         {
             assert(false && "LairObject::respawn missing lair_passive_waves attribute");
             this->mPassiveWaves = 3;
+        }
+
+        // Waves (see LairObject.h).
+        mStageEnd.clear();
+        if (this->hasInternalAttribute("lair_wave_stages"))
+        {
+            std::stringstream stages(this->getInternalAttribute<std::string>("lair_wave_stages"));
+            std::string count;
+            int32 end = 0;
+            while (std::getline(stages, count, ','))
+            {
+                int32 n = std::atoi(count.c_str());
+                if (n <= 0 || end + n > MaxCreatureTypes)
+                {
+                    LOG(WARNING) << "Lair " << this->getId() << ": bad lair_wave_stages, no waves";
+                    mStageEnd.clear();
+                    break;
+                }
+                end += n;
+                mStageEnd.push_back(end);
+            }
+            for (int32 e : mStageEnd)
+            {
+                if (!mCreatureTemplates[e - 1])
+                {
+                    LOG(WARNING) << "Lair " << this->getId() << ": lair_wave_stages has more kinds than its group, no waves";
+                    mStageEnd.clear();
+                    break;
+                }
+            }
+            mWaveBoss = this->hasInternalAttribute("lair_wave_boss")
+                && this->getInternalAttribute<std::string>("lair_wave_boss") != "0";
+            if (this->hasInternalAttribute("lair_wave_delay"))
+            {
+                mWaveDelay = this->getInternalAttribute<uint64>("lair_wave_delay");
+            }
+            mStage = 0;
+            mNextWaveAt = 0;
         }
 
         // We do not spawn any babys yet.
@@ -734,6 +852,33 @@ void LairObject::respawn(void)
 
 void LairObject::reportedDead(uint64 deadCreatureId)
 {
+    if (isStaged())
+    {
+        for (int32 i = 0; i < this->mWaveSize; i++)
+        {
+            if (deadCreatureId != 0 && deadCreatureId == this->mCreatureId[i])
+            {
+                this->mCreatureId[i] = 0;
+                if (--mStageAlive <= 0)
+                {
+                    // The wave is down: the next, or after the last, the
+                    // first again after the lair's respawn delay.
+                    uint64 delay = mWaveDelay;
+                    if (++mStage >= static_cast<int32>(mStageEnd.size()))
+                    {
+                        mStage = 0;
+                        delay = this->getRespawnDelay();
+                    }
+                    mNextWaveAt = Anh_Utils::Clock::getSingleton()->getLocalTime() + delay;
+                    LOG(INFO) << "Lair " << this->getId() << ": wave down, wave " << (mStage + 1)
+                              << " in " << (delay / 1000) << " s";
+                }
+                return;
+            }
+        }
+        return;
+    }
+
     bool found = false;
 
     // this->mCreatureId[i] = npcNewId;

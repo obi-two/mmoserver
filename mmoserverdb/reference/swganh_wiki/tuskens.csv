@@ -1,0 +1,5 @@
+name,key,level,to_hit,damage_min,damage_max,xp,ham_min,ham_max,aggro,killer,pack,stalker,herd,armor_rating,effectiveness,special_protection,url,oldid
+Tusken commoner,tusken_commoner,16,31,170,180,690,2900,3500,yes,no,yes,no,no,None,acid 5;blast 5;cold 5;electricity 5;energy 5;heat 5;kinetic 5;stun 5,,https://wiki.swganh.org/index.php/A_Tusken_commoner_NPC_(Example),74984
+Tusken captain,tusken_captain,40,44,345,400,4006,9300,11300,yes,yes,yes,yes,no,None,acid 30;blast 30;energy 30;kinetic 30;stun 30,electricity 40;heat 40,https://wiki.swganh.org/index.php/A_Tusken_captain_NPC_(Example),74981
+Tusken chief,tusken_chief,43,46,365,440,4279,9600,11800,yes,yes,yes,yes,no,None,blast 30;energy 30,electricity 40;heat 60;kinetic 45,https://wiki.swganh.org/index.php/A_Tusken_chief_NPC_(Example),74983
+Tusken elite guard,tusken_elite_guard,44,46,365,440,4370,9600,11800,yes,yes,yes,yes,no,None,acid 30;blast 30;cold 30;electricity 30;energy 30;heat 30;kinetic 30;stun 30,,https://wiki.swganh.org/index.php/A_Tusken_elite_guard_NPC_(Example),74985

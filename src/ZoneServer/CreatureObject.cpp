@@ -53,7 +53,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "ScriptEngine/ScriptEngine.h"
 
 #include "Utils/rand.h"
+#include <algorithm>
 #include <cfloat>
+#include <cstring>
+#include "NpcManager.h"
+#include "LairObject.h"
 
 using ::common::IEventPtr;
 using ::common::EventDispatcher;
@@ -192,6 +196,21 @@ void CreatureObject::prepareSkillCommands()
             ++scIt;
         }
         ++skillIt;
+    }
+
+    // A CSR account's characters have the admin command, which the client
+    // needs to send the admin commands (/kill).
+    if (PlayerObject* player = dynamic_cast<PlayerObject*>(this))
+    {
+        if (player->getCsrTag())
+        {
+            int32 adminId = gSkillManager->getSkillCmdIdByName("admin");
+            if (adminId > 0 && std::find(mSkillCommands.begin(), mSkillCommands.end(), static_cast<uint32>(adminId)) == mSkillCommands.end())
+            {
+                mSkillCommands.push_back(static_cast<uint32>(adminId));
+                mSkillCommandMap.insert(std::make_pair(BString("admin").getCrc(), (void*)0));
+            }
+        }
     }
 }
 
@@ -735,6 +754,7 @@ void CreatureObject::incap()
         if (player)
         {
             player->disableAutoAttack();
+            player->getController()->clearCombatQueue();
         }
         //See if our player is mounted -- if so dismount him
         if(player->checkIfMounted())
@@ -827,6 +847,7 @@ void CreatureObject::die(uint64 killerId)
     {
         gMessageLib->SendSystemMessage(::common::OutOfBand("base_player", "victim_dead"), player);
         player->disableAutoAttack();
+        player->getController()->clearCombatQueue();
     }
 
     // reset ham regeneration
@@ -882,66 +903,71 @@ void CreatureObject::die(uint64 killerId)
             defenderIt = mDefenders.erase(defenderIt);
         }
 
-        // bring up the clone selection window
-        ObjectSet inRangeBuildings;
+        // bring up the clone selection window: the player's stored clone
+        // (bind) first, then every cloning facility on the planet, nearest
+        // first, each named by its town and distance (as pre-CU: the
+        // player chose where to clone, the stored clone at the top).
+        ObjectSet facilities;
         BStringVector buildingNames;
         std::vector<BuildingObject*> buildings;
-        BuildingObject*	nearestBuilding = NULL;
+
+        // All of the planet's, as a player can die further than any search
+        // range from one.
+        gWorldManager->getCloningFacilities(&facilities);
+
+        const glm::vec3 position = player->getWorldPosition();
+        std::vector<std::pair<float, BuildingObject*> > byDistance;
         BuildingObject* preDesignatedBuilding = NULL;
-
-        // Search for cloning facilities: all of the planet's, as a player can
-        // die further than any search range from one.
-        gWorldManager->getCloningFacilities(&inRangeBuildings);
-
-        ObjectSet::iterator buildingIt = inRangeBuildings.begin();
-
-        while (buildingIt != inRangeBuildings.end())
+        for (Object* object : facilities)
         {
-            BuildingObject* building = dynamic_cast<BuildingObject*>(*buildingIt);
-            if (building)
+            BuildingObject* building = dynamic_cast<BuildingObject*>(object);
+            if (!building || !building->getSpawnPoints()->size())
             {
-                // Do we have any personal clone location?
-                if (building->getId() == player->getPreDesignatedCloningFacilityId())
-                {
-                    preDesignatedBuilding = building;
-                }
-
-                if (building->getBuildingFamily() == BuildingFamily_Cloning_Facility)
-                {
-                    // TODO: This code is not working as intended if player dies inside, since buildings use world coordinates and players inside have cell coordinates.
-                    // Tranformation is needed before the correct distance can be calculated.
-                    if(!nearestBuilding	||
-                        (nearestBuilding != building && (glm::distance(mPosition, building->mPosition) < glm::distance(mPosition, nearestBuilding->mPosition))))
-                    {
-                        nearestBuilding = building;
-                    }
-                }
+                continue;
             }
-            ++buildingIt;
-        }
-
-        if (nearestBuilding)
-        {
-            if (nearestBuilding->getSpawnPoints()->size())
+            if (building->getId() == player->getPreDesignatedCloningFacilityId())
             {
-                // buildingNames.push_back(nearestBuilding->getRandomSpawnPoint()->mName.getAnsi());
-                // buildingNames.push_back("Closest Cloning Facility");
-                buildingNames.push_back("@base_player:revive_closest");
-                buildings.push_back(nearestBuilding);
-
-                // Save nearest building in case we need to clone when reviev times out.
-                player->saveNearestCloningFacility(nearestBuilding);
+                preDesignatedBuilding = building;
             }
+            byDistance.push_back(std::make_pair(glm::distance(position, building->mPosition), building));
         }
+        std::sort(byDistance.begin(), byDistance.end(),
+                  [] (const std::pair<float, BuildingObject*>& a, const std::pair<float, BuildingObject*>& b) { return a.first < b.first; });
 
         if (preDesignatedBuilding)
         {
-            if (preDesignatedBuilding->getSpawnPoints()->size())
+            buildingNames.push_back("@base_player:revive_bind");
+            buildings.push_back(preDesignatedBuilding);
+        }
+
+        for (const std::pair<float, BuildingObject*>& entry : byDistance)
+        {
+            std::string town = NpcManager::Instance()->nearestCityName(entry.second->mPosition, 500.0f);
+            if (town.empty())
             {
-                // buildingNames.push_back("Pre-Designated Facility");
-                buildingNames.push_back("@base_player:revive_bind");
-                buildings.push_back(preDesignatedBuilding);
+                town = "Cloning Facility";
             }
+            char label[160];
+            if (entry.first < 1000.0f)
+            {
+                snprintf(label, sizeof(label), "%s (%d m)", town.c_str(), static_cast<int>(entry.first));
+            }
+            else
+            {
+                snprintf(label, sizeof(label), "%s (%.1f km)", town.c_str(), entry.first / 1000.0f);
+            }
+            if (entry.second == preDesignatedBuilding)
+            {
+                snprintf(label + strlen(label), sizeof(label) - strlen(label), " - stored clone");
+            }
+            buildingNames.push_back(label);
+            buildings.push_back(entry.second);
+        }
+
+        if (byDistance.size())
+        {
+            // Save nearest building in case we need to clone when revive times out.
+            player->saveNearestCloningFacility(byDistance.front().second);
         }
 
         if (buildings.size())
@@ -1033,6 +1059,15 @@ void CreatureObject::die(uint64 killerId)
         {
             // Give XP to the one(s) attacking me.
             npc->updateAttackersXp();
+
+            // A lair in waves hears of the death now, not when the corpse goes.
+            if (AttackableCreature* creature = dynamic_cast<AttackableCreature*>(npc))
+            {
+                if (LairObject* lair = dynamic_cast<LairObject*>(gWorldManager->getObjectById(creature->getLairId())))
+                {
+                    lair->creatureDied(getId());
+                }
+            }
         }
 
         // Put this creature in the pool of delayed destruction.

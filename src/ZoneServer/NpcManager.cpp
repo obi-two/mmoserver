@@ -209,7 +209,7 @@ void NpcManager::loadLairs(void)
     // (docs/SPAWNS.md). A city's area is a circle (width 0, height its
     // diameter) or a rectangle; the larger side gives its radius.
     std::stringstream sql;
-    sql << "SELECT r.x, r.z, GREATEST(r.width, r.height) / 2 FROM " << mDatabase->galaxy() << ".cities c INNER JOIN "
+    sql << "SELECT r.x, r.z, GREATEST(r.width, r.height) / 2, c.city_name FROM " << mDatabase->galaxy() << ".cities c INNER JOIN "
         << mDatabase->galaxy() << ".planet_regions r ON (r.region_id = c.city_region) WHERE c.planet_id = " << gWorldManager->getZoneId();
     mDatabase->executeAsyncSql(sql, [this] (DatabaseResult* result) {
         if(result && result->getResultSet())
@@ -221,6 +221,7 @@ void NpcManager::loadLairs(void)
                 city.x = static_cast<float>(rows->getDouble(1));
                 city.z = static_cast<float>(rows->getDouble(2));
                 city.radius = static_cast<float>(rows->getDouble(3));
+                city.name = rows->getString(4);
                 mCities.push_back(city);
             }
         }
@@ -243,6 +244,24 @@ float NpcManager::distanceToNearestCity(const glm::vec3& position) const
         }
     }
     return nearest;
+}
+
+std::string NpcManager::nearestCityName(const glm::vec3& position, float within) const
+{
+    const CityCircle* nearest = NULL;
+    float best = within;
+    for(const CityCircle& city : mCities)
+    {
+        float dx = position.x - city.x;
+        float dz = position.z - city.z;
+        float distance = std::sqrt(dx * dx + dz * dz) - city.radius;
+        if(distance <= best)
+        {
+            best = distance;
+            nearest = &city;
+        }
+    }
+    return nearest ? nearest->name : std::string();
 }
 
 void NpcManager::_loadLairRows(void)
@@ -834,8 +853,16 @@ uint8 NpcManager::_executeAttack(CreatureObject* attacker,CreatureObject* defend
     // default attack
     // if(cmdProperties->mCmdCrc == 0xa8fef90a)
     {
-        // combatSpam = gCombatManager->getDefaultSpam(weapon->getGroup());
-        combatSpam = "creature";
+        // A humanoid NPC's spam is its weapon's, as a player's ("shoots at
+        // you and hits"); a creature's is the creature one.
+        if (weapon && attackerNpc->hasInternalAttribute("creature_humanoid"))
+        {
+            combatSpam = gCombatManager->getDefaultSpam(weapon->getGroup());
+        }
+        else
+        {
+            combatSpam = "creature";
+        }
     }
     // special attack
     /*

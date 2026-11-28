@@ -35,6 +35,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "Skill.h"
 #include "DatabaseManager/DatabaseCallback.h"
 #include <boost/pool/pool.hpp>
+#include <cstring>
 
 
 //======================================================================================================================
@@ -122,6 +123,17 @@ public:
     }
     BString					getSkillCmdById(uint32 skillCmdId) {
         return mSkillCommandList[skillCmdId-1];
+    }
+    // A skill command's id by its name; 0 if there is none.
+    int32					getSkillCmdIdByName(const char* name) {
+        for (size_t i = 0; i < mSkillCommandList.size(); ++i)
+        {
+            if (strcmp(mSkillCommandList[i].getAnsi(), name) == 0)
+            {
+                return static_cast<int32>(i + 1);
+            }
+        }
+        return 0;
     }
     BString					getXPTypeById(uint32 xpId) {
         return mXpTypeList[xpId-1];

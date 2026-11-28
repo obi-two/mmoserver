@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "Utils/typedefs.h"
 #include "ObjectFactoryCallback.h"
 
+#include <string>
 #include <vector>
 #include <glm/glm.hpp>
 
@@ -104,6 +105,9 @@ public:
     // cities' circles), or a very large number if the planet has none.
     // Random lairs use it to keep to their distance band (docs/SPAWNS.md).
     float	distanceToNearestCity(const glm::vec3& position) const;
+    // The name of the city whose area is nearest to a position, if that
+    // area's edge is within the given distance; empty otherwise.
+    std::string	nearestCityName(const glm::vec3& position, float within) const;
 
 
 protected:
@@ -127,6 +131,7 @@ private:
         float x;
         float z;
         float radius;
+        std::string name;
     };
     std::vector<CityCircle>	mCities;
     void	_loadLairRows(void);

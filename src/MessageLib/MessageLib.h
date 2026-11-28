@@ -674,6 +674,10 @@ private:
 	bool				_checkPlayer(uint64 playerId) const;
 
 	void				_sendToInRangeUnreliable(Message* message, Object* const object, unsigned char priority, bool to_self = true);
+	// As _sendToInRangeUnreliable, but each copy is addressed to its recipient:
+	// an object controller message the client shows only on its own object
+	// (combat spam).
+	void				_sendToInRangeUnreliableAddressed(Message* message, Object* const object, unsigned char priority);
 	void				_sendToInRange(Message* message, Object* const object, unsigned char priority, bool to_self = true) const;
 
 	void				_sendToInRangeUnreliableChat(Message* message, const CreatureObject* object, unsigned char priority, uint32_t crc);

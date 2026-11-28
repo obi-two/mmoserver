@@ -53,13 +53,22 @@ Introduction 5-16, Combat 65-86, Professions 105-320 (Brawler 123,
 Marksman 140), Planets 321-376 (Tatooine 324), PvP 377-386, Weapons table
 388, Armor table 394, Creature tables 396-483.
 
+## The swganh wiki
+
+wiki.swganh.org, the SWGANH developers' wiki, compiled from the live game,
+the guides and players' screenshots, is an approved source: patch notes,
+places, and the NPC example pages (with their HAM, damage, armour). Cite
+the page and its revision (`oldid`). Its stat pages rarely say which
+publish they describe; say so where it matters.
+
 ## Transcribed reference data
 
 `mmoserverdb/reference/` holds the guides' tables in our own columns, one
 row per entry with its printed page, for migrations to take values from:
 `prima_ed/` (An Empire Divided: weapons, armour, specials, a few
 creatures) and `prima_2004/` (the 2004 guide's creature, droid and NPC
-tables, read from the PDF by `tools/reference/prima2004_tables.py`). Each
+tables, read from the PDF by `tools/reference/prima2004_tables.py`), and
+`swganh_wiki/` (the wiki's Tusken pages). Each
 folder's README says what was transcribed and how it was checked.
 
 ## Citing

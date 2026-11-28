@@ -37,6 +37,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 - creature lair
 */
 
+#include <vector>
+
 #define MaxWaveSize 6
 // The kinds of creature (or NPC) a lair can call: an NPC camp has up to 7
 // (the Jawa warband); 5 crashed the zone at load (docs/SPAWNS.md).
@@ -94,6 +96,10 @@ public:
 
     void	spawn(void);
     void	reportedDead(uint64 deadCreatureId);
+    // A creature of this lair has just died (its corpse stays a few
+    // minutes; reportedDead comes when it goes). A lair in waves counts it
+    // now, so the next wave follows the last kill, not the last corpse.
+    void	creatureDied(uint64 creatureId) { if (!mStageEnd.empty()) { reportedDead(creatureId); } }
     bool	requestAssistance(uint64 targetId, uint64 sourceId) const;
     void	requestLairAssistance(void) const;
 
@@ -112,6 +118,23 @@ private:
 
     bool	playerInRange(float range);
     void	spawnInitialWave(void);
+
+    // Waves (lair_wave_stages, e.g. "3,3,2"): the lair's kinds of creature,
+    // in their group's order, split into stages. Each wave calls a full
+    // wave of the current stage's kinds; when all of it is dead the next
+    // stage follows after lair_wave_delay, and after the last the lair
+    // starts again from the first after its respawn delay. With
+    // lair_wave_boss, the last stage's last kind is its leader: one in the
+    // wave, the rest of the wave the stage's other kinds.
+    bool	isStaged(void) const { return !mStageEnd.empty(); }
+    uint64	pickCreatureTemplate(int32 slot) const;
+    void	spawnStageWave(void);
+    std::vector<int32>	mStageEnd;		// each stage's end, an index into the kinds
+    int32	mStage = 0;
+    int32	mStageAlive = 0;
+    bool	mWaveBoss = false;
+    uint64	mWaveDelay = 30000;			// ms between a stage's end and the next
+    uint64	mNextWaveAt = 0;			// local time of the next wave, 0 for none
     bool	getLairTarget(void);
     void	makePeaceWithDefendersOutOfRange(void);
 

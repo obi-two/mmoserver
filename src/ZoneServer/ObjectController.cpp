@@ -222,6 +222,42 @@ void ObjectController::clearQueues()
 }
 
 //=============================================================================
+
+void ObjectController::clearCombatQueue()
+{
+    if (mInUseCommandQueue)
+    {
+        // Mid-processing: done when the queue's pass ends.
+        mClearCombatQueue = true;
+        return;
+    }
+    mClearCombatQueue = false;
+
+    PlayerObject* player = dynamic_cast<PlayerObject*>(mObject);
+    CommandQueue::iterator cmdIt = mCommandQueue.begin();
+    while (cmdIt != mCommandQueue.end())
+    {
+        ObjControllerCommandMessage* cmdMsg = *cmdIt;
+        if (!cmdMsg->getCmdProperties() || !cmdMsg->getCmdProperties()->mAddToCombatQueue)
+        {
+            ++cmdIt;
+            continue;
+        }
+        if (player && cmdMsg->getSequence())
+        {
+            gMessageLib->sendCommandQueueRemove(cmdMsg->getSequence(), 0.0f, 0, 0, player);
+        }
+        if (Message* message = cmdMsg->getData())
+        {
+            message->setPendingDelete(true);
+        }
+        cmdIt = mCommandQueue.erase(cmdIt);
+        cmdMsg->~ObjControllerCommandMessage();
+        mCmdMsgPool.free(cmdMsg);
+    }
+}
+
+//=============================================================================
 //
 // process
 //
@@ -560,6 +596,10 @@ bool ObjectController::_processCommandQueue()
     if (mRemoveCommandQueue)
     {
         this->clearQueues();
+    }
+    else if (mClearCombatQueue)
+    {
+        this->clearCombatQueue();
     }
     return ((!mCommandQueue.empty() ||  player->autoAttackEnabled())? true : false);
 }

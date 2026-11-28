@@ -737,7 +737,7 @@ void AttackableCreature::_think(void)
         }
     }
 
-    bool playersNear = _nearestPlayer(noticeRange()) != NULL;
+    bool playersNear = _nearestPlayer(noticeRange(), true) != NULL;
     if (mCombatState == State_Idle && playersNear)
     {
         mCombatState = State_Alerted;
@@ -762,7 +762,7 @@ void AttackableCreature::_think(void)
     }
 }
 
-PlayerObject* AttackableCreature::_nearestPlayer(float range)
+PlayerObject* AttackableCreature::_nearestPlayer(float range, bool includeIgnored)
 {
     ObjectSet inRange;
     gSpatialIndexManager->getObjectsInRange(this, &inRange, ObjType_Player, range, true);
@@ -772,7 +772,8 @@ PlayerObject* AttackableCreature::_nearestPlayer(float range)
     for (ObjectSet::iterator it = inRange.begin(); it != inRange.end(); ++it)
     {
         PlayerObject* player = dynamic_cast<PlayerObject*>(*it);
-        if (!player || !player->isConnected() || player->isDead() || player->isIncapacitated())
+        if (!player || !player->isConnected() || player->isDead() || player->isIncapacitated()
+                || (player->isIgnoredByNpcs() && !includeIgnored))
         {
             continue;
         }
@@ -858,6 +859,14 @@ void AttackableCreature::assistPack(uint64 targetId)
     if (!target || target->isDead() || target->isIncapacitated() || !_withinLeash(target))
     {
         return;
+    }
+    // A CSR ignored by NPCs fights only what it attacks.
+    if (PlayerObject* player = dynamic_cast<PlayerObject*>(target))
+    {
+        if (player->isIgnoredByNpcs())
+        {
+            return;
+        }
     }
     LOG(INFO) << "Creature " << getId() << " (" << mSocialGroup << ") assists its pack against " << targetId;
     // The pack's members answer the call; they don't call again.

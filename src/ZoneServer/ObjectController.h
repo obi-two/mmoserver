@@ -238,6 +238,9 @@ public:
     bool					mHandlerCompleted;
 
     void					clearQueues();
+    // Drop the queued combat commands (incapacitated or dead: pre-CU, the
+    // combat queue emptied), telling the client so its queue display clears.
+    void					clearCombatQueue();
 
     // target
     void					handleSetTarget(Message* message);
@@ -755,6 +758,7 @@ private:
 		// admin
 		void	_handleAdminSysMsg(uint64 targetId,Message* message,ObjectControllerCmdProperties* cmdProperties);
 		void	_handleAdminWarpSelf(uint64 targetId,Message* message,ObjectControllerCmdProperties* cmdProperties);
+		void	_handleAdminKill(uint64 targetId,Message* message,ObjectControllerCmdProperties* cmdProperties);
 		void	_handleBroadcast(uint64 targetId, Message* message, ObjectControllerCmdProperties* cmdProperties);
 		void	_handleBroadcastPlanet(uint64 targetId, Message* message, ObjectControllerCmdProperties* cmdProperties);
 		void	_handleBroadcastGalaxy(uint64 targetId, Message* message, ObjectControllerCmdProperties* cmdProperties);
@@ -797,6 +801,7 @@ private:
 		boost::pool<boost::default_user_allocator_malloc_free>		mEventPool;
 
 		CommandQueue				mCommandQueue;
+		bool						mClearCombatQueue = false;
 		EventQueue					mEventQueue;
 		ObjectSet						mInRangeObjects;
 		ObjectSet::iterator mObjectSetIt;

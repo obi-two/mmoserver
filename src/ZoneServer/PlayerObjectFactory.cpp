@@ -515,7 +515,8 @@ void PlayerObjectFactory::requestObject(ObjectFactoryCallback* ofCallback,uint64
             "character_attributes.character_flags,character_biography.biography,character_attributes.states,characters.race_id,"
             "banks.planet_id,account.account_csr,character_attributes.group_id,characters.bornyear,"
             "character_matchmaking.match_1, character_matchmaking.match_2, character_matchmaking.match_3, character_matchmaking.match_4,"
-            "character_attributes.force_current,character_attributes.force_max,character_attributes.new_player_exemptions"
+            "character_attributes.force_current,character_attributes.force_max,character_attributes.new_player_exemptions,"
+            "COALESCE(character_csr_flags.npcs_ignore, 0)"
             " FROM %s.characters"
             " INNER JOIN %s.account ON(characters.account_id = account.account_id)"
             " INNER JOIN %s.banks ON (%" PRIu64 " = banks.id)"
@@ -526,9 +527,10 @@ void PlayerObjectFactory::requestObject(ObjectFactoryCallback* ofCallback,uint64
             " INNER JOIN %s.faction ON (character_attributes.faction_id = faction.id)"
             " INNER JOIN %s.character_biography ON (characters.id = character_biography.character_id)"
             " INNER JOIN %s.character_matchmaking ON (characters.id = character_matchmaking.character_id)"
+            " LEFT JOIN %s.character_csr_flags ON (characters.id = character_csr_flags.character_id)"
             " WHERE (characters.id = %" PRIu64 ");",
             mDatabase->galaxy(),mDatabase->galaxy(),mDatabase->galaxy(),id + BANK_OFFSET,mDatabase->galaxy(),mDatabase->galaxy(),mDatabase->galaxy(),
-            mDatabase->galaxy(),mDatabase->galaxy(),mDatabase->galaxy(),mDatabase->galaxy(), id);
+            mDatabase->galaxy(),mDatabase->galaxy(),mDatabase->galaxy(),mDatabase->galaxy(),mDatabase->galaxy(), id);
 
     mDatabase->executeSqlAsync(this,asyncContainer,sql);
 }
@@ -703,7 +705,7 @@ PlayerObject* PlayerObjectFactory::_createPlayer(DatabaseResult* result)
 void PlayerObjectFactory::_setupDatabindings()
 {
     //player binding
-    mPlayerBinding = mDatabase->createDataBinding(185);
+    mPlayerBinding = mDatabase->createDataBinding(186);
     mPlayerBinding->addField(DFT_uint64,offsetof(PlayerObject,mId),8,0);
     mPlayerBinding->addField(DFT_uint64,offsetof(PlayerObject,mParentId),8,1);
     mPlayerBinding->addField(DFT_uint32,offsetof(PlayerObject,mAccountId),4,2);
@@ -745,6 +747,7 @@ void PlayerObjectFactory::_setupDatabindings()
     mPlayerBinding->addField(DFT_uint32,offsetof(PlayerObject,mHam.mCurrentForce),4,187);
     mPlayerBinding->addField(DFT_uint32,offsetof(PlayerObject,mHam.mMaxForce),4,188);
     mPlayerBinding->addField(DFT_uint8,offsetof(PlayerObject,mNewPlayerExemptions),1,189);		 //39
+    mPlayerBinding->addField(DFT_uint8,offsetof(PlayerObject,mNpcsIgnore),1,190);
 
     mPlayerBinding->addField(DFT_uint32,offsetof(PlayerObject,mHam.mHealth.mMaxHitPoints),4,132);
     mPlayerBinding->addField(DFT_uint32,offsetof(PlayerObject,mHam.mStrength.mMaxHitPoints),4,133);
@@ -783,7 +786,7 @@ void PlayerObjectFactory::_setupDatabindings()
         mPlayerBinding->addField(DFT_uint16,offsetof(PlayerObject,mCustomization)+(i*2),2,i + 17);//+113 = 183
 
     mPlayerBinding->addField(DFT_uint16,offsetof(PlayerObject,mCustomization[171]),2,130);
-    mPlayerBinding->addField(DFT_uint16,offsetof(PlayerObject,mCustomization[172]),2,131);				   //185
+    mPlayerBinding->addField(DFT_uint16,offsetof(PlayerObject,mCustomization[172]),2,131);				   //186 (with npcs_ignore)
 
     //hair binding
     mHairBinding = mDatabase->createDataBinding(3);
