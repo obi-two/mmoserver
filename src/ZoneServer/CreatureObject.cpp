@@ -196,6 +196,21 @@ void CreatureObject::prepareSkillCommands()
         }
         ++skillIt;
     }
+
+    // A CSR account's characters have the admin command, which the client
+    // needs to send the admin commands (/kill).
+    if (PlayerObject* player = dynamic_cast<PlayerObject*>(this))
+    {
+        if (player->getCsrTag())
+        {
+            int32 adminId = gSkillManager->getSkillCmdIdByName("admin");
+            if (adminId > 0 && std::find(mSkillCommands.begin(), mSkillCommands.end(), static_cast<uint32>(adminId)) == mSkillCommands.end())
+            {
+                mSkillCommands.push_back(static_cast<uint32>(adminId));
+                mSkillCommandMap.insert(std::make_pair(BString("admin").getCrc(), (void*)0));
+            }
+        }
+    }
 }
 
 //=============================================================================

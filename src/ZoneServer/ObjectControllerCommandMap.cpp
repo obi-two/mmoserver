@@ -492,6 +492,7 @@ void ObjectControllerCommandMap::_registerCppHooks()
     // admin profession
     mCommandMap.insert(std::make_pair(opOCAdminSysMsg, std::bind(&ObjectController::_handleAdminSysMsg, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)));
     mCommandMap.insert(std::make_pair(opOCAdminWarpSelf, std::bind(&ObjectController::_handleAdminWarpSelf, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)));
+    mCommandMap.insert(std::make_pair(opOCAdminKill, std::bind(&ObjectController::_handleAdminKill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)));
     mCommandMap.insert(std::make_pair(opOCAdminBroadcast, std::bind(&ObjectController::_handleBroadcast, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)));
     mCommandMap.insert(std::make_pair(opOCAdminBroadcastPlanet, std::bind(&ObjectController::_handleBroadcastPlanet, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)));
     mCommandMap.insert(std::make_pair(opOCAdminBroadcastGalaxy, std::bind(&ObjectController::_handleBroadcastGalaxy, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)));

@@ -25,6 +25,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 ---------------------------------------------------------------------------------------
 */
 #include "AdminManager.h"
+#include "CombatManager.h"
+#include "NPCObject.h"
+#include "Weapon.h"
 #include "ObjectController.h"
 #include "ObjectControllerCommandMap.h"
 #include "PlayerObject.h"
@@ -134,6 +137,62 @@ void ObjectController::_handleAdminWarpSelf(uint64 targetId,Message* message,Obj
     gMessageLib->SendSystemMessage(L"Error parsing parameters.", player);
 }
 
+
+//======================================================================================================================
+//
+// kill: a CSR kills the creature or NPC targeted (testing). The kill goes
+// the usual way, as a hit from the CSR: the creature dies, its lair hears
+// of it (waves) and its loot is the CSR's.
+//
+
+void ObjectController::_handleAdminKill(uint64 targetId,Message* message,ObjectControllerCmdProperties* cmdProperties)
+{
+    PlayerObject* player = dynamic_cast<PlayerObject*>(mObject);
+    if (!player)
+    {
+        return;
+    }
+    if (!player->getCsrTag())
+    {
+        gMessageLib->SendSystemMessage(L"Only CSR accounts can use /kill.", player);
+        return;
+    }
+    if (!targetId)
+    {
+        targetId = player->getTargetId();
+    }
+    CreatureObject* target = dynamic_cast<CreatureObject*>(gWorldManager->getObjectById(targetId));
+    if (!target || target == player || dynamic_cast<PlayerObject*>(target))
+    {
+        gMessageLib->SendSystemMessage(L"[SYNTAX] /kill with a creature or NPC targeted.", player);
+        return;
+    }
+    if (target->isDead())
+    {
+        return;
+    }
+
+    int32 health = target->getHam()->mHealth.getCurrentHitPoints();
+    if (NPCObject* npc = dynamic_cast<NPCObject*>(target))
+    {
+        npc->updateDamage(player->getId(), player->getGroupId(), WeaponGroup_Unarmed, health, player->states.getPosture(),
+                          glm::distance(target->mPosition, player->mPosition));
+    }
+    // Twice: a creature knocked out by the first goes down for good.
+    gCombatManager->applyDamage(target, "health", health + 1);
+    if (!target->isDead())
+    {
+        gCombatManager->applyDamage(target, "health", target->getHam()->mHealth.getMaxHitPoints() + 1);
+    }
+    if (target->isDead())
+    {
+        gMessageLib->SendSystemMessage(::common::OutOfBand("base_player", "killer_target_dead"), player, true);
+    }
+    else
+    {
+        gMessageLib->SendSystemMessage(L"/kill: the target did not die.", player);
+    }
+}
 
 //=============================================================================================================================
 //
