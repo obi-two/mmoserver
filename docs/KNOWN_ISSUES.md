@@ -1717,6 +1717,16 @@ as a decimal and rounded. To test: a krayt kills a player in a few hits.
 
 Confirmed on the VM (Nov 2026): a juvenile canyon krayt killed the player.
 
+### 62. A looted corpse stays its full 3-5 minutes — open, with looting
+
+Seen at Fort Tusken (Nov 2026): a creature's corpse lies 3-5 minutes after
+its death however it was looted (CreatureObject::die,
+`timeBeforeDeletion`), and a lair heard of a death only when the corpse
+went, so the fort's next wave came minutes late. The waves are fixed: a
+lair in waves counts a death when it happens. Left for the looting work:
+pre-CU, a corpse looted empty went soon after; ours should too, so the
+area clears and lairs that replace their creatures do so sooner.
+
 ### 61. The vesp lair shows the default appearance box — fixed, to test
 
 Seen on Lok (Nov 2026): "a vesp lair" drew as the client's red question
