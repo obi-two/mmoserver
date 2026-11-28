@@ -377,6 +377,10 @@ the group's row order, each wave calls from: "3,3,2"), `lair_wave_boss`
 (ms between waves); `lair_respawn_delay` is the pause before starting
 over.
 
+Confirmed on the VM (Nov 2026): each spot's waves 1, 2 and 3 followed 30 s
+after the last kill (/kill), the courtyard's third with the Tusken King,
+then the pause before wave 1 again.
+
 Migration 079 pins the waves to four spots clear of the walls, found in
 game: the courtyard (-3980, 6253; the only one whose third wave has the
 King), the gate (-3982, 6292), the back left corner by the cave (-3962,
